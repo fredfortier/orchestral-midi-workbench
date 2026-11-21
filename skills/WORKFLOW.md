@@ -83,7 +83,7 @@ existing realization/edit owner. This adds no loader, native editing operation
 or kontakt-ctl customization responsibility.
 
 Use `midi-bridge controller instrument` and the
-[receiver contract](../controller/ARCHITECTURE.md#purpose-and-execution-boundaries). Do not split an assignment into raw Kontakt
+[receiver contract](../crates/controller/ARCHITECTURE.md#integrated-instruments). Do not split an assignment into raw Kontakt
 insertion followed by manual window work or a separately improvised loader call.
 Conventional MIDI controls use native **track-level MIDI automation** by default:
 MW CC1, BC CC2, XP CC11, other documented CCs, and pitch bend (a distinct MIDI
@@ -317,7 +317,7 @@ to editing, realization or setup. A full listening review is not an automatic ta
 
 ## Current implementation boundaries
 
-Consult [RENDITION.md](../convert/RENDITION.md), native CLI help and the relevant
+Consult [RENDITION.md](../crates/convert/RENDITION.md), native CLI help and the relevant
 controller contracts before acting. This workflow does not extend their schemas.
 
 * General public New/Save/Open and transport/history commands are not exposed.

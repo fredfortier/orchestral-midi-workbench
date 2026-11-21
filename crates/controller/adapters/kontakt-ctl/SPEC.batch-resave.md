@@ -33,7 +33,7 @@ real-library coverage from a disposable fixture's receipt.
 
 ## Verification
 
-Windows unit tests cover path/ownership admission, native folder readback,
+Ephemeral Windows checks cover path/ownership admission, native folder readback,
 completion, failure cleanup and receipt reuse. Live qualification must independently
 observe exact target, complete rewrites and process exit on disposable files.
 Runtime invocation and recovery diagnostics are in [README.md](README.md).

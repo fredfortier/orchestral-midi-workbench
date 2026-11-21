@@ -45,8 +45,8 @@ From `crates/`, for relevant Rust/Java implementation changes:
 cargo fmt --all -- --check
 cargo check -p notes-transformer --all-targets
 cargo clippy -p notes-transformer --all-targets -- -D warnings
-controller/client-adapter/mvnw -f controller/client-adapter/pom.xml verify
-controller/client-adapter/mvnw -f controller/client-adapter/pom.xml -P harness verify
+(cd controller/adapters/bitwig-ctl && ./mvnw verify)
+(cd controller/adapters/bitwig-ctl && ./mvnw -P harness verify)
 ```
 
 Durable unit tests are prohibited. Run small ephemeral probes during each change. Use manifests for supported toolchains

@@ -19,6 +19,15 @@ Kontakt assignment, including Channel Filter → Channel Map → receiver. Java 
 host calls; Rust owns pure musical planning and external assignment orchestration.
 Keyboard delivery and panel focus belong to computer use in the owning skill.
 
+## Native host execution
+
+The [Bitwig Java adapter](adapters/bitwig-ctl/README.md) keeps published SDK
+calls and private document mappings distinct. Qualify each operation against
+its host build, owning thread and object lifetime. Host objects stay on the
+admitted document thread. Socket waits, blocking external work and live
+references stay out of that boundary. Timing-sensitive callbacks require
+explicit allocation, blocking, locking and logging budgets.
+
 ## Paths and structural reads
 
 `Path = {project, elements:[{kind,name,nativeId?,id?,version?}]}` follows actual
@@ -129,9 +138,8 @@ native precision before mutation. Reject unsupported occurrence isolation. Compl
 readback and point identity mappings verify intended changes and preservation;
 never treat an echoed request as independent verification.
 
-Host objects stay on the admitted build's document thread. No socket waits,
-blocking external work or live references cross that boundary. Native mutation
-uses the existing independent Undo transaction and calibrated rollback behavior.
+Native mutation uses the existing independent Undo transaction and calibrated
+rollback behavior.
 Known refusal, partial failure and unknown outcome remain distinct. Recover lost
 responses through the original operation identity and readback; never blindly
 retry or issue keyboard Undo against an unknown outcome.
@@ -172,8 +180,9 @@ Assignment independently reuses the sole Kontakt anywhere in the slot or inserts
 at the end when no instrument exists; multiple instruments refuse. It does not
 require or modify routing helpers. Without an explicit NKI, preserve patch state.
 The existing integrated operation qualifies the exact native/Win32 editor, invokes
-the repo loader and verifies receiver membership/routing before closing. Only
-transient editor visibility is excluded from that comparison. Keep-editor-open
+the [Kontakt loader](adapters/kontakt-ctl/ARCHITECTURE.md) and verifies receiver
+membership/routing before closing. Only transient editor visibility is
+excluded from that comparison. Keep-editor-open
 verifies native visibility and the same owned window, records `editorKeptOpen`,
 and reports no closure; the loader never closes the editor. External loading is
 outside native Undo. Native assignment, NKI submission, loaded patch, samples and
@@ -193,6 +202,9 @@ Historical deployment exceptions belong in WORKPAD.md, not runtime recipes.
 Loopback HTTP v2 uses `/v2/health` and `/v2/commands` with
 `{requestId,adapter?,command}`. The native wire is separately versioned and uses
 `{type:documentRequest,request,command}` plus correlated typed observations.
+Bound externally supplied frames and queues. Define connection cancellation,
+shutdown and partial-frame behavior while preserving original operation identity
+for recovery.
 Bump wire/adapter version → build → install immutable CLI/service/adapter → reload
 exact version → verify live handshake → reread → mutate. Never overwrite a loaded
 artifact or admit a mismatched/unknown host build by best-effort reflection.
@@ -208,7 +220,7 @@ Record elapsed time and payload sizes for scoped structure, selection and conten
 reject redundant full-project reads and unnecessary payloads.
 
 [RUNBOOK.md](RUNBOOK.md) owns qualification procedures, [WORKPAD.md](WORKPAD.md)
-owns historical incidents and actual evidence. [bitwig-explore](../skills/bitwig-explore/SKILL.md)
-owns coherent runtime discovery/selection/computer recipes; runtime never loads
-skill authoring SPEC files. Compilation alone does not establish native behavior,
-semantic fidelity, instrument support or audible playback.
+owns historical incidents and actual evidence. [bitwig-explore](../../skills/bitwig-explore/SKILL.md)
+owns runtime discovery, selection and computer recipes. Compilation establishes
+buildability. Native behavior, semantic fidelity, instrument support and audible
+playback require their own evidence.

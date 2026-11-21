@@ -11,7 +11,7 @@ From `crates/`:
 
 ```sh
 cargo build -p notes-transformer
-mvn -q -f controller/client-adapter/pom.xml package
+(cd controller/adapters/bitwig-ctl && ./mvnw verify)
 ./target/debug/midi-bridge serve
 ./target/debug/midi-bridge controller info
 ./target/debug/midi-bridge controller midi get-all --paths paths.json --output before.json
@@ -39,7 +39,7 @@ MIDI CC insertion helper is not needed for conventional MIDI automation.
 `controller selection set --input request.json` replaces selection absolutely
 using returned qualified paths and fresh authority; time mode supplies arranger
 beat bounds. It does not establish keyboard focus. See the
-[navigation workflow](../skills/bitwig-explore/references/arranger-navigation.md).
+[navigation workflow](../../skills/bitwig-explore/references/arranger-navigation.md).
 Complete snapshots store `.automation` once beside `.clips`, with `.owners` and
 exact explicit `.paths`; a track need not contain note clips to own automation.
 Structural `info --path` resolves its subtree directly and omits parameter catalogues.
@@ -54,7 +54,7 @@ Java/Rust wire versions with [install-extension.sh](scripts/install-extension.sh
 installation alone does not reload running extension classes. Connection lifecycle
 is explicit via `adapter bitwig connection`; never replay a mutation after timeout.
 
-[skills/WORKFLOW.md](../skills/WORKFLOW.md) owns musical task routing and the
+[skills/WORKFLOW.md](../../skills/WORKFLOW.md) owns musical task routing and the
 qualified native keyboard workflow around the core tools. [RUNBOOK.md](RUNBOOK.md)
 owns ephemeral qualification; no durable unit tests are retained. Optional isolated
 virtual display/PipeWire setup is in [MANAGED_BITWIG.md](MANAGED_BITWIG.md). Use
@@ -70,9 +70,9 @@ midi-bridge controller export-audio start --input export.json --operation export
 midi-bridge controller export-audio status --operation export-01 --output status-01.json
 ```
 
-The [export skill](../skills/bitwig-export-audio/SKILL.md) owns option selection,
+The [export skill](../../skills/bitwig-export-audio/SKILL.md) owns option selection,
 exact-path track filtering, status reconciliation and independent audio checks.
-The [mixing skill](../skills/bitwig-mixing/SKILL.md) owns musical technique and
+The [mixing skill](../../skills/bitwig-mixing/SKILL.md) owns musical technique and
 acceptance; native settings alone do not establish audible quality.
 
 The 6.1 native export callback subclass compiles against the installed host JAR
@@ -91,5 +91,5 @@ midi-bridge controller midi assemble --input capture.json --output performance.m
 ```
 
 Capture excludes inactive tracks by default. The [export contract](EXPORT_MIDI.md)
-owns scope, routing and losses; the [export skill](../skills/bitwig-export-midi2/SKILL.md)
+owns scope, routing and losses; the [export skill](../../skills/bitwig-export-midi2/SKILL.md)
 guides interpretation of a separate working JSON copy. No companion is required.

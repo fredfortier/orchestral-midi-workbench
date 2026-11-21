@@ -2,9 +2,23 @@
 
 Convert separates musical meaning, MIDI encoding and reconstructed notation.
 Controller owns DAW capture and offline host-to-MIDI2 assembly; the
-[controller export contract](../controller/ARCHITECTURE.md#self-contained-midi2-export)
+[controller export contract](../controller/EXPORT_MIDI.md#self-contained-midi2-export)
 owns active-track filtering, the channel/Filter/Map convention, lyric slot names
 and interpretation of captured automation. Do not duplicate that host model here.
+
+## Musical representation
+
+Preserve authored distinctions and provenance where the conversion contract
+requires them. Make ambiguous, unsupported and lossy mappings explicit. A
+receiver-specific keyswitch or an editorial inference needs an explicit binding
+or interpretation, respectively. An instrument's available techniques alone
+provide no evidence of MIDI-CI support.
+
+Keep score time, performed beats, ticks, pitch units and protocol resolution
+explicit. Define scaling, rounding and equal-time ordering at encoding
+boundaries. Account for tempo and repeat occurrences when mapping score time
+to performed time. Keep validation and reconstruction outside real-time host
+callbacks.
 
 ## Self-contained MIDI2
 

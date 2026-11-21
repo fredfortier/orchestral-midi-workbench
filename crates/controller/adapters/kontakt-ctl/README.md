@@ -3,15 +3,14 @@
 Repo-owned Windows-under-Wine loader. Ordinary setup invokes it only through
 integrated `midi-bridge controller instrument assign`; it loads the exact NKI into
 the adapter-owned editor. It does not assign players, edit Bitwig or customize
-receivers. [Architecture](../../ARCHITECTURE.md#e-service---kontakt-loader) owns
+receivers. [Architecture](ARCHITECTURE.md#hosted-loading) owns
 that boundary.
 
 ## Run the vendored source with the provisioned Windows environment
 
-Run from this directory. The Windows environment can live elsewhere; the source
-and working directory below explicitly select **this** package. Do not run Linux
-Python/uv, sync this package into a Linux environment, or modify a working Wine
-prefix to fix a command-line error.
+Enter this package from the repository root as shown below. Keep the provisioned
+Windows environment separate from the loader source. The wrapper selects this
+checkout while reusing that environment under Wine.
 
 Tested environment: Kontakt 7.10.1, x64 Windows Python 3.11, `/home/user/wine`,
 `DISPLAY=:0`. `X:` maps to `/mnt/data/kontakt`. The existing Windows runtime is
@@ -19,7 +18,7 @@ Tested environment: Kontakt 7.10.1, x64 Windows Python 3.11, `/home/user/wine`,
 Substitute another already provisioned Windows environment when appropriate.
 
 ```bash
-cd /home/user/src/fredfortier/MIDI2.0Workbench/crates/controller/adapters/kontakt-ctl
+cd crates/controller/adapters/kontakt-ctl  # from the repository root
 export WINEPREFIX=/home/user/wine DISPLAY=:0
 KONTAKT_RUNTIME=/home/user/src/oatsvine/music-composition-skills/tools/kontakt-ctl
 KONTAKT_SOURCE_WIN=$(winepath -w "$PWD")

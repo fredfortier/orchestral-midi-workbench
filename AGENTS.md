@@ -1,38 +1,22 @@
-# harness-template
+# Unnamed musical tooling
 
-This repository is a base template for agent-first software projects.
+## Development workflow
 
-`AGENTS.md` stays short on purpose. Treat it as a map, not the encyclopedia. Repository-local markdown under `docs/` is the system of record.
+- Start with the [collaboration guide](docs/REPO_COLLAB_GUIDE.md), [architecture map](docs/ARCHITECTURE.md), and [core beliefs](docs/design-docs/core-beliefs.md). Read the governing package contract before changing behavior.
+- Inspect the worktree and preserve unrelated changes. Keep changes small and update affected docs in the same task.
+- For complex work, follow the [execution plan guide](docs/PLANS_GUIDE.md). Before finishing a code change, check the [quality targets](docs/QUALITY_SCORE.md) and record the change using the [history guide](docs/HISTORY_GUIDE.md).
+- Keep prompts, policies, and architectural rules versioned. Route package development through [the Cargo workspace](crates/AGENTS.md), [Bitwig adapter](crates/controller/adapters/bitwig-ctl/AGENTS.md), or [Kontakt adapter](crates/controller/adapters/kontakt-ctl/AGENTS.md) instructions as applicable.
+- For contribution, security, and release work, use [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and the [CI](docs/CICD.md) and [release](docs/releases/README.md) guides.
 
-If a code or workflow change makes a doc stale, update the doc in the same task.
+## Bitwig project layout
 
-## Read At The Start Of Each Task
+- The project root is the directory containing the saved `.bwproject`. Keep `PERFORMANCE.md` there.
+- Keep the original score and its provenance record in the project's established source location. For a new project without an agreed source location, use the project root.
+- Use project-root `references/` for external listening references and `evidence/` for new evidence. Honor the project's existing evidence location.
+- Preserve existing project files and paths. Create folders as needed and leave `recordings/`, `master-recordings/`, and other DAW-managed directories to Bitwig. Follow the [checkpoint procedure](skills/WORKFLOW.md#experimental-project-backups) for manual backups.
 
-- `docs/REPO_COLLAB_GUIDE.md`: repository-wide collaboration, commit, documentation, and testing expectations.
-- `docs/ARCHITECTURE.md`: top-level architecture map and intended package boundaries.
-- `docs/design-docs/core-beliefs.md`: agent-first operating principles and repository design intent.
+## Skill workflow
 
-## Read Before Finishing A Code Change
-
-- `docs/HISTORY_GUIDE.md`: when to record code changes, naming rules, and redaction rules.
-- `docs/QUALITY_SCORE.md`: current quality targets and gaps by area.
-
-## Read When The Task Needs It
-
-- `docs/PLANS_GUIDE.md`: when to create an execution plan and how to maintain it.
-- `docs/PRODUCT_SENSE.md`: user value, product constraints, and feature prioritization heuristics.
-- `docs/RELIABILITY.md`: runtime guardrails, observability expectations, and operational readiness.
-- `docs/SECURITY.md`: secure defaults for auth, data handling, secrets, and external integrations.
-- `docs/SUPPLY_CHAIN_SECURITY.md`: dependency, SBOM, provenance, and supply-chain security integration guidance.
-- `docs/CICD.md`: current CI/CD status and where to add real project automation later.
-- `docs/FRONTEND.md`: UI/system guidance if the repo includes a frontend surface.
-- `CONTRIBUTING.md`: pull request expectations and default review checklist.
-- `docs/releases/README.md`: how to maintain user-facing release notes.
-- `docs/references/README.md`: curated external references copied into the repo for agent use.
-
-## Working Rules
-
-- Prefer small, explicit, repository-legible abstractions.
-- Keep prompts, policies, and architectural rules versioned in-repo.
-- For complex work, create an execution plan instead of relying on long chat context.
-- Record finished code changes in `docs/histories/`.
+- Start music-production work at [task routing](skills/WORKFLOW.md#route-by-outcome). Follow the owning skill and the workflow's [execution boundaries](skills/WORKFLOW.md#mandatory-execution-boundary) for any live action.
+- Use the workflow's [artifact authority](skills/WORKFLOW.md#meaning-and-authority) and [mutation ownership](skills/WORKFLOW.md#artifact-and-mutation-ownership) to establish scope. Verify the requested result using the owning workflow's [readiness and reconciliation rules](skills/WORKFLOW.md#readiness-and-change-propagation).
+- Put skill execution instructions in `SKILL.md` and directly routed references. Reserve skill `SPEC.md` and maintenance sidecars for authoring and review.
