@@ -28,12 +28,13 @@ has no Bitwig UI-control or close command. Service termination is environment
 cleanup for the explicitly disposable fixture; it can force-clean its process
 group after its timeout. Never stop the user's DAW or shared Wine server.
 
-For concurrent qualification, use distinct service/adapter ports and extension
-artifacts. `MIDI_WORKBENCH_EXTENSIONS` overrides the managed extension directory;
-`MIDI_WORKBENCH_ADAPTER_PORT` selects the test listener. The script's explicit
+Use one Bitwig application instance. For a dedicated qualification listener,
+configure its native and HTTP API ports explicitly.
+`MIDI_WORKBENCH_EXTENSIONS` overrides the managed extension directory;
+`MIDI_WORKBENCH_ADAPTER_PORT` selects the native port from Bitwig. The script's explicit
 `MIDI_WORKBENCH_ALSA_DEVICES=1` option exposes ALSA devices when OSC needs a virtual
 input; do not commandeer physical ports or the desktop feedback socket.
 
 Validate actual host generation/owners before native writes. Valid silent audio,
 a display connection or a service health response is not musical qualification.
-See [RUNBOOK.md](RUNBOOK.md) for the evidence contract.
+See the [native verification contract](ARCHITECTURE.md#wire-deployment-and-verification).

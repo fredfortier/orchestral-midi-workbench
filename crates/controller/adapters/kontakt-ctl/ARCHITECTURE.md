@@ -27,8 +27,7 @@ stderr. Failures return a nonzero exit status. [`cli.py`](kontakt_ctl/cli.py) an
 the command result types own the concrete fields.
 
 Use ephemeral Windows checks and disposable load probes. Durable unit tests
-are prohibited. Compilation verifies source only. The
-[runtime guide](RUNBOOK.md#provisioned-windows-runtime) owns the runnable setup.
+are prohibited. Compilation verifies source only.
 
 ## Standalone library preprocessing
 

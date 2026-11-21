@@ -40,4 +40,5 @@ setup. Exploration adds no macro executor or alternate setup/editing mechanism.
 
 Keep complete observations as edit authority; local query projections are reports.
 A read failure requires diagnosis, not fabricated empty content. Reobserve after
-navigation/history before writing. Health is `/v2/health` on the configured port.
+navigation/history before writing. Service health is `/v2/health` on the HTTP API
+port (8789 by default). Confirm project readiness with a native read.

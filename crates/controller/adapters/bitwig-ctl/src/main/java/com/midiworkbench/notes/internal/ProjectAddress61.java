@@ -65,10 +65,9 @@ final class ProjectAddress61 {
                     if(!name.equals(display))continue;
                     if(kind.equals("device")){matches.add(candidate);}
                     else if(kind.equals("plugin")) {
-                        Object contents=ProjectAdapter61.value(candidate,"device_contents");
-                        if(contents==null || !Class.forName("ych",true,contents.getClass().getClassLoader()).isInstance(contents))continue;
-                        if(element.required("id").asText().equals("vst3-"+ProjectAdapter61.value(contents,"vst_device_id"))
-                            && element.required("version").asText().equals(ProjectAdapter61.value(contents,"device_version")))matches.add(candidate);
+                        PluginIdentity61 plugin=PluginIdentity61.read(ProjectAdapter61.value(candidate,"device_contents"));
+                        if(plugin!=null && element.required("id").asText().equals(plugin.id())
+                            && element.required("version").asText().equals(plugin.version()))matches.add(candidate);
                     } else {
                         String expected=switch(kind) {
                             case "layer" -> "5024be2e-65d6-4d40-bbfe-8b2ea993c445";

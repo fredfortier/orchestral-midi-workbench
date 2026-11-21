@@ -254,8 +254,9 @@ public final class Instrument61 {
         ObjectNode result=Wire.object();result.put("id",id(device));result.put("name",deviceName(device));
         result.put("nativeDeviceId",Reflection.call(device,"v33").toString());
         Object contents=value(device,"device_contents");
-        if(contents!=null && Class.forName("ych",true,contents.getClass().getClassLoader()).isInstance(contents)) {
-            result.put("pluginId","vst3-"+value(contents,"vst_device_id"));result.put("version",value(contents,"device_version").toString());
+        PluginIdentity61 plugin=PluginIdentity61.read(contents);
+        if(plugin!=null) {
+            result.put("pluginId",plugin.id());result.put("version",plugin.version());
             result.put("editorVisible",Boolean.TRUE.equals(Reflection.call(Reflection.call(contents,"cfn"),"getBoolValue")));
         }
         SlotRouting61.read(device,result);
@@ -459,7 +460,8 @@ public final class Instrument61 {
         }
         if(found==null){if(required)throw new IllegalArgumentException("Slot has no instrument");return null;}
         Object contents=value(found,"device_contents");
-        if(!type(found.getClass().getClassLoader(),"ych").isInstance(contents) || !KONTAKT.equals("vst3-"+value(contents,"vst_device_id")))throw new IllegalArgumentException("Existing instrument is not Kontakt");
+        PluginIdentity61 plugin=PluginIdentity61.read(contents);
+        if(plugin==null || !KONTAKT.equals(plugin.id()))throw new IllegalArgumentException("Existing instrument is not Kontakt");
         return found;
     }
     private static void editor(Object proxy,Object slot,boolean visible)throws Exception {

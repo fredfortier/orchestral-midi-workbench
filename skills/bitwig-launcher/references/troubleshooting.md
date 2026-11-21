@@ -6,11 +6,11 @@ mutation: reconcile its original operation ID and current native state first.
 
 | Symptom | Diagnosis and recovery |
 | --- | --- |
-| Connection refused on 8788 | Inspect the listener and durable service status/log. Start the single owned listener, then verify native readiness. Do not start a competing service. |
-| Handshake failure or disconnected adapter | Inspect `adapter bitwig connection list`; ignore dead host descriptors. Start the listener first. An admitted session recovers a lost connection with bounded backoff; protocol/handshake refusal remains fail-stop. For initial setup failure, request one connect for the intended live instance and inspect its result. Keep the service persistent. |
+| Connection refused | Check which port failed. The native adapter connects to 8788 and the CLI uses HTTP on 8789 by default. Inspect the owned listener's status and logs, start it if needed, then verify native readiness. |
+| Handshake failure or disconnected adapter | Run `midi-bridge adapter bitwig connection list` and inspect the open descriptor for the live process. Start the listener first. An admitted session recovers a lost connection with bounded backoff; protocol/handshake refusal requires diagnosis. For initial setup failure, request one connect for the intended live instance and inspect its result. Keep the service persistent. |
 | Version mismatch | Identify the CLI, connected service, loaded adapter and Bitwig versions. Report the mismatch as a missing prerequisite for dependent production actions. |
 | Bitwig exits or restarts with the listener | Reconfirm the intended instance and project before reconnecting. Reconcile pending operations by their original IDs. If the restart repeats, report the unstable session prerequisite. |
-| Multiple adapters | Something went very wrong. State your reasoning, stop and start again. |
+| Multiple connected adapters | Identify the intended live instance and project. Pass `midi-bridge controller --adapter <ID>` before the read subcommand to select it. |
 | No active editor or wrong selection | Inspect the managed display and native selection. Select the arranger note clip itself with Object Selection. Preserve the native adapter's Inspector fallback; do not invent cached selection. |
 | Ownership/geometry/reference error | Escalate. |
 | Virtual-display plug-in crash | Measure actual mode/refresh and read Xorg/Bitwig/Wine logs. Use dummy Xorg with nonzero refresh for the admitted Kontakt/DXVK environment. |

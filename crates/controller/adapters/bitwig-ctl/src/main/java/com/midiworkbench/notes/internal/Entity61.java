@@ -29,7 +29,11 @@ final class Entity61 {
             case "layerChain","choice" -> {metadata.put("channel",((Number)value(owner,"filter_note_channel")).intValue());metadata.put("outputChannel",((Number)value(owner,"override_note_channel")).intValue());}
             case "plugin","device","layer","selector" -> {
                 SlotRouting61.read(owner,metadata);
-                if(kind.equals("plugin")){Object contents=value(owner,"device_contents");metadata.put("pluginId","vst3-"+value(contents,"vst_device_id"));metadata.put("version",value(contents,"device_version").toString());}
+                if(kind.equals("plugin")) {
+                    JsonNode element=path.required("elements").get(path.required("elements").size()-1);
+                    metadata.put("pluginId",element.required("id").asText());
+                    metadata.put("version",element.required("version").asText());
+                }
             }
             default -> { }
         }
@@ -101,10 +105,14 @@ final class Entity61 {
         Object chain=call(owner,owner.getClass().getName().equals("com.bitwig.flt.document.core.master.device.kdt")?"PPp":"Vdp");
         for(Object device:(List<?>)call(chain,"ATl")) {
             String name=value(device,"user_device_name").toString();if(name.isEmpty())name=value(device,"device_name").toString();
-            String builtin=call(device,"v33").toString();Object contents=value(device,"device_contents");
-            String kind=builtin.equals("5024be2e-65d6-4d40-bbfe-8b2ea993c445")?"layer":builtin.equals("9588fbcf-721a-438b-8555-97e4231f7d2c")?"selector":contents!=null && Class.forName("ych",true,contents.getClass().getClassLoader()).isInstance(contents)?"plugin":"device";
+            String builtin=call(device,"v33").toString();
+            PluginIdentity61 plugin=PluginIdentity61.read(value(device,"device_contents"));
+            String kind=builtin.equals("5024be2e-65d6-4d40-bbfe-8b2ea993c445")?"layer":builtin.equals("9588fbcf-721a-438b-8555-97e4231f7d2c")?"selector":plugin!=null?"plugin":"device";
             ObjectNode path=childPath(parent.required("path"),kind,name);
-            if(kind.equals("plugin")) {ObjectNode e=(ObjectNode)path.withArray("elements").get(path.withArray("elements").size()-1);e.put("id","vst3-"+value(contents,"vst_device_id"));e.put("version",value(contents,"device_version").toString());}
+            if(plugin!=null) {
+                var elements=path.withArray("elements");
+                ((ObjectNode)elements.get(elements.size()-1)).put("id",plugin.id()).put("version",plugin.version());
+            }
             ObjectNode node=entity(path,kind,name,device);parent.withArray("children").add(node);
             deviceChildren(device,node,kind);
         }

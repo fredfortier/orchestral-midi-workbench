@@ -1,5 +1,5 @@
 # Bitwig Java adapter
 
-Build from this directory with `./mvnw verify` and `./mvnw -P harness verify`.
-The [adapter instructions](AGENTS.md) cover JDK and Bitwig runtime requirements.
+Use the [adapter instructions](AGENTS.md) for build checks and
+[Linux deployment and smoke testing](AGENTS.md#update-and-smoke-test-on-linux).
 See [native host execution](../../ARCHITECTURE.md#native-host-execution).

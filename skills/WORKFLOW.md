@@ -212,7 +212,7 @@ original score + user direction + documented library capabilities
                               |
                        MIDI2 + companion
                               |
-                      midi-bridge import
+               native placement and clip replacement
                               |
                      independent native readback
 ```

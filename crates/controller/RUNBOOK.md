@@ -1,25 +1,14 @@
-# Controller qualification
+# Bitwig qualification probe notes
 
-Use [ARCHITECTURE.md](ARCHITECTURE.md) for the intended contracts. This runbook
-defines qualification evidence. Use disposable material for native tests.
+Use the [adapter instructions](adapters/bitwig-ctl/AGENTS.md) for deployment and
+the [verification contract](ARCHITECTURE.md#wire-deployment-and-verification)
+for acceptance. Select probe cases applicable to the change and fixture.
 
-## Fixture and observation
-
-Use an explicitly disposable project. Record host build, adapter/service/CLI
-identities, saved fixture path, document generation and tested owners. Keep the
-user's project, extensions, ports and unresolved operations independent.
-[MANAGED_BITWIG.md](MANAGED_BITWIG.md) documents the optional isolated Linux host.
-
-Choose the smallest current read from CLI help. Preserve the original observation,
-operation intent, actual result and independently authored expectations. Display
-pages and counts cannot stand in for complete affected scope. Do not acquire a
-whole-project dump just because a previous test did.
-
-## Native acceptance matrix
+## Candidate probe scopes
 
 | Concern | Evidence |
 | --- | --- |
-| Discovery | Collapsed groups, duplicate names, empty owners, complete native paths; no reflected graph |
+| Discovery | Collapsed groups, duplicate names, empty owners, complete native paths; round-trip discovered CLAP and VST plug-in paths through `controller info --path` |
 | Selection | Object/time/note membership, active versus retained selection, locked layers, explicit unsupported editors |
 | Notes/expression | Changed values plus untouched geometry, routing, operators, complete ordered curves and selection |
 | Sources/occurrences | Offsets, loops, aliases and explicit rejection where isolation is unsupported |
@@ -30,29 +19,3 @@ whole-project dump just because a previous test did.
 | Failure | Stale refusal before writes; admitted partial-write rollback or honest partial/unknown result |
 | Disconnect | Original-ID status after lost response; no repeated mutation or accidental retargeting |
 | Artifacts | Native completion and independent file validation; audio/samples/persistence remain separate claims |
-
-Use independent expected values. A serializer/deserializer pair or a receipt
-repeating the submitted values is not independent native readback. Fault injection
-and history probes belong only to the development harness. Do not treat an offline
-pass as admitted live behavior or use automatic Undo to resolve an unknown outcome.
-
-## Build checks and ephemeral probes
-
-From `crates/`, for relevant Rust/Java implementation changes:
-
-```sh
-cargo fmt --all -- --check
-cargo check -p notes-transformer --all-targets
-cargo clippy -p notes-transformer --all-targets -- -D warnings
-(cd controller/adapters/bitwig-ctl && ./mvnw verify)
-(cd controller/adapters/bitwig-ctl && ./mvnw -P harness verify)
-```
-
-Durable unit tests are prohibited. Run small ephemeral probes during each change. Use manifests for supported toolchains
-and features. Documentation-only changes require references/content/diff checks;
-unrelated builds add no evidence. Live tests remain separate from unattended runs.
-
-Report exact checks, fixture scope, readback/history evidence and unresolved limits.
-[Retired qualification reports](../../docs/adrs/controller-native-authority.md) describe their original builds and fixtures.
-Current help and ARCHITECTURE.md determine executable syntax; historical recipes
-are not current execution instructions.

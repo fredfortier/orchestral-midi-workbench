@@ -2,7 +2,7 @@
 
 This checkout uses local checks. Bitwig and Kontakt qualification use disposable
 fixtures outside unattended checks. See the
-[controller runbook](../crates/controller/RUNBOOK.md) for the Rust and Maven gates.
+[workspace checks](../crates/AGENTS.md#verification) and [adapter checks](../crates/controller/adapters/bitwig-ctl/AGENTS.md#build-checks).
 
 ## Verification inputs
 
@@ -29,8 +29,7 @@ cargo test --manifest-path crates/Cargo.toml --workspace --all-targets --locked
 Run the extraction and clone only for missing inputs. The corpus also comes
 from the [pinned upstream revision](https://github.com/cuthbertLab/music21/tree/7a3b55e13781e2f3d28a5411f17275d259684af4).
 The Node check needs `unzip` and `xmllint`. Rust's independent XSD oracles use
-Python with `lxml`. Live qualification is covered by the
-[controller runbook](../crates/controller/RUNBOOK.md).
+Python with `lxml`.
 
 After changing `rules::VOCABULARY`, regenerate the JSON catalog with
 `UPDATE_CONVERT_CATALOG=1 cargo test --manifest-path crates/Cargo.toml -p musicxml-midi2-convert --test conversion catalog_is_single_source`.

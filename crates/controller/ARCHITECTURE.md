@@ -335,6 +335,5 @@ selection restoration and unchanged musical/routing/geometry/name readback.
 Record elapsed time and payload sizes for scoped structure, selection and content;
 reject redundant full-project reads and unnecessary payloads.
 
-[RUNBOOK.md](RUNBOOK.md) owns qualification procedures. Compilation establishes
-buildability. Native behavior, semantic fidelity, instrument support and audible
-playback require their own evidence.
+Compilation establishes buildability. Native behavior, semantic fidelity,
+instrument support and audible playback require their own evidence.

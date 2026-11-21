@@ -11,7 +11,7 @@
 
 ## Verification
 
-Run from `crates/`. Start with checks for the affected package. Converter tests need the pinned [score corpus](convert/tests/cli.rs) and the [MusicXML XSD and Python lxml](convert/tests/check_musicxml.py). For native checks, follow the [controller runbook](controller/RUNBOOK.md#build-checks-and-ephemeral-probes).
+Run from `crates/`. Start with checks for the affected package. Converter tests need the pinned [score corpus](convert/tests/cli.rs) and the [MusicXML XSD and Python lxml](convert/tests/check_musicxml.py). For native Bitwig checks, use the [adapter instructions](controller/adapters/bitwig-ctl/AGENTS.md).
 
 ```sh
 cargo fmt --all -- --check

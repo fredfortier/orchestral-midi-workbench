@@ -13,7 +13,8 @@ and native qualification artifacts.
 
 Keep durable contracts and grammar in the owning package architecture. Keep
 execution with the skills and package runbooks. Use short entry points to route
-readers to the governing material.
+readers to the governing material. Current placement of essential developer
+procedures follows the [collaboration guide](../REPO_COLLAB_GUIDE.md#documentation-discipline).
 
 ## Consequences and evidence
 

@@ -65,8 +65,11 @@ Use [bitwig-explore](../bitwig-explore/SKILL.md) for native arranger discovery
 and deliberate selection. Independently verify native Object/Time/note selection
 and every intended clip/track owner; screenshots and injected input are not a fallback.
 
-Run `midi-bridge controller midi get-all` unchanged for either
-kind of host. Count the actual note and automation arrays with jq. 
+Use `midi-bridge controller selection read` to confirm native project and
+selection readiness for either kind of host. When the task requires a musical
+read, use the selected note clips or pass exact clip paths to
+`midi-bridge controller midi get-all --paths paths.json`. Count the actual
+note and automation arrays with jq.
 
 Open [troubleshooting](references/troubleshooting.md) whenever launch, project
 open, controller access or recording fails. Fix the durable cause and verify the

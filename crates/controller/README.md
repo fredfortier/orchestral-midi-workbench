@@ -4,4 +4,4 @@
 operations. Run `cargo run --manifest-path crates/Cargo.toml -p notes-transformer -- --help`
 from the repository root.
 
-[Architecture](ARCHITECTURE.md) · [Qualification](RUNBOOK.md) · [Java adapter](adapters/bitwig-ctl/README.md)
+[Architecture](ARCHITECTURE.md) · [Java adapter](adapters/bitwig-ctl/README.md)
