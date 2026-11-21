@@ -1,25 +1,16 @@
 # Architecture
 
-This file is the top-level map for the repository. Replace the placeholders below as the real project takes shape.
+Use `$dexlabs:durable-documentation` to maintain architecture documents.
 
-## Intended Repository Shape
+## Overview
 
-- `apps/`: deployable applications or entry points.
-- `packages/`: shared libraries and contracts.
-- `infra/`: deployment, infrastructure, and environment definitions.
-- `scripts/`: repository automation that agents can run directly.
-- `docs/`: the repository knowledge base and system of record.
+[capture roughly at a high-level with ascii visual aid the architecture of this project]
 
-## Boundary Rules
+## Concepts and Components
 
-- Put business logic in reusable packages before spreading it across apps.
-- Keep infrastructure and runtime orchestration explicit and versioned.
-- Avoid hidden cross-package coupling; document allowed dependency directions once the stack is real.
-- When the architecture changes, update this file in the same task.
+[state that individual components/concepts architecture specified enclosed in package]
 
-## To Fill In For A New Project
+Project index:
 
-- Primary product surfaces and runtime topology.
-- Package layering and import boundaries.
-- Data flow and persistence model.
-- Observability stack and local development model.
+- [Controller](../crates/controller/ARCHITECTURE.md)
+- [Convert](../crates/convert/ARCHITECTURE.md)
