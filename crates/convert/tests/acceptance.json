@@ -1,0 +1,2974 @@
+{
+  "claim": "T(mapping=2, policy=corpus-v1, sample=12-v1, M2-123 + M2-126, Cargo.lock)",
+  "generatedUtc": "2026-10-23T19:35:30.150475+00:00",
+  "complete": true,
+  "artifactUnchangedDuringChecks": true,
+  "artifactSha256": {
+    "crates/Cargo.lock": "4cbae0e4dd9f926c7f59480c6bf5923e4fba1b3905b2dfc20b20b8d42baac0eb",
+    "crates/Cargo.toml": "6d368df4b3f7bd04bfd872798e560da011f04f1e42a09b6c306b86cc59f85550",
+    "crates/convert/Cargo.toml": "7378b8032debecf693e50e9217ada90b25ef713fbba4743c8382d004bd2776de",
+    "crates/convert/README.md": "427e42b4dabde4e3e4304c7827c3f08d16f687f2b782e5da1d40fcfadbd5a3f5",
+    "crates/convert/mapping/TRANSLATIONS.md": "798d507e5489323a42bb97f2891b991c114ebcb1409baf3c45f3585b41880d5c",
+    "crates/convert/mapping/annotation.schema.json": "32a4e3391984bf61f9f470ba3f0cefe1398bc7edfd691a33e6ff96a3c98e34ee",
+    "crates/convert/mapping/binding.schema.json": "22a4ec96b5490d5f1b7d279a1c6510eb1cb9d596c200786792a0530ba4a373e0",
+    "crates/convert/mapping/orchestral-subclasses.json": "c4a6b5e77855cb79bb197fe5bfa9f4a08122d60e5de6c349a41ce748588dc978",
+    "crates/convert/mapping/refinement.schema.json": "f23f2bebc1f443cfb9334349042489cb2270b15bd7ce5bbf994ffc7a745ae3d8",
+    "crates/convert/src/ci.rs": "a0d4a723017f564adca3b791f4262b4ba442c036b0327031cbef77201baf80dc",
+    "crates/convert/src/clip.rs": "fd78b227e536b8d4c35e966d77abec9bf5f623c580a1f4f594c95834d371f339",
+    "crates/convert/src/extension.rs": "6dd231473321e275a21b2b0b1ca45b9785e5ac2b7347452a64b31ee2ac0fe6ab",
+    "crates/convert/src/lib.rs": "3670150584fb2567450f757b2c1ba6c121c49c4e5b9b29587ee7beaf259a0c4d",
+    "crates/convert/src/main.rs": "c6bc1acb0da2145c34b9ca693606babeb540d238c66f88485040bf772c2ef549",
+    "crates/convert/src/model.rs": "4370643c76709c6f33adf2a2e59578badc02554aece183907b7ec2e76e7545aa",
+    "crates/convert/src/piano.rs": "994a08d80ec84e34c41d5133bb52ed2cd7d746db19d9b78f19a048a1988e9f13",
+    "crates/convert/src/preserve.rs": "49cdef23d65c56d36292dec7f017f5dd75f8d534e54d2442d42f2a8e171357b9",
+    "crates/convert/src/remarks.rs": "9fa174806804f47c8875e27a1e6c61ae5f696c10d3036076b6fc3c2aec7aa9b7",
+    "crates/convert/src/rules.rs": "babf2f15ca3d98304e4a6d9b1b4b9099d30ee1e006e3739ca7a68857f36b22a7",
+    "crates/convert/src/wire.rs": "dacd9d39e1b1ab6806bbc053908b21815ab3cf42fdfaa09186b761697ae772f9",
+    "crates/convert/src/xml.rs": "f869c4779211695bccd7184ca40ac294c048b5e7bfc0407a77eaf4a328427887",
+    "crates/convert/tests/CORPUS-STUDY.md": "0b32a0e3e4ed6c8f4c97a76facdbac15c66827c982e331dc05128c83797c6775",
+    "crates/convert/tests/calibrate.py": "2ffe55701a83ff59168d2e2bc2f2d42883e35c807cf485fb9a743c3b450844d4",
+    "crates/convert/tests/check_musicxml.py": "053e2f8f3d9627db4d4ebd8cc1ffd20735c385f2fe6a355a35065b9c4ed709d0",
+    "crates/convert/tests/cli.rs": "d5da32ce5a8226624aa1efd6f78e6be6a8b03c056cb37bd24bfce60257bef65c",
+    "crates/convert/tests/conversion.rs": "e77eb0cba62c1d224ce02e7dff73270625f5a24415ace73d3e62abf410cb0e6f",
+    "crates/convert/tests/corpus-manifest.json": "ba5357a4b8be5f6af8ed66204f05a902f798d992b15dd72ea825f3d881d9e624",
+    "crates/convert/tests/corpus-sample.json": "cf66cb4fdd0442bc597103a97c4766d125b82ba61c8c315914702263f786a240",
+    "crates/convert/tests/interpretation.rs": "cfa099cd46fd31f59508462ae8b2d393e90349d2a3bd33e92c8acd807543adac",
+    "crates/convert/tests/musical.rs": "a9e2dbd0a7307dd9359e712f8ff683bd6f4710ba73874d013e6a16f0c23ade8c",
+    "crates/convert/tests/piano.rs": "3190e84fdf486d37bb352adf1cb7b3f15d432c1115085fa1e09676ddf41e4dc9",
+    "crates/convert/tests/protocol.rs": "65cc745a7e4ae48e95cd199622d75722bf83ee22461feaf30135441567f060bd",
+    "crates/convert/tests/support/mod.rs": "57130b0aff1a48d4f27d4e756c216ac31e05c8e98953b0f6ab1daee384b19f3e",
+    "crates/research/check.mjs": "e998a39eeffa4e52e69c3c5c843c1f74c5d6ce2d58867e96a70e1887877c7940",
+    "crates/research/sources.json": "4dedca9e979039eb1cd638d34b868747cb4560af22ea082ce083b4fced7c4b82"
+  },
+  "artifactDigest": "1baa3544e3deaa001efc58694ebc142797ad3f3868209bdafc927ecfada69469",
+  "commands": [
+    {
+      "command": [
+        "node",
+        "crates/research/check.mjs"
+      ],
+      "exitCode": 0,
+      "seconds": 0.816,
+      "log": "/tmp/convert-acceptance-62mb5l4i/0.log",
+      "logSha256": "ae0359963d1247eb3f6715fa56989e89501a64bc0223bc5c15e6909cbe41ccdd"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "crates/Cargo.toml",
+        "--all",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.295,
+      "log": "/tmp/convert-acceptance-62mb5l4i/1.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "cargo",
+        "check",
+        "--manifest-path",
+        "crates/Cargo.toml",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 0.897,
+      "log": "/tmp/convert-acceptance-62mb5l4i/2.log",
+      "logSha256": "fcc4d67d545d9d98d00a8f2d9f34abf7802f57b42c9ba28e7ea6097aacaa4973"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "crates/Cargo.toml",
+        "-p",
+        "musicxml-midi2-convert",
+        "--locked",
+        "--offline",
+        "--",
+        "--show-output"
+      ],
+      "exitCode": 0,
+      "seconds": 157.616,
+      "log": "/tmp/convert-acceptance-62mb5l4i/3.log",
+      "logSha256": "92e384a8b57733ac2f22ebf295faae2512bf2e510d4f2600432f0ebbd5a687f7"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--manifest-path",
+        "crates/Cargo.toml",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "seconds": 1.589,
+      "log": "/tmp/convert-acceptance-62mb5l4i/4.log",
+      "logSha256": "c6613c79dee3a5dc986b79e2d43607c42fffe58245749cd988fb138764fbbe61"
+    },
+    {
+      "command": [
+        "cargo",
+        "doc",
+        "--manifest-path",
+        "crates/Cargo.toml",
+        "--workspace",
+        "--no-deps",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 1.794,
+      "log": "/tmp/convert-acceptance-62mb5l4i/5.log",
+      "logSha256": "0be412e99468ffeec58f275cccb0c406c6c0b318f8931c8f3b0507a2f0380a6f"
+    },
+    {
+      "command": [
+        "cargo",
+        "+1.87.0",
+        "check",
+        "--manifest-path",
+        "crates/Cargo.toml",
+        "-p",
+        "musicxml-midi2-convert",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 1.123,
+      "log": "/tmp/convert-acceptance-62mb5l4i/6.log",
+      "logSha256": "078f226628aca52de3be7832ea3cc2a2575a89a5b8a414a7f8f9710bd0a6a069"
+    }
+  ],
+  "tests": [
+    {
+      "harness": "cli.rs",
+      "case": "actual_binary_converts_bach_both_ways_and_schema_validates",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "details_validate_lengths_and_counts",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "exact_decimals_and_tuplets_use_libraries",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "independent_note_wire_vector",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "catalog_is_single_source",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "native_coordinate::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "malformed_clip_cannot_publish_a_performance",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "native_coordinate::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "native_coordinate::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "normative_scaling::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "normative_scaling::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "normative_scaling::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "normative_scaling::case_5",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "normative_scaling::case_4",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "profile_codec_and_enable_exchange",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "rational_normalization_checks_signed_limits::case_2_denominator_overflow",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "rational_normalization_checks_signed_limits::case_3_reducible_limits",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "rational_normalization_checks_signed_limits::case_4_zero",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "rational_normalization_checks_signed_limits::case_5_negative_denominator",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "rational_normalization_checks_signed_limits::case_1_numerator_overflow",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "rational_normalization_checks_signed_limits::case_6_zero_denominator",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "xml_and_archive_boundaries_reject_independent_adversarial_inputs",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_sample_is_pinned_and_diversified",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "refinement_is_per_note_and_checks_embedded_map",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_04_schoenberg_articulation",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "all_named_coordinates_survive_both_directions",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_10_bach_chorale_baseline",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_05_schumann_voice_pedal",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_11_bach_orchestral_case_study",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_01_bach_piano",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_02_cpebach_ornaments",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_03_joplin_syncopation",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_12_bach_large_orchestration",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_06_weber_transposing_wind",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_09_mozart_classical_quartet",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_08_beethoven_fugue_harmonic",
+      "result": "ok"
+    },
+    {
+      "harness": "conversion.rs",
+      "case": "corpus_roundtrip::case_07_beethoven_largest",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "a_touching_harmonic_pitch_is_not_sounded_as_if_it_were_the_resulting_partial",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "a_paired_tremolo_is_not_misread_as_two_single_note_rolls::case_4",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "a_paired_tremolo_is_not_misread_as_two_single_note_rolls::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "a_paired_tremolo_is_not_misread_as_two_single_note_rolls::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "a_paired_tremolo_is_not_misread_as_two_single_note_rolls::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "an_explicit_unmeasured_tremolo_is_not_given_an_invented_measured_rate::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "an_explicit_unmeasured_tremolo_is_not_given_an_invented_measured_rate::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_02",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_01",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_05",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_03",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_09",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_07",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_04",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_06",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "musicxml_shake_is_an_ornament_schedule_not_automatically_a_brass_shake_sample",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "explicitly_lower_ornament_start_is_not_replaced_with_an_upper_neighbor",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_01",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "left_hand_pizzicato_glyph_requests_plucking_as_well_as_direction",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_02",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_03",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_04",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_06",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_08",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_05",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_07",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_10",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_09",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_11",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_12",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_13",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_14",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_15",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_16",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_17",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_18",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_19",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_20",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_21",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "piano_inverse_uses_published_range_boundaries::case_22",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_08",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_10",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "context_does_not_prove_a_more_specific_production::case_11",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "relative_attack_marks_change_emphasis_but_never_override_authored_velocity::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "relative_attack_marks_change_emphasis_but_never_override_authored_velocity::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "relative_attack_marks_change_emphasis_but_never_override_authored_velocity::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "scoped_other_ornament_remains_literal_and_does_not_invent_a_library_articulation",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "repeated_freehand_notation_keeps_provenance_without_duplicate_xml_ids",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_4",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_8",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_7",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_6",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_9",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "interpretation.rs",
+      "case": "every_named_sound_remains_reachable_across_the_appendix_instrument_columns::case_5",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "every_release_subclass_and_note_modifier_is_validated",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "a_span_stop_on_a_later_chord_member_excludes_the_whole_boundary",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "explicit_grace_dynamics_record_the_numeric_boundary",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "arpeggio_default_and_explicit_arrow_have_defined_pitch_order",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "grace_keeps_articulation_and_explicit_timing::case_1_following",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "header_tempo_and_meter_have_prescribed_order_and_multiplicity",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "explicit_swing_uses_the_musicxml_ratio_and_eligibility_rules",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "fine_decimal_boundaries_use_library_arithmetic",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "grace_keeps_articulation_and_explicit_timing::case_2_inserted",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "external_multi_packet_flex_text_survives_the_inverse",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "independent_parts_sharing_a_route_keep_their_expression_scope",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "first_and_second_endings_are_not_dropped",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "native_compound_and_left_hand_pizzicato_keep_independent_meaning",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "navigation_has_independent_attack_expectations::case_1_da_capo",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "navigation_has_independent_attack_expectations::case_2_dal_segno",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "navigation_preserves_current_playback_state_and_note_overrides",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "navigation_to_coda_and_midmeasure_fine",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "numbered_articulation_spans_are_half_open_and_voice_scoped",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "numbered_trill_continues_to_its_resolution_and_accidentals_change_auxiliary_pitch",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "ornaments_are_realized_after_ties_resolve_their_full_span",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "persistent_mutes_use_sound_play_and_respect_instrument_scope",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "editing_the_clip_defeats_stale_source_restoration",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "literal_zero_midi2_attacks_and_trailing_silence_have_a_real_inverse",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "independently_authored_clip_has_a_real_inverse",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "mute_collisions_allocate_separate_channels",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "bank_bytes_and_simultaneous_controller_order_have_independent_vectors",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "controllers_between_attacks_and_before_releases_keep_their_order",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "instrument_ids_and_isolated_channels_inherit_initial_programs",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "release_subclasses_survive_canonical_musicxml::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "same_pitch_overlap_and_position_do_not_retag_a_neighbor",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "berlin_conventions_survive::case_4",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "berlin_conventions_survive::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "berlin_conventions_survive::case_6",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "berlin_conventions_survive::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "berlin_conventions_survive::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "berlin_conventions_survive::case_5",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "release_subclasses_survive_canonical_musicxml::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "time_only_filters_repeat_occurrences",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "simultaneous_unison_ties_keep_two_note_lifecycles",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "sounding_ties_have_one_lifecycle",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "source_pitch_replacement_is_explicit_and_rounding_is_accounted",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "trill_defaults_are_an_independent_timed_oracle",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "sound_offset_and_time_only_change_the_actual_dynamic_scope",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "unpitched_instrument_binding_uses_midi_key_not_display_pitch",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "release_subclasses_survive_canonical_musicxml::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "release_subclasses_survive_canonical_musicxml::case_4",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "release_subclasses_survive_canonical_musicxml::case_5",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "transient_dynamics_are_envelopes_and_do_not_change_later_attacks::case_1_forte_piano",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "transient_dynamics_are_envelopes_and_do_not_change_later_attacks::case_2_sforzando",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "typed_library_adapters_keep_fractional_durations_and_timewise_entities",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "independent_bwv267_facts",
+      "result": "ok"
+    },
+    {
+      "harness": "musical.rs",
+      "case": "crescendo_is_a_timed_dynamic_layer_curve_and_survives_edits",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_key_velocity_and_optional_position_controllers_use_standard_fields",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_ci_uses_its_published_id_and_31_byte_details",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "local_identity_renewal_discards_piano_capabilities::case_1_invalidation",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "local_identity_renewal_discards_piano_capabilities::case_2_discovery_collision",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "profile_interpretation_does_not_turn_a_violin_or_electric_piano_into_acoustic_piano",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_muffler_does_not_accept_a_brass_mute_identity::case_5",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_muffler_does_not_accept_a_brass_mute_identity::case_4",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_muffler_does_not_accept_a_brass_mute_identity::case_6",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_numeric_source_dynamics_take_precedence_over_letters",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_mute_words_do_not_confuse_historical_dampers_una_corda_and_a_muffler",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "ordinary_piano_declares_only_piano_and_emits_no_orchestral_attribute",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_muffler_does_not_accept_a_brass_mute_identity::case_3",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_muffler_does_not_accept_a_brass_mute_identity::case_1",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_muffler_does_not_accept_a_brass_mute_identity::case_2",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_emphasis_changes_the_hammer_attack_and_keeps_natural_decay",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "piano_profile_key_velocity_and_silent_attack_survive_without_archived_source",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "two_instruments_in_one_written_part_get_distinct_profile_bindings",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_08",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_04",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_05",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_02",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_03",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_06",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "a_piano_profile_is_not_lost_when_the_score_only_contains_a_rest",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_07",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_01",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "independent_bach_orchestral_note_and_ornament_counts",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_09",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "published_piano_dynamic_centers::case_10",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "freehand_remarks_survive_at_note_and_timed_direction_scope",
+      "result": "ok"
+    },
+    {
+      "harness": "piano.rs",
+      "case": "voice_scoped_text_survives_without_a_companion_and_stays_in_the_correct_part",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "acknowledgements_extend_timeouts_without_claiming_enablement",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "all_profile_state_notifications_and_disable_flow_have_explicit_effects",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_01",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "off_reserved_field_and_ack_details_follow_the_standard",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "normative_fallback_preserves_original_request",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_03",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "invalid_capabilities_do_not_mutate_cached_state",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_04",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_05",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_02",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "invalidation_and_discovery_collisions_use_injected_entropy",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_07",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_06",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_09",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_08",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_11",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_12",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_13",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_14",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_inquiries_report_each_addressed_channel::case_1_channel",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_inquiries_report_each_addressed_channel::case_2_group",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_family_codecs::case_10",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "profile_inquiries_report_each_addressed_channel::case_3_function_block",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "published_discovery_and_local_reply_interoperate",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "wire_errors_receive_prescribed_nak_codes",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "optional_capabilities_require_a_live_transaction_and_program_changes_invalidate_them",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "pe_rejects_unsolicited_replies_and_expired_transactions",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "unknown_chunk_count_is_declared_by_the_final_chunk",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "out_of_order_property_chunks_fail",
+      "result": "ok"
+    },
+    {
+      "harness": "protocol.rs",
+      "case": "refinement_resource_is_ascii_chunked_and_schema_described",
+      "result": "ok"
+    }
+  ],
+  "corpus": [
+    {
+      "path": "bach/bwv846.mxl",
+      "sha256": "286535dfb99cf841bfa9848e4cd71ddb2339c476a123971cb326b3d85e410018",
+      "role": "piano",
+      "label": "J. S. Bach, BWV 846",
+      "reason": "Keyboard polyphony, cross-staff/voice timing, ties and fermatas.",
+      "source": {
+        "notes": 729,
+        "measures": 34,
+        "parts": [
+          "Piano"
+        ],
+        "instruments": [
+          "Piano"
+        ],
+        "features": {
+          "tied": 136,
+          "fermata": 2
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "5",
+          "6"
+        ],
+        "programs": [
+          "1"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_01_bach_piano",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 550
+        },
+        "dictionaryDescriptors": 3,
+        "durationQuarters": "138",
+        "noteOnAttributeTypes": {
+          "00": 533
+        },
+        "noteOnCoordinates": {
+          "10/0": 533
+        },
+        "path": "bach/bwv846.mxl",
+        "performedAttacks": 533,
+        "pianoChannels": [
+          {
+            "channel": 0,
+            "group": 0
+          }
+        ],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "cpebach/h186.mxl",
+      "sha256": "39462c924adce2ebb29a86cbdfe88e0f5d4f23d1c7c537b06853d55f81571a59",
+      "role": "piano",
+      "label": "C. P. E. Bach, H. 186",
+      "reason": "Dense keyboard ornamentation: turns, inverted mordents, grace notes, staccatissimo and tenuto.",
+      "source": {
+        "notes": 929,
+        "measures": 32,
+        "parts": [
+          "MusicXML Part"
+        ],
+        "instruments": [
+          "Acoustic Grand Piano"
+        ],
+        "features": {
+          "staccatissimo": 9,
+          "tenuto": 2,
+          "slur": 272,
+          "tied": 44,
+          "fermata": 2,
+          "trill-mark": 2,
+          "grace": 5,
+          "turn": 14,
+          "inverted-mordent": 11
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "programs": [
+          "1"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_02_cpebach_ornaments",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 890,
+          "staccatissimo": 9
+        },
+        "dictionaryDescriptors": 59,
+        "durationQuarters": "257/2",
+        "noteOnAttributeTypes": {
+          "00": 421,
+          "10": 440,
+          "11": 9
+        },
+        "noteOnCoordinates": {
+          "10/0": 421,
+          "10/2": 440,
+          "11/4": 9
+        },
+        "path": "cpebach/h186.mxl",
+        "performedAttacks": 870,
+        "pianoChannels": [
+          {
+            "channel": 0,
+            "group": 0
+          }
+        ],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ],
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "joplin/maple_leaf_rag.mxl",
+      "sha256": "5fe979be991095d18bb9ee3394bf70d26237e37903ab7e751ee32e30b8e6460a",
+      "role": "piano",
+      "label": "Joplin, Maple Leaf Rag",
+      "reason": "Syncopated keyboard chords, multiple voices, repeat traversal and ties.",
+      "source": {
+        "notes": 1647,
+        "measures": 85,
+        "parts": [
+          "Piano"
+        ],
+        "instruments": [
+          "Piano"
+        ],
+        "features": {
+          "slur": 8,
+          "tied": 184
+        },
+        "repeats": 8,
+        "voices": [
+          "1",
+          "5",
+          "6"
+        ],
+        "programs": [
+          "1"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_03_joplin_syncopation",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 2590
+        },
+        "dictionaryDescriptors": 5,
+        "durationQuarters": "577/2",
+        "noteOnAttributeTypes": {
+          "00": 2552,
+          "10": 16
+        },
+        "noteOnCoordinates": {
+          "10/0": 2552,
+          "10/2": 16
+        },
+        "path": "joplin/maple_leaf_rag.mxl",
+        "performedAttacks": 2568,
+        "pianoChannels": [
+          {
+            "channel": 0,
+            "group": 0
+          }
+        ],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ],
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "schoenberg/opus19/movement2.mxl",
+      "sha256": "99b51a60b16ba85f4303ebe0ad294a2ceb330a26b4475157880ac09e48acf35a",
+      "role": "piano",
+      "label": "Schoenberg, Op. 19 No. 2",
+      "reason": "Short modern keyboard texture with staccato, tenuto, accents and dynamic wedges.",
+      "source": {
+        "notes": 141,
+        "measures": 9,
+        "parts": [
+          "MusicXML Part"
+        ],
+        "instruments": [
+          "Grand Piano"
+        ],
+        "features": {
+          "staccato": 25,
+          "tenuto": 2,
+          "accent": 1,
+          "slur": 8,
+          "tied": 20,
+          "fermata": 2,
+          "wedge": 12
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3"
+        ],
+        "programs": [
+          "1"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_04_schoenberg_articulation",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 106,
+          "staccato": 21
+        },
+        "dictionaryDescriptors": 9,
+        "durationQuarters": "37",
+        "noteOnAttributeTypes": {
+          "00": 40,
+          "10": 27,
+          "11": 25
+        },
+        "noteOnCoordinates": {
+          "10/0": 40,
+          "10/2": 27,
+          "11/0": 21,
+          "11/2": 4
+        },
+        "path": "schoenberg/opus19/movement2.mxl",
+        "performedAttacks": 92,
+        "pianoChannels": [
+          {
+            "channel": 0,
+            "group": 0
+          }
+        ],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ],
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "schumann_robert/opus48no2.mxl",
+      "sha256": "c6cb6b24a0afcc87f1fadefa64f12ec095bbb5a61a96e49ba05663fe835a94f2",
+      "role": "voice-piano",
+      "label": "R. Schumann, Op. 48 No. 2",
+      "reason": "Voice/piano separation, sustain pedal, fermatas and expressive markings.",
+      "source": {
+        "notes": 276,
+        "measures": 36,
+        "parts": [
+          "MusicXML Part",
+          "MusicXML Part"
+        ],
+        "instruments": [
+          "Choir Aahs",
+          "Grand Piano"
+        ],
+        "features": {
+          "staccato": 17,
+          "accent": 6,
+          "slur": 36,
+          "tied": 48,
+          "fermata": 7,
+          "wedge": 4,
+          "pedal": 2
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "programs": [
+          "1",
+          "53"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_05_schumann_voice_pedal",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 247,
+          "staccato": 8
+        },
+        "dictionaryDescriptors": 0,
+        "durationQuarters": "143/4",
+        "noteOnAttributeTypes": {
+          "00": 98,
+          "10": 112,
+          "11": 17
+        },
+        "noteOnCoordinates": {
+          "10/0": 156,
+          "10/2": 54,
+          "11/0": 8,
+          "11/2": 9
+        },
+        "path": "schumann_robert/opus48no2.mxl",
+        "performedAttacks": 227,
+        "pianoChannels": [
+          {
+            "channel": 0,
+            "group": 0
+          },
+          {
+            "channel": 1,
+            "group": 0
+          }
+        ],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ],
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ],
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 13,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "weber/concertino_clarinet.mxl",
+      "sha256": "344a87bde10672d391e8de38da09a7270fc4cbebc36832617c035b6f75fbde08",
+      "role": "wind-piano",
+      "label": "Weber, Clarinet Concertino reduction",
+      "reason": "Large transposing wind-plus-piano score, multiple instrument IDs, ornaments and dynamics.",
+      "source": {
+        "notes": 5307,
+        "measures": 482,
+        "parts": [
+          "Bb Clarinet",
+          "Piano"
+        ],
+        "instruments": [
+          "Bb Clarinet",
+          "Piano",
+          "Piano"
+        ],
+        "features": {
+          "staccato": 199,
+          "accent": 72,
+          "slur": 474,
+          "tied": 202,
+          "fermata": 3,
+          "trill-mark": 7,
+          "grace": 34,
+          "wedge": 116,
+          "turn": 2
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "programs": [
+          "1",
+          "72"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_06_weber_transposing_wind",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 4814,
+          "staccato": 160
+        },
+        "dictionaryDescriptors": 265,
+        "durationQuarters": "1685/2",
+        "noteOnAttributeTypes": {
+          "00": 3502,
+          "10": 1023,
+          "11": 199
+        },
+        "noteOnCoordinates": {
+          "10/0": 3628,
+          "10/2": 897,
+          "11/0": 160,
+          "11/2": 39
+        },
+        "path": "weber/concertino_clarinet.mxl",
+        "performedAttacks": 4724,
+        "pianoChannels": [
+          {
+            "channel": 1,
+            "group": 0
+          },
+          {
+            "channel": 2,
+            "group": 0
+          }
+        ],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                32,
+                0,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "beethoven/opus132.mxl",
+      "sha256": "8c4b99d9cec4aa5f62cfe4966f0e65275d2e52465a0b68ca0b0190b33eabd908",
+      "role": "strings",
+      "label": "Beethoven, Op. 132",
+      "reason": "Largest corpus file by written note-element count; entire quartet with repeats, long spans, grace notes and wedges.",
+      "source": {
+        "notes": 20361,
+        "measures": 4496,
+        "parts": [
+          "Violin I",
+          "Violin II",
+          "Viola",
+          "Violoncello"
+        ],
+        "instruments": [],
+        "features": {
+          "slur": 6354,
+          "trill-mark": 67,
+          "wavy-line": 67,
+          "grace": 42,
+          "wedge": 1782
+        },
+        "repeats": 28,
+        "voices": [
+          "1",
+          "2"
+        ],
+        "programs": []
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_07_beethoven_largest",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 26890,
+          "staccato": 529
+        },
+        "dictionaryDescriptors": 2987,
+        "durationQuarters": "5026",
+        "noteOnAttributeTypes": {
+          "10": 25117,
+          "11": 639
+        },
+        "noteOnCoordinates": {
+          "10/0": 464,
+          "10/2": 24653,
+          "11/0": 529,
+          "11/A": 110
+        },
+        "path": "beethoven/opus132.mxl",
+        "performedAttacks": 25756,
+        "pianoChannels": [],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 3,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "beethoven/opus133.mxl",
+      "sha256": "07e1dfbbe34a762f725869e5c45a938cf9ab5408ee7456ec06a44b292aeb5039",
+      "role": "strings",
+      "label": "Beethoven, Op. 133",
+      "reason": "Second complexity axis: 12,970 note elements, 293 staccatos, 139 trills, 172 grace notes and a harmonic.",
+      "source": {
+        "notes": 12970,
+        "measures": 2968,
+        "parts": [
+          "1st Violin",
+          "2nd Violin",
+          "Viola",
+          "Cello"
+        ],
+        "instruments": [
+          "Violin",
+          "Violin",
+          "Viola",
+          "Cello"
+        ],
+        "features": {
+          "staccato": 293,
+          "slur": 1956,
+          "tied": 1732,
+          "fermata": 44,
+          "trill-mark": 139,
+          "wavy-line": 8,
+          "grace": 172,
+          "wedge": 26,
+          "harmonic": 1
+        },
+        "repeats": 0,
+        "voices": [
+          "1"
+        ],
+        "programs": [
+          "41",
+          "42",
+          "43"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_08_beethoven_fugue_harmonic",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 9711,
+          "staccato": 157
+        },
+        "dictionaryDescriptors": 120,
+        "durationQuarters": "8941/4",
+        "noteOnAttributeTypes": {
+          "10": 9157,
+          "11": 311
+        },
+        "noteOnCoordinates": {
+          "10/0": 6322,
+          "10/2": 2835,
+          "11/0": 157,
+          "11/2": 120,
+          "11/A": 34
+        },
+        "path": "beethoven/opus133.mxl",
+        "performedAttacks": 9468,
+        "pianoChannels": [],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 3,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "mozart/k458/movement1.mxl",
+      "sha256": "5015fd7109b945f5cdbfcbfd7e12ab5a7740299635b6719bad923c817f3dd89d",
+      "role": "strings",
+      "label": "Mozart, K. 458 I",
+      "reason": "Contrasting Classical quartet: repeat structure, staccato/slur compounds, trills and grace notes.",
+      "source": {
+        "notes": 5243,
+        "measures": 1132,
+        "parts": [
+          "1st Violin",
+          "2nd Violin",
+          "Viola",
+          "Cello"
+        ],
+        "instruments": [
+          "Violin",
+          "Violin",
+          "Viola",
+          "Cello"
+        ],
+        "features": {
+          "staccato": 466,
+          "slur": 1476,
+          "tied": 268,
+          "trill-mark": 20,
+          "wavy-line": 29,
+          "grace": 56
+        },
+        "repeats": 12,
+        "voices": [
+          "1",
+          "2"
+        ],
+        "programs": [
+          "41",
+          "42",
+          "43"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_09_mozart_classical_quartet",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 7666,
+          "staccato": 775
+        },
+        "dictionaryDescriptors": 43,
+        "durationQuarters": "1537",
+        "noteOnAttributeTypes": {
+          "10": 6757,
+          "11": 881
+        },
+        "noteOnCoordinates": {
+          "10/0": 2409,
+          "10/2": 4348,
+          "11/0": 775,
+          "11/2": 106
+        },
+        "path": "mozart/k458/movement1.mxl",
+        "performedAttacks": 7638,
+        "pianoChannels": [],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 3,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "bach/bwv267.mxl",
+      "sha256": "8fd35db74f930089746d03248b8267882c9508d8f005aec67e9f4e23d74c27e4",
+      "role": "choral",
+      "label": "J. S. Bach, BWV 267",
+      "reason": "Retains the independently audited 402-attack baseline and CLI example; four-part chorale, not an orchestral score.",
+      "source": {
+        "notes": 330,
+        "measures": 80,
+        "parts": [
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass"
+        ],
+        "instruments": [],
+        "features": {
+          "tied": 10,
+          "fermata": 32
+        },
+        "repeats": 4,
+        "voices": [],
+        "programs": []
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_10_bach_chorale_baseline",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 418
+        },
+        "dictionaryDescriptors": 0,
+        "durationQuarters": "89",
+        "noteOnAttributeTypes": {
+          "10": 402
+        },
+        "noteOnCoordinates": {
+          "10/0": 402
+        },
+        "path": "bach/bwv267.mxl",
+        "performedAttacks": 402,
+        "pianoChannels": [],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 3,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "bach/bwv29.8.mxl",
+      "sha256": "8537e2e063ff22eda261419fba92760353d9d255a9356f379fdebe654f9e5464",
+      "role": "orchestral-choral",
+      "label": "J. S. Bach, BWV 29/8",
+      "reason": "Detailed case study: three trumpets, timpani and SATB; inverted mordents, ties, fermatas and repeats. Authored MIDI programs are piano placeholders.",
+      "source": {
+        "notes": 676,
+        "measures": 328,
+        "parts": [
+          "Trumpet 1",
+          "Trumpet 2",
+          "Trumpet 3",
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass",
+          "Timpani"
+        ],
+        "instruments": [
+          "Instrument 6",
+          "Instrument 7",
+          "Instrument 8",
+          "Instrument 1",
+          "Instrument 2",
+          "Instrument 3",
+          "Instrument 4",
+          "Instrument 5"
+        ],
+        "features": {
+          "tied": 12,
+          "fermata": 56,
+          "inverted-mordent": 3
+        },
+        "repeats": 8,
+        "voices": [],
+        "programs": [
+          "1"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_11_bach_orchestral_case_study",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 683
+        },
+        "dictionaryDescriptors": 3,
+        "durationQuarters": "145",
+        "noteOnAttributeTypes": {
+          "10": 647
+        },
+        "noteOnCoordinates": {
+          "10/0": 647
+        },
+        "ornamentTrace": [
+          {
+            "descriptor": {
+              "qualifiers": {
+                "urn:midi2workbench:expanded-pattern": {
+                  "count": 3,
+                  "index": 0,
+                  "kind": "inverted-mordent",
+                  "logicalDuration": "2"
+                }
+              },
+              "technique": "core.normal"
+            },
+            "end": "206/25",
+            "noteOnWords": [
+              "40914C10",
+              "90410000"
+            ],
+            "onset": "8",
+            "pitch": "76",
+            "route": {
+              "channel": 1,
+              "group": 0
+            },
+            "source": "/score-partwise/part[@id='P2']/measure[4]/note[2]#occurrence=3"
+          },
+          {
+            "descriptor": {
+              "qualifiers": {
+                "urn:midi2workbench:expanded-pattern": {
+                  "count": 3,
+                  "index": 1,
+                  "kind": "inverted-mordent",
+                  "logicalDuration": "2"
+                }
+              },
+              "technique": "core.normal"
+            },
+            "end": "212/25",
+            "noteOnWords": [
+              "40914E10",
+              "90410000"
+            ],
+            "onset": "206/25",
+            "pitch": "78",
+            "route": {
+              "channel": 1,
+              "group": 0
+            },
+            "source": "/score-partwise/part[@id='P2']/measure[4]/note[2]#occurrence=3"
+          },
+          {
+            "descriptor": {
+              "qualifiers": {
+                "urn:midi2workbench:expanded-pattern": {
+                  "count": 3,
+                  "index": 2,
+                  "kind": "inverted-mordent",
+                  "logicalDuration": "2"
+                }
+              },
+              "technique": "core.normal"
+            },
+            "end": "10",
+            "noteOnWords": [
+              "40914C10",
+              "90410000"
+            ],
+            "onset": "212/25",
+            "pitch": "76",
+            "route": {
+              "channel": 1,
+              "group": 0
+            },
+            "source": "/score-partwise/part[@id='P2']/measure[4]/note[2]#occurrence=3"
+          },
+          {
+            "descriptor": {
+              "qualifiers": {
+                "urn:midi2workbench:expanded-pattern": {
+                  "count": 3,
+                  "index": 0,
+                  "kind": "inverted-mordent",
+                  "logicalDuration": "2"
+                }
+              },
+              "technique": "core.normal"
+            },
+            "end": "531/25",
+            "noteOnWords": [
+              "40914C10",
+              "90410000"
+            ],
+            "onset": "21",
+            "pitch": "76",
+            "route": {
+              "channel": 1,
+              "group": 0
+            },
+            "source": "/score-partwise/part[@id='P2']/measure[8]/note[2]#occurrence=7"
+          },
+          {
+            "descriptor": {
+              "qualifiers": {
+                "urn:midi2workbench:expanded-pattern": {
+                  "count": 3,
+                  "index": 1,
+                  "kind": "inverted-mordent",
+                  "logicalDuration": "2"
+                }
+              },
+              "technique": "core.normal"
+            },
+            "end": "537/25",
+            "noteOnWords": [
+              "40914E10",
+              "90410000"
+            ],
+            "onset": "531/25",
+            "pitch": "78",
+            "route": {
+              "channel": 1,
+              "group": 0
+            },
+            "source": "/score-partwise/part[@id='P2']/measure[8]/note[2]#occurrence=7"
+          },
+          {
+            "descriptor": {
+              "qualifiers": {
+                "urn:midi2workbench:expanded-pattern": {
+                  "count": 3,
+                  "index": 2,
+                  "kind": "inverted-mordent",
+                  "logicalDuration": "2"
+                }
+              },
+              "technique": "core.normal"
+            },
+            "end": "23",
+            "noteOnWords": [
+              "40914C10",
+              "90410000"
+            ],
+            "onset": "537/25",
+            "pitch": "76",
+            "route": {
+              "channel": 1,
+              "group": 0
+            },
+            "source": "/score-partwise/part[@id='P2']/measure[8]/note[2]#occurrence=7"
+          }
+        ],
+        "path": "bach/bwv29.8.mxl",
+        "performedAttacks": 647,
+        "pianoChannels": [],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 3,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 4,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 5,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 6,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 7,
+              "group": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "bach/bwv248.64-6.mxl",
+      "sha256": "55341321387dc66be0c6f829144a5e2125973fad9c9fd399a92d885357fe58f4",
+      "role": "orchestral-choral",
+      "label": "J. S. Bach, BWV 248/64",
+      "reason": "Broadest selected instrumentation: 14 parts with brass, winds, strings, voices and continuo; routing and sustained ties.",
+      "source": {
+        "notes": 5220,
+        "measures": 966,
+        "parts": [
+          "Trumpet 1",
+          "Trumpet 2",
+          "Trumpet 3",
+          "Timpani",
+          "Oboe 1",
+          "Oboe 2",
+          "Violin 1",
+          "Violin 2",
+          "Viola",
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass",
+          "Continuo"
+        ],
+        "instruments": [
+          "Instrument 7",
+          "Instrument 7",
+          "Instrument 7",
+          "Instrument 6",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 1",
+          "Instrument 2",
+          "Instrument 3",
+          "Instrument 4",
+          "Instrument 5"
+        ],
+        "features": {
+          "tied": 44
+        },
+        "repeats": 0,
+        "voices": [
+          "1"
+        ],
+        "programs": [
+          "20",
+          "25",
+          "43",
+          "48",
+          "55",
+          "69"
+        ]
+      },
+      "hashMatches": true,
+      "test": {
+        "harness": "conversion.rs",
+        "case": "corpus_roundtrip::case_12_bach_large_orchestration",
+        "result": "ok"
+      },
+      "disposition": "both inverse modes and XSD",
+      "diagnostic": null,
+      "observed": {
+        "bothInversePerformanceHashesMatch": true,
+        "bothInverseXsdValid": true,
+        "canonicalMarks": {
+          "other-play": 4092
+        },
+        "dictionaryDescriptors": 0,
+        "durationQuarters": "273",
+        "noteOnAttributeTypes": {
+          "10": 3984
+        },
+        "noteOnCoordinates": {
+          "10/0": 3984
+        },
+        "path": "bach/bwv248.64-6.mxl",
+        "performedAttacks": 3984,
+        "pianoChannels": [],
+        "profiles": [
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 0,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 1,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 2,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 3,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 4,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 5,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 6,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 7,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 8,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 9,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 10,
+              "group": 0
+            }
+          },
+          {
+            "profileIds": [
+              [
+                126,
+                33,
+                1,
+                1,
+                1
+              ]
+            ],
+            "route": {
+              "channel": 11,
+              "group": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "discoveredHashedAttempted": 12,
+    "validBothDirections": 12,
+    "invalidWitnesses": 0,
+    "historicalSurveyFiles": 535,
+    "testCases": 207,
+    "namedCoordinates": 106,
+    "releaseSubclasses": 5,
+    "profileCodecCases": 14
+  },
+  "obligations": {
+    "corpus": "12 diversified pinned hashes selected after surveying 535; all 12 per-file cases; both reconstructions compared and XSD validated",
+    "mapping": "106 catalog coordinates; independently specified JSON; five release cases; field vectors",
+    "granular": "six Berlin refinement cases, hash-bound token dictionary, PE schema/chunks",
+    "inverse": "external clips, stale source, controller/note ordering and canonical re-encoding",
+    "wire": "independent byte vectors, truncation/reserved bits, scaling, header ordering",
+    "piano": "M2-126 ID and 31-byte details, ten literal dynamic centers and 22 inverse boundaries, key velocity and physical positions, natural decay and silent key actions",
+    "interpretation": "nine instrument columns \u00d7 106 named sounds; authored shortening counterexamples; unknown scoped remarks; harmonic pitch-role and ornament-start counterexamples",
+    "profiles": "14 family cases plus discovery, state, details, timeout, invalidation, fallback and PE cases",
+    "cli": "process-level Bach conversion to all three formats; independent XSD and overwrite checks",
+    "accounting": "counted elements/attributes with dispositions; exact encoded magnitudes; rounding bound case",
+    "reproducibility": "this content-addressed report; offline Cargo, research, lint, docs, Rust 1.87 checks"
+  },
+  "numericBounds": {
+    "time": "exact or E_TPQ, no time rounding",
+    "nearestInteger": "<= 1/2 encoded unit",
+    "pitchEndpointClamp": "< 1 encoded 7.25 unit near 128",
+    "trace": "exactMagnitude and encoded in conversion report"
+  },
+  "domainLimits": [
+    "Finite corpus and named synthetic cases; not all possible MusicXML or receivers",
+    "No hardware/audio or installed sample-library certification",
+    "Accelerated/terminal ornaments, paired-note tremolo and numeric Fine schedules reject explicitly",
+    "Unresolved multi-instrument/note-instance bindings reject explicitly"
+  ]
+}

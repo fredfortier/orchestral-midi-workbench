@@ -1,0 +1,22 @@
+[project]
+name = "kontakt-ctl"
+version = "0.1.0"
+description = "Launch Kontakt 7 under Wine and capture overlay verification screenshots"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "loguru>=0.7.3",
+    "pydantic>=2.11.0",
+    "pillow>=12.1.1",
+    "pyautogui>=0.9.54",
+    "pygetwindow>=0.0.9",
+    "rich>=14.1.0",
+    "typer>=0.16.0",
+]
+
+[project.scripts]
+kontakt-ctl = "kontakt_ctl.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"

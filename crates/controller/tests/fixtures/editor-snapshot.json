@@ -1,0 +1,1643 @@
+{
+  "document": "1f3b8f82-dd6e-408e-8057-57da0726dc94",
+  "selection": {
+    "editor": "biA",
+    "kind": "time",
+    "from": 62.0,
+    "to": 92.0,
+    "lanes": [
+      "1150",
+      "1401",
+      "647",
+      "898"
+    ],
+    "objects": []
+  },
+  "clips": [
+    {
+      "id": "1155",
+      "lane": "1150",
+      "track": "1087",
+      "content": "1201",
+      "start": 0.0,
+      "duration": 80.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 80.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 80.0,
+      "notes": [
+        {
+          "note": {
+            "id": "1207",
+            "channel": 0,
+            "key": 67,
+            "start": 73.75,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.74,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1210",
+            "channel": 1,
+            "key": 81,
+            "start": 0.5,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.71,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "1213",
+            "channel": 1,
+            "key": 65,
+            "start": 63.99899959564209,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.66,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1216",
+            "channel": 15,
+            "key": 80,
+            "start": 0.125,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.61,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "1219",
+            "channel": 15,
+            "key": 66,
+            "start": 64.125,
+            "duration": 0.0625,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "1161",
+      "lane": "1150",
+      "track": "1087",
+      "content": "1237",
+      "start": 84.0,
+      "duration": 8.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 8.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 8.0,
+      "notes": [
+        {
+          "note": {
+            "id": "1243",
+            "channel": 0,
+            "key": 73,
+            "start": 0.125,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1246",
+            "channel": 1,
+            "key": 74,
+            "start": 2.0,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1249",
+            "channel": 2,
+            "key": 75,
+            "start": 6.75,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "1406",
+      "lane": "1401",
+      "track": "1338",
+      "content": "1467",
+      "start": 0.0,
+      "duration": 80.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 80.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 80.0,
+      "notes": [
+        {
+          "note": {
+            "id": "1473",
+            "channel": 0,
+            "key": 69,
+            "start": 73.75,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.74,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1476",
+            "channel": 0,
+            "key": 66,
+            "start": 3.8999996185302734,
+            "duration": 0.0625,
+            "muted": false,
+            "velocity": 0.62,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "1479",
+            "channel": 1,
+            "key": 67,
+            "start": 63.99899959564209,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.66,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1482",
+            "channel": 1,
+            "key": 64,
+            "start": 0.125,
+            "duration": 0.0625,
+            "muted": false,
+            "velocity": 0.54,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "1485",
+            "channel": 9,
+            "key": 63,
+            "start": 0.0,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.5,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [
+                {
+                  "id": "1491",
+                  "time": 0.0,
+                  "value": 0.2,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.04
+                },
+                {
+                  "id": "1492",
+                  "time": 0.5,
+                  "value": 0.8,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.1
+                }
+              ],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [
+                {
+                  "id": "1488",
+                  "time": 0.0,
+                  "value": 0.3,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.02
+                },
+                {
+                  "id": "1489",
+                  "time": 0.25,
+                  "value": 0.6,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.05
+                }
+              ],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "1494",
+            "channel": 15,
+            "key": 68,
+            "start": 64.125,
+            "duration": 0.0625,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1497",
+            "channel": 15,
+            "key": 65,
+            "start": 1.125,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.58,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "1412",
+      "lane": "1401",
+      "track": "1338",
+      "content": "1515",
+      "start": 84.0,
+      "duration": 1.0,
+      "sourceStart": 0.375,
+      "sourceEnd": 2.25,
+      "loopEnabled": true,
+      "loopStart": 0.25,
+      "loopLength": 2.0,
+      "notes": [
+        {
+          "note": {
+            "id": "1521",
+            "channel": 0,
+            "key": 75,
+            "start": 0.125,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [
+                {
+                  "id": "1524",
+                  "time": 0.0,
+                  "value": 0.23,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.07
+                },
+                {
+                  "id": "1525",
+                  "time": 0.375,
+                  "value": 0.78,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.02
+                }
+              ],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1527",
+            "channel": 1,
+            "key": 76,
+            "start": 2.0,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "1530",
+            "channel": 2,
+            "key": 77,
+            "start": 6.75,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "1418",
+      "lane": "1401",
+      "track": "1338",
+      "content": "1581",
+      "start": 85.0,
+      "duration": 1.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 1.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 1.0,
+      "notes": [
+        {
+          "note": {
+            "id": "1587",
+            "channel": 15,
+            "key": 90,
+            "start": 0.125,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.67,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "1424",
+      "lane": "1401",
+      "track": "1338",
+      "content": "1548",
+      "start": 86.0,
+      "duration": 5.625,
+      "sourceStart": 0.375,
+      "sourceEnd": 2.25,
+      "loopEnabled": true,
+      "loopStart": 0.25,
+      "loopLength": 2.0,
+      "notes": [
+        {
+          "note": {
+            "id": "1554",
+            "channel": 0,
+            "key": 75,
+            "start": 0.125,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [
+                {
+                  "id": "1557",
+                  "time": 0.0,
+                  "value": 0.23,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.07
+                },
+                {
+                  "id": "1558",
+                  "time": 0.375,
+                  "value": 0.78,
+                  "interpolation": "LINEAR",
+                  "curvature": 0.0,
+                  "spread": 0.02
+                }
+              ],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1560",
+            "channel": 1,
+            "key": 76,
+            "start": 2.0,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "1563",
+            "channel": 2,
+            "key": 77,
+            "start": 6.75,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "652",
+      "lane": "647",
+      "track": "584",
+      "content": "698",
+      "start": 0.0,
+      "duration": 80.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 80.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 80.0,
+      "notes": [
+        {
+          "note": {
+            "id": "704",
+            "channel": 0,
+            "key": 66,
+            "start": 73.75,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.74,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "707",
+            "channel": 1,
+            "key": 81,
+            "start": 0.5,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.71,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "710",
+            "channel": 1,
+            "key": 64,
+            "start": 63.99899959564209,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.66,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "713",
+            "channel": 15,
+            "key": 80,
+            "start": 0.125,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.61,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "716",
+            "channel": 15,
+            "key": 65,
+            "start": 64.125,
+            "duration": 0.0625,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "658",
+      "lane": "647",
+      "track": "584",
+      "content": "734",
+      "start": 84.0,
+      "duration": 8.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 8.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 8.0,
+      "notes": [
+        {
+          "note": {
+            "id": "740",
+            "channel": 0,
+            "key": 72,
+            "start": 0.125,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "743",
+            "channel": 1,
+            "key": 73,
+            "start": 2.0,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "746",
+            "channel": 2,
+            "key": 74,
+            "start": 6.75,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "903",
+      "lane": "898",
+      "track": "835",
+      "content": "949",
+      "start": 0.0,
+      "duration": 80.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 80.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 80.0,
+      "notes": [
+        {
+          "note": {
+            "id": "955",
+            "channel": 0,
+            "key": 68,
+            "start": 73.75,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.74,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "958",
+            "channel": 1,
+            "key": 81,
+            "start": 0.5,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.71,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "961",
+            "channel": 1,
+            "key": 66,
+            "start": 63.99899959564209,
+            "duration": 0.75,
+            "muted": false,
+            "velocity": 0.66,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "964",
+            "channel": 15,
+            "key": 80,
+            "start": 0.125,
+            "duration": 0.25,
+            "muted": false,
+            "velocity": 0.61,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": false
+        },
+        {
+          "note": {
+            "id": "967",
+            "channel": 15,
+            "key": 67,
+            "start": 64.125,
+            "duration": 0.0625,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "909",
+      "lane": "898",
+      "track": "835",
+      "content": "985",
+      "start": 84.0,
+      "duration": 8.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 8.0,
+      "loopEnabled": false,
+      "loopStart": 0.0,
+      "loopLength": 8.0,
+      "notes": [
+        {
+          "note": {
+            "id": "991",
+            "channel": 0,
+            "key": 74,
+            "start": 0.125,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "994",
+            "channel": 1,
+            "key": 75,
+            "start": 2.0,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        },
+        {
+          "note": {
+            "id": "997",
+            "channel": 2,
+            "key": 76,
+            "start": 6.75,
+            "duration": 0.5,
+            "muted": false,
+            "velocity": 0.7,
+            "releaseVelocity": 0.7874015748031497,
+            "velocitySpread": 0.0,
+            "contentStart": 0.0,
+            "operators": {
+              "chanceEnabled": true,
+              "occurrenceEnabled": true,
+              "recurrenceEnabled": true,
+              "repeatEnabled": true,
+              "chance": 1.0,
+              "occurrence": "ALWAYS",
+              "recurrenceLength": 1,
+              "recurrenceMask": 1,
+              "repeatCount": 0,
+              "repeatCurve": 0.0,
+              "repeatVelocityEnd": 0.0,
+              "repeatVelocityCurve": 0.0
+            },
+            "expressions": {
+              "pressure": [],
+              "pitch": [],
+              "gain": [],
+              "pan": [],
+              "timbre": [],
+              "formant": []
+            }
+          },
+          "selected": true
+        }
+      ]
+    }
+  ],
+  "revision": "9f3ae721b387122bf67e4962989c589b70b5af4685e30ffdde199ab5063920a9"
+}

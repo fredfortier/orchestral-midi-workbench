@@ -1,0 +1,361 @@
+{
+  "hostBuild": "6.1",
+  "project": {
+    "UUID": "062e8c06-06b4-4b24-8360-98f7ff23cb2c",
+    "file_path": "/tmp/import-native-committed/NativeArrangerPilot.bwproject",
+    "is_being_saved": false,
+    "is_modified": true,
+    "name": "NativeArrangerPilot",
+    "project_dir_is_temporary": false,
+    "project_dir_path": "/tmp/import-native-committed"
+  },
+  "revision": "b0fbb74598d6e2711c0b94b21daa0296382c3be23a4b5080616d6bfae84daf2a",
+  "schemaVersion": 2,
+  "thread": "main",
+  "totals": {
+    "tracks": 4,
+    "storedNotes": 3,
+    "ownedObjects": 17
+  },
+  "tracks": [
+    {
+      "automation": {
+        "id": "4006-automation",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "clips": [],
+      "devices": {
+        "id": "4006-devices",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "id": "4006",
+      "parent": null,
+      "properties": {
+        "type": "com.bitwig.flt.document.core.master.stI",
+        "UUID": "54970ed9-5865-43b6-9120-8bbda592e399",
+        "displayed_title": "IMPORT-BATCH native content",
+        "override_note_channel": 0,
+        "mixerData": {
+          "id": "4006-mixer",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        },
+        "midiParameterData": {
+          "id": "4006-midi",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        }
+      }
+    },
+    {
+      "automation": {
+        "id": "4172-automation",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "clips": [],
+      "devices": {
+        "id": "4172-devices",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "id": "4172",
+      "parent": "4006",
+      "properties": {
+        "type": "com.bitwig.flt.document.core.master.stI",
+        "UUID": "da03e9b2-3dab-4708-a804-eb59bff9b001",
+        "displayed_title": "Part | source fixture",
+        "override_note_channel": 0,
+        "mixerData": {
+          "id": "4172-mixer",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        },
+        "midiParameterData": {
+          "id": "4172-midi",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        }
+      }
+    },
+    {
+      "automation": {
+        "id": "4338-automation",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "clips": [
+        {
+          "duration": 4.0,
+          "id": "4521",
+          "loop": {
+            "duration": 4.0,
+            "is_about_to_be_deleted": false,
+            "is_being_recorded": false,
+            "managed_object_ID": 4524,
+            "should_hide_when_rendering": false,
+            "time": 0.0,
+            "type": "UpC"
+          },
+          "loopEnabled": false,
+          "notes": [
+            {
+              "channel": 0,
+              "contentStart": 0.0,
+              "duration": 1.0,
+              "expressions": {
+                "formant": [],
+                "gain": [],
+                "pan": [],
+                "pitch": [
+                  {
+                    "curvature": 0.0,
+                    "id": "4535",
+                    "interpolation": "HOLD",
+                    "spread": 0.0,
+                    "time": 0.0,
+                    "value": 0.25
+                  }
+                ],
+                "pressure": [
+                  {
+                    "curvature": 0.0,
+                    "id": "4532",
+                    "interpolation": "LINEAR",
+                    "spread": 0.0,
+                    "time": 0.0,
+                    "value": 0.1
+                  },
+                  {
+                    "curvature": 0.0,
+                    "id": "4533",
+                    "interpolation": "HOLD",
+                    "spread": 0.0,
+                    "time": 0.5,
+                    "value": 0.8
+                  }
+                ],
+                "timbre": []
+              },
+              "id": "4529",
+              "key": 60,
+              "muted": false,
+              "operators": {
+                "chance": 1.0,
+                "chanceEnabled": false,
+                "occurrence": "ALWAYS",
+                "occurrenceEnabled": false,
+                "recurrenceEnabled": false,
+                "recurrenceLength": 1,
+                "recurrenceMask": 1,
+                "repeatCount": 0,
+                "repeatCurve": 0.0,
+                "repeatEnabled": false,
+                "repeatVelocityCurve": 0.0,
+                "repeatVelocityEnd": 0.0
+              },
+              "releaseVelocity": 0.3527428091859312,
+              "start": 0.0,
+              "velocity": 0.15260547798886093,
+              "velocitySpread": 0.0
+            },
+            {
+              "channel": 1,
+              "contentStart": 0.0,
+              "duration": 1.0,
+              "expressions": {
+                "formant": [],
+                "gain": [],
+                "pan": [],
+                "pitch": [],
+                "pressure": [],
+                "timbre": []
+              },
+              "id": "4538",
+              "key": 60,
+              "muted": false,
+              "operators": {
+                "chance": 1.0,
+                "chanceEnabled": false,
+                "occurrence": "ALWAYS",
+                "occurrenceEnabled": false,
+                "recurrenceEnabled": false,
+                "recurrenceLength": 1,
+                "recurrenceMask": 1,
+                "repeatCount": 0,
+                "repeatCurve": 0.0,
+                "repeatEnabled": false,
+                "repeatVelocityCurve": 0.0,
+                "repeatVelocityEnd": 0.0
+              },
+              "releaseVelocity": 0.3,
+              "start": 0.5,
+              "velocity": 0.7,
+              "velocitySpread": 0.0
+            }
+          ],
+          "properties": {
+            "observedContentUuid": "3958cd4b-3922-4d1d-8ffb-9d26bbfb2dff",
+            "type": "UMj"
+          },
+          "sourceEnd": 4.0,
+          "sourceStart": 0.0,
+          "start": 8.0
+        }
+      ],
+      "devices": {
+        "id": "4338-devices",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "id": "4338",
+      "parent": "4172",
+      "properties": {
+        "type": "yyk",
+        "UUID": "f2edcb28-67db-4cfd-a126-20042dca4ab3",
+        "displayed_title": "Part | b01",
+        "override_note_channel": -1,
+        "mixerData": {
+          "id": "4338-mixer",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        },
+        "midiParameterData": {
+          "id": "4338-midi",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        }
+      }
+    },
+    {
+      "automation": {
+        "id": "4540-automation",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "clips": [
+        {
+          "duration": 4.0,
+          "id": "4724",
+          "loop": {
+            "duration": 4.0,
+            "is_about_to_be_deleted": false,
+            "is_being_recorded": false,
+            "managed_object_ID": 4727,
+            "should_hide_when_rendering": false,
+            "time": 0.0,
+            "type": "UpC"
+          },
+          "loopEnabled": false,
+          "notes": [
+            {
+              "channel": 15,
+              "contentStart": 0.0,
+              "duration": 1.0,
+              "expressions": {
+                "formant": [],
+                "gain": [],
+                "pan": [],
+                "pitch": [],
+                "pressure": [],
+                "timbre": []
+              },
+              "id": "4732",
+              "key": 60,
+              "muted": false,
+              "operators": {
+                "chance": 1.0,
+                "chanceEnabled": false,
+                "occurrence": "ALWAYS",
+                "occurrenceEnabled": false,
+                "recurrenceEnabled": false,
+                "recurrenceLength": 1,
+                "recurrenceMask": 1,
+                "repeatCount": 0,
+                "repeatCurve": 0.0,
+                "repeatEnabled": false,
+                "repeatVelocityCurve": 0.0,
+                "repeatVelocityEnd": 0.0
+              },
+              "releaseVelocity": 0.4,
+              "start": 0.0,
+              "velocity": 0.9,
+              "velocitySpread": 0.0
+            }
+          ],
+          "properties": {
+            "observedContentUuid": "74fdee07-a3c6-4489-aab3-828a1ef38a4c",
+            "type": "UMj"
+          },
+          "sourceEnd": 4.0,
+          "sourceStart": 0.0,
+          "start": 8.0
+        }
+      ],
+      "devices": {
+        "id": "4540-devices",
+        "properties": {
+          "type": "fixture"
+        },
+        "children": []
+      },
+      "id": "4540",
+      "parent": "4172",
+      "properties": {
+        "type": "yyk",
+        "UUID": "8fc2f3d8-343d-4874-a301-a35958596e23",
+        "displayed_title": "Part | b02",
+        "override_note_channel": -1,
+        "mixerData": {
+          "id": "4540-mixer",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        },
+        "midiParameterData": {
+          "id": "4540-midi",
+          "properties": {
+            "type": "fixture"
+          },
+          "children": []
+        }
+      }
+    }
+  ],
+  "transport": {
+    "id": "transport",
+    "properties": {
+      "type": "fixture"
+    },
+    "children": []
+  }
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Bitwig Edit"
+  short_description: "Edit notes, expression and stored automation safely"

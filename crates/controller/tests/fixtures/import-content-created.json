@@ -1,0 +1,40 @@
+{
+  "groups": [
+    {
+      "key": "root",
+      "uuid": "54970ed9-5865-43b6-9120-8bbda592e399"
+    },
+    {
+      "key": "part",
+      "uuid": "da03e9b2-3dab-4708-a804-eb59bff9b001"
+    }
+  ],
+  "tracks": [
+    {
+      "clipContentUuid": "3958cd4b-3922-4d1d-8ffb-9d26bbfb2dff",
+      "key": "main",
+      "notes": [
+        {
+          "key": "n-001",
+          "nativeId": "4529"
+        },
+        {
+          "key": "n-002",
+          "nativeId": "4538"
+        }
+      ],
+      "uuid": "f2edcb28-67db-4cfd-a126-20042dca4ab3"
+    },
+    {
+      "clipContentUuid": "74fdee07-a3c6-4489-aab3-828a1ef38a4c",
+      "key": "independent",
+      "notes": [
+        {
+          "key": "n-003",
+          "nativeId": "4732"
+        }
+      ],
+      "uuid": "8fc2f3d8-343d-4874-a301-a35958596e23"
+    }
+  ]
+}

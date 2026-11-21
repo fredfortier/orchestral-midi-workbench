@@ -1,0 +1,2189 @@
+{
+  "music21Commit": "7a3b55e13781e2f3d28a5411f17275d259684af4",
+  "files": [
+    {
+      "path": "bach/bwv1.6.mxl",
+      "sha256": "54915cba7b1dd0e2a10e973d2365c0342e1ed3616ca28b5e54fd6c5c2c20c6d4"
+    },
+    {
+      "path": "bach/bwv10.7.mxl",
+      "sha256": "6dc6f5dc66f895c99d762032b89d3d39a959e57ad6dd22bea1c436f177b69c92"
+    },
+    {
+      "path": "bach/bwv101.7.mxl",
+      "sha256": "2bbdabf8c1059e9887834797a5aa216a86787795563019edf78c50f28811d652"
+    },
+    {
+      "path": "bach/bwv102.7.mxl",
+      "sha256": "c380c3259e57e4543fa6ad7af6d745da13b3080d06363d40093bd36d816dadf8"
+    },
+    {
+      "path": "bach/bwv103.6.mxl",
+      "sha256": "a4d3b71d96fd3ad5190ee6be4739e67365d816197c1a795e4d8a2fd20fc52edd"
+    },
+    {
+      "path": "bach/bwv104.6.mxl",
+      "sha256": "c3c293c2a626f2b51e7231501ccd1f32c6be2494b4778110bce2c32ab2a9085e"
+    },
+    {
+      "path": "bach/bwv108.6.mxl",
+      "sha256": "88f77ee050bb90af656c887a53254e55143abcbbcf4bf440f8d44ab4fd415038"
+    },
+    {
+      "path": "bach/bwv11.6.mxl",
+      "sha256": "3aa18ec6b8c9eb61c82e519dcca7dc28d012a9a4c0e0e5346b435f19fff091eb"
+    },
+    {
+      "path": "bach/bwv110.7.mxl",
+      "sha256": "4cdecb4c8675d7645528e34527080a2889fd3d10059ed727d152515e3d530bac"
+    },
+    {
+      "path": "bach/bwv111.6.mxl",
+      "sha256": "5522178df57d3ae266c39bad744cff2b7a92e3e8c467ed6ffcf0c589f0e6ae3f"
+    },
+    {
+      "path": "bach/bwv112.5-sc.mxl",
+      "sha256": "f95b9aecd00ba88a9cbfc386666d0ffe9361725bc57bc726e4b803492359dc54"
+    },
+    {
+      "path": "bach/bwv112.5.mxl",
+      "sha256": "2f893a1d71b6c49ef8a7a741c955562a7844d22be68924c01d295487f82ed5bc"
+    },
+    {
+      "path": "bach/bwv113.8.mxl",
+      "sha256": "43fa1efb74347f9e28634a3ffd635da7073b9817e6788127b62933746c773c37"
+    },
+    {
+      "path": "bach/bwv114.7.mxl",
+      "sha256": "6a674128aec24b43d6c5126f1422fa0b7ee4091828168b6b378d2f8d04c4399e"
+    },
+    {
+      "path": "bach/bwv115.6.mxl",
+      "sha256": "a2b0861ea963ec7aa5fef77b4dcc57de3118b96984949e781b2d60e31d4a465a"
+    },
+    {
+      "path": "bach/bwv116.6.mxl",
+      "sha256": "98a88994e5a00ea7f0f9f5a7b1b0ecfaee8a6ae11a8d08d50a33cdc1fcef6e02"
+    },
+    {
+      "path": "bach/bwv117.4.mxl",
+      "sha256": "5c1af0ac5abe6a39d1f2665c599fb6242bac3b48cf65b3b0126cf674e5d31d03"
+    },
+    {
+      "path": "bach/bwv119.9.mxl",
+      "sha256": "ddf6a12d02f02075d036d7ed1c8f4f8caad4e9233d93b023cc3d5ea7ab8dbf80"
+    },
+    {
+      "path": "bach/bwv12.7.mxl",
+      "sha256": "7352a64dd145b764cf4830238249f0de1c4224477cec84067cbc823e6f874607"
+    },
+    {
+      "path": "bach/bwv120.6.mxl",
+      "sha256": "4d6eb0d1b0fde7a2916f800991cf51ea1a2419ced861caf5687b73e8ec4f7b8d"
+    },
+    {
+      "path": "bach/bwv120.8-a.mxl",
+      "sha256": "397601c9160be00e62ae6ffdbdd2adeb51ab3025e35119672df62e9b9ffd3030"
+    },
+    {
+      "path": "bach/bwv121.6.mxl",
+      "sha256": "1d47eda517de0aa1da187d2fa9a2fcca24e03677e83d2577441e231ab110f8cc"
+    },
+    {
+      "path": "bach/bwv122.6.mxl",
+      "sha256": "a51b81c8f885e0b11d668015d7a76e07c3899d807ff74c3043056b6a142e3a15"
+    },
+    {
+      "path": "bach/bwv123.6.mxl",
+      "sha256": "74533aa82f21e0ca2a8b07fecc6e51aab69d0f4f451a26848b7c10f9b8145497"
+    },
+    {
+      "path": "bach/bwv124.6.mxl",
+      "sha256": "096bd28db2a0ebd17520623b005ba701c2c76aa3113526b917d2425b59e5ce8e"
+    },
+    {
+      "path": "bach/bwv125.6.mxl",
+      "sha256": "78875627961c884cb22c7d664811a1449addeb771e4cba1a2566ebb348a8bb8d"
+    },
+    {
+      "path": "bach/bwv126.6.mxl",
+      "sha256": "b4002c162b269457e403616d2d29767d18b713b0540c1c3d8dcd55fb95e0470b"
+    },
+    {
+      "path": "bach/bwv127.5.mxl",
+      "sha256": "be6bdb2a12c5250fe837a649eb82e126995e2ebc049f9c04d9c7e7c37948ee42"
+    },
+    {
+      "path": "bach/bwv128.5.mxl",
+      "sha256": "ee760426fc93e90e9386f7255ea7be82c3124ea6101adfed12d611700a50f9de"
+    },
+    {
+      "path": "bach/bwv13.6.mxl",
+      "sha256": "d0a9ad8edcb73cf39256e48699070689057b3bee794faa4a96b15c85112e734f"
+    },
+    {
+      "path": "bach/bwv130.6.mxl",
+      "sha256": "c4d20099aeedcf7b1fca6081c0019543ca0c4a35c17a39e755779f6b54b08d72"
+    },
+    {
+      "path": "bach/bwv133.6.mxl",
+      "sha256": "7a7b587c2cdbe263d9f0b54a731face5f6992341aebacae66d1375f7d561a47f"
+    },
+    {
+      "path": "bach/bwv135.6.mxl",
+      "sha256": "ac586960774097c5e5aef9adf034f4f8cc3b8e5e3aa3ab04ecd93605070c5c43"
+    },
+    {
+      "path": "bach/bwv136.6.mxl",
+      "sha256": "84f69c89e045f485a0680f1115f57e87d8bf87cb8e82045222847803a6e67a24"
+    },
+    {
+      "path": "bach/bwv137.5.mxl",
+      "sha256": "bdf4d92743940d4bce0e4a1585b41452cfb80cd0c6b59defc5e7a0f3d9ff3ebb"
+    },
+    {
+      "path": "bach/bwv139.6.mxl",
+      "sha256": "220d5f3fea336439150591426d2b90b6b47dc552be2410a2cc475ae3df444271"
+    },
+    {
+      "path": "bach/bwv14.5.mxl",
+      "sha256": "aac8a85a711450056a8e46ad7c73b8b4ff7fb3e19196784ced5ab11fa3cb1c2f"
+    },
+    {
+      "path": "bach/bwv140.7.mxl",
+      "sha256": "4fe58983afe94884a3c95042ef32c0c999c406e495e597b6e4def8de9661f6e9"
+    },
+    {
+      "path": "bach/bwv144.3.mxl",
+      "sha256": "0367a2102ee8f076c74c6a4068ed74494b4f20f19639fc2e2f1d63598ef5a7ea"
+    },
+    {
+      "path": "bach/bwv144.6.mxl",
+      "sha256": "61e05f32628ad7b0db20bb368bda2fdb037c09da570236f159df3b03cb696a96"
+    },
+    {
+      "path": "bach/bwv145-a.mxl",
+      "sha256": "c966d987d18b7b527be693c6d35afa80dcda942d72eb8645357d53342587664a"
+    },
+    {
+      "path": "bach/bwv145.5.mxl",
+      "sha256": "4b6b18d986993ed94c98cc9108912440c3d4c91ee676fe053d875e51ab9809f3"
+    },
+    {
+      "path": "bach/bwv146.8.mxl",
+      "sha256": "173ab7ed20af602599351af16284327bc0eb5f9800c73b8bde6ef078984e4160"
+    },
+    {
+      "path": "bach/bwv148.6.mxl",
+      "sha256": "65de0cab98fbfee1b76feab800f8e2df820ae9c653492acc502b1c838692a810"
+    },
+    {
+      "path": "bach/bwv149.7.mxl",
+      "sha256": "845b35ecf9ad1b62ea09111b7fd4408673f6df14a9436af5d9ec0289f13df6e1"
+    },
+    {
+      "path": "bach/bwv151.5.mxl",
+      "sha256": "1c83439a05887d2a7b5003d5fe2eae22bbecdc3738e9895c320e496739ca4c51"
+    },
+    {
+      "path": "bach/bwv153.1.mxl",
+      "sha256": "49553bbbfa8e79ddac3b35232608c9db07c3bf2582a161b805e6eec891e1fe8e"
+    },
+    {
+      "path": "bach/bwv153.5.mxl",
+      "sha256": "f3432eb2e814b8668e5dcf2d7c7a532b576d058c7c5449726ca0f6f7c4a94310"
+    },
+    {
+      "path": "bach/bwv153.9.mxl",
+      "sha256": "15f4ff9a8a6fe3bc47d18a7582037d9854b17dae56bdabd31b957fab444c4188"
+    },
+    {
+      "path": "bach/bwv154.3.mxl",
+      "sha256": "9b859bb5be7bfc58a8d4c0af3e6d4966aa586102c3c9956cad318d300a1ceb59"
+    },
+    {
+      "path": "bach/bwv154.8.mxl",
+      "sha256": "b68f4d5d361170b4d78d402e0decc558e1869aec6c921366f8e998c04584ff84"
+    },
+    {
+      "path": "bach/bwv155.5.mxl",
+      "sha256": "57bf913f1302a298b51d508e2ef1765834c84dfc52275143f1bb403f237a59c1"
+    },
+    {
+      "path": "bach/bwv156.6.mxl",
+      "sha256": "be8bffcfa07b2a2649a40ace3afb386b80c4232c7a31d34c38db8a72bc7c480e"
+    },
+    {
+      "path": "bach/bwv157.5.mxl",
+      "sha256": "3bef117523a1283e77b2fc777519b526e306c7c2e5f38873291501c2cb1618c4"
+    },
+    {
+      "path": "bach/bwv158.4.mxl",
+      "sha256": "ae848f882089e509c226d10b15c65f248116d3fc5ee5a3628dfb9e860ce729b5"
+    },
+    {
+      "path": "bach/bwv159.5.mxl",
+      "sha256": "8d376911e54c4117f889e5efaca1d69929af127a220246d0408a45ff50bebff4"
+    },
+    {
+      "path": "bach/bwv16.6.mxl",
+      "sha256": "f9befa982343250ccff6b499b55aa5593870aabd5527554e09918d1b52dcde87"
+    },
+    {
+      "path": "bach/bwv161.6.mxl",
+      "sha256": "b91fff77df211eb9b08e014b78693e9620a36d7456a72bc596001229948dbe46"
+    },
+    {
+      "path": "bach/bwv162.6-lpz.mxl",
+      "sha256": "9b02400449f324d435fe9aea83812431bd593c4e15042e56ae27c2f9937d0d88"
+    },
+    {
+      "path": "bach/bwv164.6.mxl",
+      "sha256": "f4c9a063564bbf5b8fd3f53769c60da03083ec0cb3edaa7e92b991a0cfba523f"
+    },
+    {
+      "path": "bach/bwv165.6.mxl",
+      "sha256": "4b584af21eec78fdea7c394af18bc1e4690dc34940679b6a46ddc1385b9d30fa"
+    },
+    {
+      "path": "bach/bwv166.6.mxl",
+      "sha256": "105898b6b277befa3ea5d11f507c9ce0d5bd8d0098f1255a38d772531494c802"
+    },
+    {
+      "path": "bach/bwv168.6.mxl",
+      "sha256": "76f0291da48f250b58ce4025f399860ddc919bc9cf6cbaeee9efb6da287d0771"
+    },
+    {
+      "path": "bach/bwv169.7.mxl",
+      "sha256": "64b30cfc5638120648ddbcd265ef2acd2cd02554c1ab4a9b626bd30a22c9dce2"
+    },
+    {
+      "path": "bach/bwv17.7.mxl",
+      "sha256": "a2f0dde7a8a4005571326e78f0e1fa10b418477e0d7f765e68048901202d1994"
+    },
+    {
+      "path": "bach/bwv171.6.mxl",
+      "sha256": "eacd12908b37680d28292f2df99d48b53d91f07c40eabacfb43696d1a099ea1b"
+    },
+    {
+      "path": "bach/bwv172.6.mxl",
+      "sha256": "677562214f513c0b8f56e0e58d2f9026c02596aed15477e03be4febaa1355ca9"
+    },
+    {
+      "path": "bach/bwv174.5.mxl",
+      "sha256": "90ac5ec3887e35563f538443bf01d5cb769e7933a2a1b21851eea0154816dae2"
+    },
+    {
+      "path": "bach/bwv175.7.mxl",
+      "sha256": "81d31f6522e2107b713f984efd31dc27147e3a652078487ef6163f3425012e25"
+    },
+    {
+      "path": "bach/bwv176.6.mxl",
+      "sha256": "d70a9fe1dbca1a16400d365c2d34425d63acfbe93b14b03c11ce9626de1f4667"
+    },
+    {
+      "path": "bach/bwv177.4.mxl",
+      "sha256": "4f7bfcdbc75f41637da37de4fa5d4ffd7f032303aa8b63ed5d2578ee8135173d"
+    },
+    {
+      "path": "bach/bwv177.5.mxl",
+      "sha256": "ff13e9c03e80a9e8dd43f247dfbd133e4ec1c1719059e4ee2e08c802726ebc84"
+    },
+    {
+      "path": "bach/bwv178.7.mxl",
+      "sha256": "3a39b8ef084ed80ea3859cbf76a4602bbf46259f76de5d008a32f584ec6e848a"
+    },
+    {
+      "path": "bach/bwv179.6.mxl",
+      "sha256": "7dd81fc64b102d838e6d7b50db59a6041ad44471602d8181a9dd95a3029ebdc6"
+    },
+    {
+      "path": "bach/bwv18.5-lz.mxl",
+      "sha256": "f9a8615c545bf2c26ecab23979a15b539b92a83c5a0b5f8cc19c6b0f4b4bcf54"
+    },
+    {
+      "path": "bach/bwv18.5-w.mxl",
+      "sha256": "67ff6bb6661acf6529c516582acd5f1cdf36074838d0742316a495b40e700839"
+    },
+    {
+      "path": "bach/bwv180.7.mxl",
+      "sha256": "d3136648f7fa02b7d69ff7d61b249128be92374905ac69a05b1470071fd28acf"
+    },
+    {
+      "path": "bach/bwv183.5.mxl",
+      "sha256": "a8e488a911a297ee1e300df0307202c7bd092fd6dbc848f898d6815dfa81620f"
+    },
+    {
+      "path": "bach/bwv184.5.mxl",
+      "sha256": "dcf30e49205b570fbf7f7039f0ce5af42a41e3a021f5653dc2f0683d292ee9b4"
+    },
+    {
+      "path": "bach/bwv185.6.mxl",
+      "sha256": "cf995c2139c18bd9dea10fa78e21ca5f5748da452337e57c4eeafca1ef00116d"
+    },
+    {
+      "path": "bach/bwv187.7.mxl",
+      "sha256": "add06d8bca42d04d78c11086c9532eaa4c3be3264b6d4b0172cf2745a30c5f40"
+    },
+    {
+      "path": "bach/bwv188.6.mxl",
+      "sha256": "79822d51303ac35e7f0ddb1d3a7297275a35558abf5be899e84f45904c77322e"
+    },
+    {
+      "path": "bach/bwv19.7.mxl",
+      "sha256": "eca329274474ecb72195bbb2c6d36249abfb4d56d31b6583a3d58483f7b6297a"
+    },
+    {
+      "path": "bach/bwv190.7-inst.mxl",
+      "sha256": "d8c29775f65d7b2e6f4eeee69f4d8389eec9c095646a51bd817e95bb64b28083"
+    },
+    {
+      "path": "bach/bwv190.7.mxl",
+      "sha256": "c7bc767d237c31c34cc972bc69c0498bf9cdbb73693f95eb10802674f68f02e7"
+    },
+    {
+      "path": "bach/bwv194.12.mxl",
+      "sha256": "331ac7d5906939f85911aa6af42d7c1d32f5de5ee1c53976f70af59db4db2c79"
+    },
+    {
+      "path": "bach/bwv194.6.mxl",
+      "sha256": "56cc4b4cea771bf3cccd18bda1bf2f81bf80f7ad480734ada9c85271cf6436a2"
+    },
+    {
+      "path": "bach/bwv195.6.mxl",
+      "sha256": "4cf6074b2aa104ed8d55488eeaec62d0c42458df0b4898f7cd75732e3754baa2"
+    },
+    {
+      "path": "bach/bwv197.10.mxl",
+      "sha256": "078b086efcba3e6a6fd69d025228a513e5cc6eed7d9dba6ce46600da62d94c21"
+    },
+    {
+      "path": "bach/bwv197.5.mxl",
+      "sha256": "6a1c39cbca9d1c31c75ab60ef9e8e89526730741013cc4e8b3a654ef688ca91a"
+    },
+    {
+      "path": "bach/bwv197.7-a.mxl",
+      "sha256": "09232c23effde3f40cafb45e13019b47d702d36449f063de6422c15955970812"
+    },
+    {
+      "path": "bach/bwv2.6.mxl",
+      "sha256": "ff11ed06a29513445dd2045068da2e8bf1ea5608690e3379b6d127572de0a47d"
+    },
+    {
+      "path": "bach/bwv20.11.mxl",
+      "sha256": "28f7dde915d2671fda40529cd4483fb11807f52ffa1113a1ec5fee79dde856fd"
+    },
+    {
+      "path": "bach/bwv20.7.mxl",
+      "sha256": "3bcce9b69d56e7b80600ac5316914e265c729859245df138edf790269237fc12"
+    },
+    {
+      "path": "bach/bwv226.2.mxl",
+      "sha256": "c1770bab3762914b5fb603381b2d1329e60ae90514f1056849c10c1e8ae87901"
+    },
+    {
+      "path": "bach/bwv227.1.mxl",
+      "sha256": "bfb591d85185dbda16660295747ead8e9039953a543dc246f8bbc704f60457b0"
+    },
+    {
+      "path": "bach/bwv227.11.mxl",
+      "sha256": "68c945a75a1224620a6488fb6fd9ea7a4d5e5e96990a52adadbd04aa788f4327"
+    },
+    {
+      "path": "bach/bwv227.3.mxl",
+      "sha256": "98b390f7ac0b1690d45923b8d0d29ef0747c3523b0a18d61dc3c4480055977e1"
+    },
+    {
+      "path": "bach/bwv227.7.mxl",
+      "sha256": "3e7e49a167b4017f9f8125bdbd4c50ae827ba84b6be0d4ec30bed0b0dc377c53"
+    },
+    {
+      "path": "bach/bwv229.2.mxl",
+      "sha256": "132f384c6d6f43ab15ae683220fbcce3bcefbb415b4929ff5aa51437b964ffed"
+    },
+    {
+      "path": "bach/bwv24.6.mxl",
+      "sha256": "f83449cebb3490b855c5e346f368ff43ab0edb6836065b70f7116bf65e285e60"
+    },
+    {
+      "path": "bach/bwv244.10.mxl",
+      "sha256": "70804fa1be451ee8181b4cba47e42d1e95193316ae52a35fdb148565ef2be75e"
+    },
+    {
+      "path": "bach/bwv244.15.mxl",
+      "sha256": "3a0cf85c5d395c42df4c4d435501e74e45f7e15b696818ecd3dd4bd4ad969069"
+    },
+    {
+      "path": "bach/bwv244.17.mxl",
+      "sha256": "ea9eec4d4ffa9178a6df2f7fb63fa6a2a88e59b068e0456db2fa90923aaed54d"
+    },
+    {
+      "path": "bach/bwv244.25.mxl",
+      "sha256": "ef8e4078e0151e1febe1c370995e1eca6fc4c1d8bcde453e9dae949844e24c01"
+    },
+    {
+      "path": "bach/bwv244.29-a.mxl",
+      "sha256": "07d762f2f8ac7341a08285a6b74b05e197abb28b84f98e02cbc58107107e29f7"
+    },
+    {
+      "path": "bach/bwv244.3.mxl",
+      "sha256": "785940a4b7344ae0a8e827cd5f62a4a73b38a8864f193df7c7152a49b98f95c9"
+    },
+    {
+      "path": "bach/bwv244.32.mxl",
+      "sha256": "6a64e97f6eaef3e38ffe11818814c389dbbde4ec48e9a132cd1b85cef712b426"
+    },
+    {
+      "path": "bach/bwv244.37.mxl",
+      "sha256": "871811537e39ed94af0b00d30ab9fdb9db3689cd0b7936a2f6b166fd3ee4b4b6"
+    },
+    {
+      "path": "bach/bwv244.40.mxl",
+      "sha256": "efa561d1690914088fc796df10fbf70457e327f7ffc1e049ecaefe7dd89082e9"
+    },
+    {
+      "path": "bach/bwv244.44.mxl",
+      "sha256": "f0d4c90ccb2da56d23cc718394560fd101ce2beeec6f5316b8d1aacb627ec219"
+    },
+    {
+      "path": "bach/bwv244.46.mxl",
+      "sha256": "7d2426b216c51dcfe1135fee7b304cd49bbb99bc5a705cd5591782e30873d468"
+    },
+    {
+      "path": "bach/bwv244.54.mxl",
+      "sha256": "a6ab971253b460c77528ff96e3be9b5171dc92653d4dd124e50e3c5929932a8e"
+    },
+    {
+      "path": "bach/bwv244.62.mxl",
+      "sha256": "40dea26e17b710119c5010d4323f58a2b924e045553af0d33239daa07886a6cc"
+    },
+    {
+      "path": "bach/bwv245.11.mxl",
+      "sha256": "9f28c677955959cb9e8608b4948127c254c1151a71019b0c6d377baab96c0641"
+    },
+    {
+      "path": "bach/bwv245.14.mxl",
+      "sha256": "2baaa4e0f9e3279adcc549221cb2227f5e1180dfbae99ed58e82d74da3f67c04"
+    },
+    {
+      "path": "bach/bwv245.15.mxl",
+      "sha256": "afa2c6dab9d16a96c78421b623632559169f446bed2253fcf0956c9935122b63"
+    },
+    {
+      "path": "bach/bwv245.17.mxl",
+      "sha256": "e05eb3622c7edcb079f2a2b6d50fde3388c64e986bbbc894de4f8437ced61835"
+    },
+    {
+      "path": "bach/bwv245.22.mxl",
+      "sha256": "39c600d936349c0aaae2869f733a7a641353fe66184910fe2dd643a9f866ac12"
+    },
+    {
+      "path": "bach/bwv245.26.mxl",
+      "sha256": "c069c379ac63b5946280a8d20969c83dcc6cb1bfae3bbc8378188a3e9d47e67d"
+    },
+    {
+      "path": "bach/bwv245.28.mxl",
+      "sha256": "8497f8287c62ccd7151de6952bc1564b03acad0c8081cdc386c33d3ee4771c4c"
+    },
+    {
+      "path": "bach/bwv245.3.mxl",
+      "sha256": "8f01458271bea522a7d589c4191b7ecb46f60d6d739932fd704f37e37ec1e4ad"
+    },
+    {
+      "path": "bach/bwv245.37.mxl",
+      "sha256": "f40a75dd2ecfecd7dca59557b6f9e7a241516e8a340d2da15b1897d7a862be73"
+    },
+    {
+      "path": "bach/bwv245.40.mxl",
+      "sha256": "62b797510370c79d3e9d82175a260a6748c00785fd67408c10eb97f8a7bb9944"
+    },
+    {
+      "path": "bach/bwv245.5.mxl",
+      "sha256": "5f71d6bbef525473231ea164b00a3e2b788db18bda44066d1d4d576f722ced74"
+    },
+    {
+      "path": "bach/bwv248.12-2.mxl",
+      "sha256": "03f27251df1e731d9f0ba2ce61c5768dccda2894517e6a9b658b1fbea2f004af"
+    },
+    {
+      "path": "bach/bwv248.17.mxl",
+      "sha256": "f4c75a44aa772c60ccb0979d922596f2928cf7591977ea91f8792537a8dbb6f1"
+    },
+    {
+      "path": "bach/bwv248.23-2.mxl",
+      "sha256": "51d1f63183d11044e46acd71f1512254d38b58c29b43eb7c3883251cc80357a2"
+    },
+    {
+      "path": "bach/bwv248.23-s.mxl",
+      "sha256": "5c20ed04dc6d01c144f8e55a76f8dfefb71f8ab6e21418dc7549f7c67a8aa4e0"
+    },
+    {
+      "path": "bach/bwv248.28.mxl",
+      "sha256": "52a70575c307b26611bd656b8db2cf3f1bbaf25aedd911ab084f4e50c45db009"
+    },
+    {
+      "path": "bach/bwv248.33-3.mxl",
+      "sha256": "840aaeff30653c2cc3f4d3121b8d0545fc858c02a08c0762775d0874fc118b27"
+    },
+    {
+      "path": "bach/bwv248.35-3.mxl",
+      "sha256": "9c63f9a581678c0c14fed85aee77a3fded044be37758cf6b33846a26cac6b663"
+    },
+    {
+      "path": "bach/bwv248.35-3c.mxl",
+      "sha256": "efa855e4a08e865b8f853e780e9cd1675f704ec71fb0f66a8926ad634ddf7446"
+    },
+    {
+      "path": "bach/bwv248.42-4.mxl",
+      "sha256": "600cfb0f2003fc405443d71efbec3a14fffb090fadaf90b3265752e4213c7337"
+    },
+    {
+      "path": "bach/bwv248.42-s.mxl",
+      "sha256": "7485050a3f907706e6cf46b31de7f6f937584d73d45e2622969ac7bd99da3bf9"
+    },
+    {
+      "path": "bach/bwv248.46-5.mxl",
+      "sha256": "7a38245ac56d649dfa33a8bffa679c57ab9c2f792f058f5a56d42f44d6b4e957"
+    },
+    {
+      "path": "bach/bwv248.5.mxl",
+      "sha256": "6a3ed5125e45b988db52e6d5677a7d79d4d55ce5c1428b78cd65e70e534ad69f"
+    },
+    {
+      "path": "bach/bwv248.53-5.mxl",
+      "sha256": "0ff3fe876e209e9b22e23476d11880569755df7d4e66c2d314ac58671d9e7dc9"
+    },
+    {
+      "path": "bach/bwv248.59-6.mxl",
+      "sha256": "39a25ee1b363a1dd65f325241261a1594ecc3f3b1c500a23f23538c166eea34a"
+    },
+    {
+      "path": "bach/bwv248.64-6.mxl",
+      "sha256": "55341321387dc66be0c6f829144a5e2125973fad9c9fd399a92d885357fe58f4"
+    },
+    {
+      "path": "bach/bwv248.64-s.mxl",
+      "sha256": "0ace9253f770ead325d71820a524bb07919998a5d6a96362d5d979101cc7ecc9"
+    },
+    {
+      "path": "bach/bwv248.9-1.mxl",
+      "sha256": "d8b102810bf628bed0fb245443f6c1da469c16d20befa9f976703c8246870148"
+    },
+    {
+      "path": "bach/bwv248.9-s.mxl",
+      "sha256": "3406c7ae6ebae42ad44a4554512b881e1367542d2718a613821bdc994f15c7cd"
+    },
+    {
+      "path": "bach/bwv25.6.mxl",
+      "sha256": "a027b208d26794938684355472eef2ff0265ed201cd6febfa34e9042a5580c1a"
+    },
+    {
+      "path": "bach/bwv250.mxl",
+      "sha256": "dad95c8cdcf586ca8e2fcdd6cafa657094ab98fba4722945f2c0015186e11807"
+    },
+    {
+      "path": "bach/bwv251.mxl",
+      "sha256": "cdfca01d9375a9f633984d1782af5c0cd3836ce79445683d0072d7cfb571333b"
+    },
+    {
+      "path": "bach/bwv252.mxl",
+      "sha256": "e63cd049483ace8a0a1ed2f14ab9aed2d4fe7f9d3b48c578e40add9a835baeb3"
+    },
+    {
+      "path": "bach/bwv253.mxl",
+      "sha256": "4ba6d853dfa25c8fa540f03e52fcec0e838e44a43b901f90ae15c8d43827b818"
+    },
+    {
+      "path": "bach/bwv254.mxl",
+      "sha256": "ee2c424f92cd55a0ef0c1ca8bbb1b7ac63f80c975a5f34aa1df5bdc0f1f21420"
+    },
+    {
+      "path": "bach/bwv255.mxl",
+      "sha256": "138406552e49aa9b9ce333cb17820aac846f96c42419791cd62d206e24061129"
+    },
+    {
+      "path": "bach/bwv256.mxl",
+      "sha256": "eafe5dc24fa6e4daed7aff617d337e507cc9c6fde3cd1eb3ba47f1d343a8f5ac"
+    },
+    {
+      "path": "bach/bwv257.mxl",
+      "sha256": "6b810bb4ecfc016a09ba6e5c358afb3483e8dcb8cd854539d1e72c94b3e5a0f1"
+    },
+    {
+      "path": "bach/bwv258.mxl",
+      "sha256": "b7bddb0b187d40386f9d4822bad8096fc8a14342784009130434b7e63d43db0f"
+    },
+    {
+      "path": "bach/bwv259.mxl",
+      "sha256": "9b6bb9662a1dfcf9abbb3760e7afea13873e6ca56a8e82ff1d19e59c7f5342f9"
+    },
+    {
+      "path": "bach/bwv26.6.mxl",
+      "sha256": "b73dae968f9dba2146007d97767394bcbc011c74444a7f7729186f0497d62410"
+    },
+    {
+      "path": "bach/bwv260.mxl",
+      "sha256": "9c25133ec7442badcf122e15a8deeb7a72ccab9ebb79d427d782a6aef338fa79"
+    },
+    {
+      "path": "bach/bwv261.mxl",
+      "sha256": "73aacb0d2f5b47c5d166f0d38e0d0771b287a22d226680db2dd0c1c40be04ddb"
+    },
+    {
+      "path": "bach/bwv262.mxl",
+      "sha256": "5f5a369235dfa57f4f80ac1c325ccada63a757ab1636038221b517b8f147592d"
+    },
+    {
+      "path": "bach/bwv263.mxl",
+      "sha256": "eb184d4d80c531ff392758643b9e3603a60e0cfa8421a43093f019e105420e8f"
+    },
+    {
+      "path": "bach/bwv264.mxl",
+      "sha256": "e52357bc75dce02d574d9b9225cd5046d7cf4d0ea02425015d59c7ccf63e573a"
+    },
+    {
+      "path": "bach/bwv265.mxl",
+      "sha256": "bb48dab540f75bd59e25a36174b34ce42e16b48dbf39a59f3c4e4148928daf7f"
+    },
+    {
+      "path": "bach/bwv266.mxl",
+      "sha256": "c2dc3a3fb188f7c1d1ba939e78f2cd15dd0091426da27205ed637fd9a88581d4"
+    },
+    {
+      "path": "bach/bwv267.mxl",
+      "sha256": "8fd35db74f930089746d03248b8267882c9508d8f005aec67e9f4e23d74c27e4"
+    },
+    {
+      "path": "bach/bwv268.mxl",
+      "sha256": "5cc037ea7d23b7b5e59a633e182d66ea6365b6c4e48e43dc61332779a6a4886a"
+    },
+    {
+      "path": "bach/bwv269.mxl",
+      "sha256": "9676f11a2b26488bcf30db90c15576caa1ea2a616b909e376d44b8b804e9d138"
+    },
+    {
+      "path": "bach/bwv27.6.mxl",
+      "sha256": "625add18cf442a6acc228dbb87beb4fd1315c41dfe0d75a1ef2af3f6fa6d035a"
+    },
+    {
+      "path": "bach/bwv270.mxl",
+      "sha256": "3fc8e1bb91fa586990c76d1cf6563db0a305b856ba894832b547dd9ea595548d"
+    },
+    {
+      "path": "bach/bwv271.mxl",
+      "sha256": "498c82c3d48d9dd370d6e3e67bdcf68a8d5a0b6c52e849f7d6aa47c4a2abfe7b"
+    },
+    {
+      "path": "bach/bwv272.mxl",
+      "sha256": "f20305f8d341c316d78998cfdafc0ab96130e506a13115cc6a5faad8781174ec"
+    },
+    {
+      "path": "bach/bwv273.mxl",
+      "sha256": "0294e0fa66ada9e76a6728052882d32c217771944e957a9f0544cc0c74ac3830"
+    },
+    {
+      "path": "bach/bwv274.mxl",
+      "sha256": "28d7478bfae23996c817ad520c4edf1c2a616719821479a4fdeeff86465d4c08"
+    },
+    {
+      "path": "bach/bwv275.mxl",
+      "sha256": "f30ecb3ce8e16dc29961688d28d9e3246816fa5259a9c5c1a413733772e04ada"
+    },
+    {
+      "path": "bach/bwv276.mxl",
+      "sha256": "7ca12be6986ee3b0e2922f0c06c928c84726a2a58c9cff934f83b3bf05e6010b"
+    },
+    {
+      "path": "bach/bwv277.mxl",
+      "sha256": "61744d6c58bf64b29c7424f8347323466957b35d83071bfe8b7ba6f0a0bfdf8b"
+    },
+    {
+      "path": "bach/bwv278.mxl",
+      "sha256": "22c5e3bef3a3ba518ea9b3196ecc70359e8e2b7679a7bc9fc3c045a105e2275f"
+    },
+    {
+      "path": "bach/bwv279.mxl",
+      "sha256": "931273d48cbc42dc4bfff0345499d99adce5b38c1d4b54a5376ed10e3b1b3c3e"
+    },
+    {
+      "path": "bach/bwv28.6.mxl",
+      "sha256": "7e0ce1bf478ee1358ff1b5523aca07d847a2dc9d05921e7b23fc4ea89f2c16aa"
+    },
+    {
+      "path": "bach/bwv280.mxl",
+      "sha256": "4582f11769537cedfc0adc2a2f2f1c6d62a565532bfe2a2b845793cd3052e387"
+    },
+    {
+      "path": "bach/bwv281.mxl",
+      "sha256": "3946fb6c7dc6a0fe772f88aaefa5d32f9b42f9fcc476e9a3070f9e5b33ea760a"
+    },
+    {
+      "path": "bach/bwv282.mxl",
+      "sha256": "b2b2d8c96064ecedbba56f9445d7d673aac1776254555b6470f8781fb33e05a8"
+    },
+    {
+      "path": "bach/bwv283.mxl",
+      "sha256": "469b0436f068231ddfa35fb0c21a5f53713412a19a3834af44eacb92fbf974e2"
+    },
+    {
+      "path": "bach/bwv284.mxl",
+      "sha256": "f412525e8c6a257f1d41348e6149960f6d31116bb3ab7102ed86076d018d81a3"
+    },
+    {
+      "path": "bach/bwv285.mxl",
+      "sha256": "c06af2d71705be850df06b802ccb38b19f85325c94bde1b803f2a69f56fe48e0"
+    },
+    {
+      "path": "bach/bwv286.mxl",
+      "sha256": "716c711b0f73feb5f5d9aa90d13489f76d3aa0b6f82ad00d9273985ea0bfece0"
+    },
+    {
+      "path": "bach/bwv287.mxl",
+      "sha256": "0686a9fb023b46d5b7af7b86f0e75678198bf118bd53808a12df6fb806dcfaf6"
+    },
+    {
+      "path": "bach/bwv288.mxl",
+      "sha256": "02837a4e65eabf2370dec9e0811a8673a6ff492ce846b35fe93cb0d9765eb793"
+    },
+    {
+      "path": "bach/bwv289.mxl",
+      "sha256": "24d2bd8a14ae8db11ad92ef490077efe0779e144de0eba7cebf762a819ec1730"
+    },
+    {
+      "path": "bach/bwv29.8.mxl",
+      "sha256": "8537e2e063ff22eda261419fba92760353d9d255a9356f379fdebe654f9e5464"
+    },
+    {
+      "path": "bach/bwv290.mxl",
+      "sha256": "350566950997170027ce1b40eccd60cc85d57494c8e4325c12c8fad80516b458"
+    },
+    {
+      "path": "bach/bwv291.mxl",
+      "sha256": "2b737e60aa29c8f373ec1719c737ab00d421ccfcc96b46c32470054c9d5852dc"
+    },
+    {
+      "path": "bach/bwv292.mxl",
+      "sha256": "6eba908863609bbabe8681474473c521e44a7cc6bfd52139cb6787e0f7e4e90a"
+    },
+    {
+      "path": "bach/bwv293.mxl",
+      "sha256": "3677e1b5879e5d6044655e5a63897571cf6e4fd64a81ed3b0725e50442d66ecb"
+    },
+    {
+      "path": "bach/bwv294.mxl",
+      "sha256": "1856c126785e0dad5f7c5aa9b33478feeeccafd2cb47ff905f173fe46f557f7e"
+    },
+    {
+      "path": "bach/bwv295.mxl",
+      "sha256": "b93fcbf6ee37cec31bd5b2f399114fa431f1d7c927f78878f8d12c82215ca412"
+    },
+    {
+      "path": "bach/bwv296.mxl",
+      "sha256": "e3d027711d73d9b8b601dd9359f24fcb26b7d762fb8f1e89b7e32f37336c5fce"
+    },
+    {
+      "path": "bach/bwv297.mxl",
+      "sha256": "a8b88262d38a2ebef99e5a7ebe14f003eaddbe65c4987ee8d75af5c46587d73a"
+    },
+    {
+      "path": "bach/bwv298.mxl",
+      "sha256": "67ba1c099037940971439e4ad9b95cdcc7ba81800ae9defb2f23bc57f0e61ed1"
+    },
+    {
+      "path": "bach/bwv299.mxl",
+      "sha256": "eb56d2d0e542dc11d8ad0c0a86fc45bb2c677fafe1b500485db39457e7ef6e6a"
+    },
+    {
+      "path": "bach/bwv3.6.mxl",
+      "sha256": "4fb0f42afda0da9b4795e0118d4d532f8428f99c9b07efa9d2f4ed3f441c3b90"
+    },
+    {
+      "path": "bach/bwv30.6.mxl",
+      "sha256": "3becf44d36fa13ac67a105dec476d565dcf02fa06d77e49035abe922dacda3a5"
+    },
+    {
+      "path": "bach/bwv300.mxl",
+      "sha256": "f6935767f013348fd874e84a522dd9ed84953b1fffb4f497acbc52f1fd88cc1e"
+    },
+    {
+      "path": "bach/bwv301.mxl",
+      "sha256": "2634ae537b21f2a902e33f138b7a9849f6e905d9a722e5bdba287da4166da70e"
+    },
+    {
+      "path": "bach/bwv302.mxl",
+      "sha256": "0b16559b20595697aa796aed77f71c7291e008f30a82ebe228a5b1b7c0d9ea4b"
+    },
+    {
+      "path": "bach/bwv303.mxl",
+      "sha256": "a2449b641a99f82ed430517fa2b38d98c331854e2fb1c4c46b14bbb1a8298089"
+    },
+    {
+      "path": "bach/bwv304.mxl",
+      "sha256": "6605274b7f54a2d525c77bdb8452575152753a30c3b192f9b9b205aaa2a2f54b"
+    },
+    {
+      "path": "bach/bwv305.mxl",
+      "sha256": "56c644161c59f00dbef5b8166dbd28c493943d6cc0ffa9fa964bb7c655b4d9cb"
+    },
+    {
+      "path": "bach/bwv306.mxl",
+      "sha256": "655665743c897dcb9d0b35e43f218493210d6a4f4c8fec5be80629b826c239cc"
+    },
+    {
+      "path": "bach/bwv307.mxl",
+      "sha256": "3478aec9933337905f9e6b0189a5b959e67ca3d08ebf8e7fb7d278508a96e2e8"
+    },
+    {
+      "path": "bach/bwv308.mxl",
+      "sha256": "43c6aaace26a9750b7d818cbd898ecca08479cd4deaeee82eee108c19ccdc025"
+    },
+    {
+      "path": "bach/bwv309.mxl",
+      "sha256": "ddccb00e2b90e30e42a94107264dd254902b2911703d5bdab58929ef5fc65adf"
+    },
+    {
+      "path": "bach/bwv31.9.mxl",
+      "sha256": "0bf9545036a003842f8024f55179dfb6629fbd5a14e3bf5f10ac432bc9037456"
+    },
+    {
+      "path": "bach/bwv310.mxl",
+      "sha256": "4247fa2f4ca089aa1eb917ee011bc0b4c97d7522f3cb1581bab34d218081d239"
+    },
+    {
+      "path": "bach/bwv311.mxl",
+      "sha256": "c59e795c3a5ad1a8adde9e6a096029bcd9b39dffb2497c3fa64d62746244e8af"
+    },
+    {
+      "path": "bach/bwv312.mxl",
+      "sha256": "1ebeee06ce56c95e5d14696bc9fa79585c0878ba929c9754f27d309d90b39b61"
+    },
+    {
+      "path": "bach/bwv313.mxl",
+      "sha256": "2c5fc3a3d5a6299c1aaa38319808e6b4cce54ea4ee6e81871fdf806378e9b4ba"
+    },
+    {
+      "path": "bach/bwv314.mxl",
+      "sha256": "cd33b11fca0dc0c79bba346cae866ca5857852317f1129202890f5090bd79824"
+    },
+    {
+      "path": "bach/bwv315.mxl",
+      "sha256": "5ac4314c1b3312b2f7f3a7a2afd4ff86c89acfbb75a62e712ef4025a39a44373"
+    },
+    {
+      "path": "bach/bwv316.mxl",
+      "sha256": "14035c121ab5a0ee878509006c477313db4dfcc7a0ec5a05ea6928bb4e9e5aab"
+    },
+    {
+      "path": "bach/bwv317.mxl",
+      "sha256": "2a33c4804e74c1f031574e0a90daecfd8933a9c7950c1776d20d544453ae006d"
+    },
+    {
+      "path": "bach/bwv318.mxl",
+      "sha256": "e2d2baa4f9215f6db06eee3e589d1fba68bc98536e55a82fb287752d64f436e2"
+    },
+    {
+      "path": "bach/bwv319.mxl",
+      "sha256": "09171f804a5603494e60372af976387811accbf9c8646463e59f8ff3353a307a"
+    },
+    {
+      "path": "bach/bwv32.6.mxl",
+      "sha256": "f51928d8870a15825c61fb6bd480d8644da772c990f6cc9f74d0c57116fc72a2"
+    },
+    {
+      "path": "bach/bwv320.mxl",
+      "sha256": "b65d9d88e74ead0fe9bb0bdf9a3c18ccba69a6c0ec9eb720140bedc43d1d7218"
+    },
+    {
+      "path": "bach/bwv321.mxl",
+      "sha256": "ea835128c41568751059ffab165f83ca81a044ec6efc664f2e87b9307cf77b0f"
+    },
+    {
+      "path": "bach/bwv322.mxl",
+      "sha256": "f87afdea12cc708a519b53ab2eca090d70976b5b5e56adbf33c704874d32d656"
+    },
+    {
+      "path": "bach/bwv323.mxl",
+      "sha256": "b34107b2a7fedd49f3388a920517684e00049913e709727a61c0fbf6835bf656"
+    },
+    {
+      "path": "bach/bwv324.mxl",
+      "sha256": "f4c04da9db589368b0e4bc1ad84dedd129e6e14e6b20bad5a92269fec99a50b9"
+    },
+    {
+      "path": "bach/bwv325.mxl",
+      "sha256": "ff2b1a7da67db380803f191f742a2b0065eb05a9be13853bb63b0ed0837e0f90"
+    },
+    {
+      "path": "bach/bwv326.mxl",
+      "sha256": "cb68db185c953b7d7090664be37e1d106e015e4cdd87a3622bbb888d021d8e06"
+    },
+    {
+      "path": "bach/bwv327.mxl",
+      "sha256": "9295b6021c552bfca7d926540f12722aa788774c73edff9da76156e2c0e28a2d"
+    },
+    {
+      "path": "bach/bwv328.mxl",
+      "sha256": "5b165b25b25e41d4926cc5764eada421d8f66efcb94f1b257825a9deefb0192e"
+    },
+    {
+      "path": "bach/bwv329.mxl",
+      "sha256": "f47b895044432e9e35e1d891902dae5eccea66b5a26c0e145ca1727079c487c5"
+    },
+    {
+      "path": "bach/bwv33.6.mxl",
+      "sha256": "b1a1a662561edcdd36ab6da4be1512878f06b5bd1173e9d6c6c8df549b418a89"
+    },
+    {
+      "path": "bach/bwv330.mxl",
+      "sha256": "bbcde3f8caf7bf4c822d370e0b9b16bb3cdd85745c6efdd3a0e5593870219c99"
+    },
+    {
+      "path": "bach/bwv331.mxl",
+      "sha256": "f51bb6831c4503d7eb3e680543a526dd5d4908f35e55fffb0ddedfbed1caf335"
+    },
+    {
+      "path": "bach/bwv332.mxl",
+      "sha256": "f23ec0c2d609bcc429fc76afecd40f5295d63b4c8d4e2dff47787bdc1a54d193"
+    },
+    {
+      "path": "bach/bwv333.mxl",
+      "sha256": "217a6bd0e91fd658aace257942ab5a400bac4f76a49fa382ceebf32be3dda791"
+    },
+    {
+      "path": "bach/bwv334.mxl",
+      "sha256": "4bf26cc03c07ae195df51c6b71747bfe3bbcb6585e64b89e564920ba10af9a3f"
+    },
+    {
+      "path": "bach/bwv335.mxl",
+      "sha256": "bc411115f4cb946f43e3f01c3874eccf70a28e42187656683749e8afb7e35580"
+    },
+    {
+      "path": "bach/bwv336.mxl",
+      "sha256": "54a29a3d454581e5d45c76ad623349d3498832142bf6cca2183ed9e78ba2a24b"
+    },
+    {
+      "path": "bach/bwv337.mxl",
+      "sha256": "991f5aeb420ed537f7aa82b75c609b050f75fb63a4cb0c7f7a5104c7a493b763"
+    },
+    {
+      "path": "bach/bwv338.mxl",
+      "sha256": "7c8e6fa7e2c5c9350e8f82b6ed987536ad8a0e88e88e79547410a65bd185b62d"
+    },
+    {
+      "path": "bach/bwv339.mxl",
+      "sha256": "8a74901ef97145e11146130d69cd41042dd9f8ea9a568b9d930aa48367e18509"
+    },
+    {
+      "path": "bach/bwv340.mxl",
+      "sha256": "d7cb1adac8090125e110a727d5df12442b26cc3d7a70fb16896c052220085958"
+    },
+    {
+      "path": "bach/bwv341.mxl",
+      "sha256": "467a013a7c1fbb77030e6f4b9fd38b1f10ec3a68b88fd91ee9948aced8893667"
+    },
+    {
+      "path": "bach/bwv342.mxl",
+      "sha256": "353ee07463c25c672a3d518f72d7c04ac166dcda68550eb6205744fd80eea1bb"
+    },
+    {
+      "path": "bach/bwv343.mxl",
+      "sha256": "ac9ee6583dacd209d2ad7256e6c58502be686a983f8a8fef7d48cef532560f9d"
+    },
+    {
+      "path": "bach/bwv344.mxl",
+      "sha256": "3267f3b168578c73116daa51c54d6dffb20e0fe1edc70344f88c68daacda4869"
+    },
+    {
+      "path": "bach/bwv345.mxl",
+      "sha256": "1053941bb7910ff2bb7c0f6e725330fb6cbc31b387ddc2418d15a6291586d237"
+    },
+    {
+      "path": "bach/bwv346.mxl",
+      "sha256": "dd7a39199fc8e5da2d1f9fe940a2ec8d215bfd8e8514d47a401c2bb8051b20c1"
+    },
+    {
+      "path": "bach/bwv347.mxl",
+      "sha256": "a017649b259ceda9c0ee8a74909893a69d01163c5f60ae5e631dc3d2ac58bcb5"
+    },
+    {
+      "path": "bach/bwv348.mxl",
+      "sha256": "4771a5ed60ffdc800200082f43159884e9f77931a1af2c6ae7f9edf6a7841ab3"
+    },
+    {
+      "path": "bach/bwv349.mxl",
+      "sha256": "7ac88fe1e46d11b86e8e27287a74eb36c4eb947060f19400c5d6be3d62425e7a"
+    },
+    {
+      "path": "bach/bwv350.mxl",
+      "sha256": "7c34b4e02c7e78684c16b7920cac8a63e5c5c850a9f0a818e7026ef2473c68d4"
+    },
+    {
+      "path": "bach/bwv351.mxl",
+      "sha256": "94c548efe4ae90dbbf557b1ead77f0a99f9474be2869c93ccfb007b097503a4f"
+    },
+    {
+      "path": "bach/bwv352.mxl",
+      "sha256": "a033aabcb798a424662e69f5c6419bd0c3859419ac67bff09dd066d06328cfe2"
+    },
+    {
+      "path": "bach/bwv353.mxl",
+      "sha256": "71951c6136613bb18176254a2b78ce7e0511c591e27a06cd6cd81ec040b1325e"
+    },
+    {
+      "path": "bach/bwv354.mxl",
+      "sha256": "30a97aba3acfdacc7be78bae1f6a65eddd53f63babe85116a41584a5f5e4dcfb"
+    },
+    {
+      "path": "bach/bwv355.mxl",
+      "sha256": "dc6565640ef6837fa8fe2acfa880d8a9601201716b363f8efa35144e84f1cf34"
+    },
+    {
+      "path": "bach/bwv356.mxl",
+      "sha256": "ed55d023beb86caaa5f93b4438e6e2e6862a39ec805c19893839fd80d0d12ef7"
+    },
+    {
+      "path": "bach/bwv357.mxl",
+      "sha256": "b0cc3d2db9d89289855bbac8964d0b53431a679157bb345d14a7faaaf59d5f9c"
+    },
+    {
+      "path": "bach/bwv358.mxl",
+      "sha256": "3d83b8f48b1a55d063fc469de78e79c350f582a8c39b965e58705c7a0cb3bc78"
+    },
+    {
+      "path": "bach/bwv359.mxl",
+      "sha256": "438af649215866fe3943abe93226a83bd6613d93ec68b5d9fb3d8605f354aafe"
+    },
+    {
+      "path": "bach/bwv36.4-2.mxl",
+      "sha256": "f547b04cd3084149427398cf80cfed4fafa0002e06b8526f38690d29da87661a"
+    },
+    {
+      "path": "bach/bwv36.8-2.mxl",
+      "sha256": "2f6d4e612404ae5813763cec5b0c21e8b89c5493002f577252bc05a01eea9290"
+    },
+    {
+      "path": "bach/bwv360.mxl",
+      "sha256": "041b24074be01c0a6a5a6b2a9002355a2e6a222758afd30abe201a14a720a22d"
+    },
+    {
+      "path": "bach/bwv361.mxl",
+      "sha256": "0b02c32831b100781b84328b2431794a3fdaaa5beae7b908e532519ad031ee33"
+    },
+    {
+      "path": "bach/bwv362.mxl",
+      "sha256": "78f208762f8bf008c19d5d2a8f0bfdb9de454c64df93b7e4edb1af1b0ad1a324"
+    },
+    {
+      "path": "bach/bwv363.mxl",
+      "sha256": "72c5faafe829687f45d7cad7c1280903a096548b2053111565b8b83d8a4f2db2"
+    },
+    {
+      "path": "bach/bwv364.mxl",
+      "sha256": "46e21a3f4a07ff28b47cb6e01181c0ed86c4ba36e0301f8ec78f428d6b5cabee"
+    },
+    {
+      "path": "bach/bwv365.mxl",
+      "sha256": "30901f44477de8b31d2b601fbb312f18f5021cabc25ec02f634e6581651f72d9"
+    },
+    {
+      "path": "bach/bwv366.mxl",
+      "sha256": "ca4392fc0bba1e2a0b02cfaa74e6eceb73982136d06c7f3e63a41ca6b78ad758"
+    },
+    {
+      "path": "bach/bwv367.mxl",
+      "sha256": "efa83c8857041f26f8e5574537db909b24540bc60cbc58c79fbd6dffabd2f012"
+    },
+    {
+      "path": "bach/bwv368.mxl",
+      "sha256": "f2b438cc3969f9c1d6b20ba2d16775e0c5b7e5390a70fc0d29832424784de9cb"
+    },
+    {
+      "path": "bach/bwv369.mxl",
+      "sha256": "674181b986fe425d94bcd6d8ce2999bf78c286157ba28fcad64047a027912ecf"
+    },
+    {
+      "path": "bach/bwv37.6.mxl",
+      "sha256": "9f06618b0da691804b709ccc6f9fdb0b936866744bb51f608255b54238f8689b"
+    },
+    {
+      "path": "bach/bwv370.mxl",
+      "sha256": "80eb7593bbe7429a1334ac192f4d14849f55b94bc0ed5dddeae320480d85c75f"
+    },
+    {
+      "path": "bach/bwv371.mxl",
+      "sha256": "5f9e76acf55319c9a7f3357083a0e4fef9ac14ebe5cdca0a16f4d504ee934f71"
+    },
+    {
+      "path": "bach/bwv372.mxl",
+      "sha256": "97d3aa03870fc0a3e31564a317cb914feb96dd503f69cfeaaf9470f442f84b5f"
+    },
+    {
+      "path": "bach/bwv373.mxl",
+      "sha256": "4c8328dc4f959552236f274b3d86760d7ad6dcf02018082f816c7c3095023f1d"
+    },
+    {
+      "path": "bach/bwv374.mxl",
+      "sha256": "b0f1130982fd80702b87d7ff3c2708425b42f6e186f9e48cbdb0bc34134eabdb"
+    },
+    {
+      "path": "bach/bwv375.mxl",
+      "sha256": "706aa52427580e37055d313cce041f0b5be6477e73d948c31eb0b149c2c4e9c6"
+    },
+    {
+      "path": "bach/bwv376.mxl",
+      "sha256": "5ed3b63ade1914a8e18926147a34daee7b94108a95ce30f589ceb62ae21756ab"
+    },
+    {
+      "path": "bach/bwv377.mxl",
+      "sha256": "353f2d93ac556cedad5474e355b00cc5b152f298d55877e19cab720d6d0185c5"
+    },
+    {
+      "path": "bach/bwv378.mxl",
+      "sha256": "1657a16fba7735484110dbc98468845fa635c2865623a1a2aa89ea774e6fc567"
+    },
+    {
+      "path": "bach/bwv379.mxl",
+      "sha256": "e209e7c2b052831d509f6a004aefc8af0727b05fba3e4af87cdfae338baa340c"
+    },
+    {
+      "path": "bach/bwv38.6.mxl",
+      "sha256": "3d7f458d1f7588de2c664a9aaefe287937be807355eeb708db38caab98d3bef7"
+    },
+    {
+      "path": "bach/bwv380.mxl",
+      "sha256": "81f5c32b30191b837ae6f8fba8ea4161d9bb781a766d77cd7bed40b659db96ce"
+    },
+    {
+      "path": "bach/bwv381.mxl",
+      "sha256": "edbd6ca0d4e72b82878e53aeacfb85b05c245354101aa94efe366d687e53e4e6"
+    },
+    {
+      "path": "bach/bwv382.mxl",
+      "sha256": "e08f1f05f2b994301bb92e89ece8bc9e6cb5290eaf22433aee81e59d7a4be21e"
+    },
+    {
+      "path": "bach/bwv383.mxl",
+      "sha256": "1ac7758a5996ef94a2a1720ef03f03aa3223659e40978cced1957985499907ba"
+    },
+    {
+      "path": "bach/bwv384.mxl",
+      "sha256": "70c2c9cf5b3555d05849546bacb1c1011120c11f9f26c940ac96a8ed31c4f999"
+    },
+    {
+      "path": "bach/bwv385.mxl",
+      "sha256": "2fb5b486d54dd7fcadf3f7499ac07c030e7063f5006a0caa446977a52e97e075"
+    },
+    {
+      "path": "bach/bwv386.mxl",
+      "sha256": "c8bd74a5d9089ad8ca7edafc90e61c810b0d840bc5750105675d9ba46938b56d"
+    },
+    {
+      "path": "bach/bwv387.mxl",
+      "sha256": "648fce3c4262732ab9d2f623c1eda8c3aa00864b84199fd65480bcb1fd1d31a4"
+    },
+    {
+      "path": "bach/bwv388.mxl",
+      "sha256": "b9a69c8060bbebb879f03ea33ed7a11813843f7a7a0453814b7068d66877ffe4"
+    },
+    {
+      "path": "bach/bwv389.mxl",
+      "sha256": "b81225b3fcf1a15cac220d43532f0fd877b82c92583c6bdbb5cbaf13accae214"
+    },
+    {
+      "path": "bach/bwv39.7.mxl",
+      "sha256": "79ebcd47447dd4f76f9ae40da8ca99ae1fb1b2ee57b6cb9cfd32dce620dba210"
+    },
+    {
+      "path": "bach/bwv390.mxl",
+      "sha256": "e6dfa551709cdb0c6f18429aa281502c049fbc17e8c4c10f5143cef02b4366fe"
+    },
+    {
+      "path": "bach/bwv391.mxl",
+      "sha256": "e0be80aff9fc83f0cc163d6c180b3bc42370b86315d82cc8f9df8b97995a4314"
+    },
+    {
+      "path": "bach/bwv392.mxl",
+      "sha256": "a0d3f80df67c3c8362a8f29face2b36f488f6d5c084db3110dfe743827df4c34"
+    },
+    {
+      "path": "bach/bwv393.mxl",
+      "sha256": "8ba2a509a2b46fd3e10cee792744c546f8054e9353adb454f7258c0d9bed29a3"
+    },
+    {
+      "path": "bach/bwv394.mxl",
+      "sha256": "24024aedb1911e83305d93885911c6f5620902ff2f3750f93d99c5e7dbde075a"
+    },
+    {
+      "path": "bach/bwv395.mxl",
+      "sha256": "5515751a99825be47dff8eae2ef6005a0f4991b167f74a35eed0561dd1b8ad60"
+    },
+    {
+      "path": "bach/bwv396.mxl",
+      "sha256": "1c69758e7b4bb6dd9ca65194c966203519d623ce81239815f0a8b6f738c4bc68"
+    },
+    {
+      "path": "bach/bwv397.mxl",
+      "sha256": "55964d2130168669716c879a5ac462701e9dda1ed46d20515bc2464a325fa66a"
+    },
+    {
+      "path": "bach/bwv398.mxl",
+      "sha256": "88fc1d7521830eed71c8ef52e9b33a5aef39157158760932468f5fe0d88c1ef7"
+    },
+    {
+      "path": "bach/bwv399.mxl",
+      "sha256": "1d69d9519685feea93cb220848e4df0583f6f643fd8656efd663cd9a6a1e1711"
+    },
+    {
+      "path": "bach/bwv4.8.mxl",
+      "sha256": "4d918a88ecaa22359bcc2f21a4d5415082f2b11750aac7ec0fdba6c697a42b75"
+    },
+    {
+      "path": "bach/bwv40.3.mxl",
+      "sha256": "6fd98453bb93fcf25db70ffe06c754199087c13d0720ecf1b07cb297b8d9e25b"
+    },
+    {
+      "path": "bach/bwv40.6.mxl",
+      "sha256": "43ccf82c4a0d35a67d1b436271ca26aa267883e942ffb76d5b87a19f11e808eb"
+    },
+    {
+      "path": "bach/bwv40.8.mxl",
+      "sha256": "89b527da3439fcfaf49e22ebba367bdcedbd1c624bf49759f2b30f7db789be4c"
+    },
+    {
+      "path": "bach/bwv400.mxl",
+      "sha256": "0e7c1f76297b636bc6cd35166949005a0d3540bbad44ed91929ae9c48f8c6cfc"
+    },
+    {
+      "path": "bach/bwv401.mxl",
+      "sha256": "d6494ce91869df673fc4ae67f9b2f0102e6a61658db87d2f5578c51f030f074f"
+    },
+    {
+      "path": "bach/bwv402.mxl",
+      "sha256": "fb085dcac0082d7565fb8543a47700e0011e6fb4c4891d9243a63bc95333674c"
+    },
+    {
+      "path": "bach/bwv403.mxl",
+      "sha256": "9a9e6e5a277d62bf040e36bd29da542a721415622fd05c1fb04438385d799a70"
+    },
+    {
+      "path": "bach/bwv404.mxl",
+      "sha256": "8ac61c93e9f46a3cff96654651fe25c73b3b18f887f8106e48d4e03194d05550"
+    },
+    {
+      "path": "bach/bwv405.mxl",
+      "sha256": "cb6540f3d613f1e19ee91e010ebc5d6db49134363f14bc1604e3ad7b7872775f"
+    },
+    {
+      "path": "bach/bwv406.mxl",
+      "sha256": "16bbe53c2c80627ca4673206d2f471bf7b866b05b57e264bb6071064f9f4b0c7"
+    },
+    {
+      "path": "bach/bwv407.mxl",
+      "sha256": "170281fba9453850c00b3c379f223042388182b5f4b486eadba15cab262db10f"
+    },
+    {
+      "path": "bach/bwv408.mxl",
+      "sha256": "4b7ec5ae09957c606ec92f8ce6eec067b86571cdb973dcc4d8cd398cf78a1ef1"
+    },
+    {
+      "path": "bach/bwv409.mxl",
+      "sha256": "ce0da6b76198819939984fe4593f2b66d39a99ea24022377b1e9f51b5ac602a8"
+    },
+    {
+      "path": "bach/bwv41.6.mxl",
+      "sha256": "a2c4e8fcd906667fa9cb40214588c8f32a35ba743f67ad49750b154a3c9e4538"
+    },
+    {
+      "path": "bach/bwv410.mxl",
+      "sha256": "2c467d32ec5e5f2324a7a5f8de8a133c5776279f73556894fbdf58093e63025f"
+    },
+    {
+      "path": "bach/bwv411.mxl",
+      "sha256": "cb93d40e1992c49d9f4eeb5a5870bc7a477f401dfa1d4949ed361776c2fa5339"
+    },
+    {
+      "path": "bach/bwv412.mxl",
+      "sha256": "d75000c01d04616b13d6e80cb2aaffb277596edf77b9a31cc3e11da600e2f227"
+    },
+    {
+      "path": "bach/bwv413.mxl",
+      "sha256": "4b033e50e82365e8a348dc1cc5e1d8e068b72c9480a6eb1cab31a864954a5f8f"
+    },
+    {
+      "path": "bach/bwv414.mxl",
+      "sha256": "51b64dfe137fe59ad6deff645bff11e50cdf93eac449a057de6d06a4a1977d11"
+    },
+    {
+      "path": "bach/bwv415.mxl",
+      "sha256": "1c266d51e2536aa7cbadfd842a8d1d04e04e78fe665b0f512d38b8d1bcf70b58"
+    },
+    {
+      "path": "bach/bwv416.mxl",
+      "sha256": "b49c48b49ee18dc63aa0a7de4050b39baaddc6811f823d70c1305f6372d5fd34"
+    },
+    {
+      "path": "bach/bwv417.mxl",
+      "sha256": "e41788eb7944794380d51faca62a946b427a697059fb746c919503bfd19fb6af"
+    },
+    {
+      "path": "bach/bwv418.mxl",
+      "sha256": "bd261d962bfceb731f3c2439b1553196b08b4cf461039a6a2dfed05dcfe55681"
+    },
+    {
+      "path": "bach/bwv419.mxl",
+      "sha256": "3a3d1fc8b1082f59283e3b731fd0bd094ef1114ca4848325d95000346e24be10"
+    },
+    {
+      "path": "bach/bwv42.7.mxl",
+      "sha256": "96c36783e9c0e38c9b374a303454f753b4599320b1ed00fc758d8c4c35ea71d6"
+    },
+    {
+      "path": "bach/bwv420.mxl",
+      "sha256": "a80348b69145d126bf5d7be351c317eeb60f796e91a6ba4cbf94f29cbbc28b4e"
+    },
+    {
+      "path": "bach/bwv421.mxl",
+      "sha256": "c27ef2f03725758471502633d8b78459638f38ab40dc81e2e30b6050fb5f794a"
+    },
+    {
+      "path": "bach/bwv422.mxl",
+      "sha256": "442befb1ff45a68488e552df7412fa03457d89c1ae17220469ffc2890ef49d6d"
+    },
+    {
+      "path": "bach/bwv423.mxl",
+      "sha256": "16997d32fbca573aaef87a26d196c1863a05203cc58e426234beadd0378a44c6"
+    },
+    {
+      "path": "bach/bwv424.mxl",
+      "sha256": "5a651a05b94c1f1b638c79e562935943066363d850f56b3fd338a92c21b46226"
+    },
+    {
+      "path": "bach/bwv425.mxl",
+      "sha256": "2289c946a9fe5ab2d37db20e07523a0488d72bc9ee0ff50b3cb96a0736c0f23e"
+    },
+    {
+      "path": "bach/bwv426.mxl",
+      "sha256": "3634c84f3c9e387366fcf84de13191d269ad81a5c6ce9cdb4090ff525db998a6"
+    },
+    {
+      "path": "bach/bwv427.mxl",
+      "sha256": "d02d7ecb12548422b88336a522095c1bcd2022ffd6ad1d93ce651e14fe8c3631"
+    },
+    {
+      "path": "bach/bwv428.mxl",
+      "sha256": "3f3f2acbd8dc94c98511f13eac0f365a964e66871a54fb3085514629ef562089"
+    },
+    {
+      "path": "bach/bwv429.mxl",
+      "sha256": "b626f5635b1b95eb41d4b0efa578c56ede6c6b740bacf3552f940ba67f09c13e"
+    },
+    {
+      "path": "bach/bwv43.11.mxl",
+      "sha256": "a7bbc358451bc8a2764e1df728700b0303d12552730e0967958dd06263c7bdc9"
+    },
+    {
+      "path": "bach/bwv430.mxl",
+      "sha256": "6d5935531c28a997f1ce2ac52cc2bc419c3890a5099b8cddb358d42ecede9695"
+    },
+    {
+      "path": "bach/bwv431.mxl",
+      "sha256": "ec8294b7e6d87a63d779f6164735b6ccafddd8ee2501949e927a7ebd6043ff24"
+    },
+    {
+      "path": "bach/bwv432.mxl",
+      "sha256": "e75af1b05c1d768646b61eaa5a70bb190b6e1dd199e9f58ee17bad6ed7c7b111"
+    },
+    {
+      "path": "bach/bwv433.mxl",
+      "sha256": "01587e19542465e54e8aa127e2d116a5a594b6ba995bda0ed9847457c5986b35"
+    },
+    {
+      "path": "bach/bwv434.mxl",
+      "sha256": "aef48fcf63ddee93acfe92522466697ae610ac7fd1868d05a963d540094e37ef"
+    },
+    {
+      "path": "bach/bwv435.mxl",
+      "sha256": "16fce59f77db7e0c0a952a5bb998e2c972e1b0a5447732084cfcaa924ce0b6fe"
+    },
+    {
+      "path": "bach/bwv436.mxl",
+      "sha256": "9174761e4e8469d0bfc2fa590d0e692e1b086224289427237be483145f373449"
+    },
+    {
+      "path": "bach/bwv437.mxl",
+      "sha256": "ab8d687a5db3d77ec6e434a2d2b4936da9ee81f39b8b6ed5d539c0e90c6ac208"
+    },
+    {
+      "path": "bach/bwv438.mxl",
+      "sha256": "783006fd9b53bfdb0dd518f03f70e85864c449e27cc9e6f3c62718a50065d37a"
+    },
+    {
+      "path": "bach/bwv44.7.mxl",
+      "sha256": "52b4eaad0010730f7501853092c3628b9c7ffdeee24828eeb39e8790eda430dd"
+    },
+    {
+      "path": "bach/bwv45.7.mxl",
+      "sha256": "bb7dfe18dfd26398b9e0e2ce7645c4b539fd4045a1a139e32a53287bd545c8c1"
+    },
+    {
+      "path": "bach/bwv46.6.mxl",
+      "sha256": "b016c271461c267d498df9f374eaea313ff5e7b16d8de99c5d907f1812249353"
+    },
+    {
+      "path": "bach/bwv47.5.mxl",
+      "sha256": "01c5d194f798d051636dc5a05135ba41882cb0fd23ad2604afc55ae22ea60537"
+    },
+    {
+      "path": "bach/bwv48.3.mxl",
+      "sha256": "fda74e1e9d9df2ffa571b287f73f2ebbfbee1a989f06c161891fdb9991147da2"
+    },
+    {
+      "path": "bach/bwv48.7.mxl",
+      "sha256": "6120f797cf12953bfa76572e893a3bebdd272f66f799b24aad5e24dccc748341"
+    },
+    {
+      "path": "bach/bwv5.7.mxl",
+      "sha256": "ffbc99245a1a491b843b4452a99aadbede8dc8af9bf02a538821c5e547658a71"
+    },
+    {
+      "path": "bach/bwv52.6.mxl",
+      "sha256": "0fe0467b6c193e6531ef1250f0be86338ea260ea2421f8bfa699905ab985745e"
+    },
+    {
+      "path": "bach/bwv55.5.mxl",
+      "sha256": "02aeb45a4b63d24d0ae2e7737915ee68dbf70205dd6aedbcdce8f7709577a784"
+    },
+    {
+      "path": "bach/bwv56.5.mxl",
+      "sha256": "e07e8e0746d3a1d643f54bef58d0f9c50ea6239f5bd01857aa3a9b15aa770f14"
+    },
+    {
+      "path": "bach/bwv57.8.mxl",
+      "sha256": "09be4a99c7419ec97b83bae821bad84f6d0154e088c48168dea47e0607c3fad8"
+    },
+    {
+      "path": "bach/bwv59.3.mxl",
+      "sha256": "01b93ceeb5184108ca6d79904818df6b2200ff0a8a748a1b6277d9e300779d20"
+    },
+    {
+      "path": "bach/bwv6.6.mxl",
+      "sha256": "3c36bac424225f1e246387d04a30fd560b7783513fcf4f3c2cb12498de7443b4"
+    },
+    {
+      "path": "bach/bwv60.5.mxl",
+      "sha256": "a86b7efe510c2672d83a25743e7eb52762a9f3d8608afb64dce41225d30057e3"
+    },
+    {
+      "path": "bach/bwv62.6.mxl",
+      "sha256": "2b8f940505beef494b768a318c3527f85cb2cd4d279975475eb3fd7be5844130"
+    },
+    {
+      "path": "bach/bwv64.2.mxl",
+      "sha256": "af7d560ebe578016b2fac41748f0ce4e6730e69816b99867f8a17d8d38c5310d"
+    },
+    {
+      "path": "bach/bwv64.4.mxl",
+      "sha256": "629b1fd94999b18c014d0da75744452ca94ea075dde624701bb0e60404264836"
+    },
+    {
+      "path": "bach/bwv64.8.mxl",
+      "sha256": "295584bab1711fcdf44c2b91dacccf4e61624602841aaed04c8d250007fcf268"
+    },
+    {
+      "path": "bach/bwv65.2.mxl",
+      "sha256": "b3c3257ceec1d28f6d7408dc34f5ffc8876fa985aa864f7e7af1287aba626925"
+    },
+    {
+      "path": "bach/bwv65.7.mxl",
+      "sha256": "424c840abd974114040e06291df3e975d752121ec9ffa3c92fc0854b8c542989"
+    },
+    {
+      "path": "bach/bwv66.6.mxl",
+      "sha256": "4fd93bb11683771d5d3bc1f89768f5398f6ff72aae0c04e4f25bfb533d4ccd0e"
+    },
+    {
+      "path": "bach/bwv67.7.mxl",
+      "sha256": "bf1dc2632d7f1ea66ce08e0a044883cf841f5c1d8cf63ee5f35449d99cc1c13d"
+    },
+    {
+      "path": "bach/bwv69.6-a.mxl",
+      "sha256": "795393ea5149dad670545e9ee8b0ffa4e9a502c91d86a040569ae0889d276b37"
+    },
+    {
+      "path": "bach/bwv7.7.mxl",
+      "sha256": "48b55e50482f4adbf7c1ac252bedc7821af60efe5520691af346882ec9c7c7f1"
+    },
+    {
+      "path": "bach/bwv70.11.mxl",
+      "sha256": "008e653dc4efcab7d36b3a104c31e2a7b29133b243875181a5f000cee49bf4f5"
+    },
+    {
+      "path": "bach/bwv70.7.mxl",
+      "sha256": "28a5c2d100495ea5444d6c4bb18b0835e7dc85e781c121ced651cd6a0be777f3"
+    },
+    {
+      "path": "bach/bwv72.6.mxl",
+      "sha256": "478e4b5d5cc9c3882d833e67ac137317da51e4d3e2d1c62576306a4e2e08d71b"
+    },
+    {
+      "path": "bach/bwv73.5.mxl",
+      "sha256": "f3d9f5afbc2ac457822e6a80447e229d4f051d3fe292ee680db99f1b4dd34747"
+    },
+    {
+      "path": "bach/bwv74.8.mxl",
+      "sha256": "2117ea40b19dcd10fb8949fe9cc86105ef6bbeecd1b99bdd57f9a92e09dfc7ab"
+    },
+    {
+      "path": "bach/bwv77.6.mxl",
+      "sha256": "9ff2d933740933c07c15f1180a9e2811c35ed5435dff05a896e86ee8a47d1fc5"
+    },
+    {
+      "path": "bach/bwv78.7.mxl",
+      "sha256": "e798016f58f415e496df9eaa9456538bb7801c28e7b396ea1844adf14c9cef03"
+    },
+    {
+      "path": "bach/bwv79.3.mxl",
+      "sha256": "3762117192f46bba21f90996cc175a221457945952145f04ed131c2bdb84f032"
+    },
+    {
+      "path": "bach/bwv79.6.mxl",
+      "sha256": "b8d29a8773c164c39af8d25fd0575b7abceb353471d32c0b564b82c9e9762af7"
+    },
+    {
+      "path": "bach/bwv8.6.mxl",
+      "sha256": "07348f503dbcb77a459c9a6fd2a179558f2aec0e1f2aa245e5d61dd691de050b"
+    },
+    {
+      "path": "bach/bwv80.8.mxl",
+      "sha256": "89e545db2c0a671e276ec795de51cd4cf8a736a0bce771203589e03ed84ad135"
+    },
+    {
+      "path": "bach/bwv81.7.mxl",
+      "sha256": "859b4f3bb098681239ec03a729401a98492688fcaf1f0338e13e45cb749157dc"
+    },
+    {
+      "path": "bach/bwv83.5.mxl",
+      "sha256": "5150fab96c27e59e1067553134b9bb4d865a0eef40e3ac140f7a83bb1d8cc93f"
+    },
+    {
+      "path": "bach/bwv84.5.mxl",
+      "sha256": "f984dc92d7b00040530735810a18d3b6038b8043a274a57c349e13336105a00f"
+    },
+    {
+      "path": "bach/bwv846.mxl",
+      "sha256": "286535dfb99cf841bfa9848e4cd71ddb2339c476a123971cb326b3d85e410018"
+    },
+    {
+      "path": "bach/bwv85.6.mxl",
+      "sha256": "66cb9558ebdd15e86cc9a964edaf4bba89dbae3354b2f783a32bfe1e39f0a96a"
+    },
+    {
+      "path": "bach/bwv86.6.mxl",
+      "sha256": "5b9a0acc0010297e9f49f8c43d098361deb28f67dfc13f9f6b682cff9ec1003e"
+    },
+    {
+      "path": "bach/bwv87.7.mxl",
+      "sha256": "9752d5087701bf49f1767bc16cad5827e69827b6da224b657d42b855064da91c"
+    },
+    {
+      "path": "bach/bwv88.7.mxl",
+      "sha256": "98d78b868c6579c13744606e035c72c71c5b92cbb6e2b4fb774bfbe0b36e7075"
+    },
+    {
+      "path": "bach/bwv89.6.mxl",
+      "sha256": "1a69cfc433bac0378c3af6d8e1f6f04c2937e7353b19f04929f1cdafc1235922"
+    },
+    {
+      "path": "bach/bwv9.7.mxl",
+      "sha256": "c4267d73f44343bb062628aa63b0034db0f7492790a83ead45d9cf787e5e1ed2"
+    },
+    {
+      "path": "bach/bwv90.5.mxl",
+      "sha256": "0d7b4cf42d41c22c62661692693b7a7612b3957279ee2762e51ed649f1bae467"
+    },
+    {
+      "path": "bach/bwv91.6.mxl",
+      "sha256": "d0966639e5bcd8e875a31a1896ee6a3c0e36c4c9c3ac77d84a2bffd01f089e75"
+    },
+    {
+      "path": "bach/bwv92.9.mxl",
+      "sha256": "884c1290bf0a254834f511ccd600fdd7d5e40f550b56be9924032432f6b2e042"
+    },
+    {
+      "path": "bach/bwv93.7.mxl",
+      "sha256": "39d731c22f112dcfae40f7211015cdd7266cc864c8d7d2d1445627c464410082"
+    },
+    {
+      "path": "bach/bwv94.8.mxl",
+      "sha256": "ba56570c7fe332e1b9d057dec6cacdf7f380aa3d98262ee80b67264fa8680e9e"
+    },
+    {
+      "path": "bach/bwv95.7.mxl",
+      "sha256": "99ef240c7535046828ed8824bc4d820f7fe2f3ba8b2c9bcc8269c3f8a12a5c6e"
+    },
+    {
+      "path": "bach/bwv96.6.mxl",
+      "sha256": "8b0684426d89af3eeca8da1562ed27d439ae22f3e0ddea039291e66a4664e771"
+    },
+    {
+      "path": "bach/bwv97.9.mxl",
+      "sha256": "67e2ebb29fbbc3a9a1348529c5fd3acdc52e24ac8db79592e3915c0434018b1d"
+    },
+    {
+      "path": "bach/bwv99.6.mxl",
+      "sha256": "06bd2ebacfbb9c827fee83f9902b0f3730b417c3996407191e7b46da1a51c224"
+    },
+    {
+      "path": "beethoven/opus132.mxl",
+      "sha256": "8c4b99d9cec4aa5f62cfe4966f0e65275d2e52465a0b68ca0b0190b33eabd908"
+    },
+    {
+      "path": "beethoven/opus133.mxl",
+      "sha256": "07e1dfbbe34a762f725869e5c45a938cf9ab5408ee7456ec06a44b292aeb5039"
+    },
+    {
+      "path": "beethoven/opus18no1/movement1.mxl",
+      "sha256": "d12a02b070c37b9fe35184526dfccf63c1ac62d43b3584687173e880ad75f638"
+    },
+    {
+      "path": "beethoven/opus18no1/movement2.mxl",
+      "sha256": "e4ff6562e42e1a054ec3a1b175185105c7cfc6e944abca7c95f9870205c5ad40"
+    },
+    {
+      "path": "beethoven/opus18no1/movement3.mxl",
+      "sha256": "0ffb5ac3bfa4e0162bde011cc98c68c6a74c12fd41a36d9da0e3bb707c9c5f10"
+    },
+    {
+      "path": "beethoven/opus18no1/movement4.mxl",
+      "sha256": "a55bf7d7146b77e78dd7bcf23624f84e0607662a93986a1a83aaca3a42dc915e"
+    },
+    {
+      "path": "beethoven/opus18no3.mxl",
+      "sha256": "51d27afd34577c27e12e2fe39ebfd30990bd31408da3b7e29ece7bbeeb1a5478"
+    },
+    {
+      "path": "beethoven/opus18no4.mxl",
+      "sha256": "4b18c603613fa2bdfff80f8ca5249807cdd3a2ceb54ba12eccac40f354671d3f"
+    },
+    {
+      "path": "beethoven/opus18no5.mxl",
+      "sha256": "a402b7e226d28f970ed133d4d46cd28893f0fcb4b7a0beabbb87928229f8500f"
+    },
+    {
+      "path": "beethoven/opus59no1/movement1.mxl",
+      "sha256": "a88e67710f3f6cb1c9b83407e306fa4aca2c5c4869c506375e593c5d8ff5efa6"
+    },
+    {
+      "path": "beethoven/opus59no1/movement2.mxl",
+      "sha256": "2f8764c205ce42dd829a0e50d6255b57ef27d1c5ea01ff936e072cdf66c38b02"
+    },
+    {
+      "path": "beethoven/opus59no1/movement3.mxl",
+      "sha256": "dcd13dd704ff1ad6a319ce3788252047f655748a52281f6e3ad40f5080a1ee04"
+    },
+    {
+      "path": "beethoven/opus59no1/movement4.mxl",
+      "sha256": "ae3504b23e4157f5694dc7ca3e59db7ee9ad870e400f05d5da4c5f5305dd356c"
+    },
+    {
+      "path": "beethoven/opus59no2/movement1.mxl",
+      "sha256": "a505b3442f1fe51b522fdb002681520a4858fe9ffa0ed90108045f7e9276029d"
+    },
+    {
+      "path": "beethoven/opus59no2/movement2.mxl",
+      "sha256": "b52f16ccedbdb1d9ad8ef353e18c9ab25024c296bb47a299238f43ca7929e50b"
+    },
+    {
+      "path": "beethoven/opus59no2/movement3.mxl",
+      "sha256": "8f2e52619776bfb683d56734e81bb5c0e9d3b74c03196c658204de630fc28685"
+    },
+    {
+      "path": "beethoven/opus59no2/movement4.mxl",
+      "sha256": "e65d8ff4d8de21d0ed05d5a9c84cf9b2d43b603b06bc7d69e34a30d4ae0bd399"
+    },
+    {
+      "path": "beethoven/opus59no3/movement1.mxl",
+      "sha256": "05f0f3125f42cbd1fae974e16cbe7df4b79e214d7c84322092cced7ee0cdfa8d"
+    },
+    {
+      "path": "beethoven/opus59no3/movement2.mxl",
+      "sha256": "145ef4bd238a19eb98bbba57bf4352a34bd808266ddd82085071960f1e881933"
+    },
+    {
+      "path": "beethoven/opus59no3/movement3.mxl",
+      "sha256": "0653207a4ebf431ee317cf82c710418740364679889dbeb439c6262c6c40664b"
+    },
+    {
+      "path": "beethoven/opus59no3/movement4.mxl",
+      "sha256": "760f259c054cc88385c3af23c04087a25142f6ac012f2a1c7aa0cf707938b4ce"
+    },
+    {
+      "path": "beethoven/opus74.mxl",
+      "sha256": "d9220faafd9c6c3d85c51c1b83f0d12e2d6392013c448b1f61945e93db120676"
+    },
+    {
+      "path": "cpebach/h186.mxl",
+      "sha256": "39462c924adce2ebb29a86cbdfe88e0f5d4f23d1c7c537b06853d55f81571a59"
+    },
+    {
+      "path": "demos/ComprehensiveChordSymbolsTestFile.mxl",
+      "sha256": "00f04c652e52679e539a78976587a3956102760180a6ea1fd2454afc5c691c88"
+    },
+    {
+      "path": "demos/chorale_with_parallels.mxl",
+      "sha256": "e09dd15f83d9dcdeda64413753f4f1f8c63c29526afabeb8f715f1526ce064f6"
+    },
+    {
+      "path": "demos/chord_realization_exercise.mxl",
+      "sha256": "cd69ffe8b2cde64a0833455f372fc495d5182fc30f8c3c71e3a258171936a2ed"
+    },
+    {
+      "path": "demos/incorrect_time_signature_pv.mxl",
+      "sha256": "e23fa6b7a92cf967c23eaa968d669f1572f363c5a18db6b6dd2c722fc06d525f"
+    },
+    {
+      "path": "handel/rinaldo/Lascia_chio_pianga.mxl",
+      "sha256": "e41299096f92837d9fadbc67c13e0e8c7336549d97777009b383447332709346"
+    },
+    {
+      "path": "haydn/opus1no1/movement1.mxl",
+      "sha256": "329800ad77e5ed25d62c6d9da355c5cc3b2dc31caec61f996d0e75e8f24292fa"
+    },
+    {
+      "path": "haydn/opus1no1/movement2.mxl",
+      "sha256": "695c447791407eb17afdc424fe466e50299b38db2d8d04343c8c4f866b98d48f"
+    },
+    {
+      "path": "haydn/opus1no1/movement3.mxl",
+      "sha256": "b4376c8749f567477642eed24d2364b6f7b561e4f4ffaeea462479b293389837"
+    },
+    {
+      "path": "haydn/opus1no1/movement4.mxl",
+      "sha256": "8ae1b2abdd1616380fa22db3faface347b252abb0b308a177c8d9383b9f7f6b7"
+    },
+    {
+      "path": "haydn/opus1no1/movement5.mxl",
+      "sha256": "4dbb9a7cabdff14a6bd9e787ad45ce3f5770a66299cf78ea59f31b6935c38b32"
+    },
+    {
+      "path": "haydn/opus74no1/movement1.mxl",
+      "sha256": "f8925cd0d7cc5c3914e12ae0d69ddaab70513270b35ac52837cf1f177108118b"
+    },
+    {
+      "path": "haydn/opus74no1/movement2.mxl",
+      "sha256": "0420a3463ddde08de07a44bf8360fc041342ab230b306462c45a00f2256bbdc4"
+    },
+    {
+      "path": "haydn/opus74no1/movement3.mxl",
+      "sha256": "36463daa2f580e9041b5065f5bef8a7ef82c8baf7b530e9ee7f5d9b23e710e95"
+    },
+    {
+      "path": "haydn/opus74no1/movement4.mxl",
+      "sha256": "ad9e2af5bbbe4e4a254aecf1ce88a2abddcd9bd81c0e686c47b54caaf5a5b8f6"
+    },
+    {
+      "path": "johnson_j_r/lift_every_voice.mxl",
+      "sha256": "7606a3f0797dc1c3917627411146af82fd1a161dae7ae5c1616bdc5615a600fb"
+    },
+    {
+      "path": "joplin/maple_leaf_rag.mxl",
+      "sha256": "5fe979be991095d18bb9ee3394bf70d26237e37903ab7e751ee32e30b8e6460a"
+    },
+    {
+      "path": "leadSheet/berlinAlexandersRagtime.mxl",
+      "sha256": "57000e483dc724bc9e40819508cd0dc6a05998b701e3b0f58118dcbd0cc0637b"
+    },
+    {
+      "path": "leadSheet/fosterBrownHair.mxl",
+      "sha256": "d41e7d26d2d300a2dcbbeee97714474baa65d8e38e7875ea8cc97727659e1b8a"
+    },
+    {
+      "path": "liliuokalani/aloha_oe.mxl",
+      "sha256": "2730b6a7bb5f47364045d445ef704f7d9a646473e337e1c695c655f684412379"
+    },
+    {
+      "path": "lusitano/allor_che_ignuda.mxl",
+      "sha256": "0633d6f0b0919815968a6dace3eeaf10dfb384808fcf47ecbdaa8d6be0c8c877"
+    },
+    {
+      "path": "monteverdi/madrigal.3.1.mxl",
+      "sha256": "d4f7bb23242f3a0992d56ab56c4baf803cbd431cadc6af40ef04ace2337af94a"
+    },
+    {
+      "path": "monteverdi/madrigal.3.10.mxl",
+      "sha256": "6c2467f4e1dfca9e8d493018bfa206fba02133037eda214ce63185b39e67a0fa"
+    },
+    {
+      "path": "monteverdi/madrigal.3.11.mxl",
+      "sha256": "2334eb8c96b44d6c1dcecc3dae45388e07ec18946af18685023f8cc04d906256"
+    },
+    {
+      "path": "monteverdi/madrigal.3.12.mxl",
+      "sha256": "38c2cb5b7744cabe9f8f2326879c1d0775c56bfdcffa8f0b23942e14a51eb039"
+    },
+    {
+      "path": "monteverdi/madrigal.3.13.mxl",
+      "sha256": "daac039b636a60e41905d0947c642aad49996c4e1cb9a5a08703841b63f6f608"
+    },
+    {
+      "path": "monteverdi/madrigal.3.14.mxl",
+      "sha256": "46175523f5f5b9a0656b5a038be62bda7b517dc9d084517eab711f099cef4d7a"
+    },
+    {
+      "path": "monteverdi/madrigal.3.15.mxl",
+      "sha256": "146fc249de867a0c1ba96c862b64ecf900338a02818ae88daabbf34b55c9dc32"
+    },
+    {
+      "path": "monteverdi/madrigal.3.16.mxl",
+      "sha256": "7e4c20d6f58cdb2c0ce6362ba8808fa1633111e24abdc96d52e5fae242d63239"
+    },
+    {
+      "path": "monteverdi/madrigal.3.17.mxl",
+      "sha256": "b609c95f01abea2070d78f8c1e5070f5f469e11bdd35e298556ec689d282b34f"
+    },
+    {
+      "path": "monteverdi/madrigal.3.18.mxl",
+      "sha256": "0645dd1f34ccba7d400ed25c142b3ff9b558547228c652af78fe13488ff98488"
+    },
+    {
+      "path": "monteverdi/madrigal.3.19.mxl",
+      "sha256": "ae39f9451b2c36d64c240cc12001b35038d65289c9f624b698cc564a9ace6959"
+    },
+    {
+      "path": "monteverdi/madrigal.3.1_old.mxl",
+      "sha256": "43af1728941c8ae767137c45a14b0675c1169f1e1319e6896a5b3164df04adfe"
+    },
+    {
+      "path": "monteverdi/madrigal.3.2.mxl",
+      "sha256": "bb4d148539f5588378565f74d32d2d31257c1cd00a8be0409a60e78861e8741e"
+    },
+    {
+      "path": "monteverdi/madrigal.3.20.mxl",
+      "sha256": "ff5405794934eae3ef90ba2fa58fe339e6c2d7235c823a1b1931d63136862e26"
+    },
+    {
+      "path": "monteverdi/madrigal.3.3.mxl",
+      "sha256": "061574e53aecf40a58990479f6c7286ddc87c1eedf7cbe12ab1af24b0144f75f"
+    },
+    {
+      "path": "monteverdi/madrigal.3.4.mxl",
+      "sha256": "b1f0b2af1be25a8e6d86227649506cd6f97fc709ba173662ddc07f0cca692cee"
+    },
+    {
+      "path": "monteverdi/madrigal.3.5.mxl",
+      "sha256": "a117a84ccb3793fbfcec05d006ec84656fd92cb85dd39d126d3bc734a5435717"
+    },
+    {
+      "path": "monteverdi/madrigal.3.6.mxl",
+      "sha256": "3c4f27731d5ef8dd7b9a4351fd1dbf157382983e1ef7e953487303e1471c3019"
+    },
+    {
+      "path": "monteverdi/madrigal.3.7.mxl",
+      "sha256": "11da5e00ed34d21c04f663fb3adb5e350b2acf5ee58b21b257071eeeba50e205"
+    },
+    {
+      "path": "monteverdi/madrigal.3.8.mxl",
+      "sha256": "c96e59539d15d9dd670dde47ef9180e187130546f2c64895813659252fa52ec2"
+    },
+    {
+      "path": "monteverdi/madrigal.3.9.mxl",
+      "sha256": "a7fccbb7331874d2c98674b32121e99862725bb454f7d60da8737b241ab86a37"
+    },
+    {
+      "path": "monteverdi/madrigal.4.1.mxl",
+      "sha256": "778dc1767bd5872f81d70ae3fa2929b1e09d4ec19f7d373effaff424fdb58cf2"
+    },
+    {
+      "path": "monteverdi/madrigal.4.10.mxl",
+      "sha256": "a64635737d720639076c1b28b6cd7b5ff8388aefe0b78ebe57411f22a2b3da9d"
+    },
+    {
+      "path": "monteverdi/madrigal.4.11.mxl",
+      "sha256": "bfde30deab672367a7a07c4f3930861aa4ad7d76167814415e795ab8c519d156"
+    },
+    {
+      "path": "monteverdi/madrigal.4.12.mxl",
+      "sha256": "82fa6170c9a0df44ceb1ffb01494cd3cd1f3d31fb73f7b5d460e8795c6db3b80"
+    },
+    {
+      "path": "monteverdi/madrigal.4.13.mxl",
+      "sha256": "e08d7d8fbf0508197602fdcd27499596c7ba139ac7686932de9bb1e7ea262d8a"
+    },
+    {
+      "path": "monteverdi/madrigal.4.14.mxl",
+      "sha256": "015b877c48a182298c87765f8f1390c2fb632be282b9dd45c621bb236576e388"
+    },
+    {
+      "path": "monteverdi/madrigal.4.15.mxl",
+      "sha256": "e33db44ec78fc741545bcbad8195d2d434fbbb34bb886d387cd863bd5c1386ca"
+    },
+    {
+      "path": "monteverdi/madrigal.4.16.mxl",
+      "sha256": "81784434b858408a92914e44febf73d80d68b0b4722adff86cabd8434d633a48"
+    },
+    {
+      "path": "monteverdi/madrigal.4.17.mxl",
+      "sha256": "ee1441d3063c4f5ddcb78ba21a108ee8f6673f03f61ff5b38bb31acbb309cb76"
+    },
+    {
+      "path": "monteverdi/madrigal.4.18.mxl",
+      "sha256": "30902d6d91ef78e2f05337d5845bd7627254c5f9b6e6bc546aa918fa6bfb49a8"
+    },
+    {
+      "path": "monteverdi/madrigal.4.19.mxl",
+      "sha256": "7d93782f4218edd8cea2e359fceab04e9b805070171a1d0cd3ac5405768dfcf1"
+    },
+    {
+      "path": "monteverdi/madrigal.4.2.mxl",
+      "sha256": "61f839206f95f915b2905eaff76ef88b914369bc2c1393fad997de243cd15807"
+    },
+    {
+      "path": "monteverdi/madrigal.4.20.mxl",
+      "sha256": "3442e2b9af55b83d72d91f514bdcd7700de3a3985e417ff847156551fa711435"
+    },
+    {
+      "path": "monteverdi/madrigal.4.3.mxl",
+      "sha256": "24c559109341c9eb3d73ac2966c5de6b118e9385b5da3c0079d393e56b3135a4"
+    },
+    {
+      "path": "monteverdi/madrigal.4.4.mxl",
+      "sha256": "00fc2c927c3759b62d0f7e0c443c1ce05142776badb917495c76b99d161d8bf3"
+    },
+    {
+      "path": "monteverdi/madrigal.4.5.mxl",
+      "sha256": "89054493648499089807cfb1ab529c34c58640e70424192bca2b98f7ed524f24"
+    },
+    {
+      "path": "monteverdi/madrigal.4.6.mxl",
+      "sha256": "0fb19644e9d0be72b154544c8125254a18b9e4d08e40f7a1e3aaab591a926e74"
+    },
+    {
+      "path": "monteverdi/madrigal.4.7.mxl",
+      "sha256": "ecd93434030e05e52480cf06a855cb669204f294e771fafc21bc9759bffa5d70"
+    },
+    {
+      "path": "monteverdi/madrigal.4.8.mxl",
+      "sha256": "2e50f1d98f25e65a8fabc1d93ad602f8dbda1839fd759b38f4a37ebc84f00a28"
+    },
+    {
+      "path": "monteverdi/madrigal.4.9.mxl",
+      "sha256": "4ace4d218c43fdf6a4be832ea23fc96ccac24ba0be1401e7e53924f6c6ab5518"
+    },
+    {
+      "path": "monteverdi/madrigal.5.1.mxl",
+      "sha256": "16e8b7d8c0bb8f65290c9e0b7f3c556d04d6f8162fc2ba80333bb216df9c34d7"
+    },
+    {
+      "path": "monteverdi/madrigal.5.2.mxl",
+      "sha256": "1333c772d80e93eb1b5745e05739377463c76301f85caa084ac0191630f50d25"
+    },
+    {
+      "path": "monteverdi/madrigal.5.3.mxl",
+      "sha256": "f459f135752665b24aa16fabd9d85b946d3791e53402bc6883bacee9eb794699"
+    },
+    {
+      "path": "monteverdi/madrigal.5.4.mxl",
+      "sha256": "ac05c17311a4a3f9093e3d6573e530412bc7ededc7fe726ff7d42b40a2b79ff9"
+    },
+    {
+      "path": "monteverdi/madrigal.5.5.mxl",
+      "sha256": "f31452dfa4c3e2e21e88f37838f35291ba15f7087088322fc9c5e1e8518427de"
+    },
+    {
+      "path": "monteverdi/madrigal.5.6.mxl",
+      "sha256": "9b172ebbf1e46278b392e669de783b9f9f052c87cd6b16032ae4797226ddd15f"
+    },
+    {
+      "path": "monteverdi/madrigal.5.7.mxl",
+      "sha256": "9eca939b49836c3354a3366a1596e9243cc2d0e61ed1d78ab6b22b3c38a94a1f"
+    },
+    {
+      "path": "monteverdi/madrigal.5.8.mxl",
+      "sha256": "7a88a005cd06a981127fe6ea033eca62fa8a21924273dc9c96c3fd237580303f"
+    },
+    {
+      "path": "mozart/k155/movement1.mxl",
+      "sha256": "5cf25b53e4cea60bcd7e7a7f32f8226c7b43b4bf25550bd782d21ac10c056941"
+    },
+    {
+      "path": "mozart/k155/movement2.mxl",
+      "sha256": "b16d9cf1ab7f406dc9fc83bf06deedc506463ad0c4071d164b5468b29aa3cca8"
+    },
+    {
+      "path": "mozart/k155/movement3.mxl",
+      "sha256": "34e20547143385e89fe2aed4a48a98f5ecefe7b41442d322946245f789966141"
+    },
+    {
+      "path": "mozart/k156/movement1.mxl",
+      "sha256": "60ed74409a2195611f5e1e1ed3e8d77ff8073ed872958decf8cdb13cc1ac964c"
+    },
+    {
+      "path": "mozart/k156/movement2.mxl",
+      "sha256": "ac0e6c60a75a7319529f6dcf97510e0b997eac2bd299847a58e5c8808942746a"
+    },
+    {
+      "path": "mozart/k156/movement3.mxl",
+      "sha256": "838b4b51dfadbeaf57cb3cb07b0cdc8bfeae50cf369f46254ea01ac4dac9ca50"
+    },
+    {
+      "path": "mozart/k156/movement4.mxl",
+      "sha256": "2a93f834b21e37c059602e156bb9bcdd295a7017ebdd1ee52ca0f56e389639c1"
+    },
+    {
+      "path": "mozart/k458/movement1.mxl",
+      "sha256": "5015fd7109b945f5cdbfcbfd7e12ab5a7740299635b6719bad923c817f3dd89d"
+    },
+    {
+      "path": "mozart/k458/movement2.mxl",
+      "sha256": "e9fe6f5487a287aa25112914e285adbd0e15af231e8795695b72365ee4c2adac"
+    },
+    {
+      "path": "mozart/k458/movement3.mxl",
+      "sha256": "26a973b4d662170c39f668b445961a6873e90d7c0ffba1ec928a9cb7f3d18b10"
+    },
+    {
+      "path": "mozart/k458/movement4.mxl",
+      "sha256": "3927a83f1350b2d34d1177e74abb2f07563b4f6430a27c50dacfb0cb5e77e8b6"
+    },
+    {
+      "path": "mozart/k545/movement1_exposition.mxl",
+      "sha256": "5b72d6c0ad5aa935865e30e80fc91422b5a131d3f72caf8303cc75d00c5a1556"
+    },
+    {
+      "path": "mozart/k80/movement1.mxl",
+      "sha256": "2a915c8817649f393230f146c5b8732dacf3d84ec1875a0419df7d36912d5cc3"
+    },
+    {
+      "path": "mozart/k80/movement2.mxl",
+      "sha256": "6db2fa50b3ec2adcc87278993d782fbff6f7b1e593aca59b4ad0f70c3522c0d5"
+    },
+    {
+      "path": "mozart/k80/movement3.mxl",
+      "sha256": "fb5e26db9a8472df2dcd6d1f8a7328ed9c4d1a97e7ed64a51492042fb12d86ea"
+    },
+    {
+      "path": "mozart/k80/movement4.mxl",
+      "sha256": "7a2e7f2880a522220bd952e9924a0b03360a06ac89fe94ed29151686ca06daa2"
+    },
+    {
+      "path": "schoenberg/opus19/movement2.mxl",
+      "sha256": "99b51a60b16ba85f4303ebe0ad294a2ceb330a26b4475157880ac09e48acf35a"
+    },
+    {
+      "path": "schoenberg/opus19/movement6.mxl",
+      "sha256": "0753b4467a581f5de8c1d2dc5e2171b3ed03347129db41dc13e0324bd1530289"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n1.mxl",
+      "sha256": "e0d33236955c4336fcd896f6b45d3365dd602878c62cab819956ca437edcda4a"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n2.mxl",
+      "sha256": "a9b78af1396d6af005d56b44c816a14aea90801509b72aca167708be44f8b591"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n3.mxl",
+      "sha256": "f7bda70f1de9f0ffe33404d8d144bf2866a9fd7039542dc3c5a55d81d3faa5c4"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n4.mxl",
+      "sha256": "207159a96daad0ed20ab05e9bcfe1b7c3aa866e70e506bbc81093c624223095d"
+    },
+    {
+      "path": "schumann_robert/opus41no1/movement1.mxl",
+      "sha256": "b3503c1b79994594c32b03172ebaa27c92898657b321e418176c395b269fc2a6"
+    },
+    {
+      "path": "schumann_robert/opus41no1/movement2.mxl",
+      "sha256": "24729d8380f43fdc5f53a44af49dd0d5f23f1b76958fa0f0ac53d31165cce1a2"
+    },
+    {
+      "path": "schumann_robert/opus41no1/movement3.mxl",
+      "sha256": "61c13a625e620aa9bfe5a16dc4b2bbee507925b92b0e56e05482c97beacade9b"
+    },
+    {
+      "path": "schumann_robert/opus41no1/movement4.mxl",
+      "sha256": "9487996f5db5a1b8ba23e5ee12f487db42780f9d6068fe25229af506f55fdbd3"
+    },
+    {
+      "path": "schumann_robert/opus41no1/movement5.mxl",
+      "sha256": "278e58b658165429eb6cae4d07f13a41e9e4b4228dd02e417e199e5a65386de9"
+    },
+    {
+      "path": "schumann_robert/opus48no2.mxl",
+      "sha256": "c6cb6b24a0afcc87f1fadefa64f12ec095bbb5a61a96e49ba05663fe835a94f2"
+    },
+    {
+      "path": "theoryExercises/TriadExercise.mxl",
+      "sha256": "93718140562778cb441cbe966b0cceb2e5e6cd0c2677b73b999824f7dc8a579f"
+    },
+    {
+      "path": "theoryExercises/checker_demo.mxl",
+      "sha256": "0c2ed57df9a565a9da773be6ec580c2ab03969258895c2cc0fa5320d650142c8"
+    },
+    {
+      "path": "trecento/PMFC_13_01-Kyrie-Summe-Clementissime.mxl",
+      "sha256": "0948a7864d438ed4ad729410eae60485d91699667c2db255a6987560ee8feb36"
+    },
+    {
+      "path": "trecento/PMFC_13_02-Kyrie-Questa-fanciulla.mxl",
+      "sha256": "e424df8541b70dac3ea62e31ecaf133018916828061fee1638b4bbb2e2e981bc"
+    },
+    {
+      "path": "verdi/laDonnaEMobile.mxl",
+      "sha256": "5e7ebb833c29d4ac7f194e0b0f6f3437d413532882b601cfdd1be5224158b026"
+    },
+    {
+      "path": "weber/concertino_clarinet.mxl",
+      "sha256": "344a87bde10672d391e8de38da09a7270fc4cbebc36832617c035b6f75fbde08"
+    },
+    {
+      "path": "webern/webern_dormi_jesu_op_16_no_2.mxl",
+      "sha256": "b7713bca5ff353c760c89058b87c3e219fd1c6e423f2c54190a6662e2ea0600e"
+    }
+  ],
+  "invalidInputs": [
+    {
+      "path": "demos/ComprehensiveChordSymbolsTestFile.mxl",
+      "code": "E_INPUT_PROGRAM",
+      "witness": "midi-program=0",
+      "authority": "MusicXML midi-128 datatype: range 1..128; identical one-based contract in converter README \u00a79"
+    },
+    {
+      "path": "demos/chorale_with_parallels.mxl",
+      "code": "E_INPUT_PROGRAM",
+      "witness": "midi-program=0",
+      "authority": "MusicXML midi-128 datatype: range 1..128; identical one-based contract in converter README \u00a79"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n1.mxl",
+      "code": "E_INPUT_DYNAMIC",
+      "witness": "sound@dynamics=-1.11",
+      "authority": "MusicXML 4.0 sound@dynamics: non-negative-decimal; M2-115 scaling domain 0..127"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n2.mxl",
+      "code": "E_INPUT_DYNAMIC",
+      "witness": "sound@dynamics=-1.11",
+      "authority": "MusicXML 4.0 sound@dynamics: non-negative-decimal; M2-115 scaling domain 0..127"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n3.mxl",
+      "code": "E_INPUT_DYNAMIC",
+      "witness": "sound@dynamics=-1.11",
+      "authority": "MusicXML 4.0 sound@dynamics: non-negative-decimal; M2-115 scaling domain 0..127"
+    },
+    {
+      "path": "schumann_clara/polonaise_op1n4.mxl",
+      "code": "E_INPUT_DYNAMIC",
+      "witness": "sound@dynamics=-1.11",
+      "authority": "MusicXML 4.0 sound@dynamics: non-negative-decimal; M2-115 scaling domain 0..127"
+    },
+    {
+      "path": "theoryExercises/checker_demo.mxl",
+      "code": "E_INPUT_PROGRAM",
+      "witness": "midi-program=0",
+      "authority": "MusicXML midi-128 datatype: range 1..128; identical one-based contract in converter README \u00a79"
+    }
+  ]
+}

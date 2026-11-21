@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kontakt Setup"
+  short_description: "Assign Kontakt and load exact NKIs"

@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:midi2workbench:articulation-map:v2",
+  "title": "Project articulation binding and X-ArticulationMap payload",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mappingVersion", "id", "status", "profileId", "target", "entries"],
+  "properties": {
+    "mappingVersion": {"const": 2},
+    "id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["example-unverified", "verified"]},
+    "profileId": {"const": [126, 33, 1, 1, 1]},
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["player", "format", "playerVersion", "library", "edition", "libraryRevision", "instrument", "setupHash"],
+      "properties": {
+        "player": {"type": "string"},
+        "format": {"enum": ["VST3", "VST2", "AU", "AAX", "standalone", "other"]},
+        "playerVersion": {"type": "string"},
+        "library": {"type": "string"},
+        "edition": {"type": "string"},
+        "libraryRevision": {"type": "string"},
+        "instrument": {"type": "string"},
+        "setupHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "entries": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["descriptor", "wire", "recipe"],
+        "properties": {
+          "descriptor": {
+            "type": "object", "additionalProperties": false,
+            "required": ["technique", "qualifiers"],
+            "properties": {
+              "technique": {"type": "string"},
+              "qualifiers": {
+                "type": "array",
+                "items": {
+                  "type": "object", "additionalProperties": false,
+                  "required": ["id", "valueJson"],
+                  "properties": {
+                    "id": {"type": "string", "pattern": "^[a-z][a-z0-9+.-]*:"},
+                    "valueJson": {"type": "string", "minLength": 1}
+                  }
+                }
+              }
+            }
+          },
+          "wire": {
+            "type": "object", "additionalProperties": false,
+            "required": ["at", "sub", "variation"],
+            "properties": {
+              "at": {"type": "integer", "minimum": 16, "maximum": 31, "not": {"enum": [24,25]}},
+              "sub": {"type": "integer", "minimum": 0, "maximum": 15},
+              "variation": {"type": "integer", "minimum": 0, "maximum": 15}
+            }
+          },
+          "recipe": {
+            "type": "object", "additionalProperties": false,
+            "required": ["patch", "selection", "trigger", "dynamics"],
+            "properties": {
+              "patch": {"type": "string", "minLength": 1},
+              "selection": {
+                "type": "object", "additionalProperties": false,
+                "required": ["kind", "channel"],
+                "properties": {
+                  "kind": {"const": "midiChannel"},
+                  "channel": {"type": "integer", "minimum": 0, "maximum": 15}
+                }
+              },
+              "trigger": {
+                "type": "object", "additionalProperties": false,
+                "required": ["kind", "transpose"],
+                "properties": {
+                  "kind": {"const": "identityPitch"},
+                  "transpose": {"type": "integer", "minimum": -127, "maximum": 127}
+                }
+              },
+              "dynamics": {
+                "oneOf": [
+                  {
+                    "type": "object", "additionalProperties": false,
+                    "required": ["mode"],
+                    "properties": {"mode": {"const": "keyVelocity"}}
+                  },
+                  {
+                    "type": "object", "additionalProperties": false,
+                    "required": ["mode", "controller", "keyVelocity", "levelSource", "scaling"],
+                    "properties": {
+                      "mode": {"const": "crossfade"},
+                      "controller": {"type": "integer", "minimum": 0, "maximum": 119},
+                      "keyVelocity": {"type": "integer", "minimum": 1, "maximum": 127},
+                      "levelSource": {"const": "dynamicLevelOrAttackVelocity"},
+                      "scaling": {"const": "m2MinCenterMax"}
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

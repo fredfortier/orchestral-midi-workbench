@@ -1,0 +1,162 @@
+{
+  "groups": [
+    {
+      "key": "root",
+      "name": "IMPORT-BATCH native content",
+      "parent": null
+    },
+    {
+      "key": "part",
+      "name": "Part | source fixture",
+      "parent": "root"
+    }
+  ],
+  "tracks": [
+    {
+      "key": "main",
+      "name": "Part | b01",
+      "parent": "part",
+      "start": 8.0,
+      "duration": 4.0,
+      "notes": [
+        {
+          "id": "n-001",
+          "channel": 0,
+          "key": 60,
+          "start": 0.0,
+          "duration": 1.0,
+          "muted": false,
+          "velocity": 0.15260547798886093,
+          "releaseVelocity": 0.3527428091859312,
+          "velocitySpread": 0.0,
+          "contentStart": 0.0,
+          "operators": {
+            "chanceEnabled": false,
+            "chance": 1.0,
+            "occurrenceEnabled": false,
+            "occurrence": "ALWAYS",
+            "recurrenceEnabled": false,
+            "recurrenceLength": 1,
+            "recurrenceMask": 1,
+            "repeatEnabled": false,
+            "repeatCount": 0,
+            "repeatCurve": 0.0,
+            "repeatVelocityEnd": 0.0,
+            "repeatVelocityCurve": 0.0
+          },
+          "expressions": {
+            "pitch": [
+              {
+                "id": "pitch-001",
+                "time": 0.0,
+                "value": 0.25,
+                "interpolation": "HOLD",
+                "curvature": 0.0,
+                "spread": 0.0
+              }
+            ],
+            "gain": [],
+            "pan": [],
+            "pressure": [
+              {
+                "id": "pressure-001",
+                "time": 0.0,
+                "value": 0.1,
+                "interpolation": "LINEAR",
+                "curvature": 0.0,
+                "spread": 0.0
+              },
+              {
+                "id": "pressure-002",
+                "time": 0.5,
+                "value": 0.8,
+                "interpolation": "HOLD",
+                "curvature": 0.0,
+                "spread": 0.0
+              }
+            ],
+            "timbre": [],
+            "formant": []
+          }
+        },
+        {
+          "id": "n-002",
+          "channel": 1,
+          "key": 60,
+          "start": 0.5,
+          "duration": 1.0,
+          "muted": false,
+          "velocity": 0.7,
+          "releaseVelocity": 0.3,
+          "velocitySpread": 0.0,
+          "contentStart": 0.0,
+          "operators": {
+            "chanceEnabled": false,
+            "chance": 1.0,
+            "occurrenceEnabled": false,
+            "occurrence": "ALWAYS",
+            "recurrenceEnabled": false,
+            "recurrenceLength": 1,
+            "recurrenceMask": 1,
+            "repeatEnabled": false,
+            "repeatCount": 0,
+            "repeatCurve": 0.0,
+            "repeatVelocityEnd": 0.0,
+            "repeatVelocityCurve": 0.0
+          },
+          "expressions": {
+            "pitch": [],
+            "gain": [],
+            "pan": [],
+            "pressure": [],
+            "timbre": [],
+            "formant": []
+          }
+        }
+      ]
+    },
+    {
+      "key": "independent",
+      "name": "Part | b02",
+      "parent": "part",
+      "start": 8.0,
+      "duration": 4.0,
+      "notes": [
+        {
+          "id": "n-003",
+          "channel": 15,
+          "key": 60,
+          "start": 0.0,
+          "duration": 1.0,
+          "muted": false,
+          "velocity": 0.9,
+          "releaseVelocity": 0.4,
+          "velocitySpread": 0.0,
+          "contentStart": 0.0,
+          "operators": {
+            "chanceEnabled": false,
+            "chance": 1.0,
+            "occurrenceEnabled": false,
+            "occurrence": "ALWAYS",
+            "recurrenceEnabled": false,
+            "recurrenceLength": 1,
+            "recurrenceMask": 1,
+            "repeatEnabled": false,
+            "repeatCount": 0,
+            "repeatCurve": 0.0,
+            "repeatVelocityEnd": 0.0,
+            "repeatVelocityCurve": 0.0
+          },
+          "expressions": {
+            "pitch": [],
+            "gain": [],
+            "pan": [],
+            "pressure": [],
+            "timbre": [],
+            "formant": []
+          }
+        }
+      ]
+    }
+  ]
+}

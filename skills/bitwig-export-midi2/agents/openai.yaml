@@ -1,0 +1,3 @@
+interface:
+  display_name: "Bitwig MIDI2 Export"
+  short_description: "Capture, interpret and export active Bitwig music to MIDI2 and MXL"

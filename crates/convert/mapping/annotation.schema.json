@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:midi2workbench:articulation:v2",
+  "title": "Project articulation semantics in MusicXML other-play",
+  "type": "object",
+  "required": ["technique"],
+  "additionalProperties": false,
+  "properties": {
+    "technique": {
+      "type": "string",
+      "pattern": "^([a-z]+\\.[a-z0-9-]+|urn:[^\\s]+)$"
+    },
+    "qualifiers": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z][a-z0-9+.-]*:"},
+      "properties": {
+        "urn:midi2workbench:position": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "urn:midi2workbench:position-region": {"enum": ["bridge-side", "nut-side"]},
+        "urn:midi2workbench:mute": {
+          "type": "object", "additionalProperties": false, "required": ["slot"],
+          "properties": {
+            "slot": {"type": "integer", "minimum": 0, "maximum": 31, "not": {"minimum": 16, "maximum": 25}},
+            "amount": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+            "identity": {"type": "string", "pattern": "^[a-z][a-z0-9+.-]*:"}
+          },
+          "if": {"properties": {"slot": {"type": "integer", "minimum": 26}}},
+          "then": {"properties": {"identity": {"type": "string"}}, "required": ["identity"]}
+        },
+        "urn:midi2workbench:sounding-pitch": {"type": "string", "pattern": "^[0-9]+/[1-9][0-9]*$"},
+        "urn:midi2workbench:attack-velocity": {"type": "integer", "minimum": 0, "maximum": 65535},
+        "urn:midi2workbench:dynamic-level": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "urn:midi2workbench:amplitude": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "urn:midi2workbench:sample-length": {"enum": ["short", "long"]},
+        "urn:midi2workbench:mute-provenance": {"enum": ["recorded", "emulated"]}
+      }
+    },
+    "binding": {"type": "string", "minLength": 1},
+    "variation": {"type": "integer", "minimum": 0, "maximum": 15},
+    "direction": {"type": "integer", "minimum": 0, "maximum": 2},
+    "string": {"type": "integer", "minimum": 0, "maximum": 7},
+    "resetRoundRobin": {"type": "boolean"},
+    "release": {"enum": ["none", "soft", "hard", "rise", "fall"]},
+    "releaseTime": {"type": "integer", "minimum": 0, "maximum": 65535},
+    "onOrder": {"type":"integer","minimum":0,"maximum":4294967295},
+    "offOrder": {"type":"integer","minimum":0,"maximum":4294967295},
+    "replace": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^/score-(partwise|timewise)/"}
+    }
+  }
+}

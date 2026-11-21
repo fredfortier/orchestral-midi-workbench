@@ -1,0 +1,54 @@
+{
+  "mappingVersion": 2,
+  "id": "example-berlin-strings-violin-i-v1",
+  "status": "example-unverified",
+  "profileId": [126, 33, 1, 1, 1],
+  "target": {
+    "player": "SINEplayer",
+    "format": "VST3",
+    "playerVersion": "capture-from-installed-player",
+    "library": "Berlin Strings",
+    "edition": "SINE",
+    "libraryRevision": "capture-from-installed-library",
+    "instrument": "Violins I",
+    "setupHash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "entries": [
+    {
+      "descriptor": {"technique": "core.normal", "qualifiers": []},
+      "wire": {"at": 16, "sub": 0, "variation": 0},
+      "recipe": {
+        "patch": "Sustains",
+        "selection": {"kind": "midiChannel", "channel": 0},
+        "trigger": {"kind": "identityPitch", "transpose": 0},
+        "dynamics": {
+          "mode": "crossfade", "controller": 1, "keyVelocity": 64,
+          "levelSource": "dynamicLevelOrAttackVelocity", "scaling": "m2MinCenterMax"
+        }
+      }
+    },
+    {
+      "descriptor": {"technique": "short.spiccato", "qualifiers": []},
+      "wire": {"at": 17, "sub": 5, "variation": 0},
+      "recipe": {
+        "patch": "Spiccato",
+        "selection": {"kind": "midiChannel", "channel": 1},
+        "trigger": {"kind": "identityPitch", "transpose": 0},
+        "dynamics": {"mode": "keyVelocity"}
+      }
+    },
+    {
+      "descriptor": {
+        "technique": "short.spiccato",
+        "qualifiers": [{"id": "urn:midi2workbench:ot-berlin:sample-character", "valueJson": "\"blurred\""}]
+      },
+      "wire": {"at": 26, "sub": 0, "variation": 0},
+      "recipe": {
+        "patch": "Spiccato Blurred",
+        "selection": {"kind": "midiChannel", "channel": 2},
+        "trigger": {"kind": "identityPitch", "transpose": 0},
+        "dynamics": {"mode": "keyVelocity"}
+      }
+    }
+  ]
+}

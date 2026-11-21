@@ -1,0 +1,30 @@
+{
+  "controller": 11,
+  "device": "937d00b2-5fb4-4734-8458-e35198a08a49",
+  "envelope": {
+    "duration": 4.0,
+    "points": [
+      {
+        "interpolation": "LINEAR",
+        "time": 0.0,
+        "value": 0.2
+      },
+      {
+        "interpolation": "LINEAR",
+        "time": 1.0,
+        "value": 0.07111111098693476
+      },
+      {
+        "interpolation": "HOLD",
+        "time": 2.0,
+        "value": 0.8
+      }
+    ],
+    "start": 8.0
+  },
+  "kind": "controls",
+  "label": "Expression",
+  "parameter": "P1",
+  "track": "9565b38a-3534-4dae-b557-87f88f9d6fbe",
+  "value": 0.75
+}

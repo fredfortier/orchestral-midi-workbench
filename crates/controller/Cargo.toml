@@ -1,0 +1,30 @@
+[package]
+name = "notes-transformer"
+description = "Selected-note transformations for Bitwig Studio"
+version.workspace = true
+edition.workspace = true
+rust-version = "1.87"
+publish.workspace = true
+default-run = "midi-bridge"
+
+[[bin]]
+name = "midi-bridge"
+path = "src/main.rs"
+
+[dependencies]
+axum = { version = "0.8.9", default-features = false, features = ["http1", "json", "tokio"] }
+reqwest = { version = "0.12.28", default-features = false, features = ["json"] }
+musicxml-midi2-convert = { path = "../convert" }
+tempfile = "3"
+clap = { version = "4", features = ["derive"] }
+rand = { version = "0.9", default-features = false, features = ["std"] }
+rand_chacha = "0.9"
+serde = { version = "1", features = ["derive"] }
+base64 = "0.22"
+serde_json = { version = "1", features = ["float_roundtrip"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "io-util", "time", "signal", "sync"] }
+tracing = { version = "0.1", default-features = false, features = ["std"] }
+tracing-subscriber = { version = "0.3", default-features = false, features = ["env-filter", "fmt"] }
+
+[lints]
+workspace = true

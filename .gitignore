@@ -46,3 +46,7 @@ venv/
 # Misc generated artifacts
 *.swp
 *.swo
+
+.tmp/
+.research/
+.qualification/

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Score Intake"
+  short_description: "Prepare an idempotent score project workspace"

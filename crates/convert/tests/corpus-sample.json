@@ -1,0 +1,462 @@
+{
+  "version": 1,
+  "surveyedFiles": 535,
+  "music21Commit": "7a3b55e13781e2f3d28a5411f17275d259684af4",
+  "selectionPolicy": "Diversify actual score instrumentation and encoded musical features; retain the largest file and an articulation-dense runner-up. Complexity is not reduced to file size or a single numeric rank. Select only semantically valid files; keep invalid-input coverage in focused tests.",
+  "profileScope": "M2-126 acoustic Piano is selected from explicit instrument-sound or consistent acoustic-piano identity. M2-123 supplies orchestral articulation tags, including compatible piano composition when needed. Numeric programs alone do not prove instrument identity or GM conformance.",
+  "files": [
+    {
+      "path": "bach/bwv846.mxl",
+      "sha256": "286535dfb99cf841bfa9848e4cd71ddb2339c476a123971cb326b3d85e410018",
+      "role": "piano",
+      "label": "J. S. Bach, BWV 846",
+      "reason": "Keyboard polyphony, cross-staff/voice timing, ties and fermatas.",
+      "source": {
+        "notes": 729,
+        "measures": 34,
+        "parts": [
+          "Piano"
+        ],
+        "instruments": [
+          "Piano"
+        ],
+        "features": {
+          "tied": 136,
+          "fermata": 2
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "5",
+          "6"
+        ],
+        "programs": [
+          "1"
+        ]
+      }
+    },
+    {
+      "path": "cpebach/h186.mxl",
+      "sha256": "39462c924adce2ebb29a86cbdfe88e0f5d4f23d1c7c537b06853d55f81571a59",
+      "role": "piano",
+      "label": "C. P. E. Bach, H. 186",
+      "reason": "Dense keyboard ornamentation: turns, inverted mordents, grace notes, staccatissimo and tenuto.",
+      "source": {
+        "notes": 929,
+        "measures": 32,
+        "parts": [
+          "MusicXML Part"
+        ],
+        "instruments": [
+          "Acoustic Grand Piano"
+        ],
+        "features": {
+          "staccatissimo": 9,
+          "tenuto": 2,
+          "slur": 272,
+          "tied": 44,
+          "fermata": 2,
+          "trill-mark": 2,
+          "grace": 5,
+          "turn": 14,
+          "inverted-mordent": 11
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "programs": [
+          "1"
+        ]
+      }
+    },
+    {
+      "path": "joplin/maple_leaf_rag.mxl",
+      "sha256": "5fe979be991095d18bb9ee3394bf70d26237e37903ab7e751ee32e30b8e6460a",
+      "role": "piano",
+      "label": "Joplin, Maple Leaf Rag",
+      "reason": "Syncopated keyboard chords, multiple voices, repeat traversal and ties.",
+      "source": {
+        "notes": 1647,
+        "measures": 85,
+        "parts": [
+          "Piano"
+        ],
+        "instruments": [
+          "Piano"
+        ],
+        "features": {
+          "slur": 8,
+          "tied": 184
+        },
+        "repeats": 8,
+        "voices": [
+          "1",
+          "5",
+          "6"
+        ],
+        "programs": [
+          "1"
+        ]
+      }
+    },
+    {
+      "path": "schoenberg/opus19/movement2.mxl",
+      "sha256": "99b51a60b16ba85f4303ebe0ad294a2ceb330a26b4475157880ac09e48acf35a",
+      "role": "piano",
+      "label": "Schoenberg, Op. 19 No. 2",
+      "reason": "Short modern keyboard texture with staccato, tenuto, accents and dynamic wedges.",
+      "source": {
+        "notes": 141,
+        "measures": 9,
+        "parts": [
+          "MusicXML Part"
+        ],
+        "instruments": [
+          "Grand Piano"
+        ],
+        "features": {
+          "staccato": 25,
+          "tenuto": 2,
+          "accent": 1,
+          "slur": 8,
+          "tied": 20,
+          "fermata": 2,
+          "wedge": 12
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3"
+        ],
+        "programs": [
+          "1"
+        ]
+      }
+    },
+    {
+      "path": "schumann_robert/opus48no2.mxl",
+      "sha256": "c6cb6b24a0afcc87f1fadefa64f12ec095bbb5a61a96e49ba05663fe835a94f2",
+      "role": "voice-piano",
+      "label": "R. Schumann, Op. 48 No. 2",
+      "reason": "Voice/piano separation, sustain pedal, fermatas and expressive markings.",
+      "source": {
+        "notes": 276,
+        "measures": 36,
+        "parts": [
+          "MusicXML Part",
+          "MusicXML Part"
+        ],
+        "instruments": [
+          "Choir Aahs",
+          "Grand Piano"
+        ],
+        "features": {
+          "staccato": 17,
+          "accent": 6,
+          "slur": 36,
+          "tied": 48,
+          "fermata": 7,
+          "wedge": 4,
+          "pedal": 2
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "programs": [
+          "1",
+          "53"
+        ]
+      }
+    },
+    {
+      "path": "weber/concertino_clarinet.mxl",
+      "sha256": "344a87bde10672d391e8de38da09a7270fc4cbebc36832617c035b6f75fbde08",
+      "role": "wind-piano",
+      "label": "Weber, Clarinet Concertino reduction",
+      "reason": "Large transposing wind-plus-piano score, multiple instrument IDs, ornaments and dynamics.",
+      "source": {
+        "notes": 5307,
+        "measures": 482,
+        "parts": [
+          "Bb Clarinet",
+          "Piano"
+        ],
+        "instruments": [
+          "Bb Clarinet",
+          "Piano",
+          "Piano"
+        ],
+        "features": {
+          "staccato": 199,
+          "accent": 72,
+          "slur": 474,
+          "tied": 202,
+          "fermata": 3,
+          "trill-mark": 7,
+          "grace": 34,
+          "wedge": 116,
+          "turn": 2
+        },
+        "repeats": 0,
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "programs": [
+          "1",
+          "72"
+        ]
+      }
+    },
+    {
+      "path": "beethoven/opus132.mxl",
+      "sha256": "8c4b99d9cec4aa5f62cfe4966f0e65275d2e52465a0b68ca0b0190b33eabd908",
+      "role": "strings",
+      "label": "Beethoven, Op. 132",
+      "reason": "Largest corpus file by written note-element count; entire quartet with repeats, long spans, grace notes and wedges.",
+      "source": {
+        "notes": 20361,
+        "measures": 4496,
+        "parts": [
+          "Violin I",
+          "Violin II",
+          "Viola",
+          "Violoncello"
+        ],
+        "instruments": [],
+        "features": {
+          "slur": 6354,
+          "trill-mark": 67,
+          "wavy-line": 67,
+          "grace": 42,
+          "wedge": 1782
+        },
+        "repeats": 28,
+        "voices": [
+          "1",
+          "2"
+        ],
+        "programs": []
+      }
+    },
+    {
+      "path": "beethoven/opus133.mxl",
+      "sha256": "07e1dfbbe34a762f725869e5c45a938cf9ab5408ee7456ec06a44b292aeb5039",
+      "role": "strings",
+      "label": "Beethoven, Op. 133",
+      "reason": "Second complexity axis: 12,970 note elements, 293 staccatos, 139 trills, 172 grace notes and a harmonic.",
+      "source": {
+        "notes": 12970,
+        "measures": 2968,
+        "parts": [
+          "1st Violin",
+          "2nd Violin",
+          "Viola",
+          "Cello"
+        ],
+        "instruments": [
+          "Violin",
+          "Violin",
+          "Viola",
+          "Cello"
+        ],
+        "features": {
+          "staccato": 293,
+          "slur": 1956,
+          "tied": 1732,
+          "fermata": 44,
+          "trill-mark": 139,
+          "wavy-line": 8,
+          "grace": 172,
+          "wedge": 26,
+          "harmonic": 1
+        },
+        "repeats": 0,
+        "voices": [
+          "1"
+        ],
+        "programs": [
+          "41",
+          "42",
+          "43"
+        ]
+      }
+    },
+    {
+      "path": "mozart/k458/movement1.mxl",
+      "sha256": "5015fd7109b945f5cdbfcbfd7e12ab5a7740299635b6719bad923c817f3dd89d",
+      "role": "strings",
+      "label": "Mozart, K. 458 I",
+      "reason": "Contrasting Classical quartet: repeat structure, staccato/slur compounds, trills and grace notes.",
+      "source": {
+        "notes": 5243,
+        "measures": 1132,
+        "parts": [
+          "1st Violin",
+          "2nd Violin",
+          "Viola",
+          "Cello"
+        ],
+        "instruments": [
+          "Violin",
+          "Violin",
+          "Viola",
+          "Cello"
+        ],
+        "features": {
+          "staccato": 466,
+          "slur": 1476,
+          "tied": 268,
+          "trill-mark": 20,
+          "wavy-line": 29,
+          "grace": 56
+        },
+        "repeats": 12,
+        "voices": [
+          "1",
+          "2"
+        ],
+        "programs": [
+          "41",
+          "42",
+          "43"
+        ]
+      }
+    },
+    {
+      "path": "bach/bwv267.mxl",
+      "sha256": "8fd35db74f930089746d03248b8267882c9508d8f005aec67e9f4e23d74c27e4",
+      "role": "choral",
+      "label": "J. S. Bach, BWV 267",
+      "reason": "Retains the independently audited 402-attack baseline and CLI example; four-part chorale, not an orchestral score.",
+      "source": {
+        "notes": 330,
+        "measures": 80,
+        "parts": [
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass"
+        ],
+        "instruments": [],
+        "features": {
+          "tied": 10,
+          "fermata": 32
+        },
+        "repeats": 4,
+        "voices": [],
+        "programs": []
+      }
+    },
+    {
+      "path": "bach/bwv29.8.mxl",
+      "sha256": "8537e2e063ff22eda261419fba92760353d9d255a9356f379fdebe654f9e5464",
+      "role": "orchestral-choral",
+      "label": "J. S. Bach, BWV 29/8",
+      "reason": "Detailed case study: three trumpets, timpani and SATB; inverted mordents, ties, fermatas and repeats. Authored MIDI programs are piano placeholders.",
+      "source": {
+        "notes": 676,
+        "measures": 328,
+        "parts": [
+          "Trumpet 1",
+          "Trumpet 2",
+          "Trumpet 3",
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass",
+          "Timpani"
+        ],
+        "instruments": [
+          "Instrument 6",
+          "Instrument 7",
+          "Instrument 8",
+          "Instrument 1",
+          "Instrument 2",
+          "Instrument 3",
+          "Instrument 4",
+          "Instrument 5"
+        ],
+        "features": {
+          "tied": 12,
+          "fermata": 56,
+          "inverted-mordent": 3
+        },
+        "repeats": 8,
+        "voices": [],
+        "programs": [
+          "1"
+        ]
+      }
+    },
+    {
+      "path": "bach/bwv248.64-6.mxl",
+      "sha256": "55341321387dc66be0c6f829144a5e2125973fad9c9fd399a92d885357fe58f4",
+      "role": "orchestral-choral",
+      "label": "J. S. Bach, BWV 248/64",
+      "reason": "Broadest selected instrumentation: 14 parts with brass, winds, strings, voices and continuo; routing and sustained ties.",
+      "source": {
+        "notes": 5220,
+        "measures": 966,
+        "parts": [
+          "Trumpet 1",
+          "Trumpet 2",
+          "Trumpet 3",
+          "Timpani",
+          "Oboe 1",
+          "Oboe 2",
+          "Violin 1",
+          "Violin 2",
+          "Viola",
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass",
+          "Continuo"
+        ],
+        "instruments": [
+          "Instrument 7",
+          "Instrument 7",
+          "Instrument 7",
+          "Instrument 6",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 8",
+          "Instrument 1",
+          "Instrument 2",
+          "Instrument 3",
+          "Instrument 4",
+          "Instrument 5"
+        ],
+        "features": {
+          "tied": 44
+        },
+        "repeats": 0,
+        "voices": [
+          "1"
+        ],
+        "programs": [
+          "20",
+          "25",
+          "43",
+          "48",
+          "55",
+          "69"
+        ]
+      }
+    }
+  ]
+}

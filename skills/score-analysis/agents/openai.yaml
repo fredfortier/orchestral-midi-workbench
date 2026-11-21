@@ -1,0 +1,3 @@
+interface:
+  display_name: "Composition Analysis"
+  short_description: "Analyze scores with music21: texture, melody, rhythm, harmony and counterpoint"

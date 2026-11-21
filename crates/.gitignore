@@ -1,0 +1,5 @@
+/target/
+
+# Full immutable DAW observations/renders remain local, indexed evidence.
+# Selected specs, test inputs, final projects and reports are force-added.
+/controller/validation/

@@ -1,0 +1,2 @@
+# These are specification names, not code identifiers requiring Markdown backticks.
+doc-valid-idents = ["..", "MusicXML", "SysEx", "SysEx7", "XPath", "SMuFL", "SINEplayer"]

@@ -1,0 +1,12 @@
+[
+  {
+    "resource": "X-ArticulationMap",
+    "canGet": true,
+    "canSet": "none",
+    "schema": {
+      "title": "Articulation map",
+      "type": "object",
+      "$ref": "midi+jsonschema://midi2workbenchArticulationMapV2"
+    }
+  }
+]

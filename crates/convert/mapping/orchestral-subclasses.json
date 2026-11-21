@@ -1,0 +1,860 @@
+{
+  "mappingVersion": 2,
+  "profileId": [
+    126,
+    33,
+    1,
+    1,
+    1
+  ],
+  "rows": [
+    {
+      "at": 16,
+      "sub": 0,
+      "id": "core.normal",
+      "term": "ordinary",
+      "name": "Normal, first bank of variations",
+      "rule": "N0"
+    },
+    {
+      "at": 16,
+      "sub": 1,
+      "id": "core.normal-extra",
+      "term": "ordinary additional variations",
+      "name": "Normal, second bank of variations",
+      "rule": "T"
+    },
+    {
+      "at": 16,
+      "sub": 2,
+      "id": "core.legato",
+      "term": "legato",
+      "name": "Legato / slurred legato",
+      "rule": "N1"
+    },
+    {
+      "at": 16,
+      "sub": 3,
+      "id": "core.molto-legato",
+      "term": "molto legato",
+      "name": "Molto legato",
+      "rule": "T"
+    },
+    {
+      "at": 16,
+      "sub": 4,
+      "id": "core.glissando",
+      "term": "portamento",
+      "name": "Glissando / string portamento sound",
+      "rule": "N2"
+    },
+    {
+      "at": 16,
+      "sub": 5,
+      "id": "core.detache",
+      "term": "detaché",
+      "name": "Detaché",
+      "rule": "T"
+    },
+    {
+      "at": 16,
+      "sub": 6,
+      "id": "core.marcato",
+      "term": "marcato",
+      "name": "Marcato sustain",
+      "rule": "N3"
+    },
+    {
+      "at": 16,
+      "sub": 7,
+      "id": "core.martele",
+      "term": "martelé",
+      "name": "Martelé",
+      "rule": "T"
+    },
+    {
+      "at": 16,
+      "sub": 8,
+      "id": "core.senza-vibrato",
+      "term": "senza vibrato",
+      "name": "Explicitly without vibrato",
+      "rule": "T"
+    },
+    {
+      "at": 16,
+      "sub": 9,
+      "id": "core.con-vibrato",
+      "term": "con vibrato",
+      "name": "Explicitly with vibrato",
+      "rule": "T"
+    },
+    {
+      "at": 16,
+      "sub": 10,
+      "id": "core.synchronized-vibrato",
+      "term": "synchronized vibrato",
+      "name": "Synchronized vibrato",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 0,
+      "id": "short.staccato-off",
+      "term": "staccato off string",
+      "name": "Ordinary staccato, off-string for strings",
+      "rule": "N4"
+    },
+    {
+      "at": 17,
+      "sub": 1,
+      "id": "short.staccato-on",
+      "term": "staccato on string",
+      "name": "Ordinary staccato, on-string",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 2,
+      "id": "short.slurred-staccato",
+      "term": "slurred staccato",
+      "name": "Single-bow slurred staccato",
+      "rule": "N5"
+    },
+    {
+      "at": 17,
+      "sub": 3,
+      "id": "short.accented-staccato",
+      "term": "accented staccato",
+      "name": "Accented staccato",
+      "rule": "N6"
+    },
+    {
+      "at": 17,
+      "sub": 4,
+      "id": "short.staccatissimo",
+      "term": "staccatissimo",
+      "name": "Staccatissimo / deliberately damped short",
+      "rule": "N7"
+    },
+    {
+      "at": 17,
+      "sub": 5,
+      "id": "short.spiccato",
+      "term": "spiccato",
+      "name": "Spiccato",
+      "rule": "N8"
+    },
+    {
+      "at": 17,
+      "sub": 6,
+      "id": "short.sautille",
+      "term": "sautillé",
+      "name": "Sautillé",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 7,
+      "id": "short.martellato",
+      "term": "martellato",
+      "name": "Martellato",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 8,
+      "id": "short.long-staccato",
+      "term": "long staccato",
+      "name": "Long / mezzo staccato, louré",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 9,
+      "id": "short.portato",
+      "term": "portato",
+      "name": "Portato",
+      "rule": "N9"
+    },
+    {
+      "at": 17,
+      "sub": 10,
+      "id": "short.pizzicato",
+      "term": "pizzicato",
+      "name": "Pizzicato",
+      "rule": "N10"
+    },
+    {
+      "at": 17,
+      "sub": 11,
+      "id": "short.snap-pizzicato",
+      "term": "snap pizzicato",
+      "name": "Snap / Bartók pizzicato",
+      "rule": "N11"
+    },
+    {
+      "at": 17,
+      "sub": 12,
+      "id": "short.col-legno-battuto",
+      "term": "col legno battuto",
+      "name": "Col legno battuto",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 13,
+      "id": "short.col-legno-gestrichen",
+      "term": "col legno gestrichen",
+      "name": "Col legno gestrichen",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 14,
+      "id": "short.string-hand-tap",
+      "term": "string hand tap",
+      "name": "Pitched string-hand tap",
+      "rule": "T"
+    },
+    {
+      "at": 17,
+      "sub": 15,
+      "id": "short.jete",
+      "term": "jeté",
+      "name": "Jeté",
+      "rule": "G1"
+    },
+    {
+      "at": 18,
+      "sub": 0,
+      "id": "repeat.tremolo",
+      "term": "unmeasured tremolo",
+      "name": "Tremolo / flutter tongue / equivalent roll",
+      "rule": "N12"
+    },
+    {
+      "at": 18,
+      "sub": 1,
+      "id": "repeat.growl",
+      "term": "growl",
+      "name": "Growl / razz",
+      "rule": "T"
+    },
+    {
+      "at": 18,
+      "sub": 2,
+      "id": "repeat.coloristic-tremolo",
+      "term": "coloristic tremolo",
+      "name": "Coloristic tremolo",
+      "rule": "T"
+    },
+    {
+      "at": 18,
+      "sub": 3,
+      "id": "repeat.timbral-trill",
+      "term": "timbral trill",
+      "name": "Same-pitch timbral trill",
+      "rule": "T"
+    },
+    {
+      "at": 18,
+      "sub": 4,
+      "id": "repeat.two",
+      "term": "two repeats",
+      "name": "Two-repeat sound",
+      "rule": "N13"
+    },
+    {
+      "at": 18,
+      "sub": 5,
+      "id": "repeat.three",
+      "term": "three repeats",
+      "name": "Three-repeat sound",
+      "rule": "N14"
+    },
+    {
+      "at": 18,
+      "sub": 6,
+      "id": "repeat.four",
+      "term": "four repeats",
+      "name": "Four-repeat sound",
+      "rule": "P"
+    },
+    {
+      "at": 18,
+      "sub": 7,
+      "id": "repeat.five",
+      "term": "five repeats",
+      "name": "Five-repeat sound",
+      "rule": "P"
+    },
+    {
+      "at": 18,
+      "sub": 8,
+      "id": "repeat.six",
+      "term": "six repeats",
+      "name": "Six-repeat sound",
+      "rule": "P"
+    },
+    {
+      "at": 18,
+      "sub": 9,
+      "id": "repeat.fast",
+      "term": "fast repeats",
+      "name": "Faster repeat sound",
+      "rule": "P"
+    },
+    {
+      "at": 19,
+      "sub": 0,
+      "id": "trill.semitone-main-first",
+      "term": "semitone trill main first",
+      "name": "Semitone trill, main note first",
+      "rule": "N15"
+    },
+    {
+      "at": 19,
+      "sub": 1,
+      "id": "trill.semitone-upper-first",
+      "term": "semitone trill upper first",
+      "name": "Semitone trill, upper note first",
+      "rule": "N15"
+    },
+    {
+      "at": 19,
+      "sub": 2,
+      "id": "trill.tone-main-first",
+      "term": "whole tone trill main first",
+      "name": "Whole-tone trill, main note first",
+      "rule": "N15"
+    },
+    {
+      "at": 19,
+      "sub": 3,
+      "id": "trill.tone-upper-first",
+      "term": "whole tone trill upper first",
+      "name": "Whole-tone trill, upper note first",
+      "rule": "N15"
+    },
+    {
+      "at": 19,
+      "sub": 4,
+      "id": "trill.minor-third",
+      "term": "minor third trill",
+      "name": "Minor-third alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 5,
+      "id": "trill.major-third",
+      "term": "major third trill",
+      "name": "Major-third alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 6,
+      "id": "trill.fourth",
+      "term": "perfect fourth trill",
+      "name": "Perfect-fourth alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 7,
+      "id": "trill.tritone",
+      "term": "tritone trill",
+      "name": "Tritone alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 8,
+      "id": "trill.fifth",
+      "term": "perfect fifth trill",
+      "name": "Perfect-fifth alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 9,
+      "id": "trill.minor-sixth",
+      "term": "minor sixth trill",
+      "name": "Minor-sixth alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 10,
+      "id": "trill.major-sixth",
+      "term": "major sixth trill",
+      "name": "Major-sixth alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 11,
+      "id": "trill.minor-seventh",
+      "term": "minor seventh trill",
+      "name": "Minor-seventh alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 12,
+      "id": "trill.major-seventh",
+      "term": "major seventh trill",
+      "name": "Major-seventh alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 19,
+      "sub": 13,
+      "id": "trill.octave",
+      "term": "octave trill",
+      "name": "Octave alternation",
+      "rule": "N16"
+    },
+    {
+      "at": 20,
+      "sub": 0,
+      "id": "color.natural-harmonic",
+      "term": "natural harmonic",
+      "name": "Natural harmonic",
+      "rule": "N17"
+    },
+    {
+      "at": 20,
+      "sub": 1,
+      "id": "color.artificial-harmonic",
+      "term": "artificial harmonic",
+      "name": "Artificial harmonic",
+      "rule": "N18"
+    },
+    {
+      "at": 20,
+      "sub": 2,
+      "id": "color.col-legno-tratto",
+      "term": "col legno tratto",
+      "name": "Col legno tratto",
+      "rule": "T"
+    },
+    {
+      "at": 20,
+      "sub": 3,
+      "id": "color.flautando",
+      "term": "flautando",
+      "name": "Flautando",
+      "rule": "T"
+    },
+    {
+      "at": 20,
+      "sub": 4,
+      "id": "color.polyphonic-octaves",
+      "term": "polyphonic octaves",
+      "name": "Polyphonic octave sound",
+      "rule": "P"
+    },
+    {
+      "at": 20,
+      "sub": 5,
+      "id": "color.polyphonic-chord",
+      "term": "polyphonic chord",
+      "name": "Polyphonic interval/chord sound",
+      "rule": "P"
+    },
+    {
+      "at": 20,
+      "sub": 6,
+      "id": "color.cuivre",
+      "term": "cuivré",
+      "name": "Cuivré",
+      "rule": "T"
+    },
+    {
+      "at": 20,
+      "sub": 7,
+      "id": "color.lontano",
+      "term": "lontano",
+      "name": "Lontano",
+      "rule": "T"
+    },
+    {
+      "at": 20,
+      "sub": 8,
+      "id": "color.singing",
+      "term": "singing into instrument",
+      "name": "Singing into the instrument",
+      "rule": "T"
+    },
+    {
+      "at": 21,
+      "sub": 0,
+      "id": "gesture.fall-end",
+      "term": "fall at end",
+      "name": "Fall at end, starting at note pitch",
+      "rule": "N19"
+    },
+    {
+      "at": 21,
+      "sub": 1,
+      "id": "gesture.fall-start",
+      "term": "fall into note",
+      "name": "Fall into note from above",
+      "rule": "N20"
+    },
+    {
+      "at": 21,
+      "sub": 2,
+      "id": "gesture.rise-end",
+      "term": "rise at end",
+      "name": "Rise at end, starting at note pitch",
+      "rule": "N21"
+    },
+    {
+      "at": 21,
+      "sub": 3,
+      "id": "gesture.rise-start",
+      "term": "rise into note",
+      "name": "Rise into note from below",
+      "rule": "N22"
+    },
+    {
+      "at": 21,
+      "sub": 4,
+      "id": "gesture.blue-down",
+      "term": "blue note down and return",
+      "name": "Dip and return to pitch",
+      "rule": "P"
+    },
+    {
+      "at": 21,
+      "sub": 5,
+      "id": "gesture.blue-up",
+      "term": "blue note up and return",
+      "name": "Rise and return to pitch",
+      "rule": "P"
+    },
+    {
+      "at": 21,
+      "sub": 6,
+      "id": "gesture.grace-below",
+      "term": "grace from below",
+      "name": "Leading grace sound from below",
+      "rule": "N23"
+    },
+    {
+      "at": 21,
+      "sub": 7,
+      "id": "gesture.grace-above",
+      "term": "grace from above",
+      "name": "Leading grace sound from above",
+      "rule": "N23"
+    },
+    {
+      "at": 21,
+      "sub": 8,
+      "id": "gesture.shake",
+      "term": "shake",
+      "name": "Shake sound",
+      "rule": "N24"
+    },
+    {
+      "at": 21,
+      "sub": 9,
+      "id": "gesture.crescendo",
+      "term": "sampled crescendo",
+      "name": "Prerecorded crescendo",
+      "rule": "N25"
+    },
+    {
+      "at": 21,
+      "sub": 10,
+      "id": "gesture.decrescendo",
+      "term": "sampled decrescendo",
+      "name": "Prerecorded decrescendo",
+      "rule": "N25"
+    },
+    {
+      "at": 21,
+      "sub": 11,
+      "id": "gesture.swell",
+      "term": "sampled crescendo decrescendo",
+      "name": "Prerecorded swell then fade",
+      "rule": "N25"
+    },
+    {
+      "at": 21,
+      "sub": 12,
+      "id": "gesture.reverse-swell",
+      "term": "sampled decrescendo crescendo",
+      "name": "Prerecorded fade then swell",
+      "rule": "N25"
+    },
+    {
+      "at": 21,
+      "sub": 13,
+      "id": "gesture.sfz-crescendo",
+      "term": "sampled sforzando crescendo",
+      "name": "Sforzando then crescendo sound",
+      "rule": "N25"
+    },
+    {
+      "at": 22,
+      "sub": 0,
+      "id": "run.playable",
+      "term": "playable runs",
+      "name": "Playable runs",
+      "rule": "T"
+    },
+    {
+      "at": 22,
+      "sub": 1,
+      "id": "run.playable-tremolo",
+      "term": "playable tremolos",
+      "name": "Playable tremolos",
+      "rule": "T"
+    },
+    {
+      "at": 22,
+      "sub": 2,
+      "id": "run.playable-glissando",
+      "term": "playable glissando",
+      "name": "Playable glissando",
+      "rule": "T"
+    },
+    {
+      "at": 22,
+      "sub": 3,
+      "id": "run.major",
+      "term": "sampled major run",
+      "name": "Major scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 4,
+      "id": "run.minor",
+      "term": "sampled minor run",
+      "name": "Minor scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 5,
+      "id": "run.dominant-seventh",
+      "term": "sampled dominant seventh run",
+      "name": "Dominant-seventh scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 6,
+      "id": "run.diminished-whole-half",
+      "term": "sampled diminished whole half run",
+      "name": "Diminished whole–half / Other 1",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 7,
+      "id": "run.diminished-half-whole",
+      "term": "sampled diminished half whole run",
+      "name": "Diminished half–whole / Other 2",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 8,
+      "id": "run.whole-tone-c",
+      "term": "sampled whole tone run containing c",
+      "name": "Whole-tone collection containing C",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 9,
+      "id": "run.whole-tone-c-sharp",
+      "term": "sampled whole tone run containing c sharp",
+      "name": "Whole-tone collection containing C♯",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 10,
+      "id": "run.pentatonic-major",
+      "term": "sampled major pentatonic run",
+      "name": "Major pentatonic scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 11,
+      "id": "run.pentatonic-minor",
+      "term": "sampled minor pentatonic run",
+      "name": "Minor pentatonic scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 12,
+      "id": "run.lydian",
+      "term": "sampled lydian run",
+      "name": "Lydian scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 13,
+      "id": "run.lydian-flat-seven",
+      "term": "sampled lydian flat seven run",
+      "name": "Lydian ♭7 scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 14,
+      "id": "run.chromatic",
+      "term": "sampled chromatic run",
+      "name": "Chromatic scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 22,
+      "sub": 15,
+      "id": "run.other",
+      "term": "sampled other run",
+      "name": "Other scale/run",
+      "rule": "P"
+    },
+    {
+      "at": 23,
+      "sub": 0,
+      "id": "effect.sustained-noise",
+      "term": "sustained noise",
+      "name": "Sustained assorted noise / air effect",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 1,
+      "id": "effect.behind-bridge",
+      "term": "bow behind bridge",
+      "name": "Sustained behind-bridge effect",
+      "rule": "G2"
+    },
+    {
+      "at": 23,
+      "sub": 2,
+      "id": "effect.random-pizzicato",
+      "term": "random pizzicato",
+      "name": "Sustained random pizzicato",
+      "rule": "P"
+    },
+    {
+      "at": 23,
+      "sub": 3,
+      "id": "effect.harmonic-glissando",
+      "term": "harmonic glissando effect",
+      "name": "Harmonic glissando effect",
+      "rule": "P"
+    },
+    {
+      "at": 23,
+      "sub": 4,
+      "id": "effect.random-glissando",
+      "term": "random glissando effect",
+      "name": "Random glissando effect",
+      "rule": "P"
+    },
+    {
+      "at": 23,
+      "sub": 5,
+      "id": "effect.short-air",
+      "term": "short air noise",
+      "name": "Short air / chiff / squeak / lip-pizz effect",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 6,
+      "id": "effect.mechanical-long",
+      "term": "sustained mechanical noise",
+      "name": "Sustained mechanical noise",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 7,
+      "id": "effect.mechanical-short",
+      "term": "short mechanical noise",
+      "name": "Short mechanical noise",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 8,
+      "id": "effect.finger-glide",
+      "term": "finger glide noise",
+      "name": "Finger glide noise",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 9,
+      "id": "effect.fret-noise",
+      "term": "fret noise",
+      "name": "Fret noise",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 10,
+      "id": "effect.thump",
+      "term": "thump",
+      "name": "Thump",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 11,
+      "id": "effect.knock",
+      "term": "knock",
+      "name": "Knock",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 12,
+      "id": "effect.slap",
+      "term": "body slap",
+      "name": "Slap",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 13,
+      "id": "effect.pop",
+      "term": "pop",
+      "name": "Pop",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 14,
+      "id": "effect.tap",
+      "term": "body tap",
+      "name": "Tap",
+      "rule": "T"
+    },
+    {
+      "at": 23,
+      "sub": 15,
+      "id": "effect.click",
+      "term": "click",
+      "name": "Click",
+      "rule": "T"
+    }
+  ]
+}

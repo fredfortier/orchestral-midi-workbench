@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Per-note articulation descriptor dictionary, version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "controllerIndex",
+    "entries",
+    "parameters"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "controllerIndex": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token",
+          "technique",
+          "qualifiers"
+        ],
+        "properties": {
+          "token": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4294967295
+          },
+          "technique": {
+            "type": "string"
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "valueJson"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9+.-]*:"
+                },
+                "valueJson": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "index",
+          "id"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

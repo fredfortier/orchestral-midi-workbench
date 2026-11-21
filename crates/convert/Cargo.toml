@@ -1,0 +1,37 @@
+[package]
+name = "musicxml-midi2-convert"
+description = "MusicXML to MIDI 2.0 conversion with orchestral articulation profiles"
+version.workspace = true
+edition.workspace = true
+rust-version = "1.87"
+publish.workspace = true
+
+[[bin]]
+name = "convert"
+path = "src/main.rs"
+
+[dependencies]
+base64 = "0.22"
+clap = { version = "4", features = ["derive"] }
+encoding_rs = "0.8"
+jsonschema = { version = "0.29", default-features = false }
+midi2 = { version = "=0.11.1", features = ["ci", "sysex7", "flex-data", "utility", "ump-stream"] }
+musicxml = "=1.1.2"
+musicxml_internal = "=1.1.2"
+num-rational = { version = "0.4", features = ["serde"] }
+num-integer = "0.1"
+rand = "0.9"
+roxmltree = "0.20"
+rust_decimal = { version = "1", default-features = false, features = ["std"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tempfile = "3"
+unicode-normalization = "0.1"
+zip = { version = "2.4", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+rstest = "0.25"
+
+[lints]
+workspace = true
