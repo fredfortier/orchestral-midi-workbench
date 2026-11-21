@@ -1,29 +1,36 @@
-# CI/CD Guide
+# Verification and CI
 
-This template no longer ships default GitHub Actions CI/CD scaffolding.
+This checkout uses local checks. Bitwig and Kontakt qualification use disposable
+fixtures outside unattended checks. See the
+[controller runbook](../crates/controller/RUNBOOK.md) for the Rust and Maven gates.
 
-## Current State
+## Verification inputs
 
-- There are no default workflows under `.github/workflows/`.
-- The repository no longer provides `make ci`, `scripts/ci.sh`, or `scripts/release-package.sh`.
-- Add testing, build, scanning, release, and deployment workflows later when the real project stack is known.
+Conversion checks use the pinned MusicXML 4.0 XSD in
+`.research/standards/musicxml/musicxml-4.0/schema/` and the pinned `music21`
+corpus in `music21/music21/corpus/`. The
+[corpus manifest](../crates/convert/tests/corpus-manifest.json) records the
+revision and sample. The research archive's `sources.json` records source
+revisions and hashes for MIDI, MusicXML, SMuFL and instrument manuals.
+Original documents retain their own licenses.
 
-## Design Principle
+From this repository root, to recover the inputs from a local copy of the
+retired checkout:
 
-CI/CD should serve the real project instead of preserving placeholder automation in the template.
+```sh
+git -C ../MIDI2.0Workbench archive --prefix=.research/ \
+  9f549d9d69453de4501744913d342a95c3c516de:crates/research | tar -x
+git clone ../MIDI2.0Workbench/music21 music21
+git -C music21 checkout --detach 7a3b55e13781e2f3d28a5411f17275d259684af4
+node crates/convert/tests/check_research.mjs
+cargo test --manifest-path crates/Cargo.toml --workspace --all-targets --locked
+```
 
-Once the stack is known, start with the smallest real validation path, then add build artifacts, supply-chain scanning, release, and deployment. Pin new GitHub Actions to commit SHAs instead of floating tags.
+Run the extraction and clone only for missing inputs. The corpus also comes
+from the [pinned upstream revision](https://github.com/cuthbertLab/music21/tree/7a3b55e13781e2f3d28a5411f17275d259684af4).
+The Node check needs `unzip` and `xmllint`. Rust's independent XSD oracles use
+Python with `lxml`. Live qualification is covered by the
+[controller runbook](../crates/controller/RUNBOOK.md).
 
-## Recommended Customization Sequence
-
-1. Define the project's own local validation command.
-2. Add a minimal pull-request gate that runs real tests, lint, or smoke checks.
-3. Add packaging, SBOM, and provenance after a real deliverable exists.
-4. Add environment-specific deployment jobs after a real runtime and target environment exist.
-5. Document all pipeline entry points and release artifacts in this file.
-
-## When Adding CI/CD Back
-
-- Do not restore workflows that only package placeholder metadata.
-- Do not expose stale or unmaintained commands in `Makefile`.
-- If release automation is added, update `docs/SUPPLY_CHAIN_SECURITY.md` and `docs/releases/README.md` in the same change.
+After changing `rules::VOCABULARY`, regenerate the JSON catalog with
+`UPDATE_CONVERT_CATALOG=1 cargo test --manifest-path crates/Cargo.toml -p musicxml-midi2-convert --test conversion catalog_is_single_source`.

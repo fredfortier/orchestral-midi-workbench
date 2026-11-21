@@ -38,6 +38,6 @@ occurrences and verified controls; resume realization only through supported
 MIDI/control operations. Its planning JSON is project evidence, not an executable
 companion extension. Do not invent JSON fields or unverified low-note selectors.
 Stock assignment remains kontakt-setup's responsibility. Read
-[the existing research](../../../research/strezov/SOURCES.md) only for the specific
+the local Strezov research index (`.research/strezov/SOURCES.md`) when available only for the specific
 capability question. Piece-specific instrument choices and phonetic candidate
 tables belong in project evidence, not reusable default policy.

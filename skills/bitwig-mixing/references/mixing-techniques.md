@@ -120,8 +120,8 @@ from those numbers. Keep listening approval separate.[^mask]
 
 Use native beat-to-seconds context for musical windows. Do not divide total file
 duration by the exported beat count: a tail can cross a later tempo change.
-The [native observation/export contract](../../../controller/MIXING.md) owns that
-context and the independent output-duration check.
+Use `beatSeconds` from the fresh mixer observation and the
+[audio export verification procedure](../../bitwig-export-audio/SKILL.md).
 
 Do not invent an industry-wide allowed overlap percentage, universal critical
 frequency or mandatory target-to-masker dB gap. These sources describe contextual

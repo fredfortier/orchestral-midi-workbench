@@ -21,7 +21,7 @@ MusicXML or PDF; acceptance here does not imply converter support for that forma
    If a required keyboard action lacks qualification or computer access is
    unavailable, report its dependent intake scope as partial until resolved.
    A mkdir or copied/empty .bwproject is not native project creation.
-3. Follow the [Bitwig project layout](../../AGENTS.md#bitwig-project-layout).
+3. Follow the [Bitwig project layout](../WORKFLOW.md#bitwig-project-layout).
    Establish identity in [PERFORMANCE.md](assets/PERFORMANCE.md), leaving
    musical sections unfilled in a new file and preserving existing content.
 4. Copy the original to the project's source location without altering it.

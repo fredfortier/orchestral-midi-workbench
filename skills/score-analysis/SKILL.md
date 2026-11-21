@@ -23,8 +23,8 @@ receiver behavior, historical correctness or artistic quality.
 2. **Load once.** Open [loading and common objects](references/loading.md).
    Use its ephemeral `uv run --with` context. Check part identities, duration,
    attack/segment counts and known export losses before interpreting results.
-   A failed import or mismatched scope blocks dependent musical conclusions;
-   repair the owning import/export issue, not the notes to fit an expectation.
+   A failed import or mismatched scope blocks dependent musical conclusions.
+   Report the affected parts and continue with any verified scope.
 3. **Choose by intent below.** Read only the selected leaves; combine them only
    when the question needs it. For “basic analysis,” use the loading inventory,
    register/texture table and one harmony excerpt, with anomalies first. For a

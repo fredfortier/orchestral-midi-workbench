@@ -555,7 +555,7 @@ impl Articulation {
     }
 }
 /// Finite native predicates are Rust rules; compatible secondary facets survive.
-/// See mapping/TRANSLATIONS.md N0–N25 for authority, interpretive choices and
+/// See ARCHITECTURE.md N0–N25 for authority, interpretive choices and
 /// counterexamples. In particular staccato does not prove a bouncing bow; 11/0
 /// is this converter's ordinary-short default, and MusicXML spiccato is a stroke
 /// mark. Do not derive either bow mechanics or a rate threshold from duration.

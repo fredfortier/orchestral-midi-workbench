@@ -29,7 +29,7 @@ Use decompilation to answer that focused question, not to assemble a speculative
 ## One small surface
 
 The following names define our adapter conventions, not Bitwig vendor interfaces.
-Keep the production implementation in `crates/controller/client-adapter`:
+Keep the production implementation in `crates/controller/adapters/bitwig-ctl`:
 
 ```java
 // Controller init: SDK proxies/settings/observers are registered here.
@@ -81,7 +81,7 @@ before, observed, preservation, error}`. Errors stay errors; no empty-success fa
 Retain failed experiments alongside successful ones. A fresh document generation
 invalidates every previous handle and armed fixture.
 
-The implemented development artifact is `client-adapter`'s Maven `harness`
+The implemented development artifact is `bitwig-ctl`'s Maven `harness`
 profile. Install with `bash scripts/install-extension.sh --harness`; the separate
 controller registers named probes, public Application Undo/Redo and the same
 document dispatcher. Use `midi-bridge adapter bitwig probe …` for correlated invocation.

@@ -13,14 +13,15 @@ This document defines the default collaboration model for an agent-first reposit
 ## Documentation Discipline
 
 - `AGENTS.md` is a routing layer, not a giant policy document.
-- `docs/` is the source of truth for repository-local knowledge.
+- `docs/` owns repository-wide guidance and records. Package `ARCHITECTURE.md` files own implementation contracts. Skills own music-production procedures.
+- Keep music-production and development documentation separate. Production skills and their supporting files must never route to development docs or source code.
 - If behavior changes, update the corresponding docs in the same change.
 - Prefer adding a new focused doc over appending unrelated rules to a large catch-all file.
 
 ## Git And Review
 
 - Keep commits scoped and descriptive.
-- Before a commit or PR, verify that docs, examples, scripts, and histories reflect the final behavior.
+- Before a commit or PR, verify that docs, examples, scripts, and relevant ADRs reflect the final behavior.
 - For large or risky work, land changes behind an execution plan checked into `docs/exec-plans/`.
 - Prefer review comments and follow-up tasks that cite repository files instead of private context.
 
@@ -33,9 +34,7 @@ This document defines the default collaboration model for an agent-first reposit
 
 ## CI/CD And Release Posture
 
-- This template does not ship built-in CI/CD, avoiding unmaintained placeholder automation.
-- After the real stack arrives, add the smallest real test, build, scan, and release path.
-- When adding pipelines, update `docs/CICD.md` and the relevant script entry points in the same change.
+- Document real validation and automation entry points in [CICD.md](CICD.md).
 
 ## Configuration Hygiene
 

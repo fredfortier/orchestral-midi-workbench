@@ -8,8 +8,8 @@ mutation: reconcile its original operation ID and current native state first.
 | --- | --- |
 | Connection refused on 8788 | Inspect the listener and durable service status/log. Start the single owned listener, then verify native readiness. Do not start a competing service. |
 | Handshake failure or disconnected adapter | Inspect `adapter bitwig connection list`; ignore dead host descriptors. Start the listener first. An admitted session recovers a lost connection with bounded backoff; protocol/handshake refusal remains fail-stop. For initial setup failure, request one connect for the intended live instance and inspect its result. Keep the service persistent. |
-| Wire/build mismatch | Compare CLI, service and loaded adapter versions plus declared host version. Deploy matching artifacts and reload the controller in the managed host. Replacing the JAR does not reload existing classes. Do not restart the user's host. |
-| DAW restarts when Rust restarts | The managed host wants the listener at startup; it must not `Require` its continued lifetime. Refresh owned units with `install`. Session recovery restores connectivity without replaying edits. |
+| Version mismatch | Identify the CLI, connected service, loaded adapter and Bitwig versions. Report the mismatch as a missing prerequisite for dependent production actions. |
+| Bitwig exits or restarts with the listener | Reconfirm the intended instance and project before reconnecting. Reconcile pending operations by their original IDs. If the restart repeats, report the unstable session prerequisite. |
 | Multiple adapters | Something went very wrong. State your reasoning, stop and start again. |
 | No active editor or wrong selection | Inspect the managed display and native selection. Select the arranger note clip itself with Object Selection. Preserve the native adapter's Inspector fallback; do not invent cached selection. |
 | Ownership/geometry/reference error | Escalate. |
@@ -28,6 +28,5 @@ the managed host's observed display to the dedicated sink. It never changes the 
 `pw-link --monitor --id` also needs a listing selector: use `--links --input
 --output`; without one the monitor exits instead of subscribing.
 
-Keep exercised canonical startup/recovery commands in the owning controller
-runbook. Until verified, report the particular missing setup condition rather
-than claiming seamless operation.
+If startup or recovery cannot be verified, report the missing production
+prerequisite and leave dependent actions pending.

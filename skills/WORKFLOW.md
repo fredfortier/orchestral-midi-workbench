@@ -4,8 +4,17 @@ This contract governs the task skills below. The user's requested scope controls
 which tasks run. Each skill returns after its own result; dependencies return to
 their caller. A multi-stage request composes these tasks without a new approval
 at every handoff. Missing capability does not authorize a workaround or work outside
-the owning existing operation. An explicitly requested repair preserves the settled
-ownership boundary and must be verified before completion is claimed.
+the owning existing operation. Complete independent musical work and report the
+affected scope when a tool cannot perform a required action. Use only the owning
+production skills, project/library documents, musical sources and current tool
+help to carry out these workflows.
+
+## Bitwig project layout
+
+- The project root is the directory containing the saved `.bwproject`. Keep `PERFORMANCE.md` there.
+- Keep the original score and its provenance record in the project's established source location. For a new project without an agreed source location, use the project root.
+- Use project-root `references/` for external listening references and `evidence/` for new evidence. Honor the project's existing evidence location.
+- Preserve existing project files and paths. Create folders as needed and leave `recordings/`, `master-recordings/`, and other DAW-managed directories to Bitwig. Follow the [checkpoint procedure](#experimental-project-backups) for manual backups.
 
 ## Experimental project backups
 
@@ -46,10 +55,10 @@ the qualified native workflow.
 
 ## Mandatory execution boundary
 
-Use the existing complete-clip controller contract for MIDI notes, expression,
-automation and the specialized Instrument Layer/Kontakt operations. Do not
-substitute manual edits, another control surface or ad hoc helpers for those
-operations. Repair a failing owner and verify it before dependent work.
+Use the [editing skill](bitwig-edit/SKILL.md) for notes, expression and
+automation and the [assignment skill](kontakt-setup/SKILL.md) for Instrument
+Layer and Kontakt operations. If a required operation fails, preserve current
+musical state and reconcile its outcome before further edits.
 
 For mixing observations/balance and native audio export, use the explicitly
 admitted [mixing](bitwig-mixing/SKILL.md) and [export](bitwig-export-audio/SKILL.md)
@@ -82,9 +91,8 @@ note/routing state. It returns phrase definitions and verified controls to the
 existing realization/edit owner. This adds no loader, native editing operation
 or kontakt-ctl customization responsibility.
 
-Use `midi-bridge controller instrument` and the
-[receiver contract](../crates/controller/ARCHITECTURE.md#integrated-instruments). Do not split an assignment into raw Kontakt
-insertion followed by manual window work or a separately improvised loader call.
+Use the [integrated assignment procedure](kontakt-setup/references/assignment.md)
+for the exact receiver and NKI.
 Conventional MIDI controls use native **track-level MIDI automation** by default:
 MW CC1, BC CC2, XP CC11, other documented CCs, and pitch bend (a distinct MIDI
 message, never a CC number). Read the exact patch's control table in
@@ -187,9 +195,8 @@ REQUEST
 ```
 
 Resolve skill paths relative to this directory and check optional references exist.
-Outside this repository, project-local AGENTS.md establishes the actual paths and
-links to this workflow rather than duplicating its procedures.
-The CLI help and owning controller contracts establish available operations.
+Use the saved musical project's own instructions to resolve its project paths.
+Use the owning production skill and current CLI help to establish available operations.
 Do not invent command names or install another control surface to fill a gap.
 
 ## Meaning and authority
@@ -315,22 +322,19 @@ An updated library document is evidence to review affected choices, not permissi
 to reorchestrate existing projects. Audition uses exploration; corrections route
 to editing, realization or setup. A full listening review is not an automatic task.
 
-## Current implementation boundaries
+## Supported production operations
 
-Consult [RENDITION.md](../crates/convert/RENDITION.md), native CLI help and the relevant
-controller contracts before acting. This workflow does not extend their schemas.
+Use the owning skill and current CLI help to determine which actions are available.
 
 * General public New/Save/Open and transport/history commands are not exposed.
-  Native lifecycle mechanisms exist inside specialist workflows and disposable
-  development probes. Intake must distinguish prepared files from completed native
-  project creation/save; never invent command names from older references.
+  Use the [native keyboard workflow](bitwig-explore/references/keyboard-workflow.md)
+  for supported lifecycle actions. Confirm that the intended project was actually
+  created and saved.
 * A generated importer schedule may contain devices outside the mandatory
   execution boundary. Such a schedule is inadmissible. Use the existing bounded
-  content/global affordances where they preserve the complete intended content;
-  instrument structure/assignment remains with `controller instrument`. If that
-  separation cannot be executed through existing commands, repair the owning
-  controller/compiler operation within scope. Raw player insertion is not a
-  substitute for integrated assignment and loading.
+  content operations where they preserve the complete intended content. Assign
+  instruments through the setup skill. If the available commands cannot preserve
+  the intended scope, leave the affected placement pending.
 * General reconciliation/migration of populated projects is not implemented.
   Notes-only reimport requires unchanged receiver/control/global/clip topology and
   its ownership evidence. It does not overwrite arbitrary native edits.

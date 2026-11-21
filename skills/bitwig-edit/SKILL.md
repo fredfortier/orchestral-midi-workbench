@@ -61,10 +61,9 @@ future reimport must reconcile it. Do not claim automatic score reconstruction.
 Required receiver setup is a dependency, not the end of an expression task.
 Read documented mappings from instrument-intake; missing facts return through its
 documentation-only branch. Keep matching loaded patches. A MIDI automation task
-does not require sender insertion or device-knob discovery. Verify shared-channel delivery through the standard Filter/Map chain; failed
-passage returns to setup rather than duplicating curves. Implementation qualification belongs
-on an agent-managed disposable fixture; do not ask the user to prepare one or
-make routine musical edits repeat qualification campaigns.
+does not require sender insertion or device-knob discovery. Verify shared-channel
+delivery through the standard Filter/Map chain. Return failed delivery to setup
+and preserve the original curves.
 
 This skill does not itself load patches, revise orchestration, create cue interpretations,
 or promise general clip split/move/delete capabilities absent from the CLI.

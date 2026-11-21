@@ -23,36 +23,12 @@ fn catalog_is_single_source() {
     let expected: serde_json::Value =
         serde_json::from_str(include_str!("../mapping/orchestral-subclasses.json")).unwrap();
     if std::env::var_os("UPDATE_CONVERT_CATALOG").is_some() {
-        use std::fmt::Write as _;
         let root = Path::new(env!("CARGO_MANIFEST_DIR"));
         let mut catalog = expected.clone();
         catalog["rows"] = serde_json::to_value(rules::VOCABULARY).unwrap();
         std::fs::write(
             root.join("mapping/orchestral-subclasses.json"),
             format!("{}\n", serde_json::to_string_pretty(&catalog).unwrap()),
-        )
-        .unwrap();
-        let readme = std::fs::read_to_string(root.join("README.md")).unwrap();
-        let (before, rest) = readme
-            .split_once("<!-- BEGIN PROFILE CATALOG -->\n")
-            .unwrap();
-        let (_, after) = rest.split_once("<!-- END PROFILE CATALOG -->").unwrap();
-        let mut table = String::from(
-            "| AT/sub | Sound | Named semantic input | Canonical MusicXML extension term | Additional native rule |\n| --- | --- | --- | --- | --- |\n",
-        );
-        for row in rules::VOCABULARY {
-            writeln!(
-                table,
-                "| `{:X}/{:X}` | {} | `{}` | {} | {} |",
-                row.at, row.sub, row.name, row.id, row.term, row.rule
-            )
-            .unwrap();
-        }
-        std::fs::write(
-            root.join("README.md"),
-            format!(
-                "{before}<!-- BEGIN PROFILE CATALOG -->\n{table}<!-- END PROFILE CATALOG -->{after}"
-            ),
         )
         .unwrap();
         return;

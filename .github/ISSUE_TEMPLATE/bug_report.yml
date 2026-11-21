@@ -27,4 +27,4 @@ body:
     id: notes
     attributes:
       label: Additional context
-      description: Plans, histories, screenshots, logs, or related links.
+      description: Plans, ADRs, screenshots, logs, or related links.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate the finite WORKPAD predicate; retain every command and case outcome.
+"""Evaluate the pinned conversion acceptance domain; retain every command and case outcome.
 
 Run from any directory. Failed evidence is written with complete=false; this
 script never edits code, changes assertions, or grants itself narrower scope.
@@ -25,7 +25,13 @@ def sha(data):
 
 
 def artifact_hashes():
-    artifacts = [ROOT / 'crates/Cargo.lock', ROOT / 'crates/Cargo.toml', CRATE / 'Cargo.toml', CRATE / 'README.md', ROOT / 'crates/research/check.mjs', ROOT / 'crates/research/sources.json']
+    artifacts = [
+        ROOT / 'crates/Cargo.lock',
+        ROOT / 'crates/Cargo.toml',
+        CRATE / 'Cargo.toml',
+        CRATE / 'ARCHITECTURE.md',
+        ROOT / '.research/sources.json',
+    ]
     for folder in ['src', 'mapping', 'tests']:
         artifacts += [p for p in (CRATE / folder).rglob('*') if p.is_file()
                       and p != OUTPUT and '__pycache__' not in str(p)]
@@ -38,7 +44,7 @@ def main():
     cargo = ['cargo']
     common = ['--manifest-path', 'crates/Cargo.toml']
     commands = [
-        ['node', 'crates/research/check.mjs'],
+        ['node', 'crates/convert/tests/check_research.mjs'],
         cargo + ['fmt'] + common + ['--all', '--check'],
         cargo + ['check'] + common + ['--workspace', '--locked', '--offline'],
         cargo + ['test'] + common + ['-p', 'musicxml-midi2-convert', '--locked', '--offline', '--', '--show-output'],

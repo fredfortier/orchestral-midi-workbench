@@ -2,12 +2,12 @@
 
 ## Bootstrap
 
-Build `crates/controller/client-adapter` as a Java-only `.bwextension`, using its
+Build `crates/controller/adapters/bitwig-ctl` as a Java-only `.bwextension`, using its
 Maven wrapper and Java 25 target. Compile against `com.bitwig:extension-api:25`
 with **provided** scope. Never bundle Bitwig application classes. Register the
 concrete definition in `META-INF/services/com.bitwig.extension.ExtensionDefinition`.
 Set API 25, beta true, zero MIDI input/output ports and fail-on-deprecation true.
-Use [the SDK lifecycle guide](../../../../../skills/bitwig-controller/references/java-extensions.md)
+Use [the SDK lifecycle guide](https://github.com/bitwig/bitwig-extensions)
 for metadata and settings; these SDK calls do not implement document note CRUD.
 
 The inspected Bitwig 6.1 runtime is Java 25.0.2 LTS. Its trimmed image lacks
@@ -55,7 +55,7 @@ inspection alone does not admit a production transport.
 
 ### Admitted native receive/document context
 
-The [actual host PoC and complete wire evidence](../../../../controller/validation/native-transport/README.md)
+The actual host PoC and complete wire evidence (retired archive: `crates/controller/validation/native-transport/README.md`)
 subsequently passed: a Java `RemoteConnection.setReceiveCallback` handler runs
 on `Control Surface Session` with `isControlSurfaceThread() == true`. It can
 call the admitted `DocumentAccess.submit`/native `exec(Runnable)` directly.
@@ -88,7 +88,7 @@ extension shutdown and Rust interoperability separately before admission.
 
 ## Dispatch
 
-The existing [Java probe](../../../../controller/probes/NotesDocumentProbe.java)
+The existing [Java probe](../../../../crates/controller/probes/NotesDocumentProbe.java)
 resolves protected `exec(Runnable)` on the document-state proxy, checking
 `isDocumentThread()` inside a **Java-created** Runnable. On that thread,
 `getDocumentGUIWrapper()` and `getDocument()` expose editor and document roots.
@@ -111,7 +111,7 @@ project generation. Close network workers in `exit()` and prevent late results
 from touching the next extension instance.
 
 The previous JS-created Runnable collided with scheduled JS callbacks. The
-[retained failure and Java-only correction](../../../../controller/validation/editor-selection/README.md#execution-ownership)
+retained failure and Java-only correction (retired archive: `crates/controller/validation/editor-selection/README.md#execution-ownership`)
 are evidence for this Java-only design. Openwig uses a JS Runnable and passive
 completion notifications; study its ownership mechanics but do not copy its
 cross-thread JS execution.
@@ -126,7 +126,7 @@ an observable whose `addListener(ums)` / `removeListener(ums)` methods accept
 transitions synchronously on the document thread. Keep these private names inside
 `EditorAdapter61`; the public project-name observer does not establish identity.
 
-[The isolated probe and production regressions](../../../../controller/validation/project-lifecycle/)
+The isolated probe and production regressions (retired archive: `crates/controller/validation/project-lifecycle/`)
 prove callback ownership, all four round-trip transitions and listener removal
 from one listener to zero with no subsequent callbacks. Every transition clears
 the frozen revision without editing the document. Prepared direct-switch and
@@ -143,7 +143,7 @@ admit shutdown during native writes or general lifecycle/backpressure behavior.
 ## Build compatibility
 
 Record the declared host version and capability results in
-[host evidence](../../../../controller/validation/editor-selection/README.md).
+host evidence (retired archive: `crates/controller/validation/editor-selection/README.md`).
 Keep version-specific method/type mappings in one implementation. Refuse an
 unsupported version or missing capability before document access.
 

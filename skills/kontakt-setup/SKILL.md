@@ -58,10 +58,9 @@ intake nor setup invents patch, channel or recovery-policy choices.
 
 ## Assign and verify
 
-Read [assignment](references/assignment.md) before execution. The binding
-[controller contract](../../controller/ARCHITECTURE.md#purpose-and-execution-boundaries)
-owns path and native execution semantics. Read [keyboard workflow](../bitwig-explore/references/keyboard-workflow.md)
-only for supporting project/focus actions; it cannot compensate for bootstrap.
+Read [assignment](references/assignment.md) for exact paths and assignment.
+Use the [keyboard workflow](../bitwig-explore/references/keyboard-workflow.md)
+for supporting project and focus actions.
 
 1. Resolve exact project/Group Track/Track paths with `controller info`. Use
    `instrument read --target target.json` for the intended Instrument Layer or Layer.
@@ -84,14 +83,14 @@ only for supporting project/focus actions; it cannot compensate for bootstrap.
 
 After all assignments complete, independently read back the requested slots and
 routing. Do not require a whole-project capture, read the project once per track
-or replay assignments to verify them. Missing scoped readback is a controller
-repair gap, not permission to invent another control surface. [Assignment](references/assignment.md) owns identifier types, timing
+or replay assignments to verify them. If scoped readback is unavailable, report
+which slots or routing remain unverified. [Assignment](references/assignment.md) owns identifier types, timing
 and the bounded routing-check procedure.
 
 The loader only loads the specified stock NKI into the controller-owned window.
-Receiver controls follow the shared necessity rule and assignment reference;
-missing operations return here after controller repair. Unsupported musical
-requirements return to realization, never patch customization or another loader.
+Receiver controls follow the shared necessity rule and assignment reference.
+Return unsupported musical requirements to realization and report any missing
+assignment operation.
 
 Update PERFORMANCE.md's setup evidence with actual assignment coverage and limits;
 preserve its orchestration and all unrelated sections. Loading, editor closure,

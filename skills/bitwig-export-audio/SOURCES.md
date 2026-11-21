@@ -1,17 +1,6 @@
-# Authoring evidence
+# Audio export workflow sources
 
-Authored 2026-11-18 under explicit user authority to implement native filtered
-audio export and its associated skill. Shape: inline runtime workflow in SKILL.md;
-SPEC.md retains authoring rationale only. Repository skills/ is the owning
-root; discovery uses the established user-skill symlink convention.
-
-Official source lineage appears in SPEC.md; operating consequences are inline
-in SKILL.md.
-Bitwig's rolling export/bounce guides were inspected on 2026-11-18. The installed
-6.1 native DXq Export Audio action constructs Zv with TQb task-owned settings;
-the implementation uses that same task and captures its final success/error
-callback. Private mappings are host-specific evidence, not public API promises.
-Native qualification outcomes belong to controller/WORKPAD.md.
+Bitwig’s export and bounce guides are cited in [the skill rationale](SPEC.md).
 
 Adopted: exact observed paths, separate group/leaf/master/return choices, explicit
 options/range, new directories, original operation polling, independent audio

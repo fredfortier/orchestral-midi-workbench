@@ -49,8 +49,8 @@ pitched segments, explicit reset commands, a native tiny note, placement clippin
 and Roman-label sensitivity to spelling. These motivate generic integrity checks;
 no piece names, pitch expectations or mappings appear in runtime instructions.
 Freshness belongs to `bitwig-export-midi2`; current-score analysis invokes that
-owner, supplied historical analysis does not. Controller/convert architecture and
-`examples/music21_analysis.py` own full comparison and representation details.
+owner, supplied historical analysis does not. The [integrity procedure](references/integrity.md)
+covers comparison and interpretation limits.
 
 Discovery walkthroughs: should trigger for “analyze current orchestration”,
 “why this suspension?”, “Roman analysis of this MXL”, “awkward melodic leaps”,

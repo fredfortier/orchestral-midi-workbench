@@ -33,8 +33,8 @@ MIDI write, automation read, Instrument Layer configuration or Kontakt bootstrap
 Use Computer screenshots can diagnose an unexpected state or inspect Shortcuts
 while qualifying a route. **Do not parse screenshots/OCR as systematic workflow
 state or as musical acceptance evidence.** If the available computer/accessibility
-integration cannot establish a necessary UI precondition, report that missing
-capability and repair it rather than inventing coordinates or a remote viewer.
+integration cannot establish a necessary UI precondition, report it and leave
+the affected UI action pending.
 
 ## Qualification scope
 

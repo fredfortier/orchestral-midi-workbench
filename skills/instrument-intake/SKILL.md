@@ -106,11 +106,9 @@ does not change a patch's identity when its relative path is unchanged.
 
 On failure, retain the original result, logs, backup location, observed partial
 progress and owned-process/dialog state exposed by the supported tool. Mark
-initialization unverified and return a failed dependency. Diagnose the owning
-operation within scope. Neither automatic replay nor automatic restoration is an
-established recovery procedure. Reconcile the original process before further
-source writes; a missing reconciliation capability requires durable tool repair,
-not manual recovery or a declaration that initialization succeeded.
+initialization unverified and return a failed dependency. Reconcile the original
+process before further source writes. If reconciliation is unavailable, keep
+the affected processing pending and retain the original evidence.
 
 Initialization means documented capability, not an audition, loaded receiver or
 configured patch. If no applicable manual can be obtained, record searched scope,

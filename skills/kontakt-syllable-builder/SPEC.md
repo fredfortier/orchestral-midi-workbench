@@ -55,18 +55,15 @@ No global optimum or live qualification for that richer model has been establish
 
 ## Source lineage and observed limits
 
-[Strezov research](../../research/strezov/SOURCES.md) identifies installed and
+The Strezov research index (`.research/strezov/SOURCES.md`) identifies installed and
 public manual editions, vocabulary images and sequencing evidence. The MusicXML
 [lyric definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/)
-explains the extractor's ordered-child representation; the existing
-[companion model](../../convert/src/preserve.rs) supplies source associations.
+explains the extractor's ordered-child representation. Source associations
+come from the realized score and its companion.
 
 [Execution findings](sources/ITERATION.md) retain the cell-entry, deletion,
 selector, HLS, single-instrument and routing experiments that motivated runtime
-procedures. The [rack loader](../../controller/adapters/kontakt-ctl/kontakt_ctl/rack.py)
-and [native setup implementation](../../controller/client-adapter/src/main/java/com/midiworkbench/notes/internal/Instrument61.java)
-are implementation evidence, not alternate runtime interfaces. Per-project
-outcomes remain in project evidence directories.
+procedures. Per-project outcomes remain in project evidence directories.
 
 The 2026-11-19 authoring repair removed duplicated operating clauses from this
 file. Runtime instructions were inspected for coverage before removal. No

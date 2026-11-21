@@ -34,8 +34,9 @@ Open [bitwig-explore](../bitwig-explore/SKILL.md) before musical reads; use its
 `controller midi get-all --paths paths.json --output fresh.json` command for
 explicit scope, or omit paths for the actual native selection. Use `controller info`
 to establish every intended part/clip. Do not confuse an empty or partial selection
-with the whole piece. Read the [complete-clip contract](../../controller/ARCHITECTURE.md#one-complete-musical-snapshot)
-for source/arranger coordinates and current CLI help for cue syntax.
+with the whole piece. Resolve written passages to actual arranger occurrences
+using the [musical read procedure](../bitwig-explore/references/musical-queries.md).
+Use current `controller cues --help` for cue syntax.
 Resolve the active project's workspace from native project identity; the output
 belongs beside its `.bwproject`, not in this skill or the source repository. For
 an unsaved project without a durable workspace, ask for the destination while

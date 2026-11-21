@@ -1,8 +1,7 @@
 # Place and reconcile performance landmarks
 
-[Architecture](../../../controller/ARCHITECTURE.md#purpose-and-execution-boundaries) owns
-intended marker scope. The cue map and current native note/source mapping supply
-musical positions; score bar numbers are not native beat coordinates.
+Use the cue map and current native note/source mapping to locate each marker
+in arranger beats. Score bar numbers are not native beat coordinates.
 
 ## Identity and placement
 

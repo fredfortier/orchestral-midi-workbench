@@ -37,7 +37,7 @@ observed in the arranger and the clip editor. General loop, filtered/locked-laye
 and partial-boundary cases remain fixture obligations.
 
 Inspect arranger, arranger-track editor, arranger-clip editor and launcher-clip
-editor separately. The [existing selection probe](../../../../controller/probes/NotesDocumentProbe.java)
+editor separately. The [existing selection probe](../../../../crates/controller/probes/NotesDocumentProbe.java)
 reads all four. Its verified build uses these wrapper accessors:
 
 | Editor | Wrapper method |
@@ -55,7 +55,7 @@ layers and effective host selection before choosing the operation's scope.
 Do not merge every editor's cached selection into one invented selection.
 
 The original user selection yielded a two-track time range while the public
-arranger cursor reported no selected cells. See [actual observations](../../../../controller/validation/editor-selection/original-selection.jsonl).
+arranger cursor reported no selected cells. See actual observations (retired archive: `crates/controller/validation/editor-selection/original-selection.jsonl`).
 An empty object selection does not make its time selection empty.
 
 ## Enumerate the right content
@@ -69,7 +69,7 @@ occurrences, and use the host's effective edit semantics at boundaries.
 Use stable document IDs plus owner scope: project generation, track, clip
 occurrence, content and note. An object path, display name, bank index or array
 position is not identity. Grouping changes paths and inserts overview lanes;
-our [grouped-selection fixture](../../../../controller/validation/editor-selection/grouped-selection.jsonl)
+our grouped-selection fixture (retired archive: `crates/controller/validation/editor-selection/grouped-selection.jsonl`)
 verified four leaf lanes without duplicate group summaries.
 
 Distinguish:
@@ -105,7 +105,7 @@ The full imported Contrapunctus I fixture has four note clips, 900 notes, and a
 312-beat duration. An explicit leaf-track arranger Time Selection returned all
 900 notes, including the last note ends at beat 312. Eight rounds of native CRUD
 and separate Undo/Redo preserved the compared note graph and mappings exactly;
-see [retained evidence](../../../../controller/validation/bach/README.md).
+see retained evidence (retired archive: `crates/controller/validation/bach/README.md`).
 
 **The original collapsed-group read failed; its Time Selection read is now corrected.** On this same fixture, both
 object selection and tool-2 Time Selection over the group summary returned an
@@ -135,7 +135,7 @@ object strategy: `LCE.vfN()` returns `nkb`; its `EwU(Collection)` expands the ra
 selected objects recursively through the meta clip's children and deduplicates
 actual clip events. Preserve raw object IDs in the selection observation, then
 filter expanded events to `UMj` note clips. Do not substitute a Time Selection
-or union cached selections. [Retained native topology and full readback](../../../../controller/validation/group-object/)
+or union cached selections. Retained native topology and full readback (retired archive: `crates/controller/validation/group-object/`)
 prove all 900 Bach notes match the independent four-leaf-clip graph. This does
 not establish launcher, locked/filtered layer or shared-occurrence semantics.
 
@@ -148,4 +148,4 @@ The prohibition above on selecting to obtain a read applies to observation
 operations: reads remain selection-preserving. A deliberate selection command
 is a separate, fenced UI action, followed by a fresh effective musical read.
 Native maps and qualification are documented in the
-[arranger contract](../../../../controller/ARCHITECTURE.md#native-selection).
+[arranger contract](../../../../crates/controller/ARCHITECTURE.md#native-selection).

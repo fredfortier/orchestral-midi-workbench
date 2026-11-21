@@ -1,20 +1,7 @@
-# Quality Score
+# Verification coverage
 
-Track quality by product area and architectural layer so agents can prioritize the weakest parts of the system.
-
-## Suggested Scale
-
-- `A`: strong coverage, stable behavior, clear docs, low operational risk.
-- `B`: acceptable but still has known gaps.
-- `C`: works but needs targeted hardening.
-- `D`: fragile or underspecified.
-
-## Initial Template
-
-| Area | Score | Why | Next Step |
-| --- | --- | --- | --- |
-| Product surface | D | Not yet defined. | Define the first user journey and acceptance criteria. |
-| Architecture docs | C | Base scaffold exists but needs project-specific content. | Fill in `docs/ARCHITECTURE.md`. |
-| Testing | D | No stack-specific tests yet. | Add a minimal smoke path with one real command. |
-| Observability | D | No local stack or conventions yet. | Document logs, metrics, traces, local access, and future pipeline access. |
-| Security | C | Defaults are documented, implementation is pending. | Add real auth, secret, and dependency rules. |
+| Area | Evidence and current limit |
+| --- | --- |
+| Score conversion | The pinned corpus and independent XSD oracle cover finite round trips. See [reference inputs](references/README.md). |
+| Bitwig adapter | Rust checks and both Maven profiles establish buildability. Native behavior needs separate evidence at the admitted host build. See [qualification](../crates/controller/RUNBOOK.md). |
+| Kontakt and playback | A load result covers the owned editor transaction. Samples, saved persistence and audible behavior require independent evidence. See the [loader contract](../crates/controller/adapters/kontakt-ctl/ARCHITECTURE.md). |

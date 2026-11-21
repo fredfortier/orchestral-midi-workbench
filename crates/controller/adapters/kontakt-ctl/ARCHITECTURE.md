@@ -28,6 +28,30 @@ the command result types own the concrete fields.
 
 Use ephemeral Windows checks and disposable load probes. Durable unit tests
 are prohibited. Compilation verifies source only. The
-[runtime guide](README.md#run-the-vendored-source-with-the-provisioned-windows-environment)
-owns the runnable setup and [library preprocessing](SPEC.batch-resave.md) owns
-standalone process scope and path-based receipt reuse.
+[runtime guide](RUNBOOK.md#provisioned-windows-runtime) owns the runnable setup.
+
+## Standalone library preprocessing
+
+```text
+batch-resave literal X: child -> exact folder readback -> owned process rewrites
+     covered receipt: reuse <----- clean exit + full verified inventory
+```
+
+- Accept one literal directory directly under the `X:` mapping. Reject traversal,
+  redirects, wildcards and empty inventories. Serialize transactions, retain
+  one standalone PID and verify the actual selected folder before submission.
+  Only the retained standalone process may be closed or terminated by cleanup.
+- Completion requires the original `.nki`/`.nkm`/`.nkb` inventory rewritten,
+  nonempty exclusively readable outputs, cleared owned dialogs and process exit
+  0. Timeout, unresolved samples, partial writes or forced cleanup fail.
+  Reconcile uncertain processing before retry. Back up original instrument files
+  for authorized processing. Disposable fixtures cannot certify a real library.
+- Atomically publish `.kontakt-ctl-batch-resave.json` after clean completion.
+  `kontakt-ctl.batch-resave/v3` records target folder, covered relative filenames,
+  counts, completion time, exit code and evidence-log path. Reuse uses covered
+  paths and a successful result. Compatible v2 coverage remains usable without
+  its hashes. `--check` and already covered requests skip launch. Documented
+  historical folder processing can establish reuse during intake.
+- Verify path and process ownership, folder readback, completeness, cleanup
+  and receipt reuse in ephemeral Windows checks. For live qualification,
+  independently observe the exact target, complete rewrites and clean exit.

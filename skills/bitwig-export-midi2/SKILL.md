@@ -5,9 +5,9 @@ description: Capture an active Bitwig project or track group, interpret its musi
 
 # Export Bitwig musical content
 
-Use the [shared workflow](../WORKFLOW.md). Run from `crates/`, using the configured
-`midi-bridge` service and `./target/debug/convert`. Build the existing locked
-converter only if absent. Export is read-only; interpretation edits a JSON copy.
+Use the [shared workflow](../WORKFLOW.md), the configured `midi-bridge` service
+and the installed musical converter. Set `score_converter` to its exact
+executable path. Export is read-only. Make interpretation edits in a JSON copy.
 
 ## Short execution path
 
@@ -36,7 +36,7 @@ converter only if absent. Export is read-only; interpretation edits a JSON copy.
 
    ```sh
    midi-bridge controller midi assemble --input interpreted.json --output performance.midi2 --report assembly.json
-   ./target/debug/convert performance.midi2 --validate --report validation.json
+   "$score_converter" performance.midi2 --validate --report validation.json
    jq '{valid,admissible,notes,parts,pitchRange,controllers,diagnostics}' validation.json
    ```
 
@@ -44,12 +44,12 @@ converter only if absent. Export is read-only; interpretation edits a JSON copy.
    inspect only the named owner/field using the reference filters. Apply a known
    correction and retry to fresh destinations. If required meaning remains
    unknown, report that blocker; do not guess, silently omit it, or start an
-   exploratory scripting/research loop. Host/wire failure requires restoring the
-   exact supported controller deployment before recapture.
+   exploratory scripting/research loop. If the controller is unavailable,
+   retain the results already obtained and report the missing prerequisite.
 4. **Convert if a score was requested.** Admission must pass first.
 
    ```sh
-   ./target/debug/convert performance.midi2 --to mxl -o score.mxl --report notation.json
+   "$score_converter" performance.midi2 --to mxl -o score.mxl --report notation.json
    ```
 
    Check notation decisions and independent MusicXML schema validation. When
@@ -66,7 +66,7 @@ only when current host content is needed; never reuse capture as mutation author
 No Syllabuilder extraction, live slot renaming or audible-equivalence claim follows
 from export. Standard lyrics need actual syllable timing; named phrases use remarks.
 
-For a concrete diagnostic not covered by the recipes, consult only its relevant
-section in the [controller contract](../../controller/EXPORT_MIDI.md)
-or [conversion contract](../../convert/ARCHITECTURE.md). These own schema and
-representation policy; they are not mandatory research before routine export.
+Use the [interpretation recipes](references/interpretation.md), the actual
+diagnostic, and the current CLI help to resolve an export failure. If the
+available operation cannot preserve the intended music, report the affected
+tracks or events and retain the original capture.

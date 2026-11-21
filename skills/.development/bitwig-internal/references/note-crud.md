@@ -8,7 +8,7 @@ All following private names apply only to the host version in the retained probe
 
 ## Read
 
-The [snapshot implementation](../../../../controller/probes/NotesDocumentProbe.java)
+The [snapshot implementation](../../../../crates/controller/probes/NotesDocumentProbe.java)
 reads source notes with `clip.qKA().v33(-Infinity,+Infinity)`. On a source note:
 
 | Value | Inspected method | Meaning |
@@ -39,7 +39,7 @@ resolve the source row and destination channel/key row, detach the **same note
 object**, and reinsert it. The probe uses `note.YeF()` for the row, `row.hk_()`
 for its timeline, `tGW(channel,key,create)` for a row and `YLV(onset,end)` for
 collision queries. Removal is `row.v33(oHd,false)`; insertion is `row.jaQ(oHd)`.
-See [tested channel/curve preservation](../../../../controller/validation/editor-selection/expression-channel.jsonl).
+See tested channel/curve preservation (retired archive: `crates/controller/validation/editor-selection/expression-channel.jsonl`).
 
 Preflight collisions without creating destination rows or otherwise mutating.
 Prove overlap semantics for same-key/channel notes before composing batch moves;
@@ -55,7 +55,7 @@ Our isolated probe uses the inspected clip `TUp(int,int,double,double,double)`
 factory and independently reads the returned source note. Resolve exact owner
 and factory semantics on the admitted build before using either path.
 
-Subsequent [command research](../../../../controller/validation/editor-harness/README.md)
+Subsequent command research (retired archive: `crates/controller/validation/editor-harness/README.md`)
 followed Openwig's descriptor → explicit owner → typed arguments pattern:
 `clip.EVR().cSc().v33(clip, List.of(channel,key,start,duration,velocity))`.
 On the admitted build this descriptor is operation 7349, `insert_note_command`.
@@ -76,7 +76,7 @@ Detached consolidation is **not** a lossless clone. Raw clip `cu_()` failed a
 shared-content relationship lookup in our probe. Find the host's correct copy
 context/factory; do not drop relationships or accept lost expressions to make
 cloning work. Native overlapping clip insertion already demonstrated boundary
-splitting and Undo/Redo; see [retained evidence](../../../../controller/validation/editor-selection/loop-boundary-replacement.jsonl).
+splitting and Undo/Redo; see retained evidence (retired archive: `crates/controller/validation/editor-selection/loop-boundary-replacement.jsonl`).
 
 ## Expressions
 
@@ -128,7 +128,7 @@ return or closing the edit group is not a successful commit acknowledgment.
 
 The production CLI compiles explicit CRUD, selected-owner replacement, sparse
 selection-wide property sets and transposition into the same absolute Plan.
-[CLI host evidence](../../../../controller/validation/controller-cli/) proves
+CLI host evidence (retired archive: `crates/controller/validation/controller-cli/`) proves
 complete independent preservation and one native Undo/Redo for the exercised
 900-note property batches. The later adjacent-key chord counterexample falsified
 general transposition admission; batch write ordering requires the two-phase
@@ -152,7 +152,7 @@ long-running groups still require a separate native concurrency admission probe.
 
 ## Active native gesture isolation
 
-[The held-gesture counterexample](../../../../controller/validation/undo-group/)
+The held-gesture counterexample (retired archive: `crates/controller/validation/undo-group/`)
 proves that nesting an instant change inside a native long-running velocity drag
 merges the separate CLI edit into the drag's Undo step. One Undo reverted both
 900 velocity changes and the CLI mute. Do not infer isolation from begin/end alone.
@@ -246,7 +246,7 @@ issuing a project Undo after closing. The isolated recovery test passes both
 previous-Undo and existing-Redo preservation after row, dynamics, operator and
 curve writes. The development-only sweep additionally passes 63 selected native
 mutation boundaries across properties, note create/delete, point CRUD and clear;
-see [the fault audits](../../../../controller/validation/native-faults/).
+see the fault audits (retired archive: `crates/controller/validation/native-faults/`).
 Calibration must precede establishing the marker/Redo cursor: calibrating a valid
 write after a user Undo would itself replace the Redo chain and invalidate the
 experiment. Assert the injected checkpoint actually fired, not just that an error
@@ -260,12 +260,12 @@ references and failure literals. Do not reintroduce a test switch on the musical
 wire or a durable one-off fault-test subcommand.
 
 See retained counterexamples and corrected observations in
-[the randomized editing evidence](../../../../controller/validation/randomized-editing/).
+the randomized editing evidence (retired archive: `crates/controller/validation/randomized-editing/`).
 
 ## Native batch ordering
 
 Final collision-free geometry alone does not prove safe native write order.
-The [adjacent-key chord counterexample](../../../../controller/validation/runtime-audit/verification.json)
+The adjacent-key chord counterexample (retired archive: `crates/controller/validation/runtime-audit/verification.json`)
 passes final-graph preflight but sequential transposition displaces a later source
 note from its row. Recovery restores the full pre-state; a sort for one direction
 cannot implement arbitrary swaps/cycles or create-before-delete Plans.
@@ -285,7 +285,7 @@ The isolated native probe covers all six argument permutations of three-note
 key cycles and all six time-cycle permutations, with two points in each of five
 editable expression families. Every complete native Undo/Redo and final 900-note
 fixture/payload restoration matches. Composed adapter probes cover four of those
-cases. [Production evidence](../../../../controller/validation/batch-geometry/verification.json)
+cases. Production evidence (retired archive: `crates/controller/validation/batch-geometry/verification.json`)
 adds two seeded eight-round cumulative campaigns across all four owners, including
 channel/key/onset/duration cycles and create-before-delete replacement. The original
 903-note CLI transposition regression passes. Thirteen calibrated write positions

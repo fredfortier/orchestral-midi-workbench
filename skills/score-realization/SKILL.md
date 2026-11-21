@@ -58,5 +58,5 @@ existing workspace + source + musical direction
 Review the complete device schedule against the shared execution boundary before
 its first write. Use [native import](references/native-import.md) for content and
 [kontakt-setup](../kontakt-setup/SKILL.md) for integrated NKI loading when requested.
-A conflicting schedule requires repair before dispatch. Preserve existing music;
-do not add humanization or a listening campaign without a request.
+Leave any placement that conflicts with the shared execution boundary pending.
+Preserve existing music and keep interpretation within the requested scope.

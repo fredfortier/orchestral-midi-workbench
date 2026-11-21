@@ -8,8 +8,8 @@ historical qualification cannot relax this contract.
 Bitwig owns the project, hierarchy, selection, notes, expression, automation and
 Undo. Controller provides lightweight discovery, exact native targeting and
 complete musical reads/replacement. Skills compose those primitives with named
-keyboard/computer recipes. [MIXING.md](MIXING.md) and [EXPORT_MIDI.md](EXPORT_MIDI.md)
-own the existing bounded mixing/audio export and MIDI2 interpretation contracts.
+keyboard/computer recipes. Native mixing, audio export and MIDI2 interpretation
+are bounded operations owned here.
 
 Retain one correlated JSON request/response envelope and qualified Path model.
 No generic action/macro executor, reflected property access, mirrored project,
@@ -18,6 +18,26 @@ API. Existing specialized instrument operations own integrated slot/routing and
 Kontakt assignment, including Channel Filter → Channel Map → receiver. Java owns
 host calls; Rust owns pure musical planning and external assignment orchestration.
 Keyboard delivery and panel focus belong to computer use in the owning skill.
+
+## Runtime and ownership
+
+```text
+CLI -> loopback HTTP -> Rust service <== native TCP ==> Bitwig Java extension
+                        |                               |
+                        |                           document thread
+                        |                               |
+                        +-- qualified load --> Kontakt editor     Bitwig state
+```
+
+- [`controller.rs`](src/controller.rs) defines admitted operations.
+  [`protocol.rs`](src/protocol.rs), [`frame.rs`](src/frame.rs) and
+  [`session.rs`](src/session.rs) own messages, framing and adapter epochs.
+- [`project_address.rs`](src/project_address.rs), [`editor.rs`](src/editor.rs)
+  and [`automation.rs`](src/automation.rs) own path, note and curve types.
+  [`export_midi.rs`](src/export_midi.rs) owns capture interpretation and assembly.
+- [`EditorSession`](adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/EditorSession.java)
+  connects the extension. The harness packages separately armed disposable
+  probes. Probe commands and the filesystem mailbox stay in the harness.
 
 ## Native host execution
 
@@ -123,8 +143,13 @@ flattened. Loops/aliases are not extra authored notes.
 
 ## Replacement, ownership and failure
 
-Read complete scope → construct desired content locally → replace → independently
-reread and compare. Preserve paths, owners, selection, clip/source/loop geometry,
+```text
+observed Snapshot + desired Snapshot -> native prepare/freeze -> Rust Plan
+      Plan = document + revision + note CRUD + complete curve changes
+      Plan -> one native Undo transaction -> independent Snapshot + ID mappings
+```
+
+Preserve paths, owners, selection, clip/source/loop geometry,
 untouched attributes and unrelated curves. Store the original explicit scope for
 freeze and reread; reconstructing it from clips loses automation-only tracks and
 can widen clip-only requests. Unchanged replacement independently rereads and
@@ -195,16 +220,107 @@ retained receipt and fresh identity/membership/routing evidence prove no NKI
 submission. It never reinserts. An atomic one-shot receipt claim fences submission;
 possible prior load, consumed claims or changed scope refuse. Loader activation/
 render preparation does not establish dialog submission or permit customization.
-Historical deployment exceptions belong in WORKPAD.md, not runtime recipes.
+## Mixing and audio export
+
+```text
+MixerObservation = document + revision + host/project context + beatSeconds[]
+                   + tracks[] + limitations[]
+MixerTrack       = Path + kind + state + volume/pan + output + sends[] + devices[]
+MixSet          = expected MixerObservation + [{path, volumeDb?, pan?}]
+AudioStart      = operation + {expected, tracks: Path[], directory, start, end,
+                              sampleRate, bitDepth, dither, preFader, realTime}
+AudioStatus     = same operation
+```
+
+- `mix read` captures one stopped-document snapshot with host identity, generation,
+  revision, hierarchy, master, routing, sends and ordered device identities and
+  activation. `beatSeconds` maps zero, the current beat and cue beats through
+  the native tempo map. Capture time is envelope metadata. Volume reports native
+  physical value, linear amplitude and dB (null at silence). Pan records range
+  and mode. Distinguish stored and effective values and report unsupported fields.
+- `mix set` accepts a fresh complete expected snapshot and absolute volume/pan
+  changes for exact Paths. Require stopped transport and unchanged mixer scope.
+  Refuse recording, automation writing, render, save and automated/modulated
+  targets. Preflight the whole batch, write under one native Undo group and
+  independently reread. Preserve musical content and unrequested mixer state.
+- `export-audio start` takes fresh scope, exact track/group/return/master Paths,
+  a quarter-note range, a fresh output directory and admitted WAV options
+  (sample rate, depth, dither, pre/post-fader and real-time). Resolve every path
+  before changing the queue or settings. Reject missing targets, unsupported
+  options and existing output paths. Use task-owned settings and preserve
+  persistent export preferences. [`export_audio.rs`](src/export_audio.rs) owns
+  the sample-rate allowlist. Depth is INT16, INT24 or FLOAT32. Float WAV rejects
+  dither. Range endpoints must be exact native beats.
+- Return an operation ID immediately and observe progress, native outcome and
+  exact paths via `export-audio status`. The document thread remains available.
+  Independent checks establish file structure, isolation, signal and tails.
+  Native completion and musical approval remain separate.
+
+## Self-contained MIDI2 export
+
+```text
+Capture v2 = {version: 2, entities, midi: Snapshot, globals[], excluded[], decisions[]?}
+Context    = {beat, seconds, numerator, denominator}
+native read -> retained capture -> optional editorial copy -> assemble -> .midi2
+```
+
+- Capture reads one current document on its owning thread, optionally under an
+  exact Path. Exclude inactive tracks and descendants of inactive groups before
+  reading their clips unless explicitly included. Mute and solo are separate
+  state. Preserve selection, transport and project. Schema 1 requires a new
+  capture. Use the same complete snapshot grammar, including one automation
+  collection and explicit owners/scope. The capture stays intact. An editorial
+  copy may record musical decisions and losses and carries no native write
+  authority. See [the capture types](src/export_midi.rs).
+- For articulated tracks, use actual stock Filter/Map routing to interpret note
+  channels and shared displayed channel 1 (JSON 0). Resolve slot names against
+  the converter vocabulary. Encode supported meaning as Note On attributes
+  under one musical track identity. Retain an explicit remark for an ambiguous
+  slot name. Receiver channels carry local addresses. Require interpretation of
+  nonshared CC curves with points before collapsing routes. Use a documented
+  mapping for a plug-in parameter's function, units and polarity. Remove a
+  redundant DAW curve once it is represented by the interpreted control.
+- Lyric slots use `[lyrics lang=la reset=20] et in ter-ra pax`. Language and reset
+  key are optional. Spaces separate words and hyphens separate syllables.
+  The reset key marks command notes on admitted channels. Keep them as playback
+  commands outside engraved pitch. Unaligned text remains a timed performance
+  remark. Unmarked slots carry no inferred lyric semantics.
+- Expand exact source/loop occurrences into arranger time, clipping tails at
+  placement/loop ends and reporting clipping over one tick. Deduplicate repeated
+  observations of track automation while preserving distinct placements and
+  owners. Use 61,440 ticks per quarter, round once and preserve positive notes
+  for at least one tick. Preserve equal-time dependencies and report maximum
+  error. Keep unsupported operators/expression as explicit residuals.
+- Sample continuous controls within 1/1024 normalized error and preserve HOLD
+  boundaries. Native timing samples use 1/16 quarter-note spacing plus exact
+  stored meter changes. Tempo uses interval-average quarter duration. Check
+  decoded timing against sampled endpoints and report interior approximation.
+  Bound work to 100,000 loop segments, points per control and timing samples
+  respectively, and one million expanded events. Reject excess rather than
+  truncate. For M2-113 squared Volume, convert native cube-root amplitude `x`
+  using `x^(3/2)`, consistently for CC7 and per-note Volume.
+- Reuse the converter's wire and clip model. Put portable musical identities and
+  any residuals in the file. Leave native IDs, object graphs, plug-in state and
+  consumed routing in the capture. Validate bytes before atomic, no-clobber
+  publication. Reconstruction needs only the file.
 
 ## Wire, deployment and verification
 
 Loopback HTTP v2 uses `/v2/health` and `/v2/commands` with
 `{requestId,adapter?,command}`. The native wire is separately versioned and uses
 `{type:documentRequest,request,command}` plus correlated typed observations.
+Native frames are plain JSON preceded by a big-endian u32 byte length.
+The adapter `hello` identifies wire, adapter and host build. The service
+`welcome` supplies the session epoch and maximum message size. Reject empty
+or oversized frames. Request correlation, operation identity, document revision
+and session epoch have distinct lifetimes.
 Bound externally supplied frames and queues. Define connection cancellation,
 shutdown and partial-frame behavior while preserving original operation identity
 for recovery.
+For a repeated mutation request ID, the service compares the complete intent and
+returns the retained result or state of the original operation. A conflicting
+intent fails. This bounded record lives in the service process. After loss of
+the record, use current native readback and retained evidence to reconcile.
 Bump wire/adapter version → build → install immutable CLI/service/adapter → reload
 exact version → verify live handshake → reread → mutate. Never overwrite a loaded
 artifact or admit a mismatched/unknown host build by best-effort reflection.
@@ -219,8 +335,6 @@ selection restoration and unchanged musical/routing/geometry/name readback.
 Record elapsed time and payload sizes for scoped structure, selection and content;
 reject redundant full-project reads and unnecessary payloads.
 
-[RUNBOOK.md](RUNBOOK.md) owns qualification procedures, [WORKPAD.md](WORKPAD.md)
-owns historical incidents and actual evidence. [bitwig-explore](../../skills/bitwig-explore/SKILL.md)
-owns runtime discovery, selection and computer recipes. Compilation establishes
+[RUNBOOK.md](RUNBOOK.md) owns qualification procedures. Compilation establishes
 buildability. Native behavior, semantic fidelity, instrument support and audible
 playback require their own evidence.

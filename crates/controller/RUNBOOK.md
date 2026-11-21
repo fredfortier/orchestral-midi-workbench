@@ -1,8 +1,7 @@
 # Controller qualification
 
-Use [ARCHITECTURE.md](ARCHITECTURE.md) for the intended contracts and
-[WORKPAD.md](WORKPAD.md) for implementation gaps. This file defines evidence to
-collect; it does not grant permission to mutate an open project.
+Use [ARCHITECTURE.md](ARCHITECTURE.md) for the intended contracts. This runbook
+defines qualification evidence. Use disposable material for native tests.
 
 ## Fixture and observation
 
@@ -54,6 +53,6 @@ and features. Documentation-only changes require references/content/diff checks;
 unrelated builds add no evidence. Live tests remain separate from unattended runs.
 
 Report exact checks, fixture scope, readback/history evidence and unresolved limits.
-[qualification/](qualification/) contains historical results, not universal admission.
+[Retired qualification reports](../../docs/adrs/controller-native-authority.md) describe their original builds and fixtures.
 Current help and ARCHITECTURE.md determine executable syntax; historical recipes
 are not current execution instructions.

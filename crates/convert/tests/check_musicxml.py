@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 from lxml import etree
 
-schema_path = Path(__file__).resolve().parents[2] / 'research/standards/musicxml/musicxml-4.0/schema/musicxml.xsd'
+schema_path = Path(__file__).resolve().parents[3] / '.research/standards/musicxml/musicxml-4.0/schema/musicxml.xsd'
 class LocalSchema(etree.Resolver):
     def resolve(self, url, public_id, context):
         name = url.rsplit('/', 1)[-1]

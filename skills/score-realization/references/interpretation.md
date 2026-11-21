@@ -34,8 +34,8 @@ and dynamics. Use supported `adapt::Plan.passages` assertions to independently
 check track/instrument ownership and note coverage when constructing new plans.
 When present these partition every performed note including repeats; source
 prefixes use actual converter identities, not printed bar numbers. Expectations
-come from score review, not copied conversion results. See
-[reviewed passages](../../../convert/RENDITION.md#reviewed-passages-and-dynamic-curves).
+come from score review. Use the [rendition inputs](conversion.md#rendition-inputs)
+to record the assertions.
 
 Authored dynamic curves need explicit supported rendering rules. The converter
 does not invent smoothing, breaths, bowing or phrase contours. Store unsupported

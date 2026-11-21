@@ -32,10 +32,7 @@ Do not dump every note or point. Use only the relevant detail filter below.
 | Conditional notes, spread, curved automation | Nominal notes and reported residual/approximation are default | Exception counts; do not simulate playback |
 | Missing spelling/slurs/lyric timing | Accept reported editorial notation limits | Do not infer one syllable per note or authored slurs |
 
-No runtime standards survey is needed. The owning architecture already records
-MIDI2/MusicXML and MuseScore/music21 precedents. Consult a specific cited section
-only for a concrete unsupported decision; otherwise preserve the residual and
-finish. The [official CC list](https://midi.org/midi-1-0-control-change-messages)
+Preserve unsupported meaning as a residual. The [official CC list](https://midi.org/midi-1-0-control-change-messages)
 and [cheatsheet](https://producersociety.com/midi-cc-cheatsheet/) identify controller
 functions, not plugin knob assignments.
 

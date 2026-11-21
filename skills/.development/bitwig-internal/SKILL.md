@@ -11,9 +11,9 @@ selection, stored notes and location context through the document adapter. Do
 not add a JavaScript bridge, grid reconstruction path, MIDI interface or a
 second competing note model.
 
-Read the [controller architecture](../../../controller/ARCHITECTURE.md) for
-intended authority/data boundaries and [repair workpad](../../../controller/WORKPAD.md)
-for implementation gaps. [Probe inventory](../../../controller/probes/README.md)
+Read the [controller architecture](../../../crates/controller/ARCHITECTURE.md) for
+intended authority/data boundaries and [historical qualification](../../../docs/adrs/controller-native-authority.md)
+for build-specific evidence. [Probe inventory](../../../crates/controller/probes/README.md)
 and retained qualifications establish only their original host/fixture scope.
 For ordinary musical tasks use [the focused workflow](../../WORKFLOW.md).
 This skill does not authorize native mutation or an implementation change by itself.
@@ -37,9 +37,8 @@ Start new integration work with [the Java harness conventions](references/java-h
 Resolve references relative to this skill. Retained host observations are
 build-specific executable evidence, not public API contracts. Research, source
 lineage and failed hypotheses live in [SOURCES.md](SOURCES.md).
-Use the public SDK manual in the neighboring `bitwig-controller`
-skill for lifecycle signatures and musical terminology; never infer a private
-signature or global selection scope from a similarly named public proxy.
+Use the published Java SDK for lifecycle signatures. Qualify private methods
+and selection scope against the actual admitted host build.
 
 ## Work in isolation before composition
 

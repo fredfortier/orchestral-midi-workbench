@@ -17,7 +17,7 @@ Never substitute current transport tempo for location tempo.
 | `fvB()` | source loop region, with time/duration attributes |
 
 Use the host mapping object to convert elapsed clip time to source position and
-loop iteration. The [mapping probe](../../../../controller/validation/editor-selection/clip-mapping.jsonl)
+loop iteration. The mapping probe (retired archive: `crates/controller/validation/editor-selection/clip-mapping.jsonl`)
 exercises elapsed 0, 1, 5 and 64, including offset .375 and a two-beat loop.
 Do not assume `source = project - placement` or clamp all notes to one loop.
 Changing the start marker with `UMc(double)` changed duration because the stop
@@ -37,7 +37,7 @@ unrequested payload change, or use this exception to hide altered music.
 
 ## Location transport
 
-The [context probe](../../../../controller/probes/NotesDocumentProbe.java)
+The [context probe](../../../../crates/controller/probes/NotesDocumentProbe.java)
 resolves the inspected document transport with `document.Nh()`. In that build:
 
 - `EwU(projectBeats)` maps beats to seconds; `jaQ(seconds)` maps back.
@@ -48,7 +48,7 @@ resolves the inspected document transport with `document.Nh()`. In that build:
   the host signature helper, and retain bar/beat context where established.
 - Keep playhead-before/after in the evidence to prove the query did not seek.
 
-The [retained context observations](../../../../controller/validation/editor-selection/context.jsonl)
+The retained context observations (retired archive: `crates/controller/validation/editor-selection/context.jsonl`)
 verify BPM 110 before beat 32, BPM 140 and 3/4 at/after beat 32, with exact
 beat/second round trips. They do not yet validate every ramp, pickup or meter case.
 Test ramps and boundaries independently before claiming complete map coverage.

@@ -1,8 +1,4 @@
-# Execution Plans
+# Execution plans
 
-This directory holds long-lived plans for complex work.
-
-- Put active work in `active/`.
-- Move finished plans to `completed/`.
-- Start from `templates/execution-plan.md`.
-- Record deferred cleanup in `tech-debt-tracker.md`.
+Use the [plan guide](../PLANS_GUIDE.md) and [template](templates/execution-plan.md).
+Record deferred work in the [debt tracker](tech-debt-tracker.md).

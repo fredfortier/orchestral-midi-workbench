@@ -1,8 +1,8 @@
 # Probe and establish correctness
 
-Use the existing [probe inventory](../../../../controller/probes/README.md),
-[native editing runbook](../../../../controller/RUNBOOK.md) and
-[retained host evidence](../../../../controller/validation/editor-selection/README.md).
+Use the existing [probe inventory](../../../../crates/controller/probes/README.md),
+[native editing runbook](../../../../crates/controller/RUNBOOK.md) and
+retained host evidence (retired archive: `crates/controller/validation/editor-selection/README.md`).
 Preserve a failed probe and its input before changing the implementation.
 
 ## Repeatable use cases

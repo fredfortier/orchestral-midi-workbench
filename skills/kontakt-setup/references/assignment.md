@@ -1,8 +1,7 @@
 # Exact path assignment
 
-Pass [eligibility](eligibility.md), then execute the settled PERFORMANCE.md schedule.
-[ARCHITECTURE.md](../../../controller/ARCHITECTURE.md#purpose-and-execution-boundaries)
-owns the data and execution contract. This reference owns the control flow.
+Pass [eligibility](eligibility.md), then execute the settled PERFORMANCE.md
+schedule. Use current `midi-bridge controller instrument --help` for syntax.
 
 Create a target JSON path containing project, native groups, track, Instrument Layer
 and optionally Layer. For example:
@@ -67,7 +66,7 @@ Default assignment still closes the editor.
 
 For a completed-insertion ownership failure or retained initial-render preflight
 failure conclusively proving no NKI submission, retain `instrument status --operation ID` as a fresh JSON receipt.
-After owner repair, the same integrated `assign` accepts `--resume-before-load
+Once the intended editor is available, the same integrated `assign` accepts `--resume-before-load
 STATUS_JSON` with the original target and settled NKI, fresh operation/output and
 optional keep-open flag. It validates the same persistent owner, receiver and routing, skips insertion,
 requalifies ownership and claims that receiver once before loading. Authorized

@@ -1,8 +1,8 @@
 # Native placement around complete clip CRUD
 
-[ARCHITECTURE.md](../../../controller/ARCHITECTURE.md) is binding. The former
-project/import workflow, graph captures and render/save command
-families are retired. Do not recreate or invoke them.
+For placement, use the native project actions and complete musical edits
+described below. Confirm each required action is available before preparing
+dependent writes.
 
 1. Compile the explicit performance using [conversion](conversion.md). Authenticate
    MIDI2/companion with `controller midi decode --input FILE --companion FILE` when

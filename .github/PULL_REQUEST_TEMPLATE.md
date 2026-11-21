@@ -8,12 +8,11 @@
 - [ ] `make ci`
 - [ ] Relevant tests or manual verification completed
 - [ ] Docs updated if behavior changed
-- [ ] History entry added or updated if this changed code/workflow
+- [ ] ADR linked if the change records a consequential decision
 - [ ] Release notes updated if user-visible
 
 ## Context
 
 - Execution plan:
-- Product spec:
-- History entry:
+- Architecture or ADR:
 - Follow-up debt:
