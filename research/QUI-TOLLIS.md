@@ -143,7 +143,8 @@ for notation rehearsals.
   ordinary Close with Save and reversible OSC engine deactivation left the
   project and engine active without advancing the saved file. Only the earlier
   score/cue saves are proved. The continuation stopped before claiming or
-  submitting the NKI. Shared-engine termination awaits user authorization.
+  submitting the NKI. Shared-engine termination was considered before the
+  orphaned-dialog recovery below.
 - The failed save eventually showed an explicit Kontakt state timeout. After
   dismissing the prompt without proceeding, the native clip operations
   responded despite the audio-engine alert. A fresh empty Scene 1 observation
@@ -164,8 +165,7 @@ for notation rehearsals.
 - An explicit attempt to create into occupied Scene 1 returned
   `InvalidRequest / NotDispatched`, and an independent read still matched the
   exact Launcher clip, its geometry and all eight notes. These checks establish
-  transport and edit mechanics. Audible audition, promotion and persistence of
-  the candidate remain open.
+  transport and edit mechanics. Audible audition and promotion remain open.
 
 ### Wrong-context display probes
 
@@ -180,6 +180,51 @@ for notation rehearsals.
   while leaving native selection empty. The earlier focused track retained
   influence over the action. Explicit exact header membership is a production
   prerequisite, even when a null primary otherwise looks harmless.
+
+### Dialog recovery and disk verification
+
+- A later native window inventory exposed one visible `Load` dialog.
+  Observation-only Win32 inspection matched its owner HWND and PID to the
+  retained Violino I loader request. Its filename was empty. Canceling only
+  that dialog released the queued project chooser and cleared the plug-in
+  alert. No patch path was supplied or submitted. No shared-engine reset
+  was needed for this recovery.
+- A byte-identical copy of the earlier save opened in Bitwig without
+  activating audio. Independent native reads matched all 12 Arranger clips
+  and 2,173 notes, plus all eight cue names and beats. Native identifiers
+  were regenerated and were excluded from the musical value comparison.
+- After returning to the original tab, the visible project and the remote
+  controller cursor disagreed. Native `info` and fresh OSC feedback pointed
+  at another project. The visible **File → Save** action changed the original
+  project file from SHA-256 prefix `e670b80c` to `ea2ac435`. No remote write
+  was issued against the mismatched target. A fresh copy of the latter bytes
+  opened in Bitwig and the exact Scene 1 Launcher read matched all eight
+  notes, clip geometry and loop settings. This verifies the saved data.
+  Closing and reopening the original path and retrying its integrated
+  assignment remain open.
+- The saved copy also reopened with the Violino I Channel Filter, Channel
+  Map and Kontakt 7 shell. Activating audio once from the verified project
+  changed the native engine state from `NOT_CONNECTED` to `CONNECTING`.
+  Subsequent native reads still reported `CONNECTING`, fresh OSC feedback
+  reported engine `0`, and the window inventory showed no plug-in dialog.
+  The assignment requires a connected engine. No new NKI load was dispatched.
+
+### Occupied placement and append
+
+- In the saved candidate copy, slot 1 on occupied Violino I beats [60,68)
+  split the original into [0,60) and [68,153) and inserted an empty clip
+  between them. Focus and correct range were insufficient when the range
+  contained music. One known-adjacent Undo restored the full original
+  geometry and all 2,173 notes. The production recipe now calls out the
+  replacement consequence as well as the required empty-range check.
+- An adjacent empty range [153,159) on the same track produced one clip
+  without touching the prior close. Copied the eight-note figure from
+  [63,69) into that clip's source coordinates and independently verified
+  position, values and preservation of all 12 preceding clips. Native
+  timing samples confirmed 3/4 and 55 BPM across the join. Two separately
+  verified history operations reversed the insertion and clip creation.
+  This qualifies unchanged-pulse append mechanics. Local timing changes
+  and the audible join remain separate.
 
 ## Fresh reverse export
 

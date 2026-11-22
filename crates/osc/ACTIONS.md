@@ -41,8 +41,10 @@ for the qualified context and effect checks. Retain results in the
 [Bach exercise](../../research/QUI-TOLLIS.md).
 
 - Establish whether the native range plus slot 5 supplies the focus needed for
-  slot 1. Challenge both inactive focus and occupied space. Test a compatible
-  multi-track range before using score placement as a batch.
+  slot 1. The Bach exercise verified shared empty-range placement on two
+  instrument tracks and then on ten. Its occupied-range probe replaced the
+  middle of an existing clip with an empty clip. Prove each intended track's
+  range is empty before dispatch.
 - Compare slot 2 to native selection, which can select an off-screen passage,
   and slot 3 to native lane lookup, which can address a hidden lane.
 - For slot 4, compare visible occurrences and stored source content across both
@@ -55,3 +57,7 @@ for the qualified context and effect checks. Retain results in the
   timing. A per-beat meter or tempo edit requires stored timing evidence across
   the proposed boundary. Project new/open/first-save and destructive
   focus-dependent routes stay open until tested in their actual context.
+- Verify OSC project focus against the exact native project path before writes.
+  When the remote and visible project disagree, the named File → Save action
+  has a verified disk outcome on the visible project. Keep remote writes
+  gated until the target is resolved.

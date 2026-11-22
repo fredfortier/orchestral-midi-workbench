@@ -46,6 +46,13 @@ stored notes, expression, and curves. Use [Kontakt setup](../../kontakt-setup/SK
 for receiver ensure. Indexed session control does not supply the native identity or
 preservation needed by those operations.
 
+The visible project tab and controller target can differ after opening or
+closing a project. Reobserve both before issuing a write. An OSC project
+name alone cannot distinguish duplicate opens or prove a saved path. If a
+remote Save would target a different project, use the named File → Save
+action in the visible, previously identified project and verify the exact
+file on disk. Resolve the remote target before resuming remote writes.
+
 ## Qualified configured profile
 
 The following controller assignments were exercised in Bitwig 6.1 with
@@ -55,7 +62,7 @@ and verify the effect before dependent actions.
 
 | Slot and binding | Preconditions and checks |
 | --- | --- |
-| **1 · General · Create Empty Clip** | Resolve a shared empty time range on one or more compatible instrument tracks, with no overlap. Require stopped transport and a live native selection read with exact range, track membership and `editor: arranger`. If focus is missing use slot 5 as described below and reread. Dispatch once, then independently verify one empty arranger clip per requested track with exact owner, start and duration, plus preservation of adjacent material. Pass its path to editing. |
+| **1 · General · Create Empty Clip** | Prove the selected time range has no overlap on every intended instrument track. An occupied selection can replace the audible middle of an existing clip with an empty clip. Require stopped transport and a live native selection read with exact range, track membership and `editor: arranger`. If focus is missing use slot 5 as described below and reread. Dispatch once, then independently verify one empty arranger clip per requested track with exact owner, start and duration, plus preservation of adjacent material. Pass its path to editing. |
 | **2 · Arranger · Zoom Arranger to Selection** | Set the exact arranger object/range and observe viewport before sending. Compare the resulting bounds and verify native selection stays on the target. |
 | **3 · Arranger · Toggle Automation Lanes for Selected Tracks** | Explicitly select the exact track headers before toggling. An empty primary and member list can still toggle the last track's lanes. Observe current disclosure, then check target and neighboring track visibility. For lane time selection or curve edits, use the native procedures. |
 | **4 · General · Split** | Use a stopped, focused Arranger with one track time-range selection whose first bound is inside the intended nonlooping clip and whose second bound is the clip end. Verify the selected owners and absence of overlapping clips. After dispatch, verify both placements/source windows and surviving note/expression occurrences. Each side can retain source notes outside its playback window. Other geometry cases require qualification. |
