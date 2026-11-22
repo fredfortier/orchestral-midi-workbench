@@ -22,7 +22,7 @@ rand_chacha = "0.9"
 serde = { version = "1", features = ["derive"] }
 base64 = "0.22"
 serde_json = { version = "1", features = ["float_roundtrip"] }
-tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "io-util", "time", "signal", "sync"] }
+tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread", "net", "io-util", "time", "signal", "sync"] }
 tracing = { version = "0.1", default-features = false, features = ["std"] }
 tracing-subscriber = { version = "0.3", default-features = false, features = ["env-filter", "fmt"] }
 
