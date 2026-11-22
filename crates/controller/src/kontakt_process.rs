@@ -101,38 +101,8 @@ const FILES: &[(&str, &[u8])] = &[
         include_bytes!("../adapters/kontakt-ctl/assets/targets/browse_for_folder_button.png"),
     ),
     (
-        "assets/targets/choose-base-folder__xminus.png",
-        include_bytes!("../adapters/kontakt-ctl/assets/targets/choose-base-folder__xminus.png"),
-    ),
-    (
-        "assets/targets/choose-base-folder__xplus.png",
-        include_bytes!("../adapters/kontakt-ctl/assets/targets/choose-base-folder__xplus.png"),
-    ),
-    (
-        "assets/targets/file__load.png",
-        include_bytes!("../adapters/kontakt-ctl/assets/targets/file__load.png"),
-    ),
-    (
         "assets/targets/file__menu.png",
         include_bytes!("../adapters/kontakt-ctl/assets/targets/file__menu.png"),
-    ),
-    (
-        "assets/targets/file_menu.png",
-        include_bytes!("../adapters/kontakt-ctl/assets/targets/file_menu.png"),
-    ),
-    (
-        "assets/targets/load__my-computer.png",
-        include_bytes!("../adapters/kontakt-ctl/assets/targets/load__my-computer.png"),
-    ),
-    (
-        "assets/targets/load__my-computer__x__first-node.png",
-        include_bytes!(
-            "../adapters/kontakt-ctl/assets/targets/load__my-computer__x__first-node.png"
-        ),
-    ),
-    (
-        "assets/targets/load__my-computer_x.png",
-        include_bytes!("../adapters/kontakt-ctl/assets/targets/load__my-computer_x.png"),
     ),
     (
         "kontakt_ctl/__init__.py",

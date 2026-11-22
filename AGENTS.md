@@ -1,4 +1,4 @@
-# Unnamed musical tooling
+# Orchestral MIDI Workbench
 
 ## Development workflow
 

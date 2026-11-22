@@ -1,4 +1,5 @@
 # Reference inputs
 
-See [pinned corpus, schemas and retrieval](../CICD.md#verification-inputs).
-The research archive manifest records source revisions and hashes.
+The [verification guide](../CICD.md#verification-inputs) identifies the pinned
+music21 corpus and MusicXML schemas and shows how to fetch them for tests.
+The optional research archive records source revisions and hashes separately.

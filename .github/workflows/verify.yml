@@ -1,0 +1,28 @@
+name: Verify
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Install verification dependencies
+        run: |
+          rustup component add rustfmt clippy
+          sudo apt-get update
+          sudo apt-get install -y python3-lxml
+          mkdir -p "$RUNNER_TEMP/verify-bin"
+          ln -s /usr/bin/python3 "$RUNNER_TEMP/verify-bin/python3"
+          echo "$RUNNER_TEMP/verify-bin" >> "$GITHUB_PATH"
+      - name: Fetch pinned test inputs
+        run: /usr/bin/python3 scripts/fetch-test-inputs.py
+      - name: Check formatting
+        run: cargo fmt --manifest-path crates/Cargo.toml --all -- --check
+      - name: Test workspace
+        run: cargo test --manifest-path crates/Cargo.toml --workspace --all-targets --locked
+      - name: Lint workspace
+        run: cargo clippy --manifest-path crates/Cargo.toml --workspace --all-targets --locked -- -D warnings

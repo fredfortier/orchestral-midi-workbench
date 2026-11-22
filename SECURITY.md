@@ -1,15 +1,10 @@
 # Security Policy
 
-## Reporting
+Report a suspected vulnerability privately through
+[GitHub Security Advisories](https://github.com/fredfortier/orchestral-midi-workbench/security/advisories/new)
+when private reporting is available. If the form is unavailable, email the
+maintainer at `fredfortier@gmail.com`. Please use GitHub Issues for ordinary
+bugs and feature requests.
 
-Do not open a public issue for a suspected vulnerability.
-
-Instead, report it through the private security channel your organization uses and include:
-
-- Affected area and impact.
-- Reproduction steps or proof of concept.
-- Known mitigations or workarounds.
-
-## Scope
-
-This repository is a base template. Projects created from it should replace this file with a real security contact and response process.
+Include the affected revision, component, impact, and enough detail for the
+maintainer to verify the report. Current fixes target the default branch.

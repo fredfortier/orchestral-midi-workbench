@@ -11,7 +11,7 @@ This repository is designed for agent-first development, but the same rules appl
 
 ## Before Opening A Pull Request
 
-- Run the local checks that directly match the change; this template no longer ships a single default CI command.
+- Run the [workspace checks](docs/CICD.md) and any native checks that match the change.
 - Use the [ADR guide](docs/ADR_GUIDE.md) for consequential decisions.
 - Update release notes when the change is user-visible.
 - Verify examples and scripts still match the current behavior.
