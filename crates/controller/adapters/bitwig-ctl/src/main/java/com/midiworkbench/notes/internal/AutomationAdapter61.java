@@ -12,15 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/** Admitted-build stored arranger source curves; invoked only on the document thread. */
+/** Admitted-build stored arranger and launcher source curves; invoked only on the document thread. */
 final class AutomationAdapter61 {
-    private final EditorAdapter61 editor;
     private final Object proxy;
     private final ClassLoader loader;
-    record Owner(Object track,Object lane,Object clip,Object source,Object timeline,Object valueType) {}
+    record Owner(Object lane,Object clip,Object launcherSlot,Object source,Object timeline,Object valueType) {}
     record Prepared(Owner owner,ObjectNode edit,Map<String,Object> points) {}
-    AutomationAdapter61(EditorAdapter61 editor,Object proxy) {
-        this.editor=editor;this.proxy=proxy;this.loader=proxy.getClass().getClassLoader();
+    AutomationAdapter61(Object proxy) {
+        this.proxy=proxy;this.loader=proxy.getClass().getClassLoader();
     }
     private Class<?> type(String name) throws Exception {return Class.forName(name,true,loader);}
     private static Object call(Object owner,String method) throws Exception {return Reflection.call(owner,method);}
@@ -50,7 +49,7 @@ final class AutomationAdapter61 {
         else throw new IllegalStateException("Unsupported native automation point representation");
         return n;
     }
-    ArrayNode readTrack(Object document,Object track,Map<String,Owner> owners) throws Exception {
+    ArrayNode readTrack(Object document,Object track,boolean includeArranger,List<Object> launcherClips,Map<String,Owner> owners) throws Exception {
         ArrayNode result=Wire.JSON.createArrayNode();
         String trackId=id(track);Object lanes=value(track,"automation_lanes");
         for(Object lane:(List<?>)Reflection.call(lanes,"XrN",new Class<?>[]{String.class},new Object[]{null})) {
@@ -71,12 +70,26 @@ final class AutomationAdapter61 {
                 }
                 Object valueType=call(reference,"heu");
                 if(valueType==null)throw new IllegalStateException("Unsupported stored automation target ("+context+"): reference value type is absent; complete read refused, no lanes omitted");
-                Object arranger=call(lane,"XQF");List<?> clips=(List<?>)call(arranger,"v33");
-                Object outside=value(arranger,"outside_timeline");
-                addLane(result,document,track,trackId,lane,atom,reference,valueType,null,outside,List.of(),owners);
-                for(Object clip:clips) {
-                    if(!type("I3W").isInstance(clip))throw new IllegalStateException("Unexpected native automation clip");
-                    addLane(result,document,track,trackId,lane,atom,reference,valueType,clip,call(clip,"mQv"),clips,owners);
+                if(includeArranger) {
+                    Object arranger=call(lane,"XQF");List<?> clips=(List<?>)call(arranger,"v33");
+                    Object outside=value(arranger,"outside_timeline");
+                    addLane(result,document,track,lane,atom,reference,valueType,null,outside,clips,null,null,owners);
+                    for(Object clip:clips) {
+                        if(!type("I3W").isInstance(clip))throw new IllegalStateException("Unexpected native automation clip");
+                        addLane(result,document,track,lane,atom,reference,valueType,clip,call(clip,"mQv"),clips,null,null,owners);
+                    }
+                }
+                if(!launcherClips.isEmpty()) {
+                    List<LauncherCurve> placements=new ArrayList<>();
+                    for(Object noteClip:launcherClips) {
+                        Object slot=launcherSlot(lane,noteClip,false),clip=Launcher61.clip(slot);
+                        if(clip!=null)placements.add(new LauncherCurve(noteClip,slot,clip));
+                    }
+                    List<Object> clips=placements.stream().map(LauncherCurve::clip).toList();
+                    for(LauncherCurve placement:placements) {
+                        Object clip=placement.clip();
+                        addLane(result,document,track,lane,atom,reference,valueType,clip,call(clip,"mQv"),clips,placement.noteClip(),placement.slot(),owners);
+                    }
                 }
             }catch(Exception error) {
                 throw new IllegalStateException("Complete automation read failed ("+laneContext+"): "+error.getMessage(),error);
@@ -84,9 +97,25 @@ final class AutomationAdapter61 {
         }
         return result;
     }
-    private void addLane(ArrayNode result,Object document,Object track,String trackId,Object lane,Object atom,Object reference,Object valueType,Object clip,Object timeline,List<?> clips,Map<String,Owner> owners) throws Exception {
+    private record LauncherCurve(Object noteClip,Object slot,Object clip) {}
+
+    private Object launcherSlot(Object lane,Object noteClip,boolean createSlot) throws Exception {
+        Object slots=call(lane,"TcB");
+        int scene=Launcher61.scene(Launcher61.noteSlot(noteClip));
+        if(scene>=((Number)call(slots,"FSQ")).intValue()) {
+            if(!createSlot)return null;
+            call(slots,"ncc",new Class<?>[]{int.class},scene+1);
+        }
+        return call(slots,"jaQ",new Class<?>[]{int.class},scene);
+    }
+
+    private void addLane(ArrayNode result,Object document,Object track,Object lane,Object atom,Object reference,
+            Object valueType,Object clip,Object timeline,List<?> clips,Object noteClip,Object launcherSlot,
+            Map<String,Owner> owners) throws Exception {
+        String trackId=id(track);
         Object source=clip==null?timeline:call(clip,"dxV");String clipId=clip==null?id(timeline):id(clip);
-        ObjectNode c=result.addObject();c.set("owner",ProjectAddress61.nativeTrackPath(document,track));c.put("placement",clip==null?"arranger":"clip");
+        ObjectNode c=result.addObject();c.set("owner",ProjectAddress61.nativeTrackPath(document,track));c.put("placement",noteClip!=null?"launcher":clip==null?"arranger":"clip");
+        if(noteClip!=null)c.put("noteClip",id(noteClip));
         c.put("track",trackId);c.put("lane",id(lane));c.put("clip",clipId);c.put("source",id(source));
         ArrayNode aliases=c.putArray("aliases");
         if(clip==null){aliases.add(clipId);c.put("referenceCount",1);}
@@ -96,7 +125,8 @@ final class AutomationAdapter61 {
         }
         ObjectNode mapping=c.putObject("mapping");
         if(clip!=null) {
-            mapping.put("startBeats",number(call(clip,"T1L")));mapping.put("durationBeats",number(call(clip,"GaO")));
+            mapping.put("startBeats",noteClip!=null?0.0:number(call(clip,"T1L")));
+            mapping.put("durationBeats",number(call(clip,noteClip!=null?"Fgm":"GaO")));
             mapping.put("sourceStartBeats",number(call(clip,"dD_")));mapping.put("sourceEndBeats",number(call(clip,"Fgm")));mapping.put("loopEnabled",(boolean)call(clip,"YeF"));
             Object loop=call(clip,"fvB");mapping.put("loopStart",number(value(loop,"time")));mapping.put("loopLength",number(value(loop,"duration")));
         }
@@ -113,7 +143,7 @@ final class AutomationAdapter61 {
             if((status&0xf0)==0xb0){target.put("kind","midiCc");target.put("channel",status&15);target.put("controller",((Number)call(atom,"Iz2")).intValue());}
         }
         ArrayNode points=c.putArray("points");for(Object point:(List<?>)call(timeline,"v33"))points.add(point(point));
-        if(owners!=null)owners.put(key(trackId,id(lane),clipId),new Owner(track,lane,clip,source,timeline,valueType));
+        if(owners!=null)owners.put(key(trackId,id(lane),clipId),new Owner(lane,clip,launcherSlot,source,timeline,valueType));
     }
     private static List<JsonNode> curves(JsonNode snapshot) {
         List<JsonNode> result=new ArrayList<>();
@@ -121,9 +151,7 @@ final class AutomationAdapter61 {
         return result;
     }
     private Object call(Object owner,String method,Class<?>[] signature,Object... args) throws Exception {return Reflection.call(owner,method,signature,args);}
-    List<Prepared> prepare(ObjectNode snapshot,JsonNode edits) throws Exception {
-        Map<String,Owner> owners=new LinkedHashMap<>();Object document=call(proxy,"getDocument");
-        for(Object track:editor.automationTracks(snapshot).values())readTrack(document,track,owners);
+    List<Prepared> prepare(ObjectNode snapshot,Map<String,Owner> owners,JsonNode edits) throws Exception {
         if(!edits.isArray())throw new IllegalArgumentException("Automation edits must be an array");
         List<Prepared> prepared=new ArrayList<>();Set<Object> sources=java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         Set<String> known=new HashSet<>(),temporary=new HashSet<>();int total=0;
@@ -161,18 +189,27 @@ final class AutomationAdapter61 {
         }
         return defaults;
     }
-    record Creation(Object track,Object parameter,ObjectNode input) {}
-    List<Creation> prepareCreates(ObjectNode snapshot,JsonNode inputs)throws Exception {
+    record Creation(Object track,Object noteClip,Object parameter,ObjectNode input) {}
+    List<Creation> prepareCreates(ObjectNode snapshot,Map<String,Object> clips,Set<String> arrangerTracks,JsonNode inputs)throws Exception {
         List<Creation> result=new ArrayList<>();Set<String> known=new HashSet<>(),temporary=new HashSet<>(),targets=new HashSet<>();
         for(JsonNode curve:curves(snapshot))for(JsonNode p:curve.required("points"))known.add(p.required("id").asText());
         for(JsonNode input:inputs) {
             JsonNode target=input.required("target");boolean parameterTarget=target.path("kind").asText().equals("parameter");
             if(parameterTarget)keys(target,Set.of("kind","device","nativeParameterId","name","min","max","domain","unit","pointType"));
             else keys(target,Set.of("kind","channel","controller"));
-            if(!input.required("placement").asText().equals("arranger"))throw new IllegalArgumentException("Expected native arranger automation");
+            boolean launcher=input.required("placement").asText().equals("launcher");
+            if(!launcher && !input.required("placement").asText().equals("arranger"))
+                throw new IllegalArgumentException("Expected arranger or launcher automation");
             Object document=call(proxy,"getDocument");
             Object track=ProjectAddress61.resolveNative(input.required("owner"),document,loader);
             if(track.getClass().getName().equals("com.bitwig.flt.document.core.master.stI"))track=call(track,"DQP");
+            Object noteClip=null;
+            if(launcher) {
+                noteClip=clips.get(text(input,"noteClip"));
+                if(noteClip==null || Launcher61.noteSlot(noteClip)==null || call(Launcher61.noteSlot(noteClip),"eu_")!=track)
+                    throw new IllegalArgumentException("Launcher automation requires an observed note clip on its owning track");
+                if(arrangerTracks.contains(id(track)))throw new IllegalArgumentException("Create launcher automation through a launcher-only clip scope");
+            } else if(!arrangerTracks.contains(id(track)))throw new IllegalArgumentException("Arranger automation requires an arranger scope");
             Object parameter=null;String identity;
             if(parameterTarget) {
                 JsonNode devicePath=target.required("device");
@@ -184,27 +221,29 @@ final class AutomationAdapter61 {
                 identity="midiCc:"+target.required("channel")+":"+target.required("controller");
             }
             boolean owned=false;for(JsonNode path:snapshot.required("owners"))if(path.equals(input.required("owner")))owned=true;
-            if(!owned || !targets.add(id(track)+":"+identity))throw new IllegalArgumentException("New automation owner is absent or repeated");
-            for(JsonNode curve:curves(snapshot))if(curve.required("track").asText().equals(id(track)) && (parameterTarget?curve.required("target").path("nativeParameterId").equals(target.required("nativeParameterId")):curve.required("target").path("kind").asText().equals("midiCc") && curve.required("target").path("channel").equals(target.required("channel")) && curve.required("target").path("controller").equals(target.required("controller"))))throw new IllegalArgumentException("Automation lane already exists; edit its complete points");
+            if(!owned || !targets.add(id(track)+":"+input.path("noteClip").asText()+":"+identity))throw new IllegalArgumentException("New automation owner is absent or repeated");
+            for(JsonNode curve:curves(snapshot))if(curve.required("track").asText().equals(id(track)) && curve.path("noteClip").equals(input.path("noteClip")) && (parameterTarget?curve.required("target").path("nativeParameterId").equals(target.required("nativeParameterId")):curve.required("target").path("kind").asText().equals("midiCc") && curve.required("target").path("channel").equals(target.required("channel")) && curve.required("target").path("controller").equals(target.required("controller"))))throw new IllegalArgumentException("Automation lane already exists; edit its complete points");
             ObjectNode physical=Wire.object();physical.put("min",parameterTarget?target.required("min").doubleValue():0.0);physical.put("max",parameterTarget?target.required("max").doubleValue():1.0);physical.put("domain",parameterTarget?target.required("domain").asText():"LINEAR");physical.put("pointType",parameterTarget?target.required("pointType").asText():"continuous");
-            JsonNode points=input.required("points");if(points.isEmpty() || points.get(0).required("time").doubleValue()!=0)throw new IllegalArgumentException("New CC arranger data must declare its beat-zero value");
+            JsonNode points=input.required("points");if(points.isEmpty() || points.get(0).required("time").doubleValue()!=0)throw new IllegalArgumentException("New automation must declare its beat-zero value");
             validatePoints(points,Wire.JSON.createArrayNode(),physical,known,temporary);
-            result.add(new Creation(track,parameter,input.deepCopy()));
+            result.add(new Creation(track,noteClip,parameter,input.deepCopy()));
         }
         return result;
     }
-    List<Owner> prepareDeletes(ObjectNode snapshot,JsonNode inputs)throws Exception {
-        List<Owner> result=new ArrayList<>();Map<String,Owner> owners=new LinkedHashMap<>();
-        for(Object track:editor.automationTracks(snapshot).values())readTrack(call(proxy,"getDocument"),track,owners);
+    List<Owner> prepareDeletes(ObjectNode snapshot,Map<String,Owner> owners,JsonNode inputs)throws Exception {
+        List<Owner> result=new ArrayList<>();
         for(JsonNode input:inputs) {
-            if(!input.required("placement").asText().equals("clip") || input.required("referenceCount").intValue()!=1 || input.required("aliases").size()!=1 || curves(snapshot).stream().noneMatch(input::equals))throw new IllegalArgumentException("Only an observed exclusive automation placement can be deleted");
+            if(!Set.of("clip","launcher").contains(input.required("placement").asText()) || input.required("referenceCount").intValue()!=1 || input.required("aliases").size()!=1 || curves(snapshot).stream().noneMatch(input::equals))throw new IllegalArgumentException("Only an observed exclusive automation placement can be deleted");
             Owner owner=owners.get(key(input.required("track").asText(),input.required("lane").asText(),input.required("clip").asText()));
             if(owner==null || owner.clip()==null || result.contains(owner))throw new IllegalArgumentException("Missing or repeated automation deletion");result.add(owner);
         }
         return result;
     }
     void deleteAll(List<Owner> inputs)throws Exception {
-        for(Owner owner:inputs)call(call(owner.lane(),"XQF"),"v33",new Class<?>[]{type("oHd"),boolean.class},owner.clip(),false);
+        for(Owner owner:inputs) {
+            if(owner.launcherSlot()!=null)call(owner.launcherSlot(),"Vdp");
+            else call(call(owner.lane(),"XQF"),"v33",new Class<?>[]{type("oHd"),boolean.class},owner.clip(),false);
+        }
     }
     List<ObjectNode> createAll(List<Creation> inputs,ObjectNode identities)throws Exception {
         List<ObjectNode> result=new ArrayList<>();Object document=call(proxy,"getDocument");
@@ -213,27 +252,40 @@ final class AutomationAdapter61 {
             Object parameter=creation.parameter();
             if(!parameterTarget)parameter=call(value(creation.track(),"midi_parameter_container"),"TUp",new Class<?>[]{int.class,int.class},target.required("channel").intValue(),target.required("controller").intValue());
             Object reference=type("com.bitwig.flt.document.core.master.oJn").getMethod("v33",type("bXo")).invoke(null,parameter),valueType=call(reference,"heu");
-            Object lane=call(creation.track(),"YLV",new Class<?>[]{type("com.bitwig.flt.document.core.iface.bf")},reference),timeline=value(call(lane,"XQF"),"outside_timeline");
+            Object lane=call(creation.track(),"YLV",new Class<?>[]{type("com.bitwig.flt.document.core.iface.bf")},reference);
+            Object slot=null,clip=null,timeline;
+            Object noteClip=creation.noteClip();
+            if(noteClip==null)timeline=value(call(lane,"XQF"),"outside_timeline");
+            else {
+                slot=launcherSlot(lane,noteClip,true);
+                if(Launcher61.clip(slot)!=null)throw new IllegalStateException("Launcher automation slot is occupied");
+                clip=call(slot,"v33",new Class<?>[]{double.class,type("xpF")},number(call(noteClip,"Fgm")),lane);
+                call(clip,"TUp",new Class<?>[]{type("gnS")},noteClip);
+                call(slot,"TUp",new Class<?>[]{type("fza")},clip);
+                timeline=call(clip,"mQv");
+            }
             Map<String,Object> original=new LinkedHashMap<>();for(Object point:(List<?>)call(timeline,"v33"))original.put(id(point),point);
             ObjectNode edit=Wire.object();edit.set("points",creation.input().required("points").deepCopy());
-            write(new Prepared(new Owner(creation.track(),lane,null,timeline,timeline,valueType),edit,original),identities,true);
-            ObjectNode observed=null;for(JsonNode curve:readTrack(document,creation.track(),null))if(curve.required("lane").asText().equals(id(lane)) && curve.required("placement").asText().equals("arranger"))observed=(ObjectNode)curve;
+            Object source=clip==null?timeline:call(clip,"dxV");
+            write(new Prepared(new Owner(lane,clip,slot,source,timeline,valueType),edit,original),identities,true);
+            ObjectNode observed=null;
+            for(JsonNode curve:readTrack(document,creation.track(),noteClip==null,noteClip==null?List.of():List.of(noteClip),null))
+                if(curve.required("lane").asText().equals(id(lane)) && curve.required("placement").equals(creation.input().required("placement")))observed=(ObjectNode)curve;
             if(observed==null || !observed.required("points").equals(edit.required("points")) || !observed.required("target").path("kind").equals(target.required("kind")) || (parameterTarget?!observed.required("target").path("nativeParameterId").equals(target.required("nativeParameterId")):!observed.required("target").path("channel").equals(target.required("channel")) || !observed.required("target").path("controller").equals(target.required("controller"))))throw new IllegalStateException("Native CC creation differs; rolling back");
             result.add(observed);
         }
         return result;
     }
-    void projectTopology(ObjectNode expected,List<Owner> deleted,List<ObjectNode> created)throws Exception {
-        ArrayNode curves=(ArrayNode)expected.required("automation");
-        for(Owner owner:deleted)for(int i=curves.size()-1;i>=0;i--)if(curves.get(i).required("lane").asText().equals(id(owner.lane())) && curves.get(i).required("clip").asText().equals(id(owner.clip())))curves.remove(i);
+    void projectTopology(ObjectNode expected,ObjectNode observed,List<Owner> deleted,List<ObjectNode> created)throws Exception {
+        if(deleted.isEmpty() && created.isEmpty())return;
+        ArrayNode curves=expected.withArray("automation");
+        for(Owner owner:deleted)for(int i=curves.size()-1;i>=0;i--)
+            if(curves.get(i).required("lane").asText().equals(id(owner.lane())) && curves.get(i).required("clip").asText().equals(id(owner.clip())))curves.remove(i);
         int index=0;
-        for(JsonNode owner:expected.required("owners")) {
-            Object track=ProjectAddress61.resolveNative(owner,call(proxy,"getDocument"),loader);
-            if(track.getClass().getName().equals("com.bitwig.flt.document.core.master.stI"))track=call(track,"DQP");
-            for(JsonNode observed:readTrack(call(proxy,"getDocument"),track,null)) {
-                for(ObjectNode lane:created)if(lane.required("lane").equals(observed.required("lane")) && lane.required("clip").equals(observed.required("clip")))curves.insert(index,lane);
-                index++;
-            }
+        for(JsonNode actual:observed.required("automation")) {
+            for(ObjectNode lane:created)
+                if(lane.required("lane").equals(actual.required("lane")) && lane.required("clip").equals(actual.required("clip")))curves.insert(index,lane);
+            index++;
         }
     }
     static void validateCurve(ObjectNode edit,JsonNode curve,Set<String> known,Set<String> temporary) {
@@ -279,7 +331,9 @@ final class AutomationAdapter61 {
             ObjectNode desired=(ObjectNode)raw;String oldId=desired.required("id").asText();Object p=creation?null:prepared.points().get(oldId);
             boolean created=p==null;
             if(created) {
-                Object target=value(value(prepared.owner().lane(),"value_atom"),"value_type");
+                Object atom=value(prepared.owner().lane(),"value_atom");
+                if(atom==null)atom=call(value(prepared.owner().lane(),"atom_reference"),"qKA");
+                Object target=value(atom,"value_type");
                 double min=number(value(target,"min")),max=number(value(target,"max"));
                 p=call(prepared.owner().valueType(),"TUp",new Class<?>[]{double.class,double.class,type("CBo"),double.class},desired.required("time").doubleValue(),(desired.required("value").doubleValue()-min)/(max-min),type("CBo").getField(desired.required("interpolation").asText().equals("HOLD")?"v33":"TUp").get(null),desired.required("curvature").doubleValue());
                 if(!p.getClass().getName().equals("nCh"))throw new IllegalStateException("Automation factory representation changed");

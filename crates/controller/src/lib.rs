@@ -16,6 +16,7 @@ pub mod files;
 pub mod frame;
 pub mod instrument;
 pub mod kontakt_process;
+pub mod launcher;
 pub mod midi;
 pub mod mix;
 pub mod operations;

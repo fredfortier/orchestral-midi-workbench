@@ -1,8 +1,24 @@
-//! Complete selected arranger clips: notes, expression and all owning-track automation.
+//! Complete native note clips, expressions and stored automation.
 use crate::protocol;
 use std::error::Error;
 pub type Observation = protocol::Snapshot;
 impl Observation {
+    pub(crate) fn owns_automation(&self, lane: &crate::automation::Curve) -> bool {
+        lane.note_clip.as_ref().is_none_or(|id| {
+            self.clips.iter().any(|clip| {
+                &clip.id == id
+                    && matches!(
+                        clip.path.elements.last(),
+                        Some(crate::project_address::Element::LauncherClip { .. })
+                    )
+                    && clip
+                        .path
+                        .track_path()
+                        .is_ok_and(|track| track == lane.owner)
+            })
+        })
+    }
+
     /// # Errors
     /// Refuses invalid content, clip paths or duplicate path ownership.
     pub fn validate(&self) -> Result<(), String> {
@@ -12,7 +28,10 @@ impl Observation {
             clip.path.validate()?;
             if !matches!(
                 clip.path.elements.last(),
-                Some(crate::project_address::Element::Clip { .. })
+                Some(
+                    crate::project_address::Element::Clip { .. }
+                        | crate::project_address::Element::LauncherClip { .. }
+                )
             ) || !paths.insert(&clip.path)
             {
                 return Err("Clip paths must be unique and end in a native Note Clip".into());
@@ -31,13 +50,14 @@ impl Observation {
             lane.validate()?;
             if lane.is_new()
                 && !pending.insert(
-                    serde_json::to_string(&(&lane.owner, &lane.target))
+                    serde_json::to_string(&(&lane.owner, &lane.note_clip, &lane.target))
                         .map_err(|e| e.to_string())?,
                 )
             {
                 return Err("Duplicate pending automation target".into());
             }
-            if !owners.contains(&lane.owner)
+            if !self.owns_automation(lane)
+                || !owners.contains(&lane.owner)
                 || (!lane.is_new() && !placements.insert((&lane.track, &lane.lane, &lane.clip)))
             {
                 return Err("Unknown owner or duplicate automation placement".into());

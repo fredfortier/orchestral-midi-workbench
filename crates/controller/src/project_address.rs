@@ -25,6 +25,12 @@ pub enum Element {
         #[serde(default, skip_serializing_if = "Option::is_none", rename = "nativeId")]
         native_id: Option<String>,
     },
+    LauncherClip {
+        name: String,
+        scene: u32,
+        #[serde(default, skip_serializing_if = "Option::is_none", rename = "nativeId")]
+        native_id: Option<String>,
+    },
     Group {
         name: String,
         #[serde(default, skip_serializing_if = "Option::is_none", rename = "nativeId")]
@@ -69,6 +75,7 @@ impl Element {
             Self::Device { name, .. }
             | Self::AutomationLane { name, .. }
             | Self::Clip { name, .. }
+            | Self::LauncherClip { name, .. }
             | Self::Group { name, .. }
             | Self::Track { name, .. }
             | Self::Layer { name, .. }
@@ -83,6 +90,7 @@ impl Element {
             Self::Device { native_id, .. }
             | Self::AutomationLane { native_id, .. }
             | Self::Clip { native_id, .. }
+            | Self::LauncherClip { native_id, .. }
             | Self::Group { native_id, .. }
             | Self::Track { native_id, .. }
             | Self::Layer { native_id, .. }
@@ -97,6 +105,7 @@ impl Element {
             Self::Device { native_id, .. }
             | Self::AutomationLane { native_id, .. }
             | Self::Clip { native_id, .. }
+            | Self::LauncherClip { native_id, .. }
             | Self::Group { native_id, .. }
             | Self::Track { native_id, .. }
             | Self::Layer { native_id, .. }
@@ -141,6 +150,7 @@ impl Path {
                 }
                 Element::LayerChain { .. } => matches!(previous, Some(Element::Layer { .. })),
                 Element::Choice { .. } => matches!(previous, Some(Element::Selector { .. })),
+                Element::LauncherClip { .. } => matches!(previous, Some(Element::Track { .. })),
                 Element::Clip { .. } | Element::AutomationLane { .. } => matches!(
                     previous,
                     Some(Element::Track { .. } | Element::Group { .. })

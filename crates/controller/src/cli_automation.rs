@@ -281,6 +281,7 @@ fn desired(
             after.automation.push(Curve {
                 owner,
                 placement: "arranger".into(),
+                note_clip: None,
                 track: String::new(),
                 lane: String::new(),
                 clip: String::new(),

@@ -49,6 +49,10 @@ final class ProjectAddress61 {
                 try(var stream=(java.util.stream.Stream<?>)Reflection.call(lane,"v33",new Class<?>[]{double.class,double.class},Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY)) {
                     var iterator=stream.iterator();while(iterator.hasNext()){Object candidate=iterator.next();if(candidate.getClass().getName().equals("UMj") && name.equals(ProjectAdapter61.value(candidate,"displayed_title")))matches.add(candidate);}
                 }
+            } else if(kind.equals("launcherClip")) {
+                int scene=element.required("scene").intValue();
+                Object candidate=Launcher61.clip(Launcher61.slot(owner,scene));
+                if(candidate!=null && name.equals(Launcher61.clipName(candidate,scene)))matches.add(candidate);
             } else if(kind.equals("automationLane")) {
                 Object track=owner.getClass().getName().equals("com.bitwig.flt.document.core.master.stI")?Reflection.call(owner,"DQP"):owner;
                 for(Object candidate:Entity61.automationLanes(track))if(name.equals(Entity61.laneName(candidate)))matches.add(candidate);
@@ -127,13 +131,14 @@ final class ProjectAddress61 {
         String previous = "";
         for (JsonNode element : path.required("elements")) {
             String kind = element.path("kind").asText();
-            if (!element.isObject() || element.size() != (kind.equals("plugin") ? 4 : 2) + (element.has("nativeId")?1:0) || !validName(element.path("name"), 256))
+            if (!element.isObject() || element.size() != (kind.equals("plugin") ? 4 : kind.equals("launcherClip") ? 3 : 2) + (element.has("nativeId")?1:0) || !validName(element.path("name"), 256))
                 throw new IllegalArgumentException("E_ADDRESS: invalid named element");
             if(element.has("nativeId") && !validName(element.required("nativeId"),128))throw new IllegalArgumentException("E_ADDRESS: invalid native identity discriminator");
             boolean valid = switch (kind) {
                 case "group", "track" -> !track && (previous.isEmpty() || previous.equals("group"));
                 case "layerChain" -> previous.equals("layer");
                 case "choice" -> previous.equals("selector");
+                case "launcherClip" -> previous.equals("track") && element.path("scene").isIntegralNumber() && element.path("scene").canConvertToInt() && element.path("scene").intValue() >= 0;
                 case "clip", "automationLane" -> previous.equals("track") || previous.equals("group");
                 case "device", "layer", "selector", "plugin" -> (track || previous.equals("group")) && (previous.equals("group") || previous.equals("track") || CHAINS.contains(previous));
                 default -> false;

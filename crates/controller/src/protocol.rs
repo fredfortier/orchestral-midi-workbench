@@ -3,7 +3,7 @@ use crate::editor::{Change, MidiNote, NoteEvent};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashSet};
 
-pub const VERSION: u8 = 72;
+pub const VERSION: u8 = 74;
 
 /// Validate an adapter-owned operation token or bounded native history cursor.
 #[must_use]
@@ -100,6 +100,10 @@ pub struct Plan {
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(tag = "type", rename_all = "camelCase", deny_unknown_fields)]
 pub enum ClientMessage {
+    LauncherObservation {
+        request: String,
+        result: crate::launcher::Observation,
+    },
     SelectionObservation {
         request: String,
         result: crate::selection::Observation,
@@ -509,7 +513,7 @@ impl Document {
             let actual = observed
                 .automation
                 .iter()
-                .find(|lane| lane.placement == "arranger" && created.matches_target(lane))
+                .find(|lane| lane.placement == created.placement && created.matches_target(lane))
                 .ok_or("Missing created MIDI CC lane")?;
             let mut points = created.points.clone();
             for point in &mut points {
@@ -519,7 +523,7 @@ impl Document {
                     .clone();
             }
             if actual.points != points
-                || actual.mapping != serde_json::json!({})
+                || (created.placement == "arranger" && actual.mapping != serde_json::json!({}))
                 || actual.reference_count != 1
                 || actual.aliases != [actual.clip.clone()]
                 || actual.target["min"]
@@ -614,6 +618,7 @@ impl Document {
             created.validate()?;
             if !created.is_new()
                 || !self.snapshot.owners.contains(&created.owner)
+                || !self.snapshot.owns_automation(created)
                 || self
                     .snapshot
                     .automation
@@ -624,7 +629,7 @@ impl Document {
             }
         }
         for deleted in &plan.automation_delete {
-            if deleted.placement != "clip"
+            if !["clip", "launcher"].contains(&deleted.placement.as_str())
                 || deleted.reference_count != 1
                 || deleted.aliases.len() != 1
                 || !self.snapshot.automation.iter().any(|c| c == deleted)

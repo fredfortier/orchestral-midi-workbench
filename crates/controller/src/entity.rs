@@ -20,6 +20,7 @@ impl Entity {
             "group",
             "track",
             "clip",
+            "launcherClip",
             "automationLane",
             "layer",
             "layerChain",

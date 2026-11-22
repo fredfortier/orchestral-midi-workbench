@@ -10,6 +10,9 @@ use std::collections::BTreeMap;
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(tag = "action", rename_all = "camelCase", deny_unknown_fields)]
 pub enum Command {
+    Launcher {
+        request: crate::launcher::Request,
+    },
     Selection {
         request: crate::selection::Request,
     },
@@ -110,6 +113,9 @@ pub enum Command {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(tag = "action", rename_all = "camelCase", deny_unknown_fields)]
 pub enum DocumentCommand {
+    Launcher {
+        request: crate::launcher::Request,
+    },
     Selection {
         request: crate::selection::Request,
     },
@@ -152,7 +158,9 @@ impl Command {
     pub fn mutates(&self) -> bool {
         !matches!(
             self,
-            Self::Selection {
+            Self::Launcher {
+                request: crate::launcher::Request::Read {}
+            } | Self::Selection {
                 request: crate::selection::Request::Read {}
             } | Self::Capture { .. }
                 | Self::Mix {
@@ -179,7 +187,8 @@ impl Command {
     pub const fn edits(&self) -> bool {
         !matches!(
             self,
-            Self::Selection { .. }
+            Self::Launcher { .. }
+                | Self::Selection { .. }
                 | Self::Capture { .. }
                 | Self::Mix { .. }
                 | Self::ExportAudio { .. }
@@ -197,70 +206,76 @@ impl Command {
     /// # Errors
     /// Refuses invalid paths or unresolved musical input.
     pub fn document_command(&self) -> Result<DocumentCommand, String> {
-        let (document, revision) = match self {
+        use crate::project_address::Path;
+        let prepare = |document: &String, revision: &String| DocumentCommand::PrepareEdit {
+            paths: None,
+            document: document.clone(),
+            revision: Some(revision.clone()),
+        };
+        match self {
+            Self::Launcher { request } => {
+                request.validate()?;
+                Ok(DocumentCommand::Launcher {
+                    request: request.clone(),
+                })
+            }
             Self::Selection { request } => {
                 request.validate()?;
-                return Ok(DocumentCommand::Selection {
+                Ok(DocumentCommand::Selection {
                     request: request.clone(),
-                });
+                })
             }
             Self::Capture {
                 path,
                 include_inactive,
             } => {
-                if let Some(path) = path {
-                    path.validate()?;
-                }
-                return Ok(DocumentCommand::Capture {
+                path.iter().try_for_each(Path::validate)?;
+                Ok(DocumentCommand::Capture {
                     path: path.clone(),
                     include_inactive: *include_inactive,
-                });
+                })
+            }
+            Self::Info { path, parameters } => {
+                path.iter().try_for_each(Path::validate)?;
+                Ok(DocumentCommand::Info {
+                    path: path.clone(),
+                    parameters: *parameters,
+                })
             }
             Self::Mix { request } => {
                 request.validate()?;
-                return Ok(DocumentCommand::Mix {
+                Ok(DocumentCommand::Mix {
                     request: request.clone(),
-                });
+                })
             }
             Self::ExportAudio { request } => {
                 request.validate()?;
-                return Ok(DocumentCommand::ExportAudio {
+                Ok(DocumentCommand::ExportAudio {
                     request: request.clone(),
-                });
-            }
-            Self::Info { path, parameters } => {
-                if let Some(path) = path {
-                    path.validate()?;
-                }
-                return Ok(DocumentCommand::Info {
-                    path: path.clone(),
-                    parameters: *parameters,
-                });
+                })
             }
             Self::ReadClips { paths } => {
-                for path in paths {
-                    path.validate()?;
-                }
-                return Ok(DocumentCommand::ReadClips {
+                paths.iter().try_for_each(Path::validate)?;
+                Ok(DocumentCommand::ReadClips {
                     paths: paths.clone(),
-                });
+                })
             }
-            Self::Cues { request } => {
-                return Ok(DocumentCommand::Cues {
-                    request: request.clone(),
-                });
-            }
+            Self::Cues { request } => Ok(DocumentCommand::Cues {
+                request: request.clone(),
+            }),
             Self::OperationStatus { .. } | Self::Instrument { .. } => {
-                return Err("Command requires application service execution".into());
+                Err("Command requires application service execution".into())
             }
-            Self::InstrumentNative { request } => {
-                return Ok(DocumentCommand::Instrument {
-                    request: request.clone(),
-                });
-            }
-            Self::Midi => return Ok(DocumentCommand::ReadMidi),
-            Self::ReplaceClips { before, .. } => (&before.document, &before.revision),
-            Self::Apply { plan } => (&plan.document, &plan.revision),
+            Self::InstrumentNative { request } => Ok(DocumentCommand::Instrument {
+                request: request.clone(),
+            }),
+            Self::Midi => Ok(DocumentCommand::ReadMidi),
+            Self::ReplaceClips { before, .. } => Ok(DocumentCommand::PrepareEdit {
+                paths: before.paths.clone(),
+                document: before.document.clone(),
+                revision: None,
+            }),
+            Self::Apply { plan } => Ok(prepare(&plan.document, &plan.revision)),
             Self::Create {
                 document, revision, ..
             }
@@ -284,17 +299,8 @@ impl Command {
             }
             | Self::Transpose {
                 document, revision, ..
-            } => (document, revision),
-        };
-        Ok(DocumentCommand::PrepareEdit {
-            paths: if let Self::ReplaceClips { before, .. } = self {
-                before.paths.clone()
-            } else {
-                None
-            },
-            document: document.clone(),
-            revision: (!matches!(self, Self::ReplaceClips { .. })).then(|| revision.clone()),
-        })
+            } => Ok(prepare(document, revision)),
+        }
     }
 
     /// Compile a caller's intent against the independently frozen UI scope.
@@ -315,7 +321,8 @@ impl Command {
             Self::Selection { .. } | Self::Capture { .. } => {
                 return Err("Capture is read-only".into());
             }
-            Self::Mix { .. }
+            Self::Launcher { .. }
+            | Self::Mix { .. }
             | Self::ExportAudio { .. }
             | Self::Info { .. }
             | Self::ReadClips { .. }

@@ -1,6 +1,6 @@
 ---
 name: bitwig-edit
-description: Apply bounded native Bitwig note, channel, per-note expression and stored automation-point edits with fresh authority, musical preservation and independent readback. Uses arranger clip ownership; excludes score import, instrument setup and cue research.
+description: Edit native Bitwig notes, channels, per-note expression and stored automation. Supports arranger edits and launcher Note Clip creation and editing. Excludes score import, instrument setup and cue research.
 ---
 
 # Edit native musical content
@@ -9,6 +9,9 @@ Follow [the shared workflow](../WORKFLOW.md). An edit request authorizes its sta
 musical change. Establish intended owners and preservation properties; keep work
 bounded to that request. Use [bitwig-explore](../bitwig-explore/SKILL.md) to resolve
 scope when needed. An open project is not a disposable history/random-edit fixture.
+
+Default to the arranger. When the request or current edit context identifies
+the launcher, use the [launcher recipe](references/common-edits.md#launcher-clips).
 
 | Change | Read |
 | --- | --- |
@@ -22,7 +25,7 @@ scope when needed. An open project is not a disposable history/random-edit fixtu
 resolve owners -> settle requested change (PERFORMANCE.md when in use)
  -> read complete selected clips OR resolve named paths and read complete clips
  -> notes / existing curve: inspect and edit that complete snapshot
- -> MIDI control: read INSTRUMENT.md control table -> resolve track/channel
+ -> arranger MIDI control: read INSTRUMENT.md control table -> resolve track/channel
     -> create/edit track MIDI lane (no sender device or automation clip)
  -> explicit beyond-MIDI device request: discover parameters/Remote Controls
  -> replace once -> independent complete readback

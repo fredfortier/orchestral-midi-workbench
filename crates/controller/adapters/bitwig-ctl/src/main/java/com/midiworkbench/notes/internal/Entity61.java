@@ -21,8 +21,8 @@ final class Entity61 {
         ObjectNode result=Wire.object();result.set("path",path);result.put("kind",kind);
         ObjectNode metadata=result.putObject("metadata");metadata.put("name",name);metadata.put("id",value(owner,"managed_object_ID").toString());result.putArray("children");
         switch(kind) {
-            case "clip" -> {
-                metadata.put("start",((Number)call(owner,"T1L")).doubleValue());metadata.put("duration",((Number)call(owner,"GaO")).doubleValue());
+            case "clip", "launcherClip" -> {
+                metadata.put("start",kind.equals("clip")?((Number)call(owner,"T1L")).doubleValue():0.0);metadata.put("duration",((Number)call(owner,kind.equals("clip")?"GaO":"Fgm")).doubleValue());
                 metadata.put("sourceStart",((Number)call(owner,"dD_")).doubleValue());metadata.put("sourceEnd",((Number)call(owner,"Fgm")).doubleValue());metadata.put("loopEnabled",(boolean)call(owner,"YeF"));
                 Object loop=call(owner,"fvB");metadata.put("loopStart",((Number)value(loop,"time")).doubleValue());metadata.put("loopLength",((Number)value(loop,"duration")).doubleValue());
             }

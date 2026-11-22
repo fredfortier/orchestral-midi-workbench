@@ -1,6 +1,7 @@
 # Edit track MIDI automation
 
-Default to native track-level MIDI automation. Read the exact patch/articulation's
+Default to native arranger track MIDI automation. For launcher scope, use the
+[launcher recipe](common-edits.md#launcher-clips). Read the exact patch/articulation's
 **Conventional MIDI control map** in INSTRUMENT.md. Missing or stale mappings
 return to instrument-intake's documentation-only branch; do not guess a CC from
 its conventional name or read manuals during live editing.
@@ -9,7 +10,8 @@ Use the [standard slot topology](../../WORKFLOW.md#mandatory-execution-boundary)
 shared controls use track channel 1 (JSON 0), explicitly admitted by each slot's
 stock Filter and mapped with notes to receiver channel 1. Verify actual passage;
 failed delivery returns to setup. Preserve authored contours and explicit
-exceptions. Do not create automation clips or per-slot knob curves. Pitch bend is a separate message;
+exceptions. Arranger creation uses track lanes. Per-slot knob curves are outside
+this workflow. Pitch bend is a separate message;
 its creation requires an admitted native operation and cannot be encoded as a CC.
 
 Before shaping musical controls, read

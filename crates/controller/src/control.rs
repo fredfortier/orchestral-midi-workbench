@@ -45,6 +45,9 @@ impl TryFrom<RawRequest> for Request {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(tag = "type", rename_all = "camelCase", deny_unknown_fields)]
 pub enum Response {
+    LauncherResult {
+        result: crate::launcher::Observation,
+    },
     SelectionResult {
         result: crate::selection::Observation,
     },

@@ -14,8 +14,8 @@ midi-bridge controller midi get-all --output before.json > /dev/null
 jq '[.clips[].path]' before.json > paths.json
 ```
 
-This returns **all** notes, all per-note expression and all owning-track automation
-for every included clip. `.notes[].selected` identifies the selected-note subset;
+This returns **all** notes, per-note expression and automation in scope.
+`.notes[].selected` identifies the selected-note subset;
 selection bounds are not a request to omit other content. For a whole selected
 clip edit, operate on all intended notes; for a selected-note edit, explicitly
 test `.selected`. Verify the returned clip paths match the requested scope.
@@ -34,6 +34,23 @@ CC assignments, follow its [parameter discovery](../../bitwig-explore/references
 Neither structural read replaces the complete content read or establishes that
 a parameter has a stored curve. Existing-curve and note edits need no parameter
 discovery or instrument setup.
+
+### Launcher clips
+
+Use the exact `launcherClip` path or run `midi-bridge controller launcher read > slot.json`
+for the selected slot. For authorized creation, verify `.position` identifies the
+intended empty slot (`.position.clip == null`), then run
+`midi-bridge controller launcher create --expected slot.json --beats "$beats" > created.json`
+with the intended whole quarter-note length. Put the observed or created
+`.position.clip` in the `paths.json` array and use the same explicit-path
+`midi get-all`, `midi replace` and independent readback below.
+
+Use clip-local source beats. Identify curves by `placement: "launcher"` and
+`noteClip` (the observed note clip ID). To add a CC curve, append an
+`automation` entry to a launcher-only snapshot with those fields, the native
+track `owner`, a documented `midiCc` target (`channel`, `controller`) and
+complete points starting at beat zero. Omit native automation IDs. A target new
+to the track also gets an arranger fallback point. Check the track scope.
 
 ## 2. Inspect or isolate data locally
 
@@ -137,7 +154,7 @@ points mean delete. Retain stable equal-time order and explicit interpolation,
 curvature and spread. Clearing points may produce a verified native fallback;
 it does not delete an outside-clip lane.
 
-For named complete curves or **new lanes**, use the same underlying transaction
+For named arranger curves or **new arranger lanes**, use the same underlying transaction
 through `controller automation set --input curves.json --output after.json`.
 Its [input recipe](automation-edits.md#set-track-cc-curves) avoids
 manual snapshot bookkeeping: specify the track/channel/CC from INSTRUMENT.md,
@@ -175,6 +192,7 @@ check the full expected clip records, including every unrequested domain:
 jq -e -n --slurpfile wanted desired.json --slurpfile actual verified.json '
   $wanted[0].document == $actual[0].document
   and $wanted[0].clips == $actual[0].clips
+  and $wanted[0].automation == $actual[0].automation
 '
 ```
 

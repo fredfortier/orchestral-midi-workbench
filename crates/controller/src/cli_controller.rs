@@ -1,9 +1,6 @@
 //! Command-line presentation of operational document intents.
 use clap::{Args, Subcommand};
-use notes_transformer::{
-    controller::{Command, Outcome},
-    point::PointEdit,
-};
+use notes_transformer::{control::Response, controller::Command, point::PointEdit};
 use std::{error::Error, path::PathBuf};
 
 #[derive(Args)]
@@ -27,6 +24,11 @@ struct Observation {
 }
 #[derive(Subcommand)]
 enum Action {
+    /// Read the selected launcher position or create a Note Clip in that empty slot.
+    Launcher {
+        #[command(subcommand)]
+        command: LauncherAction,
+    },
     /// Read native selection or replace it absolutely using returned qualified paths.
     Selection {
         #[command(subcommand)]
@@ -73,6 +75,16 @@ enum Action {
     },
 }
 
+#[derive(Subcommand)]
+enum LauncherAction {
+    Read,
+    Create {
+        #[arg(long)]
+        expected: PathBuf,
+        #[arg(long)]
+        beats: u32,
+    },
+}
 #[derive(Subcommand)]
 enum SelectionAction {
     Read,
@@ -396,6 +408,17 @@ impl Note {
 impl Controller {
     fn intent(self) -> Result<(u16, Option<String>, Command), Box<dyn Error>> {
         let command = match self.command {
+            Action::Launcher { command } => Command::Launcher {
+                request: match command {
+                    LauncherAction::Read => notes_transformer::launcher::Request::Read {},
+                    LauncherAction::Create { expected, beats } => {
+                        notes_transformer::launcher::Request::Create {
+                            expected: read(&expected)?,
+                            beats,
+                        }
+                    }
+                },
+            },
             Action::Selection { command } => Command::Selection {
                 request: match command {
                     SelectionAction::Read => notes_transformer::selection::Request::Read {},
@@ -548,30 +571,16 @@ async fn run_specialist(args: Controller) -> Result<(), Box<dyn Error>> {
     }
 
     let (port, adapter, command) = args.intent()?;
-    if matches!(&command, Command::Selection { .. }) {
-        let notes_transformer::control::Response::SelectionResult { result } =
-            notes_transformer::api::exchange(port, adapter, command).await?
-        else {
-            return Err("Unexpected selection response".into());
-        };
-        println!("{}", serde_json::to_string(&result)?);
-        return Ok(());
-    }
-    let result = execute(port, adapter, command).await?;
-    println!("{}", serde_json::to_string_pretty(&result)?);
+    let response = notes_transformer::api::exchange(port, adapter, command).await?;
+    let output = match response {
+        Response::LauncherResult { result } => serde_json::to_string(&result)?,
+        Response::SelectionResult { result } => serde_json::to_string(&result)?,
+        Response::ControlResult { result } => serde_json::to_string_pretty(&result)?,
+        _ => return Err("Unexpected command response".into()),
+    };
+    println!("{output}");
     Ok(())
 }
-async fn execute(
-    port: u16,
-    adapter: Option<String>,
-    command: Command,
-) -> Result<Outcome, Box<dyn Error>> {
-    match notes_transformer::api::exchange(port, adapter, command).await? {
-        notes_transformer::control::Response::ControlResult { result } => Ok(*result),
-        _ => Err("Unexpected command response".into()),
-    }
-}
-
 fn parse_range(value: &str) -> Result<(String, [f64; 2]), String> {
     let (field, values) = value.split_once('=').ok_or("Expected FIELD=MIN:MAX")?;
     let (min, max) = values.split_once(':').ok_or("Expected FIELD=MIN:MAX")?;

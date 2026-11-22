@@ -13,7 +13,7 @@ are bounded operations owned here.
 
 Retain one correlated JSON request/response envelope and qualified Path model.
 No generic action/macro executor, reflected property access, mirrored project,
-second setup mechanism, transport API, clip-geometry editing or project lifecycle
+second setup mechanism, transport API, general clip-geometry editing or project lifecycle
 API. Existing specialized instrument operations own integrated slot/routing and
 Kontakt assignment, including Channel Filter → Channel Map → receiver. Java owns
 host calls; Rust owns pure musical planning and external assignment orchestration.
@@ -54,7 +54,9 @@ explicit allocation, blocking, locking and logging budgets.
 native containment: groups → track → clip or automation lane; track/device chain
 → device → supported Layer/Selector slot → nested device. Plug-ins retain exact
 registry `id` and `version`. No fabricated folders or flattened group ancestry.
-Names containing separators remain literal strings.
+Names containing separators remain literal strings. A launcher Note Clip is a
+`launcherClip` child of its track with a zero-based native scene index.
+Clip resolution checks scene, name and any returned native identity.
 
 Names/kinds resolve within their immediate parent. Returned `nativeId`
 discriminators resolve duplicate siblings and must still match that named child.
@@ -95,6 +97,16 @@ require their owning computer recipe's focus, selection and binding prerequisite
 Use existing track/device/slot helpers and arranger collection/range mechanisms;
 remove superseded delta/clear selection implementations.
 
+## Launcher slot creation
+
+`launcher read` observes the Inspector's single native launcher note slot and
+returns its qualified track, zero-based scene, native slot ID and nullable clip
+path. `launcher create` requires that exact fresh observation for an empty
+slot and creates an empty Note Clip of 1–1024 whole quarter-note beats in one
+native Undo step. Verify the slot, the created clip and its source and loop
+length before returning authority. Slot creation and subsequent MIDI replacement
+are independent Undo steps.
+
 ## One complete musical snapshot
 
 ```text
@@ -112,7 +124,7 @@ operators = {chanceEnabled,chance,occurrenceEnabled,occurrence,
              recurrenceEnabled,recurrenceLength,recurrenceMask,
              repeatEnabled,repeatCount,repeatCurve,repeatVelocityEnd,repeatVelocityCurve}
 Point = {id,time,value,interpolation:HOLD|LINEAR,curvature,spread}
-Lane = {owner:Path,placement:arranger|clip,track,lane,clip,source,
+Lane = {owner:Path,placement:arranger|clip|launcher,track,lane,clip,source,noteClip?,
         aliases:[nativePlacementId],referenceCount,mapping,target,points:[Point]}
 mapping = {} | {startBeats,durationBeats,sourceStartBeats,sourceEndBeats,
                 loopEnabled,loopStart,loopLength}
@@ -127,6 +139,11 @@ placements remain distinct even when sources are shared. `aliases` and
 `referenceCount` preserve shared-source authority. Explicit track/group paths
 include their own content; child tracks are separately addressed. Clip paths read
 whole sources, not just selected notes. `selected` retains effective note intent.
+Selected launcher slots and explicit launcher clip paths use the same note and
+expression representation. Launcher placement starts at zero in clip-local
+beats. Launcher automation is scoped to the observed note clips and identified
+by `noteClip` in addition to the automation placement ID. Track/group MIDI
+reads and MIDI2 arrangement capture retain their arranger scope.
 
 Keep ordinary arrays, complete values and stable equal-time order. No pagination,
 compression, sparse views, note-only/automation-only observation protocols,
@@ -187,7 +204,11 @@ legacy-sender discovery for authorized migration. Committed sources require an
 explicit source; overlapping content refuses an implicit track edit. New parameter
 curves carry the qualified device and physical target descriptor; resolve identity,
 range/domain and automation eligibility before writes. Already-correct batches
-produce no history mutation.
+produce no history mutation. New launcher curves use `placement: "launcher"`
+and name the observed `noteClip` in a launcher-only snapshot for that track.
+The automation placement is created in the same scene and uses that clip's loop
+and source coordinates. If its target has no track-wide lane yet, the native
+lane factory also initializes that lane's arranger fallback at beat zero.
 
 ## Integrated instruments
 

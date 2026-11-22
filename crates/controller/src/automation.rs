@@ -11,6 +11,8 @@ pub const MAX_POINTS: usize = 100_000;
 pub struct Curve {
     pub owner: crate::project_address::Path,
     pub placement: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub note_clip: Option<String>,
     #[serde(default)]
     pub track: String,
     #[serde(default)]
@@ -186,6 +188,7 @@ impl Curve {
     #[must_use]
     pub fn matches_target(&self, actual: &Self) -> bool {
         self.owner == actual.owner
+            && self.note_clip == actual.note_clip
             && self.target["kind"] == actual.target["kind"]
             && if self.target["kind"] == "parameter" {
                 self.target["nativeParameterId"] == actual.target["nativeParameterId"]
@@ -203,6 +206,11 @@ impl Curve {
     pub fn validate(&self) -> Result<(), String> {
         self.owner.validate()?;
         points_valid(&self.points)?;
+        if (self.placement == "launcher") != self.note_clip.is_some()
+            || self.note_clip.as_deref().is_some_and(|id| !identity(id))
+        {
+            return Err("Launcher automation requires its native note clip identity".into());
+        }
         if self.is_new() {
             let (minimum, maximum) = if self.target["kind"] == "parameter" {
                 let device: crate::project_address::Path =
@@ -250,7 +258,7 @@ impl Curve {
             } else {
                 return Err("Unsupported new automation target".into());
             };
-            if self.placement != "arranger"
+            if !["arranger", "launcher"].contains(&self.placement.as_str())
                 || !self.track.is_empty()
                 || !self.clip.is_empty()
                 || !self.source.is_empty()
@@ -263,9 +271,9 @@ impl Curve {
                     .iter()
                     .any(|p| p.time < 0.0 || !(minimum..=maximum).contains(&p.value))
             {
-                return Err("New automation requires an observed owner and in-range arranger points starting at beat zero".into());
+                return Err("New automation requires an observed owner and in-range points starting at beat zero".into());
             }
-        } else if !["clip", "arranger"].contains(&self.placement.as_str())
+        } else if !["clip", "arranger", "launcher"].contains(&self.placement.as_str())
             || [&self.track, &self.lane, &self.clip, &self.source]
                 .iter()
                 .any(|id| !identity(id))

@@ -123,6 +123,10 @@ impl PendingControl {
                 }
                 Ok(ControlOutcome::CaptureResult { capture })
             }
+            (Command::Launcher { request }, ClientMessage::LauncherObservation { result, .. }) => {
+                request.verify(&result)?;
+                Ok(ControlOutcome::LauncherResult { result })
+            }
             (
                 Command::Selection { request },
                 ClientMessage::SelectionObservation { result, .. },
@@ -175,6 +179,7 @@ fn command_request(message: &ClientMessage) -> Option<&str> {
         ClientMessage::CaptureObservation { request, .. }
         | ClientMessage::MixObservation { request, .. }
         | ClientMessage::ExportAudioObservation { request, .. }
+        | ClientMessage::LauncherObservation { request, .. }
         | ClientMessage::SelectionObservation { request, .. }
         | ClientMessage::EntityObservation { request, .. }
         | ClientMessage::CuesObservation { request, .. }
@@ -285,6 +290,7 @@ impl Sessions {
             ClientMessage::CaptureObservation { .. }
             | ClientMessage::MixObservation { .. }
             | ClientMessage::ExportAudioObservation { .. }
+            | ClientMessage::LauncherObservation { .. }
             | ClientMessage::SelectionObservation { .. }
             | ClientMessage::EntityObservation { .. }
             | ClientMessage::CuesObservation { .. }

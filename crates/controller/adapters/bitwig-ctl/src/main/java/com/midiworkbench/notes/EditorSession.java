@@ -255,11 +255,11 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
         ObjectNode command=(ObjectNode)message.required("command");
         String action=command.required("action").asText();
         boolean edit=switch(action) {
-            case "selection","capture","mix","exportAudio","info","cues","instrument","readMidi","readClips" -> false;
+            case "selection","launcher","capture","mix","exportAudio","info","cues","instrument","readMidi","readClips" -> false;
             case "prepareEdit" -> true;
             default -> throw new IllegalArgumentException("Unknown native document action");
         };
-        keys(command,action.equals("capture")?Set.of("action","path","includeInactive"):action.equals("info")?Set.of("action","path","parameters"):action.equals("readClips")?Set.of("action","paths"):(action.equals("selection") || action.equals("mix") || action.equals("exportAudio") || action.equals("cues") || action.equals("instrument"))?Set.of("action","request"):(action.equals("readMidi"))?Set.of("action"):command.has("paths")?Set.of("action","document","revision","paths"):Set.of("action","document","revision"));
+        keys(command,action.equals("capture")?Set.of("action","path","includeInactive"):action.equals("info")?Set.of("action","path","parameters"):action.equals("readClips")?Set.of("action","paths"):(action.equals("selection") || action.equals("launcher") || action.equals("mix") || action.equals("exportAudio") || action.equals("cues") || action.equals("instrument"))?Set.of("action","request"):(action.equals("readMidi"))?Set.of("action"):command.has("paths")?Set.of("action","document","revision","paths"):Set.of("action","document","revision"));
         commandHighWater=requestSequence;
         DocumentRequest entry=new DocumentRequest(message);documentRequests.put(request,entry);
         if(pending!=null || commanding){entry.complete(commandErrorReceipt(request,"Adapter busy or reconnecting"));documentRequests.trim();send(entry.receipt);return;}
@@ -281,6 +281,11 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
             if(action.equals("mix") || action.equals("exportAudio")) {
                 ObjectNode result=Wire.object();result.put("type",action.equals("mix")?"mixObservation":"exportAudioObservation");result.put("request",request);
                 result.set("result",Wire.parse(action.equals("mix")?editor.mix(command.required("request").toString()):editor.exportAudio(command.required("request").toString())));Wire.requireMessageCapacity(result);return result.toString();
+            }
+            if(action.equals("launcher")) {
+                ObjectNode result=Wire.object().put("type","launcherObservation").put("request",request);
+                result.set("result",editor.launcher((ObjectNode)command.required("request")));
+                return result.toString();
             }
             if(action.equals("capture")) {
                 ObjectNode result=Wire.object();result.put("type","captureObservation");result.put("request",request);

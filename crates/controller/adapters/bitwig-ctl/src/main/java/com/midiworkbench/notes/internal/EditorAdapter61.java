@@ -42,7 +42,8 @@ public final class EditorAdapter61 implements AutoCloseable {
     private ProjectRevision61 nativeChanges;
 
     private record View(Object document, ObjectNode snapshot,
-                        Map<String,Object> clips, Map<String,Object> notes, Map<String,String> payloads) {}
+                        Map<String,Object> clips, Map<String,Object> notes, Map<String,String> payloads,
+                        Map<String,AutomationAdapter61.Owner> curves, Set<String> arrangerTracks) {}
 
     public EditorAdapter61(Object proxy, HostBuild build) {
         build.requireVerified();
@@ -83,6 +84,42 @@ public final class EditorAdapter61 implements AutoCloseable {
         Object document=observeCurrentDocument();exports.requireIdle();instruments.requireIdle();
         return new Selection61(proxy,document,generation,selectionScope,()->validRequest.getAsBoolean() && !closed && currentDocument==document).run(Wire.parse(request));
     }
+    private final ObservedScope launcherScope=new ObservedScope();
+    public ObjectNode launcher(ObjectNode request) throws Exception {
+        Object document=observeCurrentDocument();
+        Object slot=Launcher61.selectedSlot(Launcher61.selection(proxy));
+        ObjectNode before=Launcher61.observe(document,generation,slot,launcherScope);
+        if(request.size()==1 && request.path("action").asText().equals("read"))return before;
+        try {
+            if(!request.path("action").asText().equals("create"))throw new IllegalArgumentException("Unknown launcher action");
+            Launcher61.preflight(request,before);
+            exports.requireIdle();instruments.requireIdle();
+            requireIdleForContentEdit(document);
+            requireIndependentUndo(document);
+        }catch(Exception failure){throw new NativeRefusal(failure);}
+        int beats=request.required("beats").intValue();
+        invoke(document,"v33",new Class<?>[]{String.class,boolean.class},"Create launcher clip",false);
+        try {
+            Object recorder=call(call(call(document,"cuK"),"TcB"),"v33");
+            Object step=call(recorder,"qKA");
+            try {
+                Launcher61.create(slot,beats);
+                call(call(recorder,"v33"),"LHs");
+                Launcher61.verify(slot,beats);
+                Object actualSlot=Launcher61.selectedSlot(Launcher61.selection(proxy));
+                if(actualSlot!=slot)throw new IllegalStateException("Launcher selection changed during clip creation");
+                return Launcher61.observe(document,generation,actualSlot,launcherScope);
+            }catch(Exception failure) {
+                reverseStep(recorder,step,failure);
+                if(Launcher61.clip(slot)!=null || Launcher61.selectedSlot(Launcher61.selection(proxy))!=slot)
+                    throw new IllegalStateException("Native recovery did not restore the empty launcher slot",failure);
+                discardRecoveredStep(step);
+                throw new NativeRefusal(failure);
+            }
+        } finally {
+            invoke(document,"v33",new Class<?>[]{boolean.class},false);
+        }
+    }
     /** All reads use the same complete clip representation. */
     public String info(String path) throws Exception {return info(path,false);}
     public String info(String path,boolean parameters) throws Exception {return new Entity61(observeCurrentDocument()).read(Wire.JSON.readTree(path),parameters);}
@@ -94,16 +131,6 @@ public final class EditorAdapter61 implements AutoCloseable {
         View view=observe(frozenPaths);requireIndependentUndo(view.document());requireIsolatedSources(view);
         frozenRevision=view.snapshot().required("revision").asText();frozenSnapshot=view.snapshot().deepCopy();return view.snapshot().toString();
     }
-    Map<String,Object> automationTracks(JsonNode snapshot) throws Exception {
-        Object document=observeCurrentDocument();Map<String,Object> tracks=new LinkedHashMap<>();
-        for(JsonNode path:snapshot.required("owners")) {
-            Object track=ProjectAddress61.resolveNative(path,document,proxy.getClass().getClassLoader());
-            if(type("com.bitwig.flt.document.core.master.stI").isInstance(track))track=call(track,"DQP");
-            tracks.put(identity(track),track);
-        }
-        return tracks;
-    }
-
     public String readSelection() throws Exception { return observe().snapshot().toString(); }
     public String readAppliedSelection() throws Exception {try{return observe(frozenPaths).snapshot().toString();}finally{frozenPaths=null;}}
 
@@ -195,15 +222,12 @@ public final class EditorAdapter61 implements AutoCloseable {
                 default -> throw new IllegalArgumentException("Unknown CRUD operation");
             }
         }
-        AutomationAdapter61 automation=new AutomationAdapter61(this,proxy);
-        List<AutomationAdapter61.Prepared> curves=automation.prepare(live.snapshot(),plan.has("automation")?plan.required("automation"):Wire.JSON.createArrayNode());
-        List<AutomationAdapter61.Creation> createdCurves=automation.prepareCreates(live.snapshot(),plan.has("automationCreate")?plan.required("automationCreate"):Wire.JSON.createArrayNode());
-        List<AutomationAdapter61.Owner> deletedCurves=automation.prepareDeletes(live.snapshot(),plan.has("automationDelete")?plan.required("automationDelete"):Wire.JSON.createArrayNode());
+        AutomationAdapter61 automation=new AutomationAdapter61(proxy);
+        List<AutomationAdapter61.Prepared> curves=automation.prepare(live.snapshot(),live.curves(),plan.has("automation")?plan.required("automation"):Wire.JSON.createArrayNode());
+        List<AutomationAdapter61.Creation> createdCurves=automation.prepareCreates(live.snapshot(),live.clips(),live.arrangerTracks(),plan.has("automationCreate")?plan.required("automationCreate"):Wire.JSON.createArrayNode());
+        List<AutomationAdapter61.Owner> deletedCurves=automation.prepareDeletes(live.snapshot(),live.curves(),plan.has("automationDelete")?plan.required("automationDelete"):Wire.JSON.createArrayNode());
         if(touched.isEmpty() && curves.isEmpty() && createdCurves.isEmpty() && deletedCurves.isEmpty())throw new IllegalArgumentException("Empty edit plan");
-        Object transport=ProjectAdapter61.value(live.document(),"transport");
-        for(String field:List.of("is_playing","is_playing_on_engine","record","write_automation"))
-            if(!Boolean.FALSE.equals(ProjectAdapter61.value(transport,field)))throw new IllegalArgumentException("Content edits require stopped transport and recording disabled");
-        if(Boolean.TRUE.equals(ProjectAdapter61.value(live.document(),"is_being_saved")) || call(live.document(),"jst")!=null)throw new IllegalArgumentException("Save/render in progress");
+        requireIdleForContentEdit(live.document());
         preflightNewIdentities(live.snapshot(),plan);
         preflightGeometry(live.snapshot(),expected);
         Object document = live.document();
@@ -236,11 +260,12 @@ public final class EditorAdapter61 implements AutoCloseable {
                 }
             }
             ObjectNode pointIdentities=Wire.object();automation.deleteAll(deletedCurves);ObjectNode defaults=automation.writeAll(curves,pointIdentities);
-            List<ObjectNode> created=automation.createAll(createdCurves,pointIdentities);automation.projectTopology(expected,deletedCurves,created);
+            List<ObjectNode> created=automation.createAll(createdCurves,pointIdentities);
             pointIdentities.fields().forEachRemaining(entry->identities.put(entry.getKey(),entry.getValue().asText()));
             automation.project(expected,curves);
             call(call(recorder,"v33"),"LHs");
             View observed=observe(frozenPaths);
+            automation.projectTopology(expected,observed.snapshot(),deletedCurves,created);
             verify(live,expected,observed,touched);
             ObjectNode result=Wire.object();result.set("snapshot",observed.snapshot());result.set("identities",Wire.JSON.valueToTree(identities));result.set("defaults",defaults);
             return result.toString();
@@ -249,11 +274,7 @@ public final class EditorAdapter61 implements AutoCloseable {
             if(recorder==null || step==null)throw failure;
             // Same native change-buffer reversal used by the host's validation
             // recovery. Closing the group below is not itself rollback.
-            Object manager=call(recorder,"v33");call(manager,"LHs");
-            for(int i=0;Boolean.TRUE.equals(call(step,"Vdp"));i++) {
-                if(i>=16)throw new IllegalStateException("Native recovery did not converge",failure);
-                call(step,"mQv");call(manager,"LHs");
-            }
+            reverseStep(recorder,step,failure);
             View recovered=observe(frozenPaths);
             if(!sameDocumentState(live.snapshot(),recovered.snapshot()) || !live.payloads().equals(recovered.payloads()))
                 throw new IllegalStateException("Native recovery did not restore the frozen document",failure);
@@ -261,6 +282,21 @@ public final class EditorAdapter61 implements AutoCloseable {
             throw new IllegalStateException("Edit refused; native state restored: "+failure.getMessage(),failure);
         } finally {
             invoke(document,"v33",new Class<?>[]{boolean.class},false);
+        }
+    }
+
+    private static void requireIdleForContentEdit(Object document) throws Exception {
+        Object transport=ProjectAdapter61.value(document,"transport");
+        for(String field:List.of("is_playing","is_playing_on_engine","record","write_automation"))
+            if(!Boolean.FALSE.equals(ProjectAdapter61.value(transport,field)))throw new IllegalArgumentException("Content edits require stopped transport and recording disabled");
+        if(Boolean.TRUE.equals(ProjectAdapter61.value(document,"is_being_saved")) || call(document,"jst")!=null)throw new IllegalArgumentException("Save/render in progress");
+    }
+
+    private static void reverseStep(Object recorder,Object step,Exception failure) throws Exception {
+        Object manager=call(recorder,"v33");call(manager,"LHs");
+        for(int i=0;Boolean.TRUE.equals(call(step,"Vdp"));i++) {
+            if(i>=16)throw new IllegalStateException("Native recovery did not converge",failure);
+            call(step,"mQv");call(manager,"LHs");
         }
     }
 
@@ -545,14 +581,15 @@ public final class EditorAdapter61 implements AutoCloseable {
     private View observe(JsonNode paths) throws Exception {
         Object document = observeCurrentDocument();
         Map<String,Object> tracks=new LinkedHashMap<>();Map<String,Object> clips=new LinkedHashMap<>();Map<String,Set<String>> selected=new HashMap<>();Set<String> selectedObjects=new HashSet<>();
-        Object editor=null;boolean time=false,detail=false;double from=0,to=0;List<?> lanes=List.of();
+        Object launcherSelection=paths==null?Launcher61.selection(proxy):null;
+        Object editor=null;boolean time=false,detail=false,launcher=false;double from=0,to=0;List<?> lanes=List.of();
         if(paths!=null) {
             if(!paths.isArray() || paths.isEmpty())throw new IllegalArgumentException("Explicit clip paths must be a nonempty array");
             for(JsonNode path:paths) {
                 Object owner=ProjectAddress61.resolveNative(path,document,proxy.getClass().getClassLoader());
                 String kind=path.required("elements").get(path.required("elements").size()-1).required("kind").asText();
                 List<Object> requested=new ArrayList<>();
-                if(kind.equals("clip"))requested.add(owner);
+                if(kind.equals("clip") || kind.equals("launcherClip"))requested.add(owner);
                 else if(kind.equals("track") || kind.equals("group")) {
                     Object track=kind.equals("group")?call(owner,"DQP"):owner;tracks.put(identity(track),track);
                     Object lane=ProjectAdapter61.value(track,"main_note_clip_lane");
@@ -564,6 +601,16 @@ public final class EditorAdapter61 implements AutoCloseable {
                     if(!type("UMj").isInstance(clip) || clips.put(identity(clip),clip)!=null)throw new IllegalArgumentException("Expected nonoverlapping content paths");
                     selectedObjects.add(identity(clip));for(Object note:notes(clip))selected.computeIfAbsent(identity(clip),ignored->new HashSet<>()).add(identity(note));
                 }
+            }
+        } else if(launcherSelection!=null) {
+            launcher=true;
+            for(Object slot:list(call(launcherSelection,"jaQ"))) {
+                Object clip=Launcher61.clip(slot);
+                if(clip==null)continue;
+                if(!type("UMj").isInstance(clip))throw new IllegalArgumentException("Selected launcher slot contains unsupported material");
+                clips.put(identity(clip),clip);
+                selectedObjects.add(identity(clip));
+                for(Object note:notes(clip))selected.computeIfAbsent(identity(clip),ignored->new HashSet<>()).add(identity(note));
             }
         } else {
         Object widget = call(proxy,"getDocumentWidget");
@@ -631,7 +678,7 @@ public final class EditorAdapter61 implements AutoCloseable {
         } else throw new IllegalStateException("Unsupported active editor: "+editor.getClass().getName());
         }
         ObjectNode selection = Wire.object();
-        selection.put("editor", editor==null?"paths":detail?"detailEditor":"arranger");
+        selection.put("editor", launcher?"launcher":editor==null?"paths":detail?"detailEditor":"arranger");
         selection.put("kind", time ? "time" : detail ? "notes" : "clips");
         selection.put("from",from); selection.put("to",to);
         ArrayNode laneIds = selection.putArray("lanes");
@@ -648,17 +695,22 @@ public final class EditorAdapter61 implements AutoCloseable {
             if(track!=null)tracks.put(identity(track),track);
         }
         Map<String,Object> sourceNotes = new HashMap<>(); Map<String,String> payloads = new HashMap<>();
+        Set<String> arrangerTracks=new HashSet<>(tracks.keySet());
+        Map<String,List<Object>> launcherClips=new HashMap<>();
         for (String id : clips.keySet().stream().sorted().toList()) {
             Object clip = clips.get(id); ObjectNode c = Wire.object();
             c.put("id",id); c.put("lane",identity(call(clip,"rwW")));
             Object track = invoke(clip,"EwU",new Class<?>[]{Class.class},type("com.bitwig.flt.document.core.master.kkr"));
             if (track == null) throw new IllegalStateException("Clip has no owning track");
-            ObjectNode path=ProjectAddress61.nativeTrackPath(document,track);
-            path.withArray("elements").addObject().put("kind","clip").put("name",ProjectAdapter61.value(clip,"displayed_title").toString()).put("nativeId",identity(clip));
+            ObjectNode path=Launcher61.clipPath(document,track,clip);
             c.set("path",path);
             tracks.put(identity(track),track);
             c.put("track",identity(track)); c.put("content",identity(call(clip,"FSQ")));
-            c.put("start",number(call(clip,"T1L"))); c.put("duration",number(call(clip,"GaO")));
+            boolean inLauncher=Launcher61.noteSlot(clip)!=null;
+            if(inLauncher)launcherClips.computeIfAbsent(identity(track),ignored->new ArrayList<>()).add(clip);
+            else arrangerTracks.add(identity(track));
+            c.put("start",inLauncher?0.0:number(call(clip,"T1L")));
+            c.put("duration",number(call(clip,inLauncher?"Fgm":"GaO")));
             c.put("sourceStart",number(call(clip,"dD_"))); c.put("sourceEnd",number(call(clip,"Fgm")));
             c.put("loopEnabled",(boolean)call(clip,"YeF"));
             Object loop = call(clip,"fvB"); c.put("loopStart",number(value(loop,"time"))); c.put("loopLength",number(value(loop,"duration")));
@@ -675,12 +727,14 @@ public final class EditorAdapter61 implements AutoCloseable {
             clipNodes.add(c);
         }
         ArrayNode owners=root.putArray("owners"),automation=root.putArray("automation");
+        AutomationAdapter61 automationAdapter=new AutomationAdapter61(proxy);
+        Map<String,AutomationAdapter61.Owner> curveOwners=new HashMap<>();
         for(String trackId:tracks.keySet().stream().sorted().toList()) {
             Object track=tracks.get(trackId);owners.add(ProjectAddress61.nativeTrackPath(document,track));
-            automation.addAll(new AutomationAdapter61(this,proxy).readTrack(document,track,null));
+            automation.addAll(automationAdapter.readTrack(document,track,arrangerTracks.contains(trackId),launcherClips.getOrDefault(trackId,List.of()),curveOwners));
         }
         root.put("revision",ProjectRevision61.read(proxy,document));
-        return new View(document,root,Map.copyOf(clips),Map.copyOf(sourceNotes),Map.copyOf(payloads));
+        return new View(document,root,Map.copyOf(clips),Map.copyOf(sourceNotes),Map.copyOf(payloads),Map.copyOf(curveOwners),Set.copyOf(arrangerTracks));
     }
 
     /** Native usage enumeration is independent of selection; aliases cannot be silently edited. */
