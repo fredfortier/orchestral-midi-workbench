@@ -35,7 +35,7 @@ Undo affects the project's current native history entry, possibly another edit.
 | Insert/delete/replace notes | Inspect `controller note create/delete/replace --help`; creation requires complete `NoteEvent`, replacement affects selected notes in its owner |
 | Intentional bounded humanization | Inspect `controller note randomize --help`; choose explicit fields, ranges, count and seed from the musical intent |
 | Per-note expression point CRUD | Inspect `controller point --help` and its action's help; requires clip/note/family ownership |
-| Authorized user Undo/Redo | Only an actually available supported history route; general public history control is outside this MVP. Reobserve afterward. |
+| Authorized user Undo/Redo | [Session history](../../bitwig-explore/references/session-actions.md#direct-actions) for an established adjacent history entry. |
 
 Sparse changes are typed arrays, e.g. `[{"field":"velocity","value":0.6}]`.
 Native channel bounds are 0–15. Do not round-trip a reporting projection through

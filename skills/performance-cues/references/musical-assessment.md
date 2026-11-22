@@ -7,7 +7,7 @@ landmarks and actions to test against literature, then put into PERFORMANCE.md.
 
 ## Read and compare parts
 
-Follow bitwig-explore's observation procedure from `crates/`:
+Follow [the exploration procedure](../../bitwig-explore/references/arranger-navigation.md) from the project workspace:
 
 ```sh
 run_dir=$(mktemp -d /tmp/performance-cues.XXXXXX)

@@ -36,3 +36,12 @@ Bach *Qui tollis* project.
   Keep generic host actions out of the native document protocol.
 - Use a separate saved project for the exercise. The original score remains
   the source of notation and is preserved byte for byte.
+
+## Progress
+
+- Bridge-owned OSC landed in `67f888c`. Workspace tests, Clippy, and a
+  standalone loopback fixture verified submission and feedback.
+- The Bach workspace contains byte-verified source, 12 exact clip placements,
+  2,173 independently reread note occurrences, and eight saved cues. The
+  [exercise record](../../../research/QUI-TOLLIS.md) tracks qualified contexts,
+  remaining cases, and fixes arising from the trial.

@@ -75,7 +75,7 @@ Use the existing controller; do not scrape the mixer or create another bridge.
    after consequential changes. Compare at matched playback loudness, including
    mono/quiet playback and representative sections. If listening is unavailable,
    label the pass measurement-led and leave perceptual approval pending.
-7. Save through the qualified native Save action; verify persistence separately.
+7. Use [session actions](../bitwig-explore/references/session-actions.md#direct-actions) to save and verify persistence separately.
    Record project-specific decisions/evidence in the project's existing musical
    document, never here. Return actual changes, before/after measurements,
    processing/export scope, preservation, save and listening limits. Do not call

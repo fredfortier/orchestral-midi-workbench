@@ -13,14 +13,12 @@ MusicXML or PDF; acceptance here does not imply converter support for that forma
    Bitwig Projects root. Existing projects keep their observed saved directory.
    If a new project has no established destination, ask for it.
 2. Read `midi-bridge controller info` for the intended open project. Match actual
-   saved location and path identity. Reuse that target. New/Open/Save are native
-   named actions sent through Use Computer, following the directly routed
-   [keyboard workflow](../bitwig-explore/references/keyboard-workflow.md).
-   Verify binding/profile/focus and native result before dependent work; do not
-   guess keys, parse screenshots systematically or add lifecycle CLI helpers.
-   If a required keyboard action lacks qualification or computer access is
-   unavailable, report its dependent intake scope as partial until resolved.
-   A mkdir or copied/empty .bwproject is not native project creation.
+   saved location and path identity. Reuse that target. For an unsaved or
+   unopened project use the named **New Project**, **Open**, and first **Save**
+   actions in the [computer recipes](../bitwig-explore/references/keyboard-workflow.md).
+   Choose the intended destination in the native dialog and verify the actual
+   saved path before copying the source. Subsequent saves to that path route
+   through [session actions](../bitwig-explore/references/session-actions.md#direct-actions).
 3. Follow the [Bitwig project layout](../WORKFLOW.md#bitwig-project-layout).
    Establish identity in [PERFORMANCE.md](assets/PERFORMANCE.md), leaving
    musical sections unfilled in a new file and preserving existing content.

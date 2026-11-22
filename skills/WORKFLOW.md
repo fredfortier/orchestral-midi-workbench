@@ -19,7 +19,7 @@ help to carry out these workflows.
 ## Experimental project backups
 
 Before an authorized experiment on an existing project, save the current project
-through the qualified [native Save workflow](bitwig-explore/references/keyboard-workflow.md)
+through [session actions](bitwig-explore/references/session-actions.md#direct-actions)
 and confirm completion. Resolve its actual saved `.bwproject` path with
 `controller info`; do not copy an older on-disk state while edits remain unsaved.
 
@@ -66,12 +66,12 @@ operations. This extension does not restore general project control.
 
 For exact native selection, use `controller selection read/set` through
 [exploration](bitwig-explore/references/arranger-navigation.md). For surrounding
-project/window/focus/audition/history actions,
-use Bitwig's qualified native keyboard workflow through Use Computer. Read
-[that flow](bitwig-explore/references/keyboard-workflow.md) before the action;
-that reference owns action qualification and independent result checks.
-Do not add controller helper subcommands for this surrounding work. Screenshots
-serve troubleshooting, never systematic state parsing or musical verification.
+project/window/focus/audition/history actions, use the
+[shared session procedure](bitwig-explore/references/session-actions.md).
+It routes qualified OSC actions and the remaining computer actions. Native
+observations establish document effects. Computer observations establish actual
+window, viewport or focus effects where needed. Keep surrounding actions out
+of the native document command vocabulary.
 
 Stock instrument assignment has two owners:
 
@@ -168,6 +168,7 @@ task with fresh observations; it does not authorize an alternate control surface
 
 ```text
 REQUEST
+ +-- compose across workflows --------> bitwig-compose -------> STOP after requested stages
  +-- establish score workspace ------> score-intake ----------> STOP
  +-- document installed library -----> instrument-intake -----> STOP
  +-- configure vocal syllable phrases -> kontakt-syllable-builder -> STOP
@@ -273,6 +274,7 @@ for ties, slurs, overlap, or an instruction to connect every note.
 
 | Skill | Owns | Completion evidence |
 | --- | --- | --- |
+| [bitwig-compose](bitwig-compose/SKILL.md) | Requested multi-stage composition outcome | Owner evidence for each requested result |
 | [score-intake](score-intake/SKILL.md) | Saved workspace, original score, project instructions | Actual saved path + unaltered source + recorded project identity |
 | [instrument-intake](instrument-intake/SKILL.md) | Library documentation and verified one-time batch preprocessing | Completed path-based processing coverage + INSTRUMENT.md marker + cited capabilities/unknowns |
 | [score-realization](score-realization/SKILL.md) | Musical realization, patch selection, conversion, native notes/controls/channel layers | Intended and imported content/routing agree; save confirmed |

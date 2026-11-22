@@ -45,16 +45,15 @@ Structural reads and available-parameter discovery do not contain the stored
 curves; the complete clip observation does. Filtering is local analysis: retain
 the complete snapshot as the edit base and preserve every unrequested domain.
 For a complete notes+automation replacement, read [complete clip replacement](references/clip-replacement.md).
-For a supporting window/project/history action, read the directly routed
-[native keyboard workflow](../bitwig-explore/references/keyboard-workflow.md).
-The CLI owns musical CRUD; supporting keyboard actions must not compensate for
-missing or failed CRUD. Preserve loops, source ownership, unrequested notes,
+For surrounding actions, use the
+[shared session procedure](../bitwig-explore/references/session-actions.md).
+Stored musical changes remain on the native editing route. Preserve loops, source ownership, unrequested notes,
 expression, points and folder metadata. Refuse unsupported shared-source isolation.
 
 On partial/unknown results, retain intent/receipts and reobserve before another
 write. Never replay automatically or issue speculative Undo. Use a supported
-history command only when actually available and explicitly requested; ordinary
-public history control is outside this MVP. Native transaction/rollback mechanics
+qualified history action only when the adjacent history entry is established
+and the request authorizes it. Native transaction/rollback mechanics
 remain the adapter's responsibility and do not guarantee a safe user Undo target.
 
 Finish with requested/eligible/already-correct/applied counts by owner, independent

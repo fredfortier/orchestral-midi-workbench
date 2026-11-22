@@ -14,7 +14,11 @@ and encoding configuration during recovery.
 
 Resolve current transaction-owned window handles after submission because the
 child render window can be recreated. Retain submission and dialog evidence.
-Reconcile an unknown outcome before another submission. Confirmation covers
+Reconcile an unknown outcome before another submission. Require a visible
+render after rack preparation before opening the owned Load dialog. A failed
+dialog preflight that precedes filling or submitting the filename uses
+`NkiNotSubmitted`. Failures after that boundary retain their actual uncertainty.
+Confirmation covers
 the loader's observed dialog, render, and navigator state. Sample availability,
 saved persistence, and audible behavior each require their own evidence.
 

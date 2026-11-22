@@ -603,18 +603,16 @@ fn proven_before_submission(prior: &Value) -> bool {
     if response["error"]["type"] == "NkiNotSubmitted" {
         return true;
     }
-    legacy_initial_render_failure(directory, &response)
+    legacy_pre_submission_failure(directory, &response)
 }
 
-fn legacy_initial_render_failure(directory: &std::path::Path, response: &Value) -> bool {
-    if response["error"]["type"] != "RuntimeError"
-        || response["error"]["message"]
-            != "Timed out waiting for the Kontakt window to render: last_mean=0.00"
-    {
+fn legacy_pre_submission_failure(directory: &std::path::Path, response: &Value) -> bool {
+    const RENDER: &str = "Timed out waiting for the Kontakt window to render: last_mean=0.00";
+    const DIALOG: &str = "Exact owner's Load dialog did not appear; no submission";
+    let message = response["error"]["message"].as_str().unwrap_or_default();
+    if response["error"]["type"] != "RuntimeError" || !matches!(message, RENDER | DIALOG) {
         return false;
     }
-    // Wire-55 compatibility only: retain the exact producer source and establish
-    // that its sole render wait precedes all Load-dialog interaction.
     let Ok(bytes) =
         crate::files::read_bounded(&directory.join("kontakt-ctl/kontakt_ctl/load_nki.py"))
     else {
@@ -626,6 +624,27 @@ fn legacy_initial_render_failure(directory: &std::path::Path, response: &Value) 
     let Some(body) = source.split_once("def run_load_nki(").map(|(_, body)| body) else {
         return false;
     };
+    if message == DIALOG {
+        let Some((before_dialog, after_dialog)) =
+            body.split_once("    dialog = wait_for_owned_dialog(kontakt_window, config)")
+        else {
+            return false;
+        };
+        let Some((dialog_fn, rest)) = source
+            .split_once("def wait_for_owned_dialog(owner, config):")
+            .and_then(|(_, rest)| rest.split_once("\ndef open_headless_load_dialog("))
+        else {
+            return false;
+        };
+        return before_dialog.contains("    open_headless_load_dialog(render_window, config)")
+            && !before_dialog.contains("set_dialog_text(")
+            && !before_dialog.contains("click_button(")
+            && after_dialog.contains("    click_button(open_button_hwnd)")
+            && dialog_fn.contains(&format!("raise RuntimeError(\"{DIALOG}\")"))
+            && !dialog_fn.contains("set_dialog_text(")
+            && !rest.contains(DIALOG);
+    }
+    // Wire-55 compatibility: its sole render wait precedes all Load-dialog I/O.
     let Some((preflight, after)) =
         body.split_once("    before_image = wait_for_window_render(render_window, config)")
     else {

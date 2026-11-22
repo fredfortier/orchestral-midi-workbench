@@ -11,6 +11,34 @@ jq '(.clips[].notes[] | select(.note.key==60) | .note.velocity) = 0.6' before.js
 midi-bridge controller midi replace --expected before.json --input desired.json --output after.json
 ```
 
+For note creation, each `.clips[].notes[]` entry contains `selected` and
+a complete `note` value. Use `selected: false` for an ordinary new note.
+The example below adds a deliberately plain note; choose its channel,
+source-beat start/duration, attack and release values for the intended part.
+Use all six expression arrays, even when they have no points.
+
+```json
+{
+  "selected": false,
+  "note": {
+    "id": "draft-1",
+    "channel": 0, "key": 62, "start": 0, "duration": 1,
+    "velocity": 0.6, "releaseVelocity": 0.5, "muted": false,
+    "velocitySpread": 0, "contentStart": 0,
+    "operators": {
+      "chanceEnabled": false, "chance": 1,
+      "occurrenceEnabled": false, "occurrence": "ALWAYS",
+      "recurrenceEnabled": false, "recurrenceLength": 2, "recurrenceMask": 1,
+      "repeatEnabled": false, "repeatCount": 2, "repeatCurve": 0,
+      "repeatVelocityEnd": 0, "repeatVelocityCurve": 0
+    },
+    "expressions": {
+      "pressure": [], "pitch": [], "gain": [], "pan": [], "timbre": [], "formant": []
+    }
+  }
+}
+```
+
 Use a fresh evidence filename/directory per attempt; output publication refuses
 existing files. Check command success before parsing the retained file.
 

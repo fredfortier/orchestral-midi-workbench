@@ -95,7 +95,7 @@ assignment operation.
 Update PERFORMANCE.md's setup evidence with actual assignment coverage and limits;
 preserve its orchestration and all unrelated sections. Loading, editor closure,
 sample completeness, saved persistence, audible playback and musical approval are
-separate facts. Saving uses a separately qualified native keyboard action; it is not an instrument command.
+separate facts. Use [session actions](../bitwig-explore/references/session-actions.md#direct-actions) when the requested delivery includes Save.
 
 Keep the direct path tight: reuse selection observations, documentation, runtime,
 initialized libraries and matching receivers. Do not export full note/project
