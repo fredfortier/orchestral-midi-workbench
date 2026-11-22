@@ -224,7 +224,49 @@ for notation rehearsals.
   timing samples confirmed 3/4 and 55 BPM across the join. Two separately
   verified history operations reversed the insertion and clip creation.
   This qualifies unchanged-pulse append mechanics. Local timing changes
-  and the audible join remain separate.
+  and the audible join require their own evidence.
+
+### Stored barline timing transition
+
+- In the disposable candidate project, a native range and OSC zoom brought
+  bar 52 into view. The ruler's **Insert Time Signature Change** created an
+  exact beat-153 marker. The Point Inspector set it to 2/4. Native capture
+  still measured 3/4 before beat 153 and first measured 2/4 at beat 153.
+- Created an adjacent six-beat Violino I clip under the new meter and placed
+  the same eight-note figure. Bitwig showed the new clip's signature as 2/4.
+  The native placement retained quarter-note start 153 and duration 6.
+- The Tempo context menu exposed the project lane. Native `info` supplied no
+  qualified Tempo or Time Signature lane path, even with both lanes visible.
+  Setting a 50 BPM point at the join first produced a ramp from the existing
+  55 BPM point at beat zero. Beat 153 moved from 166.909 seconds to 174.989.
+  Enabling Hold on the verified 55 BPM point restored the earlier segment and
+  made the change abrupt. A numerical comparison over 2,545 native samples
+  confirmed 55 BPM until beat 153 and 50 BPM after it, retaining beat 153 at
+  166.909 seconds and reaching beat 159 at 174.109 seconds. All 12 original
+  clips, 2,173 notes, and the eight new events matched independent reads.
+- OSC Save advanced the disposable file and produced SHA-256 prefix
+  `7cadb0b4`. A fresh byte-identical open independently returned all 13 clips,
+  2,181 notes, all eight cues, and the same timing samples. The original Bach
+  project's saved hash still began `ea2ac435`. Evidence is in `23-*` through
+  `27-*`. This qualifies the stored constant-to-step transition. Audible
+  verification and preservation of a preexisting nonconstant tempo curve
+  remain open.
+
+### Scoped Launcher-to-Arranger transfer
+
+- On the reopened disposable copy, mapped the eight saved Launcher events
+  to Violino I beats [60,68) by onset, duration, key and channel. The first
+  join stringified numeric keys, which treated `64.0` in the Arranger read
+  and `64` in the rebased Launcher data as different. The mutation matched
+  its incomplete payload but changed only four velocities. Undo restored
+  all 13 clips and the verified timing.
+- Joining on numeric tuples and comparing the resulting events directly to
+  the Launcher data proved all eight intended velocities. The remaining
+  note fields, surrounding figures, all other clips and automation matched
+  the saved snapshot. One known-adjacent Undo restored all clip content.
+  This was a mechanical transfer on the disposable project. Listening,
+  artistic approval and transfer to a class of related passages remain
+  unverified. Evidence is in `28-*` and `29-*`.
 
 ## Fresh reverse export
 

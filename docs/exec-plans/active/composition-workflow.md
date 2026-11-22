@@ -45,3 +45,6 @@ Bach *Qui tollis* project.
   2,173 independently reread note occurrences, and eight saved cues. The
   [exercise record](../../../research/QUI-TOLLIS.md) tracks qualified contexts,
   remaining cases, and fixes arising from the trial.
+- The disposable append verified a held tempo and meter transition at a barline
+  before and after a byte-identical open. The qualified procedure combines
+  OSC framing, native timing evidence, and the host's stored timing controls.

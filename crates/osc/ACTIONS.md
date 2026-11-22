@@ -53,10 +53,12 @@ for the qualified context and effect checks. Retain results in the
   survive in stored content.
 - For slot 5, exercise the already-focused case to catch a hidden timeline.
 - Before adding a binding, compare with the direct protocol. Global
-  `/time/signature` and `/tempo/raw` are candidates for empty-project initial
-  timing. A per-beat meter or tempo edit requires stored timing evidence across
-  the proposed boundary. Project new/open/first-save and destructive
-  focus-dependent routes stay open until tested in their actual context.
+  `/time/signature` and `/tempo/raw` qualify for initial timing. The
+  [barline transition](../../skills/bitwig-compose/references/compose-and-revise.md#change-meter-and-step-tempo-at-a-barline)
+  uses visible project timing points and a native timing readback. An OSC
+  replacement must preserve the timing samples on the original side of the
+  boundary. Project new/open/first-save and destructive focus-dependent OSC
+  routes stay open until tested in their actual context.
 - Verify OSC project focus against the exact native project path before writes.
   When the remote and visible project disagree, the named File → Save action
   has a verified disk outcome on the visible project. Keep remote writes
