@@ -556,8 +556,7 @@ pub fn read(bytes: &[u8], policy: &RenderingPolicy) -> Result<(String, Performan
         .filter_map(|n| serde_json::from_str::<serde_json::Value>(n.text().unwrap_or("")).ok())
         .any(|v| {
             serde_json::from_value::<Vec<u32>>(v["words"].clone())
-                .ok()
-                .is_some_and(|w| wire::instrument_from_text(&w).is_some())
+                .is_ok_and(|w| wire::instrument_from_text(&w).is_some())
         });
     let mut made_time = BTreeMap::<String, (Rational, Rational, Rational)>::new();
     let mut note_nodes = BTreeMap::new();
