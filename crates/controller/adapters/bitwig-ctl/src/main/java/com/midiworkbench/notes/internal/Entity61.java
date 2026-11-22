@@ -106,7 +106,7 @@ final class Entity61 {
         for(Object device:(List<?>)call(chain,"ATl")) {
             String name=value(device,"user_device_name").toString();if(name.isEmpty())name=value(device,"device_name").toString();
             String builtin=call(device,"v33").toString();
-            PluginIdentity61 plugin=PluginIdentity61.read(value(device,"device_contents"));
+            PluginIdentity61 plugin=PluginIdentity61.read(value(device,"device_contents"),builtin);
             String kind=builtin.equals("5024be2e-65d6-4d40-bbfe-8b2ea993c445")?"layer":builtin.equals("9588fbcf-721a-438b-8555-97e4231f7d2c")?"selector":plugin!=null?"plugin":"device";
             ObjectNode path=childPath(parent.required("path"),kind,name);
             if(plugin!=null) {

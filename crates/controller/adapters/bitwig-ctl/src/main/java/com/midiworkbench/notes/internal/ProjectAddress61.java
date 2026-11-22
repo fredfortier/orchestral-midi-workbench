@@ -65,7 +65,8 @@ final class ProjectAddress61 {
                     if(!name.equals(display))continue;
                     if(kind.equals("device")){matches.add(candidate);}
                     else if(kind.equals("plugin")) {
-                        PluginIdentity61 plugin=PluginIdentity61.read(ProjectAdapter61.value(candidate,"device_contents"));
+                        PluginIdentity61 plugin=PluginIdentity61.read(ProjectAdapter61.value(candidate,"device_contents"),
+                                Reflection.call(candidate,"v33").toString());
                         if(plugin!=null && element.required("id").asText().equals(plugin.id())
                             && element.required("version").asText().equals(plugin.version()))matches.add(candidate);
                     } else {

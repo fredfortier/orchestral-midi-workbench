@@ -9,6 +9,24 @@ Use the [shared workflow](../WORKFLOW.md), the configured `midi-bridge` service
 and the installed musical converter. Set `score_converter` to its exact
 executable path. Export is read-only. Make interpretation edits in a JSON copy.
 
+## Required capture for the requested scope
+
+A complete, successful native capture of the exact requested scope is required
+before assembly, validation, conversion, or dependent score analysis. If capture
+fails, retain the command, scope, and exact diagnostic. Narrow reads may isolate
+the failing owner for diagnosis only. Report the failed scope and affected
+deliverables explicitly, then resume only after the owning operation is fixed
+and the same full-scope capture succeeds.
+
+Never splice partial track captures or scores, substitute archived material,
+synthesize a capture from other reads, or remove an included owner or automation
+to get past a failed capture. A matching note count or event comparison does
+not qualify a substitute. A narrower export is a different deliverable and
+requires explicit user direction. Disclose all authorized exclusions,
+interpretation decisions, unresolved losses, and failed checks. Deliver an MXL
+as verified only after admission, conversion, and the independent schema check
+all pass for that scope. A time target does not change these requirements.
+
 ## Short execution path
 
 1. **Scope and capture.** Run `midi-bridge controller info` only when a requested

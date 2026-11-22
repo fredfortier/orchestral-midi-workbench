@@ -272,6 +272,9 @@ native read -> retained capture -> optional editorial copy -> assemble -> .midi2
   collection and explicit owners/scope. The capture stays intact. An editorial
   copy may record musical decisions and losses and carries no native write
   authority. See [the capture types](src/export_midi.rs).
+- Plug-in paths and capture inventory read identity from the native serialized
+  contents. CLAP contents use `clap_device_id` and the `clap-` prefix, including
+  inside Instrument Layer and Selector slots.
 - For articulated tracks, use actual stock Filter/Map routing to interpret note
   channels and shared displayed channel 1 (JSON 0). Resolve slot names against
   the converter vocabulary. Encode supported meaning as Note On attributes

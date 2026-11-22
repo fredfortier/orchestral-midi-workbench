@@ -252,9 +252,10 @@ public final class Instrument61 {
     }
     private static ObjectNode device(Object device)throws Exception {
         ObjectNode result=Wire.object();result.put("id",id(device));result.put("name",deviceName(device));
-        result.put("nativeDeviceId",Reflection.call(device,"v33").toString());
+        String nativeDeviceId=Reflection.call(device,"v33").toString();
+        result.put("nativeDeviceId",nativeDeviceId);
         Object contents=value(device,"device_contents");
-        PluginIdentity61 plugin=PluginIdentity61.read(contents);
+        PluginIdentity61 plugin=PluginIdentity61.read(contents,nativeDeviceId);
         if(plugin!=null) {
             result.put("pluginId",plugin.id());result.put("version",plugin.version());
             result.put("editorVisible",Boolean.TRUE.equals(Reflection.call(Reflection.call(contents,"cfn"),"getBoolValue")));
@@ -460,7 +461,7 @@ public final class Instrument61 {
         }
         if(found==null){if(required)throw new IllegalArgumentException("Slot has no instrument");return null;}
         Object contents=value(found,"device_contents");
-        PluginIdentity61 plugin=PluginIdentity61.read(contents);
+        PluginIdentity61 plugin=PluginIdentity61.read(contents,Reflection.call(found,"v33").toString());
         if(plugin==null || !KONTAKT.equals(plugin.id()))throw new IllegalArgumentException("Existing instrument is not Kontakt");
         return found;
     }
