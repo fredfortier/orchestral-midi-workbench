@@ -33,6 +33,23 @@ dependent writes.
    performance in native units. Preserve source/occurrence/loop coordinates. Save
    through a separately qualified native action and verify actual saved identity.
 
+## Route and compare the notes
+
+For a patch-bound rendition, use the companion's binding for each decoded
+route and the native path resolved for that binding's track. For a notation
+rehearsal without bindings, pair decoded notes with `note_sources` from the
+same authenticated companion in canonical order. Verify count, onset, end,
+key and encoded route before using each source part and occurrence to resolve
+the intended destination. Several written parts can share an encoded route,
+and a single part can use several routes. Preserve the part ownership and any
+independent simultaneous voices in the reviewed destination map.
+
+On readback, compare note occurrences per exact destination path as
+multisets. Include channel, pitch, quantized start and end, attack and release
+velocities, and mapped expression. Ignore new native IDs and selection flags
+for this comparison. Check clip geometry and preserved content separately.
+Equal note totals can conceal a part swap or a dropped overlap.
+
 If a required project/folder/clip creation or file-placement action has no
 qualified route, leave that dependent placement pending and report the exact
 missing action. Existing complete clips remain editable through their native

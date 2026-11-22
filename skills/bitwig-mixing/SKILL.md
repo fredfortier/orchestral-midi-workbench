@@ -32,7 +32,8 @@ Use the existing controller; do not scrape the mixer or create another bridge.
    that a contour still serves the intended phrase or climax hierarchy.
    State routine assumptions; ask only if an unresolved choice materially changes
    musical intent, preservation or delivery compatibility. Do not reorchestrate.
-2. Stop playback through the qualified native keyboard workflow if necessary.
+2. Stop playback through [session actions](../bitwig-explore/references/session-actions.md)
+   if necessary.
    Read `midi-bridge controller mix read --output mix-before.json`. Retain complete
    owning clips through bitwig-explore for content/automation preservation. Read
    cues separately; join their beat positions to the mixer snapshot's `beatSeconds`

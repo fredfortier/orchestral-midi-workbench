@@ -24,8 +24,9 @@ Resolve intended project + export purpose/range/owners
 ```
 
 Resolve project instructions and confirm current project with `controller info`.
-Playback must be stopped; surrounding transport/window actions use the qualified
-native keyboard route. A request for advice alone does not dispatch an export.
+Playback must be stopped. Use [session actions](../bitwig-explore/references/session-actions.md)
+for transport and window operations. A request for advice alone does not dispatch
+an export.
 
 ```sh
 midi-bridge controller mix read --output mix.json

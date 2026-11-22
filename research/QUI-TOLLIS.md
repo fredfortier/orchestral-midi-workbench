@@ -48,8 +48,8 @@ converter pass reads its metadata. The chooser can be a distinct window.
 | --- | --- | --- |
 | Slot 1, Create Empty Clip | No target left native structure unchanged. A native [8,12] range with editor `none` also left clips unchanged, including after audio-engine activation. With the same range and editor `arranger` established by slot 5, one clip appeared at beat 8, duration 4, source [0,4], looping off and zero notes. Transport stayed stopped. | Exact range and actual Arranger focus are separate preconditions. Qualify a following write against the resulting clip path. |
 | Slot 1, compatible range batch | One exact [0,153] selection over two instrument tracks created a clip on each track. Audio and FX tracks acquired none. | One selected range and one action can supply shared full-movement placement. Independently check each owner. |
-| Slot 2, Zoom Arranger to Selection | Native selection retained [8,12], while the ruler changed from measures 1–4 to the selected measure 3 and its subdivisions. | Use the viewport for display evidence. Native selection alone does not prove framing. The empty-selection comparison remains open. |
-| Slot 3, Toggle Automation Lanes for Selected Tracks | With Inst 1 as the exact primary track header, dispatch revealed its Volume lane row and left Audio 2 closed. Scoped structural read stayed identical. | Check disclosure visually. Select track headers for predictable scope. A separate no-target visibility check remains open. |
+| Slot 2, Zoom Arranger to Selection | Native selection retained [8,12], while the ruler changed from measures 1–4 to the selected measure 3 and its subdivisions. | Use the viewport for display evidence. Native selection alone does not prove framing. A later empty-selection comparison preserved the viewport. |
+| Slot 3, Toggle Automation Lanes for Selected Tracks | With Inst 1 as the exact primary track header, dispatch revealed its Volume lane row and left Audio 2 closed. Scoped structural read stayed identical. | Check disclosure visually. Select track headers for predictable scope. A later empty-selection toggle affected the last track. |
 | Slot 4, Split | Range [12,14] left the notes, expression and curve array unchanged. Range [10,12] split [8,12] into placements at 8 and 10 of duration 2 each. Source windows became [0,2] and [2,4]. Both stored sources contained the same two note values, including right-note pressure 0.5. The right copy received fresh IDs. | Count audible occurrences within source windows. Counting all source notes after a split would double the result. Only this cut/geometry is qualified. |
 | Slot 5, Focus/toggle Arranger Timeline Panel | With an unfocused visible Arranger, preserved [8,12] selected range and changed editor to `arranger`. Invoking while focused hid the timeline and returned `none`. Invocation while hidden showed it and returned `arranger`. | Observe before invoking. An already focused timeline requires zero actions. |
 | Session history | Direct Undo removed the split and restored matching stored notes and expressions. Redo recreated both placements and complete content. Three individually checked Undo actions removed the remaining disposable split/seed/container changes. | Use direct OSC history only with the known adjacent document edit and read back each transition. |
@@ -108,6 +108,16 @@ artifact retains the source score information, including late tempo events
 and lyrics. The native rehearsal has constant tempo and is an intermediate
 deliverable for the receiver, editing and listening exercise.
 
+A later comparison derived part ownership from the MXL part list and
+companion provenance, independently of the native replacement payload.
+Flauto traverso I and Violoncello share encoded route 0/0 while Organo uses
+two routes. The source-aware multiset matched all 2,173 occurrences in both
+the independent note read and the later export capture, including destination
+part and channel, pitch, native-grid start and end, and attack and release
+velocity. The later cue read still matched all eight intended names and beats.
+This strengthened the production placement recipe with a provenance check
+for notation rehearsals.
+
 ## Receiver and Launcher handoff
 
 - Violino I Layer and slot ensure reused the returned Layer target. Both
@@ -134,6 +144,42 @@ deliverable for the receiver, editing and listening exercise.
   project and engine active without advancing the saved file. Only the earlier
   score/cue saves are proved. The continuation stopped before claiming or
   submitting the NKI. Shared-engine termination awaits user authorization.
+- The failed save eventually showed an explicit Kontakt state timeout. After
+  dismissing the prompt without proceeding, the native clip operations
+  responded despite the audio-engine alert. A fresh empty Scene 1 observation
+  created an eight-beat Violino I Launcher clip. Its first candidate reused
+  the eight notes from arranger beats [60,68), rebased their onsets to clip
+  coordinates, and applied a small attack-velocity arch. Independent readback
+  matched all eight candidate events. The 12 Arranger clips, complete note
+  values, expression and automation matched their prior snapshot. The bank
+  reported Launcher content while transport remained stopped.
+- With the Bach project active, recording off and the corresponding bank
+  slot occupied, OSC launch set both slot playing and global play to 1
+  and advanced the beat. Stop and the Arrangement return command left the
+  transport and slot stopped. The OSC bank's clip-name field was blank for
+  native default name `S1`. A seek to beat 60 reported bar 21 beat 1 in
+  3/4 without changing the native Launcher selection. A fresh mixer read
+  joined cues 60 and 141 to 65.454545 and 153.818182 seconds. The 12
+  complete Arranger clips matched the pre-audition snapshot.
+- An explicit attempt to create into occupied Scene 1 returned
+  `InvalidRequest / NotDispatched`, and an independent read still matched the
+  exact Launcher clip, its geometry and all eight notes. These checks establish
+  transport and edit mechanics. Audible audition, promotion and persistence of
+  the candidate remain open.
+
+### Wrong-context display probes
+
+- Clearing the unsupported Launcher selection by sending empty native paths
+  refused before dispatch. Selecting the exact Violino I Arranger clip worked.
+  Clearing from the Detail Editor did not clear the Arranger's own saved
+  selection. Slot 5 restored the Arranger selection on focus. Clearing again
+  with the Arranger active produced a confirmed empty target.
+- Slot 2 with that empty Arranger target preserved both the ruler framing and
+  the independent native selection.
+- Slot 3 with the same empty Arranger target revealed Violino I's Volume lane
+  while leaving native selection empty. The earlier focused track retained
+  influence over the action. Explicit exact header membership is a production
+  prerequisite, even when a null primary otherwise looks harmless.
 
 ## Fresh reverse export
 
