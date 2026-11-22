@@ -31,24 +31,52 @@ from pathlib import Path
 import music21 as m21
 
 
-def events(part):
-    """Expand chords into pitches without confusing chord objects with attacks."""
-    for obj in part.flatten().notes:
+def note_segments(part):
+    """Expand chords and retain the actual containing voice when present."""
+    for obj in part.recurse().notes:
+        site = obj.activeSite
+        voice = site.id if isinstance(site, m21.stream.Voice) else None
+        onset = obj.getOffsetInHierarchy(part)
+        release = m21.common.opFrac(onset + obj.quarterLength)
         atoms = obj.notes if isinstance(obj, m21.chord.Chord) else [obj]
         for atom in atoms:
             yield (
-                float(obj.offset),
-                float(obj.offset + obj.quarterLength),
+                onset,
+                release,
                 float(atom.pitch.ps),
                 atom.tie.type if atom.tie else None,
+                voice,
             )
+
+
+def tied_attacks(segments):
+    """Join contiguous sounding ties without conflating simultaneous voices."""
+    pending = defaultdict(list)
+    for onset, release, pitch, tie, voice in sorted(segments, key=lambda item: item[0]):
+        start = onset
+        if tie in ("stop", "continue"):
+            candidates = pending[(onset, pitch)]
+            match = next((i for i, (_, v) in enumerate(candidates) if v == voice), None)
+            # A single-voice measure can lose its explicit Voice container on import.
+            if match is None and len(candidates) == 1:
+                if voice is None or candidates[0][1] is None:
+                    match = 0
+            if match is not None:
+                start, _ = candidates.pop(match)
+        if tie in ("start", "continue"):
+            pending[(release, pitch)].append((start, voice))
+        else:
+            yield float(start), float(release), pitch
+    for (release, pitch), candidates in pending.items():
+        for start, _ in candidates:
+            yield float(start), float(release), pitch
 
 
 def summary(score):
     rows = []
     for part in score.parts:
-        segments = list(events(part))
-        attacks = list(events(part.stripTies()))
+        segments = list(note_segments(part))
+        attacks = list(tied_attacks(segments))
         rows.append(
             {
                 "part": part.partName or part.id,
@@ -61,7 +89,7 @@ def summary(score):
                     min((n[2] for n in attacks), default=None),
                     max((n[2] for n in attacks), default=None),
                 ],
-                "pitch_beats": sum(n[1] - n[0] for n in segments),
+                "pitch_beats": sum(float(n[1] - n[0]) for n in segments),
             }
         )
     return rows
@@ -152,7 +180,7 @@ def audit_capture(score, path):
     rows = []
     for part in score.parts:
         name = part.partName or part.id
-        observed = [(a, b, p) for a, b, p, _ in events(part.stripTies())]
+        observed = tied_attacks(note_segments(part))
         # Match each pitch's successive occurrences; onset rounding cannot reorder
         # different pitches, unlike a global chronological zip at shared attacks.
         source_by_pitch, xml_by_pitch = defaultdict(list), defaultdict(list)
@@ -202,8 +230,10 @@ def compare_reference(score, reference, mappings):
             continue
         if len(matches) != 1:
             raise ValueError(f"Ambiguous reference part: {target}")
-        current = sorted((p, a, b) for a, b, p, _ in events(part.stripTies()))
-        original = sorted((p, a, b) for a, b, p, _ in events(matches[0].stripTies()))
+        current_attacks = list(tied_attacks(note_segments(part)))
+        original_attacks = list(tied_attacks(note_segments(matches[0])))
+        current = sorted((p, a, b) for a, b, p in current_attacks)
+        original = sorted((p, a, b) for a, b, p in original_attacks)
         pitches_equal = [n[0] for n in current] == [n[0] for n in original]
         differences = (
             [
@@ -226,9 +256,9 @@ def compare_reference(score, reference, mappings):
                 "reference_part": target,
                 "pitch_attack_counts_equal": pitches_equal,
                 "same_pitch_sequence_by_onset": [
-                    n[2] for n in sorted(events(part.stripTies()))
+                    n[2] for n in sorted(current_attacks)
                 ]
-                == [n[2] for n in sorted(events(matches[0].stripTies()))],
+                == [n[2] for n in sorted(original_attacks)],
                 "timing_differences": len(differences),
                 "examples": differences[:5],
                 "max_onset_difference": max(

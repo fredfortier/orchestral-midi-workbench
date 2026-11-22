@@ -4,8 +4,8 @@ Open for every analysis. Input is the acquired MXL/XML and its known provenance;
 output is `score`, indexed `parts`, `start/end` in quarter-note beats, and `rows`.
 Return to the intent router. No permanent script is needed for ordinary analysis.
 
-From `crates/`, concatenate the setup and selected reference blocks into one stdin
-run. Alternatively start `python -i` through the same uv environment and execute
+Concatenate the setup and selected reference blocks into one stdin run.
+Alternatively start `python -i` through the same uv environment and execute
 blocks in that process. Separate uv invocations do not share Python variables.
 
 ```sh
