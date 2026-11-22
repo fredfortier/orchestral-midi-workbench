@@ -374,3 +374,13 @@ reconstructed score represents captured native state and its notation losses.
   first pass of the candidate. The arrangement and timing matched the
   prior capture after returning. No human approval or perceptual comparison
   follows from the signal measurement. Evidence is in `38-*`.
+
+- On the disposable project, the initialized Freyja Altos full-builder NKI
+  loaded through the same integrated assignment with `--keep-editor-open`.
+  The exact `Alto / Instruments / Qui` receiver admitted display channels 1
+  and 2. Its editor showed one rack instrument and one default Sustain cell,
+  `Luh`. Selecting that cell and choosing `Si` changed its label. Selecting
+  the cell and choosing `Luh` restored the baseline. The notes and both
+  curves matched their previous native values. This was a reversible cell
+  edit. Latin sample mapping, selector timing, and HLS remain unverified.
+  The exact editor is open for those checks. Evidence is in `39-*`.
