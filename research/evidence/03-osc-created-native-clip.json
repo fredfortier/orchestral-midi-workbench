@@ -1,0 +1,29 @@
+{
+  "clips": [
+    {
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Sketch Instruments",
+            "nativeId": "393"
+          },
+          {
+            "kind": "launcherClip",
+            "name": "S2",
+            "scene": 1,
+            "nativeId": "4398"
+          }
+        ]
+      },
+      "id": "4398",
+      "duration": 4.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 4.0,
+      "loopStart": 0.0,
+      "loopLength": 4.0,
+      "noteCount": 0
+    }
+  ]
+}

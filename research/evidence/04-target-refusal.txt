@@ -1,0 +1,6 @@
+First layer ensure result
+{"operation":"2077948-1795364998268101873:operation:93","status":"completed","automaticTrackName":{"after":"Sketch Instruments","before":"Inst 1"},"target":{"elements":[{"kind":"track","name":"Sketch Instruments","nativeId":"393"},{"kind":"layer","name":"Sketch Instruments"}],"project":"Boundary Sketch"}}
+Slot ensure with original target returned InvalidRequest / NotDispatched.
+E_ADDRESS_MATCH: expected one track named Inst 1 with nativeId 393, found 0.
+Request ID 4497654e-03b3-4b27-9f4e-a55fe966dbb8
+Resolved successor with same nativeId and used returned target for both readbacks.

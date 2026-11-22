@@ -1,0 +1,29 @@
+{
+  "action": "set",
+  "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+  "revision": "52a272e4-17b5-45ec-a400-a3fdec9bb4df",
+  "paths": [
+    {
+      "project": "Boundary Sketch",
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Inst 3",
+          "nativeId": "2720"
+        }
+      ]
+    },
+    {
+      "project": "Boundary Sketch",
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Inst 1",
+          "nativeId": "393"
+        }
+      ]
+    }
+  ],
+  "mode": "objects",
+  "range": null
+}

@@ -1,0 +1,305 @@
+{
+  "path": {
+    "project": "Boundary Sketch",
+    "elements": []
+  },
+  "kind": "project",
+  "metadata": {
+    "id": "238",
+    "name": "Boundary Sketch"
+  },
+  "children": [
+    {
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Sketch Instruments",
+            "nativeId": "393"
+          }
+        ]
+      },
+      "kind": "track",
+      "metadata": {
+        "active": true,
+        "id": "393",
+        "name": "Sketch Instruments"
+      },
+      "children": [
+        {
+          "path": {
+            "project": "Boundary Sketch",
+            "elements": [
+              {
+                "kind": "track",
+                "name": "Sketch Instruments",
+                "nativeId": "393"
+              },
+              {
+                "kind": "clip",
+                "name": "1",
+                "nativeId": "2551"
+              }
+            ]
+          },
+          "kind": "clip",
+          "metadata": {
+            "duration": 4.0,
+            "id": "2551",
+            "loopEnabled": false,
+            "loopLength": 4.0,
+            "loopStart": 0.0,
+            "name": "1",
+            "sourceEnd": 4.0,
+            "sourceStart": 0.0,
+            "start": 0.0
+          },
+          "children": []
+        },
+        {
+          "path": {
+            "project": "Boundary Sketch",
+            "elements": [
+              {
+                "kind": "track",
+                "name": "Sketch Instruments",
+                "nativeId": "393"
+              },
+              {
+                "kind": "automationLane",
+                "name": "Ch. 1 Expression (#11) automation",
+                "nativeId": "3124"
+              }
+            ]
+          },
+          "kind": "automationLane",
+          "metadata": {
+            "id": "3124",
+            "index": 0,
+            "name": "Ch. 1 Expression (#11) automation"
+          },
+          "children": []
+        },
+        {
+          "path": {
+            "project": "Boundary Sketch",
+            "elements": [
+              {
+                "kind": "track",
+                "name": "Sketch Instruments",
+                "nativeId": "393"
+              },
+              {
+                "kind": "layer",
+                "name": "Sketch Instruments",
+                "nativeId": "3180"
+              }
+            ]
+          },
+          "kind": "layer",
+          "metadata": {
+            "id": "3180",
+            "name": "Sketch Instruments"
+          },
+          "children": [
+            {
+              "path": {
+                "project": "Boundary Sketch",
+                "elements": [
+                  {
+                    "kind": "track",
+                    "name": "Sketch Instruments",
+                    "nativeId": "393"
+                  },
+                  {
+                    "kind": "layer",
+                    "name": "Sketch Instruments",
+                    "nativeId": "3180"
+                  },
+                  {
+                    "kind": "layerChain",
+                    "name": "Answer",
+                    "nativeId": "3312"
+                  }
+                ]
+              },
+              "kind": "layerChain",
+              "metadata": {
+                "channel": -1,
+                "id": "3312",
+                "name": "Answer",
+                "outputChannel": -1
+              },
+              "children": [
+                {
+                  "path": {
+                    "project": "Boundary Sketch",
+                    "elements": [
+                      {
+                        "kind": "track",
+                        "name": "Sketch Instruments",
+                        "nativeId": "393"
+                      },
+                      {
+                        "kind": "layer",
+                        "name": "Sketch Instruments",
+                        "nativeId": "3180"
+                      },
+                      {
+                        "kind": "layerChain",
+                        "name": "Answer",
+                        "nativeId": "3312"
+                      },
+                      {
+                        "kind": "device",
+                        "name": "Channel Filter",
+                        "nativeId": "3353"
+                      }
+                    ]
+                  },
+                  "kind": "device",
+                  "metadata": {
+                    "channelFilter": [
+                      true,
+                      true,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false,
+                      false
+                    ],
+                    "id": "3353",
+                    "name": "Channel Filter",
+                    "routingActive": true,
+                    "routingEnabled": true
+                  },
+                  "children": []
+                },
+                {
+                  "path": {
+                    "project": "Boundary Sketch",
+                    "elements": [
+                      {
+                        "kind": "track",
+                        "name": "Sketch Instruments",
+                        "nativeId": "393"
+                      },
+                      {
+                        "kind": "layer",
+                        "name": "Sketch Instruments",
+                        "nativeId": "3180"
+                      },
+                      {
+                        "kind": "layerChain",
+                        "name": "Answer",
+                        "nativeId": "3312"
+                      },
+                      {
+                        "kind": "device",
+                        "name": "Channel Map",
+                        "nativeId": "3819"
+                      }
+                    ]
+                  },
+                  "kind": "device",
+                  "metadata": {
+                    "channelMap": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ],
+                    "id": "3819",
+                    "name": "Channel Map",
+                    "routingActive": true,
+                    "routingEnabled": true
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Audio 2",
+            "nativeId": "558"
+          }
+        ]
+      },
+      "kind": "track",
+      "metadata": {
+        "active": true,
+        "id": "558",
+        "name": "Audio 2"
+      },
+      "children": []
+    },
+    {
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Inst 3",
+            "nativeId": "2720"
+          }
+        ]
+      },
+      "kind": "track",
+      "metadata": {
+        "active": true,
+        "id": "2720",
+        "name": "Inst 3"
+      },
+      "children": []
+    },
+    {
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "FX 1",
+            "nativeId": "723"
+          }
+        ]
+      },
+      "kind": "track",
+      "metadata": {
+        "active": true,
+        "id": "723",
+        "name": "FX 1"
+      },
+      "children": []
+    }
+  ]
+}

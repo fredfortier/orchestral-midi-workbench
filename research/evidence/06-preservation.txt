@@ -1,0 +1,115 @@
+Original fixture before and after all follow-up probes
+{
+  "originalClipsEqual": true,
+  "originalAutomationEqual": false,
+  "addedPoints": [
+    {
+      "id": "4901",
+      "time": 8.0,
+      "value": 0.5,
+      "interpolation": "LINEAR",
+      "curvature": 0.0,
+      "spread": 0.0
+    },
+    {
+      "id": "4902",
+      "time": 8.0,
+      "value": 0.0,
+      "interpolation": "HOLD",
+      "curvature": 0.0,
+      "spread": 0.0
+    },
+    {
+      "id": "4904",
+      "time": 9.913999557495117,
+      "value": 0.5,
+      "interpolation": "LINEAR",
+      "curvature": 0.0,
+      "spread": 0.0
+    }
+  ]
+}
+After a scoped native replace restored the original lane points
+true
+
+Isolated repeat, with fresh native curve snapshots immediately around recording at beat 16
+/autowrite Int(0)
+$ osc send 127.0.0.1:8000 /time f:16
+/autowrite Int(0)
+$ osc send 127.0.0.1:8000 /record
+/autowrite Int(1)
+$ osc send 127.0.0.1:8000 /play i:1
+/autowrite Int(1)
+$ osc send 127.0.0.1:8000 /stop
+/autowrite Int(0)
+Native arranger clip paths: [{"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "3", "nativeId": "4895"}]}, {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "5", "nativeId": "9573"}]}]
+[
+  {
+    "id": "9579",
+    "time": 16.0,
+    "value": 0.5,
+    "interpolation": "LINEAR",
+    "curvature": 0.0,
+    "spread": 0.0
+  },
+  {
+    "id": "9580",
+    "time": 16.0,
+    "value": 0.0,
+    "interpolation": "HOLD",
+    "curvature": 0.0,
+    "spread": 0.0
+  },
+  {
+    "id": "9582",
+    "time": 17.842347145080566,
+    "value": 0.5,
+    "interpolation": "LINEAR",
+    "curvature": 0.0,
+    "spread": 0.0
+  }
+]
+
+Guarded repeat at beat 24, with Arranger automation write turned off after arming global record
+/autowrite Int(0)
+$ osc send 127.0.0.1:8000 /time f:24
+/autowrite Int(0)
+$ osc send 127.0.0.1:8000 /record
+/autowrite Int(1)
+$ osc send 127.0.0.1:8000 /autowrite
+/autowrite Int(0)
+$ osc send 127.0.0.1:8000 /play i:1
+/autowrite Int(0)
+$ osc send 127.0.0.1:8000 /stop
+/autowrite Int(0)
+Native arranger clip paths: [{"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "3", "nativeId": "4895"}]}, {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "5", "nativeId": "9573"}]}, {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "7", "nativeId": "9687"}]}]
+Complete existing automation identical before and after guarded recording: false
+[
+  {
+    "id": "9693",
+    "time": 24.0,
+    "value": 0.5,
+    "interpolation": "LINEAR",
+    "curvature": 0.0,
+    "spread": 0.0
+  },
+  {
+    "id": "9694",
+    "time": 24.0,
+    "value": 0.0,
+    "interpolation": "HOLD",
+    "curvature": 0.0,
+    "spread": 0.0
+  },
+  {
+    "id": "9696",
+    "time": 25.913235664367676,
+    "value": 0.5,
+    "interpolation": "LINEAR",
+    "curvature": 0.0,
+    "spread": 0.0
+  }
+]
+
+Original stored clips and automation after the final scoped restoration: true
+Fixture file hash advanced after OSC Save.

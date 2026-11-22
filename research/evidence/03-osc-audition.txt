@@ -1,0 +1,46 @@
+$ crates/target/debug/osc send 127.0.0.1:8000 /time f:4
+/beat/str String("2.01.01:00")
+/beat/str String("1.02.01:00")
+/beat/str String("2.01.01:00")
+$ crates/target/debug/osc send 127.0.0.1:8000 /track/1/clip/1/launch i:1
+/play Int(1)
+/beat/str String("2.01.01:28")
+/track/1/clip/1/isPlaying Int(1)
+/beat/str String("2.01.01:56")
+/beat/str String("2.01.01:85")
+/beat/str String("2.01.02:13")
+/beat/str String("2.01.02:41")
+/beat/str String("2.01.02:70")
+/beat/str String("2.01.02:98")
+/beat/str String("2.01.03:26")
+/beat/str String("2.01.03:55")
+$ crates/target/debug/osc send 127.0.0.1:8000 /stop
+/beat/str String("2.01.04:40")
+/beat/str String("2.01.04:68")
+/play Int(0)
+/beat/str String("2.01.04:96")
+$ crates/target/debug/osc send 127.0.0.1:8000 /track/1/clip/2/select
+/track/1/clip/1/isSelected Int(0)
+/track/1/clip/2/isSelected Int(1)
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"524960ae-1427-41ae-b592-d5897410ac1c","position":null}
+$ crates/target/debug/osc send 127.0.0.1:8000 /track/1/clip/2/create i:4
+/overdub/launcher Int(1)
+/track/1/clip/2/hasContent Int(1)
+/play Int(1)
+/beat/str String("2.01.01:28")
+/track/1/clip/1/isPlaying Int(0)
+/track/1/clip/2/isPlaying Int(1)
+/beat/str String("2.01.01:56")
+/beat/str String("2.01.01:85")
+/beat/str String("2.01.02:13")
+/beat/str String("2.01.02:41")
+/beat/str String("2.01.02:70")
+/beat/str String("2.01.02:98")
+/beat/str String("2.01.03:26")
+$ crates/target/debug/osc send 127.0.0.1:8000 /stop
+/beat/str String("2.01.04:11")
+/play Int(0)
+/overdub/launcher Int(0)
+/beat/str String("2.01.04:40")
+/beat/str String("2.01.04:68")
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"524960ae-1427-41ae-b592-d5897410ac1c","position":null}

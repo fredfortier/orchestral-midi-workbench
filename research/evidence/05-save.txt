@@ -1,0 +1,8 @@
+$ stat and sha256sum on the fixture .bwproject before OSC save
+25212 bytes; mtime 2026-11-22 10:26:58.916227387 -0800
+d50ed59fd47cfc41491d917d0a76010211e22cd5ad2ecdf9f3e8504d74c5b6b2  research/tmp/Boundary Sketch/Boundary Sketch.bwproject
+$ crates/target/debug/osc send 127.0.0.1:8000 /project/save
+After the command
+35356 bytes; mtime 2026-11-22 10:30:34.937361652 -0800
+cdb02ed3e73c22c38ac459cacd1527655091ebf12c9caa88dd3d8f4ecc10bc9b  research/tmp/Boundary Sketch/Boundary Sketch.bwproject
+true

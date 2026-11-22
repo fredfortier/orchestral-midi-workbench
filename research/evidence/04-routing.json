@@ -1,0 +1,109 @@
+{
+  "autoName": {
+    "after": "Sketch Instruments",
+    "before": "Inst 1"
+  },
+  "layerOperation": "2077948-1795364998268101873:operation:93",
+  "observation": {
+    "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+    "engine": "CONNECTED",
+    "hostPid": 2268669,
+    "layerId": "5d6a8dc3-bd32-4038-ade0-54756482f745",
+    "layerPresent": true,
+    "parentDevices": [
+      {
+        "id": "5d6a8dc3-bd32-4038-ade0-54756482f745",
+        "name": "Sketch Instruments",
+        "nativeDeviceId": "5024be2e-65d6-4d40-bbfe-8b2ea993c445"
+      }
+    ],
+    "parentId": "db6f6576-e8f6-43a5-8648-a14ed22b3af8",
+    "projectUuid": "e7d60e60-6155-4778-b4fa-20bca862aaeb",
+    "selectedSlot": "19c6ad2a-8a56-48b7-a72d-69affdcc1191",
+    "slot": null,
+    "slots": [
+      {
+        "channel": -1,
+        "devices": [
+          {
+            "channelFilter": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "id": "20b08662-7804-452b-abec-0bf7e20f9b7e",
+            "name": "Channel Filter",
+            "nativeDeviceId": "c5a1bb2d-a589-4fda-b3cf-911cfd6297be",
+            "routingActive": true,
+            "routingEnabled": true
+          },
+          {
+            "channelMap": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "id": "d75b3a29-6542-42f4-b204-7ae1d641e2af",
+            "name": "Channel Map",
+            "nativeDeviceId": "0f003fa3-adcc-4684-81f7-f0e11c09c5b4",
+            "routingActive": true,
+            "routingEnabled": true
+          }
+        ],
+        "id": "19c6ad2a-8a56-48b7-a72d-69affdcc1191",
+        "name": "Answer",
+        "outputChannel": -1
+      }
+    ],
+    "target": {
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Sketch Instruments",
+          "nativeId": "393"
+        },
+        {
+          "kind": "layer",
+          "name": "Sketch Instruments"
+        }
+      ],
+      "project": "Boundary Sketch"
+    },
+    "trackDevices": [
+      {
+        "id": "5d6a8dc3-bd32-4038-ade0-54756482f745",
+        "name": "Sketch Instruments",
+        "nativeDeviceId": "5024be2e-65d6-4d40-bbfe-8b2ea993c445"
+      }
+    ],
+    "trackId": "db6f6576-e8f6-43a5-8648-a14ed22b3af8",
+    "trackTitle": ""
+  },
+  "observationsEqual": true
+}

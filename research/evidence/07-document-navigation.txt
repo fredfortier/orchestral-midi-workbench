@@ -1,0 +1,46 @@
+Native arranger inventory: [{"duration": 1.9139995574951172, "id": "4895", "loopEnabled": false, "loopLength": 1.9139995574951172, "loopStart": 0.0, "name": "3", "sourceEnd": 1.9139995574951172, "sourceStart": 0.0, "start": 8.0, "path": {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "3", "nativeId": "4895"}]}}, {"duration": 1.8423471450805664, "id": "9573", "loopEnabled": false, "loopLength": 1.8423471450805664, "loopStart": 0.0, "name": "5", "sourceEnd": 1.8423471450805664, "sourceStart": 0.0, "start": 16.0, "path": {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "5", "nativeId": "9573"}]}}, {"duration": 1.9132356643676758, "id": "9687", "loopEnabled": false, "loopLength": 1.9132356643676758, "loopStart": 0.0, "name": "7", "sourceEnd": 1.9132356643676758, "sourceStart": 0.0, "start": 24.0, "path": {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "7", "nativeId": "9687"}]}}]
+$ osc send 127.0.0.1:8000 /refresh
+/play Int(0)
+/record Int(0)
+/repeat Int(0)
+/punchIn Int(0)
+/punchOut Int(0)
+/beat/str String("7.03.01:22")
+/project/name String("Boundary Sketch")
+/project/engine Int(1)
+/track/1/name String("Sketch Instruments")
+/track/1/recarm Int(0)
+/track/2/name String("Audio 2")
+/track/2/recarm Int(0)
+/track/3/name String("Inst 3")
+/track/3/recarm Int(1)
+/track/4/recarm Int(0)
+/track/5/recarm Int(0)
+/track/6/recarm Int(0)
+/track/7/recarm Int(0)
+/track/8/recarm Int(0)
+OSC indexed slot feedback fields for bank track 3: ['color', 'hasContent', 'isPlaying', 'isPlayingQueued', 'isRecording', 'isRecordingQueued', 'isSelected', 'isStopQueued', 'name']
+Native selected clip: {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "3", "nativeId": "4895"}]}
+$ osc send 127.0.0.1:8000 /time f:16
+$ osc send 127.0.0.1:8000 /refresh
+/play Int(0)
+/record Int(0)
+/repeat Int(0)
+/punchIn Int(0)
+/punchOut Int(0)
+/beat/str String("5.01.01:00")
+/project/name String("Boundary Sketch")
+/project/engine Int(1)
+/track/1/name String("Sketch Instruments")
+/track/1/recarm Int(0)
+/track/2/name String("Audio 2")
+/track/2/recarm Int(0)
+/track/3/name String("Inst 3")
+/track/3/recarm Int(1)
+/track/4/recarm Int(0)
+/track/5/recarm Int(0)
+/track/6/recarm Int(0)
+/track/7/recarm Int(0)
+/track/8/recarm Int(0)
+Native selection after OSC seek: {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "3", "nativeId": "4895"}]}
+Native selected clip: {"project": "Boundary Sketch", "elements": [{"kind": "track", "name": "Inst 3", "nativeId": "2720"}, {"kind": "clip", "name": "5", "nativeId": "9573"}]}

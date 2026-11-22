@@ -1,0 +1,24 @@
+Saved Action 1 preference labels: Editing / Undo. Effective assignment was unverified.
+$ osc send 127.0.0.1:8000 /action/1
+[
+  {
+    "project": "Boundary Sketch",
+    "deviceIDs": [
+      "4990",
+      "7254"
+    ]
+  },
+  {
+    "project": "Boundary Sketch",
+    "deviceIDs": [
+      "4990",
+      "7254"
+    ]
+  }
+]
+
+Control via direct history command
+$ osc send 127.0.0.1:8000 /undo
+[
+  "4990"
+]

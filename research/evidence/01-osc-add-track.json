@@ -1,0 +1,40 @@
+[
+  {
+    "project": "Boundary Sketch",
+    "tracks": [
+      {
+        "id": "393",
+        "name": "Inst 1"
+      },
+      {
+        "id": "558",
+        "name": "Audio 2"
+      },
+      {
+        "id": "723",
+        "name": "FX 1"
+      }
+    ]
+  },
+  {
+    "project": "Boundary Sketch",
+    "tracks": [
+      {
+        "id": "393",
+        "name": "Inst 1"
+      },
+      {
+        "id": "558",
+        "name": "Audio 2"
+      },
+      {
+        "id": "2720",
+        "name": "Inst 3"
+      },
+      {
+        "id": "723",
+        "name": "FX 1"
+      }
+    ]
+  }
+]

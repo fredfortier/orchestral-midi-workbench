@@ -1,0 +1,7 @@
+Live Bitwig process has the installed DrivenByMoss archive open.
+113 -> DrivenByMoss.bwextension
+Implementation-Title: DrivenByMoss
+Implementation-Version: 26.6.5
+Release tag commit: 7348cda4e5ae8aebd59bb99b8d967a1f4b87677e
+Installed Bitwig localization entry:
+action.create_clip.name=Create Empty Clip

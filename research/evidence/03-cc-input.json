@@ -1,0 +1,30 @@
+[
+  {
+    "track": {
+      "project": "Boundary Sketch",
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Inst 1",
+          "nativeId": "393"
+        }
+      ]
+    },
+    "channel": 0,
+    "controller": 11,
+    "points": [
+      {
+        "time": 0,
+        "value": 0.5
+      },
+      {
+        "time": 2,
+        "value": 0.75
+      },
+      {
+        "time": 3.5,
+        "value": 0.5
+      }
+    ]
+  }
+]

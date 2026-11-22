@@ -1,0 +1,27 @@
+{
+  "action": "set",
+  "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+  "revision": "b9a980bc-ef3d-4deb-8d59-56fd8bcdfd28",
+  "paths": [
+    {
+      "project": "Boundary Sketch",
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Inst 1",
+          "nativeId": "393"
+        },
+        {
+          "kind": "automationLane",
+          "name": "Ch. 1 Expression (#11) automation",
+          "nativeId": "3124"
+        }
+      ]
+    }
+  ],
+  "mode": "time",
+  "range": {
+    "from": 1,
+    "to": 3
+  }
+}

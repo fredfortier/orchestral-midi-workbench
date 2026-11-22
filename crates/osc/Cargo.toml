@@ -1,0 +1,14 @@
+[package]
+name = "osc"
+description = "UDP OSC smoke harness for DrivenByMoss"
+version.workspace = true
+edition.workspace = true
+rust-version = "1.87"
+publish.workspace = true
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+rosc = "0.11.4"
+
+[lints]
+workspace = true

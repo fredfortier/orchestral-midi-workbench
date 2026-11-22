@@ -1,0 +1,54 @@
+[
+  {
+    "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+    "revision": "38a803f5-e58b-4276-92af-f9882fe1baed:28140",
+    "clips": [
+      {
+        "id": "2551",
+        "notes": [
+          {
+            "selected": false,
+            "key": 60
+          },
+          {
+            "selected": true,
+            "key": 64
+          },
+          {
+            "selected": false,
+            "key": 67
+          }
+        ]
+      }
+    ],
+    "automationIds": [
+      "3124"
+    ]
+  },
+  {
+    "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+    "revision": "38a803f5-e58b-4276-92af-f9882fe1baed:28151",
+    "clips": [
+      {
+        "id": "2551",
+        "notes": [
+          {
+            "selected": false,
+            "key": 60
+          },
+          {
+            "selected": true,
+            "key": 63
+          },
+          {
+            "selected": false,
+            "key": 67
+          }
+        ]
+      }
+    ],
+    "automationIds": [
+      "3124"
+    ]
+  }
+]

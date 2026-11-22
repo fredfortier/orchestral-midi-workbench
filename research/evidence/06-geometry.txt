@@ -1,0 +1,4 @@
+$ midi-bridge controller midi replace --expected <fresh before> --input <duration=4 only>
+Error: Error { code: InvalidRequest, outcome: NotDispatched, message: "Content replacement preserves clip metadata and native ownership; request ID cli-2194092-1795372924226017468; operation 2077948-1795364998268101873:operation:169" }
+Command exit 1
+true
