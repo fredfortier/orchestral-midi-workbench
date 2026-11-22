@@ -278,3 +278,99 @@ MusicXML 4.0 XSD validation. Capture took 0.35 s, assembly 0.16 s, admission
 0.004 s, and notation conversion 0.13 s in this run. These measurements are
 tool wall time, exclusive of interpretation and schema checking. The
 reconstructed score represents captured native state and its notation losses.
+
+### Cue-led curves and the revised score
+
+- On the disposable transition project, used the documented Berlin Strings
+  Violino I Sustains control map and the project design's CC1 and CC11
+  anchors. Wrote ten points per lane on display channel 1 in one native
+  transaction. Independent readback matched all point values, times and
+  shapes and all 2,181 notes across 13 clips. A second transaction changed
+  one attack and one CC1 point together, with the entire CC11 curve and all
+  unrelated content preserved. One adjacent Undo restored both changes.
+  OSC Save advanced the disposable file. These are stored controls. The
+  exact patch and its audible response remain unverified.
+- A fresh full capture matched both curves and the transition. Direct MIDI2
+  assembly and admission retained all 2,181 notes and both independent
+  controls on the exported violin route. MIDI2 controller event counts
+  reflect curve sampling. The independent MusicXML 4.0 schema check passed,
+  with 3/4 and 55 BPM at the start and 2/4 and 50 BPM at bar 52. Capture took
+  about 0.41 s and assembly 0.18 s. The reanalyzed score spans 159 quarter
+  beats and its pitch-distribution estimate is B minor.
+- The first symbolic audit falsely reported 366 Organo attacks instead of
+  304. MusicXML contained 411 Organo segments, of which 107 were tied
+  continuations. The comparator now follows contiguous ties by voice and
+  pitch, with a unique match when a bar loses its explicit voice container.
+  Rerunning the audit on the same bytes matched all 304 organ attacks and
+  endpoints and passed all 12 parts. The largest endpoint difference was
+  0.007500 beats in Flauto traverso I, within the notation tolerance.
+  Evidence is in `30-*` through `32-*`.
+
+### Compose in context
+
+- Used the native notes around PC04 and PC07 to draft a separate continuo
+  response. The sparse PC04 phrase uses four attacks, with rests between
+  the replies over repeated bass B. The PC07 phrase uses nine attacks in a
+  shorter span, following the B-minor sonority through the C-sharp preparation
+  and leaving the final resolution to the source parts. Chosen pitches are
+  already present in the verticalities at their respective onsets. The
+  phrase and its rhythms are editorial.
+- OSC track creation returned one new native identity. Its OSC bank had
+  scrolled, so rename used the refreshed bank index and was checked against
+  that identity. Native range selection and two qualified slot 1 actions
+  established separate empty clips at [60,69) and [141,148). One complete
+  replacement placed the two phrases. Independent readback matched all
+  13 draft events, all preexisting clips and curves, the timing map and all
+  eight cue positions. Save advanced the disposable file. The original
+  project's file hash was unchanged. No listening judgment is implied.
+  Evidence is in `33-*`.
+
+### Sung phrase preflight
+
+- The source-association extractor matched all 134 Alto occurrences to
+  the native clip. The opening *Qui tollis peccata mundi* covers eight
+  syllables and ten attacks through beat 13. The textless notes at 0.5 and
+  8 are continuations of *Qui* and *ca*. PC01 at beat 1 marks *tol* after
+  the pickup. Retained the exact grouping in the project's PERFORMANCE.md.
+- `Freyja Altos.nki` has retained exact-patch builder evidence. Its previously
+  verified selector lead cannot fit before the beat-zero pickup. The existing
+  phrase procedure gives the next branch: qualify simultaneous selector and
+  first-note ordering or verify a one-cell opening receiver through both
+  *Qui* notes with a handoff at *tol*. Sample labels alone did not establish
+  phonetic matches. An open and responsive receiver is still required for
+  token qualification, programming, and listening. Evidence is in
+  `34-underlay.json`.
+
+### Host recovery, exact assignment and sounding audition
+
+- Bitwig's desktop process crashed in `libnvidia-glcore.so.620.70.06` while
+  opening a new byte-identical curve and phrase copy. The old adapter and
+  audio engine exited. A normal desktop launch restored the previously
+  selected projects and reconnected one compatible native adapter. No crash
+  report was transmitted. OSC project navigation, checked against the exact
+  native saved path, recovered the disposable project. Independent readback
+  matched all 15 Arranger clips, 2,194 notes, both curves, the timing map,
+  and all eight cues. The persisted file matched its source copy byte for
+  byte. Evidence is in `35-*`.
+- Normal activation in the recovered Bach copy reached `CONNECTED` on the
+  new host. The integrated Violino I assignment loaded `04. Violins I
+  Sustains Imm.nki` into the existing Kontakt instance. The loader verified
+  one rack instrument and the controller verified editor closure. An
+  independent read matched both routing helpers and closed editor. Save
+  advanced the disposable file. Sample persistence after another open is
+  still unverified. Evidence is in `36-*` and `37-save-patch.json`.
+- A native post-fader export of Violino I beats [60,73) returned 680,728
+  frames of stereo float PCM at 48 kHz, with a peak at −46.88 dBFS. All nine
+  expected pitches matched local harmonic peaks at their intended note
+  windows. The WAV and measurement are in `37-*`.
+- A fresh explicit-path read resolved the occupied Violino I Launcher clip
+  from its track, name and scene without selecting a cell. OSC launch
+  returned playing feedback on the exact bank slot. A temporary parallel
+  link from the verified engine feed to the dedicated sink supplied a
+  14-second live WAV. The recorder returned a nonzero status despite a full
+  672,000-frame file. Fresh observations reconciled playback, stopped it,
+  and returned Violino I to the Arranger. The temporary links were removed.
+  The WAV had a −49.08 dBFS peak and all eight expected pitches matched the
+  first pass of the candidate. The arrangement and timing matched the
+  prior capture after returning. No human approval or perceptual comparison
+  follows from the signal measurement. Evidence is in `38-*`.

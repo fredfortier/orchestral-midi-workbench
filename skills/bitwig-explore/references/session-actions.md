@@ -53,6 +53,13 @@ remote Save would target a different project, use the named File → Save
 action in the visible, previously identified project and verify the exact
 file on disk. Resolve the remote target before resuming remote writes.
 
+For a known occupied Launcher clip after reopening, combine the freshly
+resolved native track element with the known `launcherClip` name and
+zero-based `scene`, omitting the stale clip ID. An explicit-path native
+`midi get-all` resolves the current ID and verifies the candidate content
+before addressing the matching OSC bank slot. An empty slot still requires
+the [native slot observation](keyboard-workflow.md) before creation.
+
 ## Qualified configured profile
 
 The following controller assignments were exercised in Bitwig 6.1 with
