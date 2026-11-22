@@ -11,18 +11,18 @@ Bring a score into Bitwig Studio 6.1, shape the performance with Kontakt instrum
 From the repository root, with the stable Rust toolchain installed, run:
 
 ```sh
-cargo install --locked --path crates/convert
 out=$(mktemp -d)
-convert crates/convert/examples/violin.musicxml --to midi2 -o "$out/violin.midi2"
-convert "$out/violin.midi2" --validate
-convert "$out/violin.midi2" --to mxl -o "$out/violin.mxl"
+cargo install --locked --path crates/convert --root "$out"
+"$out/bin/convert" crates/convert/examples/violin.musicxml --to midi2 -o "$out/violin.midi2"
+"$out/bin/convert" "$out/violin.midi2" --validate
+"$out/bin/convert" "$out/violin.midi2" --to mxl -o "$out/violin.mxl"
 ```
 
 The validation report inventories seven notes and the encoded pizzicato and staccato articulations. Open the resulting `violin.mxl` in a notation editor. Keep the generated `.convert.json` companion when you want source-aware restoration of a matching clip. Move it aside to see what the converter reconstructs from the MIDI performance alone. The forward conversion also saves the original source bytes alongside the clip.
 
 ## Realize and edit a score in Bitwig
 
-Start with [the production workflow](skills/WORKFLOW.md). The skills help an agent choose documented patches, plan articulations and phrasing, write editable notes and automation, and inspect the result. Bitwig owns the saved arrangement, so you can continue editing in the DAW. Export can capture a whole arrangement or a track group, validate a self-contained MIDI 2.0 clip, and reconstruct MusicXML or compressed MXL for harmonic, rhythmic, and orchestration analysis. [Bitwig adapter setup](crates/controller/adapters/bitwig-ctl/README.md) · [Kontakt loader setup](crates/controller/adapters/kontakt-ctl/README.md) · [MIDI 2.0 export](skills/bitwig-export-midi2/SKILL.md)
+Open this checkout in Codex or another agent that supports `SKILL.md`, then start with [the production workflow](skills/WORKFLOW.md). The skills help an agent choose documented patches, plan articulations and phrasing, write editable notes and automation, and inspect the result. Bitwig owns the saved arrangement, so you can continue editing in the DAW. Export can capture a whole arrangement or a track group, validate a self-contained MIDI 2.0 clip, and reconstruct MusicXML or compressed MXL for harmonic, rhythmic, and orchestration analysis. [Bitwig adapter setup](crates/controller/adapters/bitwig-ctl/README.md) · [Kontakt loader setup](crates/controller/adapters/kontakt-ctl/README.md) · [MIDI 2.0 export](skills/bitwig-export-midi2/SKILL.md)
 
 ## How articulations and expression travel
 
