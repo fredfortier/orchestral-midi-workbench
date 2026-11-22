@@ -971,7 +971,7 @@ fn source_pitch_replacement_is_explicit_and_rounding_is_accounted() {
         note("C", "").replace("<note>", "<note dynamics=\"71.234567\">")
     ));
     let (_, _, report) = clip::encode(&s).unwrap();
-    assert!(!report.numeric_changes.is_empty());
+    assert_ne!(report.numeric_changes, Vec::<serde_json::Value>::new());
     for change in report.numeric_changes {
         let exact: num_rational::Ratio<i128> =
             change["exactMagnitude"].as_str().unwrap().parse().unwrap();

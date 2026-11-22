@@ -103,7 +103,7 @@ fn published_discovery_and_local_reply_interoperate() {
     assert_eq!(&reply[..5], &[0x7e, 0x7f, 0x0d, 0x71, 2]);
     assert_eq!(reply[29], 7);
     assert_eq!(reply[30], 0x7f);
-    assert!(a.receive_payload(&reply).unwrap().is_empty());
+    assert_eq!(a.receive_payload(&reply).unwrap(), Vec::<Vec<u8>>::new());
     let collision = b.receive_payload(&b.discovery()).unwrap();
     assert_eq!(collision.len(), 2);
     assert_ne!(u32::from(b.muid), 2);
@@ -367,7 +367,7 @@ fn acknowledgements_extend_timeouts_without_claiming_enablement() {
     )
     .unwrap();
     a.receive_at(&wait, 80).unwrap();
-    assert!(a.expire(579).is_empty());
+    assert_eq!(a.expire(579), Vec::<(u32, u8)>::new());
     assert_eq!(a.expire(580), vec![(2, 0)]);
     assert!(!a.remote.get(&(2, 0)).copied().unwrap_or(false));
 }

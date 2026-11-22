@@ -434,7 +434,7 @@ fn a_piano_profile_is_not_lost_when_the_score_only_contains_a_rest() {
     )
     .unwrap();
     let d = clip::decode(&c.clip, Some(&c.companion.dictionary)).unwrap();
-    assert!(d.notes.is_empty());
+    assert_eq!(d.notes, Vec::<musicxml_midi2_convert::model::Note>::new());
     assert_eq!(
         d.piano_routes,
         std::collections::BTreeSet::from([Route::default()])
