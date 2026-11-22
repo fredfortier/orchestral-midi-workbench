@@ -1044,6 +1044,7 @@ dependencies = [
  "base64 0.22.1",
  "clap",
  "musicxml-midi2-convert",
+ "osc",
  "rand 0.9.5",
  "rand_chacha 0.9.0",
  "reqwest",
@@ -1156,7 +1157,6 @@ checksum = "384b8ab6d37215f3c5301a95a4accb5d64aa607f1fcb26a11b5303878451b4fe"
 name = "osc"
 version = "0.1.0"
 dependencies = [
- "clap",
  "rosc",
 ]
 

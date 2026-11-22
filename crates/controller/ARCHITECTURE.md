@@ -7,8 +7,8 @@ historical qualification cannot relax this contract.
 
 Bitwig owns the project, hierarchy, selection, notes, expression, automation and
 Undo. Controller provides lightweight discovery, exact native targeting and
-complete musical reads/replacement. Skills compose those primitives with named
-keyboard/computer recipes. Native mixing, audio export and MIDI2 interpretation
+complete musical reads/replacement. Skills compose those primitives with
+qualified OSC session actions and computer recipes. Native mixing, audio export and MIDI2 interpretation
 are bounded operations owned here.
 
 Retain one correlated JSON request/response envelope and qualified Path model.
@@ -38,6 +38,17 @@ CLI -> loopback HTTP -> Rust service <== native TCP ==> Bitwig Java extension
 - [`EditorSession`](adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/EditorSession.java)
   connects the extension. The harness packages separately armed disposable
   probes. Probe commands and the filesystem mailbox stay in the harness.
+
+## OSC session actions
+
+The bridge can own one loopback UDP command and feedback socket for the local
+DrivenByMoss extension. Its separate HTTP route submits raw OSC addresses and
+typed arguments without changing the adapter wire. One active submission can
+collect selected feedback addresses for a bounded window. UDP transmission
+establishes local submission, and feedback describes asynchronous peer state.
+Document effects still require native readback. Window or modal effects need
+a corresponding observation. See [setup](../osc/README.md) and the
+[architecture decision](../../docs/adrs/osc-through-the-bridge.md).
 
 ## Native host execution
 

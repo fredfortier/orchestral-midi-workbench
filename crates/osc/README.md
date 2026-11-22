@@ -1,47 +1,43 @@
-# DrivenByMoss OSC harness
+# DrivenByMoss OSC
 
-This standalone CLI sends OSC messages and inspects UDP feedback with [rosc](https://docs.rs/rosc/0.11.4/rosc/).
+This crate supplies OSC encoding and decoding for the `midi-bridge` service.
+The service owns the UDP feedback socket. It uses the existing bridge process
+and loopback HTTP listener. The Bitwig native adapter protocol is independent.
 
-In Bitwig, add the DrivenByMoss **Open Sound Control** controller and select
-a MIDI input. For a local smoke test, set **Port to receive on** to `8000`,
-**Host to send to** to `127.0.0.1`, and **Port to send to** to `9000`.
-These are example ports. Restart the extension after changing the feedback
-host or port. [DrivenByMoss OSC protocol](https://raw.githubusercontent.com/git-moss/DrivenByMoss-Documentation/refs/heads/master/Generic-Tools-Protocols/Open-Sound-Control-(OSC).md)
+## Configure the peer
 
-From `crates/`, run the listener first and send the refresh in a second terminal.
+In Bitwig, add or reuse DrivenByMoss **Open Sound Control**. Select an existing
+virtual MIDI input and set **Port to receive on** to the command port, **Host to
+send to** to `127.0.0.1`, and **Port to send to** to the feedback port. Restart
+the extension after changing feedback host or port. The OSC listener is opt-in.
+Start the usual controller service with the corresponding ports, for example:
 
 ```sh
-cargo run --locked -p osc -- listen 127.0.0.1:9000
-cargo run --locked -p osc -- send 127.0.0.1:8000 /refresh
+midi-bridge serve --osc-port 8000 --osc-feedback-port 9000
 ```
 
-`/refresh` asks DrivenByMoss to resend its state. Look for feedback such as
-`/project/name` and `/play`. The listener prints the sender and decoded OSC
-message or bundle. Feedback goes to the controller's configured destination.
-A successful send confirms local UDP submission. Feedback establishes that
-the controller responded.
+Use the same controller and HTTP ports as before. With a nondefault bridge HTTP
+port, pass `--port` to the CLI. A second process must not claim the feedback
+port. See [action qualification](ACTIONS.md) for context-sensitive bindings.
 
-For a local check without a DAW, send `/project/name s:Loopback` to the
-listener port `9000`. Send arguments use `i:` for a 32-bit integer, `f:`
-for a 32-bit float, and `s:` for a string. Quote an argument containing spaces.
+## Send a message and observe feedback
 
-## MIDI Dependencies
+```sh
+midi-bridge osc /refresh --observe /project/name --observe /play
+midi-bridge osc /time f:16
+midi-bridge osc /refresh --observe /beat/str
+midi-bridge osc /action/1
+```
 
-Use ALSA’s `snd-virmidi` driver. I confirmed it’s available on this host and isn’t currently loaded. [Linux kernel documentation](https://www.kernel.org/doc/html/latest/sound/alsa-configuration.html#module-snd-virmidi)
+Use the addresses and value types in the [DrivenByMoss protocol](https://raw.githubusercontent.com/git-moss/DrivenByMoss-Documentation/refs/heads/master/Generic-Tools-Protocols/Open-Sound-Control-(OSC).md).
+Arguments use `i:` (int32), `f:` (finite float32) or `s:` (string). Quote one
+argument if it contains spaces. A bare address sends zero arguments.
 
-1. Create one virtual MIDI port and verify that it appears.
-
-   ```bash
-   sudo modprobe snd-virmidi midi_devs=1
-   aconnect -i
-   ```
-
-2. In **Bitwig → Settings → Controllers → Open Sound Control**, select the new **Virtual Raw MIDI** input and enable the existing controller. Choose the new port by its displayed name. The previously saved `Virtual Raw MIDI/3` is absent. DrivenByMoss uses this input to inject MIDI from OSC commands, so there’s no `aconnect` routing step for the OSC harness. [DrivenByMoss setup](https://raw.githubusercontent.com/git-moss/DrivenByMoss-Documentation/refs/heads/master/Generic-Tools-Protocols/Open-Sound-Control-(OSC).md)
-
-3. Verify that Bitwig opened its configured OSC command port.
-
-   ```bash
-   ss -lunp 'sport = :8000'
-   ```
-
-Once `8000` is bound, listen on `9000` and send `/refresh` to `8000`.
+The JSON receipt reports `submitted` after the local UDP send. Each requested
+feedback address maps to the latest argument array received in the window,
+which defaults to 400 ms. Use up to 32 exact addresses. `--wait-ms` accepts
+1–2000 ms. A missing address means it was unobserved during that window.
+Feedback is asynchronous and may describe an unrelated change. It does not
+correlate with a command. Use `/refresh` for a fresh peer state report and
+verify document or window effects independently. The service accepts one OSC
+submission at a time and never resends a command after an uncertain outcome.
