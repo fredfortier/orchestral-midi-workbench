@@ -8,13 +8,15 @@ saved project + original score + user direction
      missing material preference -> ask once, continue independent research
      delegated choice -> research, choose and record the working default
   -> instrument intake for the intended patches
-     reuse verified library coverage or fill gaps -> return exact patch + MIDI map
-  -> PERFORMANCE.md decisions -> convert -> MIDI2 + companion -> validate and decode
-     unsupported required behavior -> resolve in the score or converter, then reconvert
+     review exact stock controls and baselines in INSTRUMENT.md
+     required effect unresolved -> research or compare eligible patches
+                              -> still unresolved: mark affected scope pending
+  -> PERFORMANCE.md musical anchors -> convert -> validate and decode
+     check every required control against the emitted MIDI2 + companion
   -> native import -> independent note and CC readback
      -> Kontakt assignment and routing readback ---+
      -> requested cues and marker readback -------+
-                                                -> save and audition
+                                                -> verify required effects, save and audition
 ```
 
 1. Pass the supplied bytes and destination to [score intake](../../score-intake/SKILL.md).
@@ -24,14 +26,17 @@ saved project + original score + user direction
    [instrument intake](../../instrument-intake/SKILL.md) for every intended
    exact patch. Require its library `INSTRUMENT.md` to document the stock MIDI
    controls, including CC1, CC2, CC11, other relevant CCs, velocity and pitch
-   bend, with any unknowns explicit. Do this before committing receiver choices.
-   A control number alone cannot establish whether it changes sampled intensity,
-   gain, attack or another behavior. The documented meaning determines which
-   curves and initial values the converter must encode.
+   bend, with separate stock dynamics and expression baselines and any unknowns
+   explicit. Review the exact entries before committing receiver choices. If
+   a required effect lacks control evidence, return to intake or compare an
+   eligible stock alternative within the user's constraints.
 3. Give the saved identity, working score, exact patch capabilities and decisions
    to [score realization](../../score-realization/SKILL.md). For every track and
    articulation, explain in `PERFORMANCE.md` how documented standard MIDI inputs
    support the intended dynamics, foreground, phrase direction and release.
+   Anchor the required curves to the composer's markings and the musicological
+   analysis in PERFORMANCE.md. Follow the shared
+   [expression control specification](../../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction).
    Use applicable controls as intended and encode their shared channel-1 curves.
    Finish and review the converter's MIDI2 and companion before creating
    musical tracks, clips or receivers. The bundle holds performed note gates,
@@ -45,7 +50,10 @@ saved project + original score + user direction
 5. Once the native MIDI readback agrees with the bundle, place any requested
    markers through [performance cues](../../performance-cues/SKILL.md) and read
    them back. Marker placement can precede Kontakt loading.
-6. Save the intended project if the request includes saved delivery. Verify
+6. Check every required musical effect against the documented capability, the
+   PERFORMANCE.md anchors, the decoded curve or note data and native readback.
+   An unresolved effect keeps that scope pending. Save the intended project if
+   the request includes saved delivery. Verify
    the file and affected native scope. Use a representative excerpt and the
    requested listening or [audio export](../../bitwig-export-audio/SKILL.md)
    evidence to establish playback. A saved workspace, editable notes, installed
@@ -77,8 +85,9 @@ Record each decision that affects the rendition beside its evidence.
   Check legato transitions, repeated attacks and polyphony against exact patches.
 - [ ] **Intensity and expression.** Identify tension, arrivals, cadence and
   release. Choose sampled dynamics, attack velocity and independent expression
-  separately. Verify that each patch supports its documented controls and
-  sounding range. Compile the chosen articulation routes and control curves.
+  separately. Review the patch control and baseline for each, and justify the
+  initial level and phrase contour against the relevant musical evidence.
+  Compile and verify the chosen articulation routes and control curves.
 - [ ] **Verification excerpts.** Pick passages that expose difficult entries,
   transitions, simultaneous voices, range extremes and the ending.
 

@@ -1,8 +1,8 @@
 # Discover device parameters and Remote Controls
 
-Use this read-only flow only for an explicit request to discover controls beyond
-conventional MIDI, or to identify legacy sender assignments during an authorized
-migration. Ordinary MIDI automation uses INSTRUMENT.md and track MIDI lanes.
+Use this read-only flow when asked to inspect a device, for the
+[instrument macro fallback](../../bitwig-edit/references/automation-edits.md#instrument-macro-fallback),
+or to identify legacy sender assignments during an authorized migration.
 Discovery never implies sender insertion, automation creation or receiver loading.
 
 ## Resolve the exact device

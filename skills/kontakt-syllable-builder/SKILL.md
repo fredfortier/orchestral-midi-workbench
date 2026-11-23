@@ -6,7 +6,7 @@ description: Configure reusable Strezov-style Kontakt Syllabuilder phrases from 
 # Configure vocal phrases
 
 For library documentation only, follow [document syllables](references/document-syllables.md)
-and return to intake. For performance, follow [the shared workflow](../WORKFLOW.md).
+and return to intake. For a wider performance request, use the [sung-phrase handoff](../bitwig-compose/references/score-and-performance.md).
 Begin with the intended Kontakt editor open on an initialized full-builder patch,
 with exactly that one instrument in its Instrument Navigator;
 loading and native routing belong to [kontakt-setup](../kontakt-setup/SKILL.md).

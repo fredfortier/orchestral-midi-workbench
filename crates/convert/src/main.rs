@@ -107,7 +107,18 @@ fn inspect_rendition(args: &Args) -> Result<()> {
         &read_policy(args.policy.as_deref())?,
     )?;
     let notes = convert::adapt::inspect_notes(score.notes)?;
-    let inspection = serde_json::json!({"duration": score.duration, "notes": notes, "sourceVoices": convert::xml::note_voices(&source)?});
+    let directions: Vec<_> = score
+        .report
+        .decisions
+        .iter()
+        .filter(|decision| decision.rule == "written direction")
+        .collect();
+    let inspection = serde_json::json!({
+        "duration": score.duration,
+        "notes": notes,
+        "sourceVoices": convert::xml::note_voices(&source)?,
+        "sourceDirections": directions
+    });
     let mut bytes = serde_json::to_vec_pretty(&inspection).map_err(io)?;
     bytes.push(b'\n');
     if let Some(path) = &args.output {

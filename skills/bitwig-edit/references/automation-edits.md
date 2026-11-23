@@ -1,17 +1,17 @@
 # Edit track MIDI automation
 
 Default to native arranger track MIDI automation. For launcher scope, use the
-[launcher recipe](common-edits.md#launcher-clips). Read the exact patch/articulation's
-**Conventional MIDI control map** in INSTRUMENT.md. Missing or stale mappings
-return to instrument-intake's documentation-only branch; do not guess a CC from
-its conventional name or read manuals during live editing.
+[launcher recipe](common-edits.md#launcher-clips). Check the vendor manual and
+the exact patch's **Conventional MIDI control map** in INSTRUMENT.md when
+available. Confirm the current assignment and response. Distinguish documented
+stock mappings from MIDI Learn options and user mappings. A CC name or number
+alone does not establish a receiver response.
 
-Use the [standard slot topology](../../WORKFLOW.md#mandatory-execution-boundary):
+Use the [standard slot topology](../../kontakt-setup/references/assignment.md#exact-path-assignment):
 shared controls use track channel 1 (JSON 0), explicitly admitted by each slot's
 stock Filter and mapped with notes to receiver channel 1. Verify actual passage;
 failed delivery returns to setup. Preserve authored contours and explicit
-exceptions. Arranger creation uses track lanes. Per-slot knob curves are outside
-this workflow. Pitch bend is a separate message;
+exceptions. Arranger creation uses track lanes. Pitch bend is a separate message;
 its creation requires an admitted native operation and cannot be encoded as a CC.
 
 Before shaping musical controls, read
@@ -68,11 +68,14 @@ duplicates: resolve their musical passage scope or retain independent behavior.
 Check placement offsets/loops before translating to arranger time. Preserve
 initial states, tails, pedals, resets and switches. Verify receiver response to the
 new shared MIDI controls, then remove redundant sender automation/devices within
-the authorized scope. Clearing points creates a fallback and does not delete a lane.
+the authorized scope. Use [qualified cleanup](../../bitwig-explore/references/keyboard-workflow.md#automation-lane-and-sender-cleanup) with exact owner selection and independent native readback. Clearing points creates a fallback and does not delete a lane.
 
-## Explicit device controls beyond conventional MIDI
+## Instrument macro fallback
 
-Only for an explicit opt-in, discover instrument parameters/Remote Controls with:
+If a verified MIDI CC cannot deliver the requested sound change, find an existing
+instrument macro through native discovery. Use the controller for discovery and
+writes. Open or manipulate a VST editor through computer interaction only on
+explicit user request.
 
 ```sh
 midi-bridge controller automation read --target device.json > parameters.json
@@ -86,7 +89,7 @@ Then use the device form of the same atomic command:
 ```
 
 A unique observed name, mapped Remote Control name or native parameter ID identifies
-the target. Preserve its physical units. This route is not the default for CC1,
-CC2, CC11 or pitch. It does not authorize inserting MIDI CC sender devices.
+the target. Preserve its physical units and confirm the macro does what the
+requested curve needs. Keep existing macro assignments and sender devices.
 
 Native message/channel choices follow [Bitwig's MIDI automation lanes](https://www.bitwig.com/userguide/latest/automation/).

@@ -5,7 +5,7 @@ description: Intake a supplied score into an idempotent Bitwig project workspace
 
 # Score intake
 
-Follow [the shared workflow](../WORKFLOW.md). Produce a reusable saved project
+Produce a reusable saved project
 workspace and stop. Intake accepts a score as an opaque source, including MXL,
 MusicXML or PDF; acceptance here does not imply converter support for that format.
 
@@ -19,7 +19,7 @@ MusicXML or PDF; acceptance here does not imply converter support for that forma
    Choose the intended destination in the native dialog and verify the actual
    saved path before copying the source. Subsequent saves to that path route
    through [session actions](../bitwig-explore/references/session-actions.md#direct-actions).
-3. Follow the [Bitwig project layout](../WORKFLOW.md#bitwig-project-layout).
+3. Follow the [Bitwig project layout](references/project-layout.md#bitwig-project-layout).
    Establish identity in [PERFORMANCE.md](assets/PERFORMANCE.md), leaving
    musical sections unfilled in a new file and preserving existing content.
 4. Copy the original to the project's source location without altering it.

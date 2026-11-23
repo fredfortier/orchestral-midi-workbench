@@ -48,7 +48,7 @@ preservation boundary and listening check. When the pulse carries forward, use
 an exactly adjacent empty range on the intended tracks and leave timing
 unchanged. Qualify any required local timing change before altering the
 existing arrangement. For an experimental append to existing work, use the
-[project checkpoint](../../WORKFLOW.md#experimental-project-backups).
+[project checkpoint](../../score-intake/references/project-layout.md#experimental-project-backups).
 
 Pass the timed material, receiver mapping and exact boundary to
 [realization](../../score-realization/SKILL.md) for score-derived material or

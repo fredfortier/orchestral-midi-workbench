@@ -896,6 +896,8 @@ pub fn read(bytes: &[u8], policy: &RenderingPolicy) -> Result<(String, Performan
                                     || n.has_tag_name("footnote")
                             }) {
                                 if let Some(value) = remark.text().filter(|v| !v.is_empty()) {
+                                    out.report
+                                        .record(xml_path(remark), "written direction", value);
                                     for &target in &part_routes {
                                         measure.events.push(Event {
                                             order: 0,

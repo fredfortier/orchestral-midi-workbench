@@ -115,3 +115,68 @@ delivery dependency. Audible stems and stored note velocities do not satisfy
 that dependency on the four choir tracks. This audit establishes documentation
 coverage for the 16 project patches. It does not qualify the four choir patches
 for continuous-dynamics delivery or claim full-library capability coverage.
+
+## Vocal control verification and delivery
+
+A later matched render varied CC1 and CC11 independently on each of the four
+loaded fixed-vowel patches. CC1 changed level and normalized spectral balance.
+CC11 changed level by about 13.2 dB across the tested range with negligible
+spectral change. The library documents now distinguish these observed controls
+from the manual's coverage, the user's note-velocity report and the unknown
+numeric factory defaults.
+
+The revised MIDI2 bundle adds eight initialized channel-1 curves. The curves
+follow the three *Herr* calls, the staggered *Zeig uns* entries, the retreat on
+*Niedrigkeit*, the two levels of glorification and the release at Fine. A scoped
+native write applied only these curves within the existing Voices group.
+Native readback matched all 1,917 vocal controller points and preserved all
+3,316 vocal notes. The saved project displayed both lanes on every voice, and
+each voice produced audio in the rendered entry and crest excerpts. Project
+evidence is under `evidence/herr-20261122T224500Z/vocal-controls/`.
+
+## Articulation and channel review
+
+The prior string rule selected the short patch on a note-local staccato tag
+and fell back to the legato patch on neighboring unmarked notes. The source
+used dots to introduce a recurring figure and written *simile* to continue it.
+The rule discarded that span context. The secondary voices of shared wind
+and continuo staves also entered generic same-instrument receivers before
+the performer labels were reconciled. Compiling and matching native counts
+then confirmed a mechanically faithful transfer of both mistakes.
+
+The score review checked the engraved note/rest figure and where grouped
+bowing resumes. It applied the short route across bars 33–36, the post-fermata
+figure of bars 58–67 and the late figure of bars 78–83, including performed
+repeats. It also resolved shared-staff doublings by the named player and
+matched redundant source occurrences. A 16,046-row ledger records each
+earlier occurrence, with 15,355 retained sounding notes and 691 omitted
+copies. Native verification matched all channels, 18 active receiver filters,
+the unchanged controller lanes and 13 cues.
+
+Converter inspection now lists written directions with their source paths.
+The converter still leaves the scope and musical meaning of prose to score
+review. The realization skill requires comparison of neighboring notes at
+channel changes, continuation review through each figure's end, exact slot
+verification and independent passage assertions for all performed notes.
+The project evidence is under `evidence/articulation-review/`.
+
+## Motif-led expression revision
+
+Starting with a selected Violins I passage narrowed the initial revision to
+one desk and two excerpts. The correction used the four-note neighbor-return
+cell and its continued variants as the scope across the written movement and
+the performed Da Capo. The scan surfaced bass, wind and choral handoffs as
+well as the second violin and viola. Neighbor notes alone generated a false
+positive at a written wind trill, so comparison with the source and context
+remained necessary. The harmonic profile distinguishes the G pedal, moving
+bass, choral calls, canonic handoffs, the two glorifications and Fine.
+
+Live readback also distinguished clip-owned automation from arranger-owned
+automation on the same CC11 target. Updating the one-point arranger tail
+would have missed established clip curves. Complete replacement required
+unique draft point IDs across both tracks in a batch. Namespacing them by
+native track ID resolved the preflight error without a partial write. The
+patch documentation ruled out treating harpsichord velocity or CC11 as a
+verified expression response. The other continuo receivers carry its
+shaped bass figure. The native project evidence and per-occurrence index
+are under `evidence/motif-expression/`.

@@ -5,7 +5,7 @@ description: Locate and select Bitwig tracks, clips, automation lanes, devices a
 
 # Explore and navigate Bitwig
 
-Follow [the shared workflow](../WORKFLOW.md). Choose a reference by the user's
+Choose a reference by the user's
 intended work; **CONTROLLER** and **COMPUTER** mark execution steps within that
 workflow, not separate categories of tasks.
 

@@ -247,7 +247,7 @@ Reveal and keyboard focus were outside this check.
 [^native]: [Native structure and selection](../crates/controller/ARCHITECTURE.md#paths-and-structural-reads)
     and the [navigation recipe](../skills/bitwig-explore/references/arranger-navigation.md).
 [^edit]: [Launcher and replacement recipes](../skills/bitwig-edit/references/common-edits.md)
-    and [supported production operations](../skills/WORKFLOW.md#supported-production-operations).
+    and [supported production operations](../skills/bitwig-compose/references/workflow-stories.md#route-by-outcome).
 [^setup]: [Integrated instrument contract](../crates/controller/ARCHITECTURE.md#integrated-instruments)
     and [assignment procedure](../skills/kontakt-setup/references/assignment.md).
 [^keyboard]: [Qualified keyboard workflow](../skills/bitwig-explore/references/keyboard-workflow.md).

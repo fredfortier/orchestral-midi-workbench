@@ -24,9 +24,11 @@ not evidence of musical suitability. Read actual documented exceptions.
 
 Invoke [instrument-intake](../../instrument-intake/SKILL.md) for the relevant
 library/subset when documentation is missing, stale or insufficient. Return to
-selection afterward. Do not initiate every library or replace that skill with
-another manual-research procedure here. Missing manual/capability evidence remains
-an explicit selection uncertainty; do not invent support.
+selection with the exact control map and stock expression and dynamics
+baselines. If an unknown function prevents a required musical effect, compare
+eligible stock alternatives within the user's constraints or mark that effect
+pending. Do not initiate every library or replace intake with another research
+procedure.
 
 Record the exact NKI relative path beneath INSTRUMENTS_ROOT_DIR as the sole patch
 identity, applicable documentation,

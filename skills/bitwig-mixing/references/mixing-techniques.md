@@ -46,7 +46,7 @@ Stop when the intended relation works; do not force equal faders or equal meters
 For sampled instruments, distinguish amplitude trim from performance controls
 that may change timbre, attack or transitions. Verify the exact patch's manual
 and observed control response before changing velocity or CC dynamics. The
-[expression-control contract](../../WORKFLOW.md#expression-control-specification)
+[expression-control contract](../../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction)
 owns those project decisions and preservation duties.
 
 ## Separation, space and processing

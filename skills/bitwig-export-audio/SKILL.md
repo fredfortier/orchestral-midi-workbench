@@ -5,7 +5,7 @@ description: Export an open Bitwig arrangement as synchronized audio for listeni
 
 # Export native Bitwig audio
 
-Read [the shared workflow](../WORKFLOW.md). Use `controller export-audio` for
+Use `controller export-audio` for
 Bitwig's native Export Audio task. Check the running CLI's help for command
 options when needed.
 Do not emulate rendering, bounce clips destructively or solo tracks one by one.

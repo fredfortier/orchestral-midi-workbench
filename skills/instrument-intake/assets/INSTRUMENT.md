@@ -40,7 +40,7 @@ never imply one NKI always equals one articulation. Explicitly mark unknowns.
 
 ## Conventional MIDI control map
 
-| Exact relative NKI / articulation scope | Control / message (MW CC1, BC CC2, XP CC11, pitch bend, velocity, other CC) | Status and stock assignment | Musical effect / interactions | MIDI range and units | Stock default / reset | Conditions / exceptions | Manual title, revision, page / section; observed evidence |
+| Exact relative NKI / articulation scope | Control / message (MW CC1, BC CC2, XP CC11, pitch bend, velocity, other CC) | Status and stock assignment | Musical effect / interactions | MIDI range and units | Stock baseline / reset | Conditions / exceptions | Manual title, revision, page / section; observed evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 
 [Required rows per covered scope: CC1, CC2, CC11, pitch bend and note velocity;
@@ -48,7 +48,9 @@ add documented pedals, switches and other MIDI controls. Status is
 documented-supported, documented-unsupported, or unknown. Manual silence is
 unknown. Group exact patches only with evidence of identical behavior. Record
 stock versus MIDI-learn assignments, dynamics versus attenuation, independent
-vibrato/attack roles and interactions. For pitch bend record center and documented
+vibrato/attack roles and interactions. Distinguish dynamics and expression
+baselines. Include load/reset, behavior before the first MIDI message and
+neutral/unity value when established. For pitch bend record center and documented
 semitone range/sensitivity, or unknown. Values here are MIDI units (CC 0–127,
 velocity 1–127 for sounding notes, pitch bend 0–16383/center 8192 where applicable);
 native track automation uses its observed physical units, with explicit boundary

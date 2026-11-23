@@ -16,6 +16,16 @@ to all parts. Identify connected line, separate attacks, repeated pulse, held
 harmony, entrances and cadences. Slurs, ties, sampled legato and portamento are
 different. Phrases cross barlines; do not reset legato, lyrics or dynamics there.
 
+Resolve articulation over the complete gesture before writing routing rules.
+Read words and signs such as *simile* or *segue*, opening examples whose marks
+continue, changes of bowing, and shared-staff instrument labels. Use the
+engraved score or another appropriate source to settle uncertain starts and
+ends. Compare neighbors with the same rhythm and musical role at every
+receiver switch, on both sides of the boundary. Default legato can give a
+fresh attack with appropriate note separation. A switch to a short sample
+requires its own musical justification. Trace shared staves back to the
+named instruments and distinguish intended doublings from duplicated exports.
+
 Choose variants with the relevant INSTRUMENT.md. Keep attack weight, sustained
 timbre/dynamics, expression, vibrato, tuning and release distinct. Patch changes
 may change the dynamics control law. Select documented stock behavior that fits
@@ -29,13 +39,16 @@ agree over the complete overlap, not only at attacks. For continuo, figures and
 voice-leading require actual harmonic interpretation; sounding pitch classes do
 not constitute a continuo realization. Do not add unrequested notes or doubles.
 
-Keep a concise passage review of musical role, receiver, attack/connection/release
-and dynamics. Use supported `adapt::Plan.passages` assertions to independently
-check track/instrument ownership and note coverage when constructing new plans.
-When present these partition every performed note including repeats; source
-prefixes use actual converter identities, not printed bar numbers. Expectations
-come from score review. Use the [rendition inputs](conversion.md#rendition-inputs)
-to record the assertions.
+For a new realization or a full channel review, partition every performed
+note, including repeated occurrences, into reviewed gestures. For each
+gesture record the score location, intended attack/connection/release, exact
+receiver and channel, and musical reason. Group notes that share a decision.
+Account explicitly for redundant source copies and other intentional omissions.
+Use the supported `passages` assertions to check the reviewed track, instrument
+and note coverage independently of the routing rules. Source prefixes use
+actual converter identities. Inspect adjacent notes and all route boundaries
+against that review, and verify exact channel/slot separately where multiple
+slots share a patch. See [rendition inputs](conversion.md#rendition-inputs).
 
 Authored dynamic curves need explicit supported rendering rules. The converter
 does not invent smoothing, breaths, bowing or phrase contours. Store unsupported

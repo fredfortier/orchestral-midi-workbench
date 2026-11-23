@@ -5,7 +5,7 @@ description: Mix an open Bitwig arrangement using musical foreground, native mix
 
 # Mix a Bitwig arrangement
 
-Read [the shared workflow](../WORKFLOW.md), then
+Read
 [mixing techniques and measurement](references/mixing-techniques.md) before
 making musical decisions. That reference separates
 industry guidance, native mechanics and this workflow's editorial defaults.

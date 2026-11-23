@@ -24,7 +24,11 @@ midi-bridge controller midi decode --input performance.midi2 \
 `--inspect-rendition` defaults to JSON on stdout. Its `notes` are performed
 occurrences, with exact `source`, `articulation` and `descriptor` values for
 building rules. `sourceVoices` maps written note paths, before the `#occurrence`
-suffix, to MusicXML voice strings. `--policy` is optional. For example,
+suffix, to MusicXML voice strings. `sourceDirections` lists written words,
+rehearsal directions and footnotes with exact source paths. Read them when
+settling passages such as *simile* continuations or shared-staff instrument
+labels. Inspection exposes the text without inferring those passage boundaries.
+`--policy` is optional. For example,
 `{"default_tempo":56}` sets quarter notes per minute for a score lacking tempo.
 
 | `plan.json` field | Use |

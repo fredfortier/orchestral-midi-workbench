@@ -36,6 +36,8 @@ Event       = {time, order, words: UMP u32[]}
 - [`xml.rs`](src/xml.rs) owns score parsing, written cursors and finite performed
   occurrence identity. Source paths identify absolute same-name sibling indices
   (1-based), optional attributes and repeat occurrences. They are identifiers.
+  Rendition inspection exposes written directions with their lexical source
+  paths for the review of continuation spans and shared staves.
 - [`rules.rs`](src/rules.rs) owns articulation choices.
   [`extension.rs`](src/extension.rs) owns named descriptors and dictionary rules.
   [`clip.rs`](src/clip.rs) and [`wire.rs`](src/wire.rs) own allocation, clock,

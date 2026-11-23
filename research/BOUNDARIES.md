@@ -69,8 +69,8 @@ from the worksheets.
   handoffs and any remaining computer dependency. Keep suggested skill changes
   in the worksheet until the evidence supports a production change.
 
-[^workflow]: The [production execution boundary and owners](../skills/WORKFLOW.md#mandatory-execution-boundary)
-    and [supported production operations](../skills/WORKFLOW.md#supported-production-operations)
+[^workflow]: The [production execution boundary and owners](../skills/bitwig-compose/references/workflow-stories.md#artifact-and-mutation-ownership)
+    and [supported production operations](../skills/bitwig-compose/references/workflow-stories.md#route-by-outcome)
     govern current skill execution.
 [^osc]: The [pinned DrivenByMoss OSC protocol](https://github.com/git-moss/DrivenByMoss-Documentation/blob/8aab247a5643082f9706b36c6fd091ab7125aae4/Generic-Tools-Protocols/Open-Sound-Control-(OSC).md)
     defines documented feedback, commands and the configured action slots.

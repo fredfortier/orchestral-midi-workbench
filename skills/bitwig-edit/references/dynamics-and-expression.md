@@ -31,10 +31,16 @@ or the native read/replace contract.
    A volume change alone does not prove an independent timbral control. Missing
    evidence returns to documentation-only intake; preserve that branch unless
    the user authorizes a labelled provisional interpretation.
-2. Read the part's actual sounding passages, rests, sustained notes and shared
-   receiver overlaps. In PERFORMANCE.md state who leads, where tension builds,
-   where accompaniment yields, and how the phrase releases. Clip edges and
-   bars are location aids, not automatic phrase boundaries.
+2. Read the part's actual sounding passages and the score and musicology notes
+   in PERFORMANCE.md. Anchor entries, rises, crests, holds and releases to
+   specific places in the score and their performed occurrences. Cite the
+   composer's dynamics, accents, articulation or phrasing where available.
+   For unmarked spans, defend the direction from text stress, harmony,
+   counterpoint, phrase structure or a cited interpretive source as applicable.
+   State why this part leads, yields, builds, holds or releases at that point
+   and how the selected control makes that audible. Mark inferred directions
+   and numerical targets as editorial. A barline or section label alone gives
+   no musical reason for a new anchor.
 3. Choose the sampled intensity with the documented dynamics control (often
    CC1 for longs, velocity for shorts). Retain attack/transition functions of
    velocity. Attenuated loud samples retain their loud timbre.
@@ -50,7 +56,12 @@ or the native read/replace contract.
    universal starting value, floor, range, or mapping from CC units to dB.
    A flat chosen level is valid for a deliberately level span; maximum is a
    musical endpoint or an explicit exception, not a workflow default.
-6. Prepare entry values without a jump on a sounding attack; recover in rests
+6. Read the stock dynamics and expression baselines in INSTRUMENT.md. Choose
+   and initialize the project values before the first affected attack, and
+   handle later entries, seek and reset where they affect the task. Distinguish
+   your project entry value from the factory value. Use a defensible labelled
+   starting value when the function is known and the factory number is unknown.
+   Prepare entry values without a jump on a sounding attack; recover in rests
    where possible. Do not swell an absent part toward another part's climax.
    Preserve tails, authored silences, pedals/resets and effective state beyond
    the requested interval. Do not manufacture a fade at a trimmed continuation.
@@ -88,9 +99,17 @@ interpretation, not a vendor-prescribed curve.
 
 ## Verify the result
 
-Independently read native lanes and verify their identity, channel, initial state,
-points and intended passage alignment. Compare CC1 and CC11 against the stated
-musical roles, including a span where they deliberately differ; fewer points or
+Give every required effect a defensible scope based on the score, performance
+directions and documented receiver response. Record named dynamics and numeric
+anchors with units and the manual section. Label editorial approximations.
+An unresolved control leaves its effect pending. Preserve the existing
+behavior and complete independent work.
+
+
+Compare each required effect in PERFORMANCE.md against the encoded plan and
+independent native readback. Verify lane identity, channel, receiver routing,
+initial state, points and intended passage alignment. Compare CC1 and CC11 against
+the stated musical roles, including a span where they deliberately differ; fewer points or
 low numerical correlation alone do not establish good phrasing. Preserve notes,
 routing and unrequested curves. When audio/audition is requested, check combined
 level/timbre and starts within phrases; otherwise report stored-data verification

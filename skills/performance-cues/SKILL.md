@@ -5,7 +5,7 @@ description: Assess an active Bitwig piece from its stored notes and piece-speci
 
 # Performance cues
 
-Follow [the shared workflow](../WORKFLOW.md). Own PERFORMANCE.md's interpretation,
+Own PERFORMANCE.md's interpretation,
 cue map and cue evidence; preserve its realization/bindings and configuration
 sections. Cue directions do not automatically authorize note, automation or tempo
 changes. Use the shared document template, not a competing whole-file format.

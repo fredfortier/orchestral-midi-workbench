@@ -37,7 +37,7 @@ Bach *Qui tollis* project.
   Keep generic host actions out of the native document protocol.
 - Use the existing **Bach BWV232 - Qui tollis Composition Smoke** project for
   the entire exercise. Save and verify its main `.bwproject`, then make a
-  [file-only checkpoint](../../../skills/WORKFLOW.md#experimental-project-backups)
+  [file-only checkpoint](../../../skills/score-intake/references/project-layout.md#experimental-project-backups)
   under its `backups/` directory when an experiment requires one. Work in the
   main file throughout. Preserve the original score byte for byte.
 

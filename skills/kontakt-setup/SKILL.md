@@ -5,8 +5,7 @@ description: Use the existing integrated midi-bridge instrument assignment opera
 
 # Load the specified instruments
 
-Follow [the shared workflow](../WORKFLOW.md), especially its mandatory execution
-boundary. Infer scope from the request and conversation; use
+Infer scope from the request and conversation; use
 [bitwig-explore](../bitwig-explore/SKILL.md) to resolve the targets:
 
 ```text
@@ -67,8 +66,8 @@ for supporting project and focus actions.
    Its native engine must be connected before assignment. An observation never
    changes selection or opens a different project.
 2. Apply the specified container and named-slot ensures in
-   [assignment](references/assignment.md). Slot ensure reapplies the shared
-   workflow's stock Filter/Map defaults and selects/verifies the resulting slot.
+   [assignment](references/assignment.md). Slot ensure reapplies the documented
+   stock Filter/Map defaults and selects/verifies the resulting slot.
    Check native name, channel mask, mapping and selection. CLI channels are 1–16;
    JSON/native note channels are 0–15. Preserve unrelated devices and musical content.
 3. Use integrated `instrument assign` for the slot. Without `--load-patch`, reuse

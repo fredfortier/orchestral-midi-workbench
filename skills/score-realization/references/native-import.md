@@ -33,7 +33,9 @@ dependent writes.
    replacement checks. Once musical placement is verified, configure requested
    receiver routing and NKI loading through kontakt-setup's integrated operation.
 5. Compare complete actual notes, expressions and lanes against the intended
-   performance in native units. Preserve source/occurrence/loop coordinates. Save
+   performance in native units. Check coverage against required effects in
+   PERFORMANCE.md as well as equality with the bundle. Preserve
+   source/occurrence/loop coordinates. Save
    through a separately qualified native action and verify actual saved identity.
 
 ## Route and compare the notes

@@ -5,9 +5,9 @@ description: Develop an orchestral piece across Bitwig workflows. Use for score-
 
 # Compose in Bitwig
 
-Use [the production workflow](../WORKFLOW.md) for project identity, execution
-authority and readiness. For an isolated operation, go directly to its owner
-in that workflow.
+Use the [workflow stories](references/workflow-stories.md) for cross-skill
+handoffs, artifact ownership and readiness. For an isolated operation, go
+directly to its owning skill.
 
 | Requested result | Procedure |
 | --- | --- |
@@ -24,6 +24,9 @@ operation-specific authority immediately before mutation. Resolve again if
 the project, ownership, name, or placement changed.
 
 Run only the stages needed for the result. Resume at the first missing proof.
+For score-to-playable delivery, account for each required musical effect using
+the [score and performance checks](references/score-and-performance.md#turn-the-score-into-a-playable-ensemble)
+before calling the arrangement complete.
 When an owner returns a refusal or an unknown outcome, use its readback and
 reconciliation procedure before dependent edits. Continue independent work.
 Use the [shared session actions](../bitwig-explore/references/session-actions.md)
