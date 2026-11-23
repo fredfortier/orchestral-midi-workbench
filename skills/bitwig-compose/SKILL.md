@@ -11,7 +11,7 @@ in that workflow.
 
 | Requested result | Procedure |
 | --- | --- |
-| Admit a score and hear an editable performance, direct a performance through cues, or realize sung phrases | [Score and performance](references/score-and-performance.md) |
+| Admit and orchestrate a score, direct a performance through cues, or realize sung phrases | [Score and performance](references/score-and-performance.md), including the orchestration checklist for a new rendition |
 | Compose a part against the arrangement, audition and apply a repair, or extend the piece | [Compose and revise](references/compose-and-revise.md) |
 | Analyze the current native performance | [Read back the arrangement](references/readback.md) |
 

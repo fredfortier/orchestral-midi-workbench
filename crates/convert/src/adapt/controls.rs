@@ -43,6 +43,12 @@ impl Controls {
                     note.source
                 )));
             }
+            if let Dynamics::FixedAttack { key_velocity } = dynamics {
+                if *key_velocity == 0 {
+                    return Err(fail("fixed attack velocity must be positive"));
+                }
+                note.velocity = *key_velocity;
+            }
             return Ok(());
         };
         let points = if meaning.curve.is_empty() {

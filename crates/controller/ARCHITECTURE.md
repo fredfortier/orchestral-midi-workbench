@@ -225,6 +225,9 @@ lane factory also initializes that lane's arranger fallback at beat zero.
 
 Layer ensure creates/reuses the named stock Layer/Selector; conflicting types
 refuse. Slot ensure takes a musical name and complete nonempty note-channel set.
+After a rename, resolve the unchanged enclosing container path and select the
+resolved slot object. Verify its new name, preserved identity and routing in
+the result.
 It reapplies outer All → Same and stock Filter admitting shared displayed channel
 1 plus the requested notes, then Map sending all sixteen channels to displayed 1.
 Reuse helpers through the native factory; move a sole existing helper to the

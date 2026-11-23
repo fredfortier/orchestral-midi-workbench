@@ -20,6 +20,8 @@ pub struct Rendition {
     /// Explicit receiver instances; omit only for legacy one-binding-per-slot manifests.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub slots: Vec<Slot>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub control_routes: Vec<ControlRoute>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bitwig: Option<Bitwig>,
 }
@@ -30,6 +32,13 @@ pub struct Track {
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mix: Option<Mix>,
+}
+/// Portable CC address for native MIDI channel 1 on the named track.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct ControlRoute {
+    pub track: String,
+    pub route: Route,
 }
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -87,7 +96,8 @@ pub struct Evidence {
 pub struct Bitwig {
     pub project_id: String,
     pub project_name: String,
-    pub group_name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub group_name: Option<String>,
     pub decision_revision: u64,
     pub native_meter_tick_rate: u8,
 }
@@ -158,7 +168,10 @@ impl Rendition {
             if !identity(&native.project_id)
                 || !label(&native.project_name)
                 || native.project_name.contains(['/', '\\'])
-                || !label(&native.group_name)
+                || native
+                    .group_name
+                    .as_deref()
+                    .is_some_and(|name| !label(name))
                 || native.decision_revision == 0
                 || native.native_meter_tick_rate == 0
             {
@@ -314,6 +327,22 @@ impl Rendition {
         if *tracks != bound_tracks || *instruments != bound_instruments {
             return Err(fail("unbound track or instrument definition"));
         }
+        let mut control_tracks = BTreeSet::new();
+        let mut control_addresses = BTreeSet::new();
+        for control in &self.control_routes {
+            if control.route.group > 15
+                || control.route.channel != 0
+                || !tracks.contains(control.track.as_str())
+                || !control_tracks.insert(&control.track)
+                || !control_addresses.insert(control.route)
+                || self.bindings.iter().any(|binding| {
+                    binding.route == control.route
+                        && (binding.track != control.track || binding.channel != 0)
+                })
+            {
+                return Err(fail("invalid or conflicting shared track CC route"));
+            }
+        }
         Ok(())
     }
 
@@ -328,19 +357,24 @@ impl Rendition {
             .iter()
             .map(|binding| (binding.route, binding))
             .collect();
-        let occupied: BTreeSet<_> = performance
+        let control_routes: BTreeSet<_> = self.control_routes.iter().map(|c| c.route).collect();
+        let mut occupied: BTreeSet<_> = performance
             .notes
             .iter()
             .map(|note| note.route)
-            .chain(
-                performance
-                    .configuration
-                    .iter()
-                    .chain(&performance.events)
-                    .filter_map(|event| crate::wire::route(&event.words)),
-            )
             .chain(performance.piano_routes.iter().copied())
             .collect();
+        for event in performance.configuration.iter().chain(&performance.events) {
+            let Some(route) = crate::wire::route(&event.words) else {
+                continue;
+            };
+            if control_routes.contains(&route)
+                && matches!(crate::wire::channel_cc(&event.words), Some((_, 0..=119)))
+            {
+                continue;
+            }
+            occupied.insert(route);
+        }
         for route in &occupied {
             if !bindings.contains_key(route) {
                 return Err(fail(format!(

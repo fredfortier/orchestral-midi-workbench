@@ -38,7 +38,7 @@ configuration, not a second listener.
 | Audition Launcher | Confirm exact owner and slot/clip. Match the current OSC bank track and scene with project, name, position and slot content. The OSC slot name can be blank for a native default clip name. Use the resolved scene position and occupied slot in that case. Send `/track/T/clip/S/launch i:1` using one-based OSC bank indexes. | Observe that slot's `isPlaying` and transport. Listen if audition is requested. Stop, then return the affected track to Arrangement with `/track/T/clip/returntoarrangement`. Stopped transport and `isPlaying: 0` establish that Launcher playback ended. Verify the Arrangement source independently before further listening. |
 | Save to an existing native path | Verify current project and saved path, then send `/project/save`. For the first save use the native Save dialog. | Verify file write for a dirty project and native path. Independently check the affected content. Reopen and reread where cold persistence is required. |
 | Undo/Redo | Verify the current project and known, immediately adjacent history entry, then send `/undo` or `/redo` once. | Independently reread affected geometry/content and check preservation. An unknown mutation outcome needs reconciliation first. |
-| Add or rename a simple instrument track | Send `/track/add/instrument` or `/track/T/name s:NAME`, after resolving the current indexed track identity for rename. | Compare native IDs and exact names. Reuse the returned path. Ambiguous index mapping requires fresh native/OSC scope. |
+| Add or rename a simple instrument track | For child creation, enter the intended group in Bitwig before `/track/add/instrument`. Group header selection can leave creation at the parent level. Resolve `/track/T/name s:NAME` against current OSC names. If the track is outside the bank, page with `/track/bank/page/+` or `/track/bank/page/-` and refresh. | Verify the first child's native ancestry before repeating creation. Compare IDs and exact names after rename. Reuse the returned paths. |
 | Show or hide an Arranger section | Read visibility, then send the toggle only if the current value differs, e.g. `/arranger/timeLineVisibility`. | Observe visibility. Establish focus separately if needed. |
 
 Use [editing](../../bitwig-edit/SKILL.md) for stopped Launcher clip creation and
@@ -66,6 +66,9 @@ The following controller assignments were exercised in Bitwig 6.1 with
 DrivenByMoss 26.6.5. Send `midi-bridge osc /action/N` with zero arguments.
 A configured action can apply in the active editor, so read the preconditions
 and verify the effect before dependent actions.
+
+If slot 5 leaves the native editor `none`, focus the visible Arranger through
+the computer, reread the editor and establish the exact range before slot 1.
 
 | Slot and binding | Preconditions and checks |
 | --- | --- |

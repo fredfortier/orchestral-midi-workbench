@@ -263,6 +263,14 @@ pub(crate) fn route(words: &[u32]) -> Option<Route> {
     }
 }
 
+pub(crate) fn channel_cc(words: &[u32]) -> Option<(Route, u8)> {
+    let [head, _] = words else { return None };
+    if head >> 28 != 4 || (head >> 20) & 15 != 0xb {
+        return None;
+    }
+    Some((route(words)?, ((head >> 8) & 127) as u8))
+}
+
 pub(crate) fn reroute(words: &[u32], route: Route) -> Result<Vec<u32>> {
     if let Ok(message) = midi2::flex_data::UnknownPerformanceText::try_from(words) {
         return Ok(crate::remarks::text(Some(route), &message.text(), false));

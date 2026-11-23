@@ -44,9 +44,14 @@ existing workspace + source + musical direction
    and supported expression must be encoded before import. Preserve original
    notation and working-score changes. Unsupported musical requirements remain
    explicit; never flatten curves or substitute articulations to obtain a pass.
+   Understand the exact receiver for every track and articulation. Use its
+   documented standard MIDI controls for their intended musical roles and
+   explain the resulting curves in PERFORMANCE.md. Consider patch-specific
+   macros only in a separately authorized refinement after MIDI2 orchestration.
 5. Freshly observe destination, review the plan and preservation scope, then use
-   admitted native operations. One top-level realization group contains musical
-   tracks. Declare named receiver slots independently of NKI resources; each admits its
+   admitted native operations. Use the destination group declared in the
+   companion, or the project root when no group is specified. Declare named
+   receiver slots independently of NKI resources; each admits its
    complete note-channel set through the shared standard Filter/Map topology.
    Reserve channel 1 for shared controls on articulated tracks; use 2–16 for notes
    and keyswitches. A single-channel nonarticulated part may use 1 for everything.

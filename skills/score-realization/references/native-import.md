@@ -4,9 +4,11 @@ For placement, use the native project actions and complete musical edits
 described below. Confirm each required action is available before preparing
 dependent writes.
 
-1. Compile the explicit performance using [conversion](conversion.md). Authenticate
-   MIDI2/companion with `controller midi decode --input FILE --companion FILE` when
-   decoded values are needed; this is offline and performs no host placement.
+1. Compile the complete performance using [conversion](conversion.md). Authenticate
+   MIDI2/companion with `controller midi decode --input FILE --companion FILE`
+   before native construction. The fixture for placement is the authenticated
+   decoded notes, time, CC and companion ownership. Keep articulation and
+   controller decisions in the converter input.
 2. Discover existing destination paths with bitwig-explore. Use
    [session actions](../../bitwig-explore/references/session-actions.md) for
    qualified track creation and exact empty clip placement. Reuse existing
@@ -23,12 +25,13 @@ dependent writes.
    tuning. Map controls and expression explicitly. Use bitwig-edit's complete
    [clip replacement](../../bitwig-edit/references/clip-replacement.md)
    before/desired/readback. Retain geometry, ownership and unrelated automation.
-4. Configure Instrument Layer/Layer routing through kontakt-setup's native
-   operations. Use native track-level MIDI automation for documented controls,
-   shared across slots where verified routing permits. No MIDI CC sender or
-   automation clip is required; report unsupported native operations before
-   dependent execution. Load NKI only when requested, through
-   its integrated assignment.
+4. Resolve shared CC events through the companion's `controlRoutes`, then place
+   native channel-1 track MIDI lanes via [automation edits](../../bitwig-edit/references/automation-edits.md).
+   Preserve beat-zero values and event timing, divide u32 values by 4,294,967,295
+   for native normalized values, and use HOLD with zero curvature. Sampled
+   CC events hold to the next event. Use the existing controller no-op or
+   replacement checks. Once musical placement is verified, configure requested
+   receiver routing and NKI loading through kontakt-setup's integrated operation.
 5. Compare complete actual notes, expressions and lanes against the intended
    performance in native units. Preserve source/occurrence/loop coordinates. Save
    through a separately qualified native action and verify actual saved identity.

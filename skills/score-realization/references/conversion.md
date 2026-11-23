@@ -9,6 +9,8 @@ source-preservation artifacts. Internal inputs are retained evidence; playback
 does not execute them or PERFORMANCE.md prose.
 
 ```sh
+"$score_converter" "$working_score" --inspect-rendition \
+  --policy "$policy" --output "$run/source-notes.json"
 "$score_converter" "$working_score" --to midi2 \
   --policy "$policy" --rendition-plan "$rendition_plan" \
   --output "$project/performance.midi2" \
@@ -54,6 +56,15 @@ does not supply a complete patch-bound rendition without its explicit plan.
   number and literal MIDI 2.0 value. With explicit `channelHold` support, dynamics
   must start at note onset and overlapping notes that share a channel must agree
   throughout the overlap. Keep sampled dynamics and expression separate.
+
+- Build rule selectors from `--inspect-rendition` on the same score and policy.
+  Use `sourceVoice` for distinct written voices on a stave. Specify any
+  reviewed note endings in `noteEdits` and any channel-1 curves in
+  `trackCcCurves` with their companion `controlRoutes`. Match the edited
+  occurrences and CC points against the decoded performance. For a fixed attack
+  with a separately planned track curve, use `fixedAttack` and its documented
+  velocity. Archive preview pan/volume and direction prose with
+  `archiveScorePreview` when the realization replaces the preview mix.
 
 The converter resolves supported score semantics and applies declared source-note
 rules to receiver routes/control laws. Fixed-attack + CC-dynamics adaptation occurs

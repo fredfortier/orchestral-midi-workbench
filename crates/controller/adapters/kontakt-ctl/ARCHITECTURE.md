@@ -18,6 +18,9 @@ Reconcile an unknown outcome before another submission. Require a visible
 render after rack preparation before opening the owned Load dialog. A failed
 dialog preflight that precedes filling or submitting the filename uses
 `NkiNotSubmitted`. Failures after that boundary retain their actual uncertainty.
+The owned Load dialog has a 75-second admission window. Wine may materialize
+the file picker after the previous 30-second limit under a large loaded session.
+The exact owner and process checks apply throughout the wait.
 Confirmation covers
 the loader's observed dialog, render, and navigator state. Sample availability,
 saved persistence, and audible behavior each require their own evidence.

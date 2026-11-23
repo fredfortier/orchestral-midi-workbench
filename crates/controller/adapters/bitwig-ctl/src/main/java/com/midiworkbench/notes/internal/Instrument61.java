@@ -413,7 +413,14 @@ public final class Instrument61 {
         return true;
     }
     private static void selectSlot(Scope scope,Object slot)throws Exception {
-        selectPath(scope.document(),scope.target());
+        ObjectNode containerPath = scope.target().deepCopy();
+        var elements = containerPath.withArray("elements");
+        int last = elements.size() - 1;
+        String kind = elements.get(last).required("kind").asText();
+        if (kind.equals("layerChain") || kind.equals("choice")) {
+            elements.remove(last);
+        }
+        selectPath(scope.document(),containerPath);
         Class<?> object=type(scope.document().getClass().getClassLoader(),"com.bitwig.ramona.core.Zj3");
         Reflection.call(slotSelection(scope.container()),"qKA",new Class<?>[]{object},slot);
         Object settings=value(scope.container(),"display_settings");
