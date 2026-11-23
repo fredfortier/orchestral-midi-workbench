@@ -59,3 +59,35 @@ research of the global performance arc belongs to performance-cues.
 For revisions, compare the actual project with the last rendition before replacing
 anything. Preserve intentional native changes in pitch, timing, articulation,
 dynamics, tempo and mix; reconcile their relation to score and executable inputs.
+
+## Translate an expressive direction into receiver behavior
+
+Use the cue's score event, occurrence, named lines and audible criterion where a
+researched direction exists. For a score before native placement, take the
+equivalent anchors from the score and intended performed form. Return ambiguous
+musical meaning to its owner. Resolve feasibility through the exact patch and
+articulation, informed by the documented control law and any applicable patch
+tests.
+
+For each affected binding, specify the attack or within-note change, the parts
+that need independent shaping, and the initial state, anchors and release that
+will make the gesture audible. Name the supported control, its units and the
+applicable note or control-channel route. Follow the shared
+[dynamics and expression procedure](../../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction)
+for velocity, sampled intensity and independent expression. Receiver capability
+governs the choice of control. Mark numeric targets as editorial unless they
+describe documented bounds or measured response. Group equivalent gestures when
+they share a purpose, binding and intended behavior. Keep different occurrences
+distinct when the return calls for a different treatment.
+
+Record this translation in the existing binding and curve-anchor sections of
+`PERFORMANCE.md` for a rendition. A proposal can describe the same choices
+without encoding them. When applying to the generated rendition, verify the
+decoded and native values, alignment and routing against the intended gesture.
+For an authorized native-only revision, hand the scoped plan to
+[Bitwig Edit](../../bitwig-edit/SKILL.md) and use its readback checks. If the
+scope includes acoustic verification, carry the cue's criterion into a
+representative ensemble comparison. A matched stem can establish a receiver's
+response, while hearing the intended hierarchy requires the relevant parts
+together. Keep unsupported effects pending and report the acoustic evidence
+actually obtained.

@@ -20,7 +20,7 @@ existing workspace + source + musical direction
 
 | Need | Read |
 | --- | --- |
-| New or changed musical interpretation | [Interpretation](references/interpretation.md) |
+| New or changed musical interpretation, including a cue-led expression plan | [Interpretation](references/interpretation.md) |
 | Discover libraries / choose NKI variants | [Instrument selection](references/instrument-selection.md) |
 | Lyrics or vocal patches | [Vocal realization](references/vocal-realization.md) |
 | Compile and validate the rendition | [Conversion](references/conversion.md) |
@@ -44,9 +44,10 @@ existing workspace + source + musical direction
    [expression control specification](../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction).
    Receiver setup is limited to native routing and exact NKI assignment/loading;
    it does not customize patch settings.
-   Preserve cue/configuration sections. Stable binding keys link readable native
-   track/layer-chain names to details. Identify patches solely by NKI paths relative
-   to INSTRUMENTS_ROOT_DIR.
+   Carry the intended audible result into the plan for each material cue-led
+   change. Preserve cue/configuration sections. Stable binding keys link readable
+   native track/layer-chain names to details. Identify patches solely by NKI paths
+   relative to INSTRUMENTS_ROOT_DIR.
 4. Compile with convert. Check the required effects against the plan before
    conversion and against the decoded bundle before import. A valid bundle or
    audible stem is insufficient evidence for an omitted effect.

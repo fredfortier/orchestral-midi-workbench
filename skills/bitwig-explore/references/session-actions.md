@@ -60,6 +60,23 @@ zero-based `scene`, omitting the stale clip ID. An explicit-path native
 before addressing the matching OSC bank slot. An empty slot still requires
 the [native slot observation](keyboard-workflow.md) before creation.
 
+## Audition an existing manual selector
+
+Use this route when an authorized comparison identifies a selector already in
+the playing path. Resolve its exact native path and choices with
+`controller instrument read --target selector.json`. Confirm that the intended
+notes reach it. In Bitwig's device panel, verify Manual mode and record the
+playing choice from the selector's active indicator. The native
+`selectedSlot` can name the editor selection while another choice plays.
+
+With playback and recording stopped, use the exact choice's **Set as active
+layer** control in the Bitwig host device panel. Verify the active label before
+each take. Use the [audio export contract](audio-export.md) for renders. After
+the comparison, restore the previous playing choice and verify its active
+label. Preserve any authored selector mode or automation. If the playing
+choice is controlled by the arrangement or a different selector mode, use
+that existing control path within the authorized scope.
+
 ## Qualified configured profile
 
 The following controller assignments were exercised in Bitwig 6.1 with

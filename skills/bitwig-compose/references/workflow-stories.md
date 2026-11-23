@@ -7,8 +7,9 @@ intent and evidence to the next owner. Resume at the first missing result.
 | Workflow story | Handoff |
 | --- | --- |
 | Supplied score to a playable project | Intake the score and initialize intended libraries. Realize the reviewed performance into MIDI2, verify native import, assign the exact receivers, then place cues or mix when requested. [Score and performance](score-and-performance.md) |
+| Research or realize a cue-led expression revision | Cues supplies the musical rationale and audible criterion. Realization translates it into receiver-specific controls. Compose routes a proposal, generated rendition or bounded native edit, then requested audition. [Direct the performance](score-and-performance.md#direct-the-performance-from-its-form) |
 | Prepare a sung phrase in context | Carry lyric coverage and the receiver from realization to setup and the builder. Return the verified phrase and control map to the native editing owner. [Score and performance](score-and-performance.md) |
-| Audition and apply a repair | Resolve the native passage, checkpoint the main project, audition, apply to the agreed scope and independently verify. [Compose and revise](compose-and-revise.md) |
+| Audition and apply a repair | Resolve the passage and choose the method suited to the request and project layout. Compare, restore temporary state, or apply the authorized choice and verify. [Audition in context](audition.md) |
 | Analyze the current performance | Capture the qualified native scope, interpret and export it, then analyze the reconstructed score. [Readback](readback.md) |
 
 ## Route by outcome
@@ -68,6 +69,7 @@ original score + user direction + documented library capabilities
 | --- | --- | --- |
 | User direction | Outcome, scope, accepted departures | Successful execution |
 | Original score | Authored notation, source identity | Every editorial decision |
+| Composition, orchestration and work-specific literature | Principles and evidence for a proposed musical choice | Patch response, numeric targets or permission to edit |
 | Official manuals + observed inventory | Documented behavior + available files | Suitability for this passage |
 | Library INSTRUMENT.md | Cited capability description; observed exceptions distinguished | Project instrument selection or loaded state |
 | Project PERFORMANCE.md | Normative musical choices, receiver bindings, approximations, cues | Actual host state |
@@ -123,8 +125,8 @@ for ties, slurs, overlap, or an instruction to connect every note.
 | [bitwig-compose](../SKILL.md) | Requested multi-stage composition outcome | Owner evidence for each requested result |
 | [score-intake](../../score-intake/SKILL.md) | Saved workspace, original score, project instructions | Actual saved path + unaltered source + recorded project identity |
 | [instrument-intake](../../instrument-intake/SKILL.md) | Library documentation and verified one-time batch preprocessing | Completed path-based processing coverage + INSTRUMENT.md marker + cited capabilities/unknowns |
-| [score-realization](../../score-realization/SKILL.md) | Musical realization, patch selection, conversion, native notes/controls/channel layers | Intended and imported content/routing agree; save confirmed |
-| [performance-cues](../../performance-cues/SKILL.md) | Scholarship, arc, cue sheet, markers | Current MIDI scope + cited decisions + independent marker readback |
+| [score-realization](../../score-realization/SKILL.md) | Receiver-specific realization of the musical intent, patch selection, conversion, generated native notes/controls/channel layers | Control plan and capability evidence; for generated delivery, intended and imported content/routing agree and save is confirmed |
+| [performance-cues](../../performance-cues/SKILL.md) | Scholarship, arc, orchestral foreground, audible criteria, cue sheet and markers | Current MIDI scope + cited decisions; independent readback for requested marker work |
 | [kontakt-setup](../../kontakt-setup/SKILL.md) | Existing controller assignment and exact NKI loading | Integrated assignment/load result and native routing readback; no customization |
 | [bitwig-mixing](../../bitwig-mixing/SKILL.md) | Musical balance, scoped mixer changes and audio-backed diagnosis | Native readback, musical preservation, verified exports and listening limits |
 | [bitwig-export-audio](../../bitwig-export-audio/SKILL.md) | Exact native channel/range/options export | Native final outcome plus independent file/audio checks |

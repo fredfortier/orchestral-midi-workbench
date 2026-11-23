@@ -11,9 +11,10 @@ sections. Cue directions do not automatically authorize note, automation or temp
 changes. Use the shared document template, not a competing whole-file format.
 
 Turn musical evidence into decisions a performer can use at rehearsal and playback.
-The outcome is the active project's `PERFORMANCE.md` and actual Bitwig **Arranger
-Cue Markers**, linked by persistent cue keys. A document or marker JSON alone is
-not completed marker creation.
+A proposal returns recommendations and listening checks. A requested cue-sheet
+revision updates the active project's `PERFORMANCE.md`. Requested marker placement
+requires actual Bitwig **Arranger Cue Markers**, linked by persistent cue keys and
+verified by readback.
 
 ## Entry and intent routing
 
@@ -25,9 +26,10 @@ adapters identify the intended instance explicitly. Do not substitute cached mus
 
 | Intent, after the entry condition passes | Required reading and action |
 | --- | --- |
-| Assess a piece / create its performance cues | Read [musical assessment](references/musical-assessment.md), [musicology research](references/musicology-research.md), [performance file](references/performance-file.md), then [cue markers](references/cue-markers.md). Observe → assess → cross-reference → shape → place → verify. |
-| Revise an existing arc after musical changes | Read the existing PERFORMANCE.md and all four references above. Reobserve music and markers; retain cue keys whose musical functions survive; revise positions and interpretation from current evidence. |
-| Research or refine a disputed interpretation | Read assessment, research and performance-file references. Investigate the specific performance decision; update affected cue explanations. Do not mutate markers unless placement/naming changes are requested or needed by the requested cue revision. |
+| Create performance cues and place markers | Read [musical assessment](references/musical-assessment.md), [musicology research](references/musicology-research.md), [performance file](references/performance-file.md), then [cue markers](references/cue-markers.md). Observe → assess → cross-reference → shape → place → verify. |
+| Propose or review a researched performance or expression arc | Read [musical assessment](references/musical-assessment.md), [musicology research](references/musicology-research.md), and the [performance file](references/performance-file.md). Return the requested proposal or review. Open [cue markers](references/cue-markers.md) for requested placement or placement changes. |
+| Revise an existing arc after musical changes | Read the existing PERFORMANCE.md and the assessment, research and performance-file references. Reobserve music and markers. Retain cue keys whose musical functions survive and revisit their positions and interpretation. Use [cue markers](references/cue-markers.md) when applying placement changes in scope. |
+| Research or refine a disputed interpretation | Read assessment, research and performance-file references. Investigate the specific performance decision. Return a review or revise the affected cue explanations as requested. Change markers only when placement is in scope. |
 | Place an already agreed cue sheet | Read performance-file and cue-marker references. Verify its musical anchors against a fresh note observation; preserve the agreed interpretation unless evidence contradicts it. |
 
 Open [bitwig-explore](../bitwig-explore/SKILL.md) before musical reads; use its
@@ -36,11 +38,11 @@ explicit scope, or omit paths for the actual native selection. Use `controller i
 to establish every intended part/clip. Do not confuse an empty or partial selection
 with the whole piece. Resolve written passages to actual arranger occurrences
 using the [musical read procedure](../bitwig-explore/references/musical-queries.md).
-Use current `controller cues --help` for cue syntax.
-Resolve the active project's workspace from native project identity; the output
-belongs beside its `.bwproject`, not in this skill or the source repository. For
-an unsaved project without a durable workspace, ask for the destination while
-continuing observation and analysis; do not invent a permanent directory.
+Use current `controller cues --help` when operating on markers.
+For a project-file deliverable, resolve the workspace from native project
+identity and use the directory beside its `.bwproject`. For an unsaved project
+without a durable workspace, resolve the destination while continuing observation
+and analysis. A proposal in conversation needs no output path.
 
 ## Shared musical obligations
 
@@ -56,6 +58,11 @@ continuing observation and analysis; do not invent a permanent directory.
   Separate authored notation, source claims, native observations and editorial
   performance choices. Do not turn MIDI key numbers into enharmonic spelling,
   dynamic commands into composer markings, or an attractive narrative into fact.
+- For material changes of contrast, balance or timbre, state the musical event and
+  performed occurrence, the role of each affected line, the proposed musical
+  action and what a listener should hear. Use composition and orchestration
+  literature to test that reasoning where applicable. Carry the chosen criterion
+  into realization or audition when the request includes either stage.
 - Research only questions that change phrasing, balance, articulation, tempo,
   agogics or climax hierarchy. Stop collecting when the decisions have sufficient
   support and remaining uncertainty is explicit.
@@ -68,5 +75,5 @@ If score, note evidence and scholarship disagree, revisit the affected passage
 and edition/coordinate mapping. Retain the uncertainty and a usable provisional
 reading if it cannot be resolved; do not manufacture agreement. If marker
 execution fails, retain the draft with explicit unplaced status and reconcile
-native state before retrying. Finish only with a concise arc, a useful cue-key
-map, relevant citations and separately reported marker readback status.
+native state before retrying. Finish with the requested arc or cue map, relevant
+citations, and the evidence status for any requested marker work.

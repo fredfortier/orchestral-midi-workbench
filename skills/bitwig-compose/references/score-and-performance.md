@@ -22,7 +22,13 @@ saved project + original score + user direction
 1. Pass the supplied bytes and destination to [score intake](../../score-intake/SKILL.md).
    Require the saved native path, matching source bytes and project
    instructions. Reuse an existing matching workspace.
-2. Resolve the orchestration checklist below. Run or reuse verified
+2. Resolve the orchestration checklist below. When the brief calls for a
+   researched expressive design, use the
+   [composition and orchestration framework](../../performance-cues/references/musicology-research.md#evaluate-a-proposed-expressive-design)
+   with the source score and intended performed form. Carry the musical reasoning
+   and listening criteria into receiver selection and realization. Live cue work
+   uses the native MIDI after placement.
+   Run or reuse verified
    [instrument intake](../../instrument-intake/SKILL.md) for every intended
    exact patch. Require its library `INSTRUMENT.md` to document the stock MIDI
    controls, including CC1, CC2, CC11, other relevant CCs, velocity and pitch
@@ -107,7 +113,27 @@ for what to encode. Carry settled decisions forward directly.
    native clip scope and the musical question to
    [performance cues](../../performance-cues/SKILL.md). Keep the verified cue
    keys, source-to-arranger positions, phrasing and foreground relationships.
-2. For a requested balance or playback investigation, give
+   For a proposal, return the directions and listening criteria. Place or update
+   markers when that result is in scope.
+2. When the brief also calls for an expression plan or implementation, pass the
+   selected score events, performed occurrences, affected lines and listening
+   criteria to [realization's interpretation procedure](../../score-realization/references/interpretation.md#translate-an-expressive-direction-into-receiver-behavior).
+   Carry the resolved exact receiver and current routing into that handoff.
+   The result specifies the controls and anchors for the intended sound.
+   Use the full [score realization](../../score-realization/SKILL.md) workflow
+   for an authorized generated rendition. Send a bounded native revision to
+   [Bitwig Edit](../../bitwig-edit/SKILL.md) with qualified owners, the scoped
+   control plan and the preservation boundary. If the request is a proposal,
+   return the plan at this point. Keep the remaining effect pending if the
+   required receiver behavior cannot be established.
+3. For requested acoustic verification, carry the same criterion and passages
+   into [audition in context](audition.md). If the effect concerns blend,
+   foreground or climax hierarchy, include the relevant ensemble. A patch
+   probe can settle an individual mapping. If the mapping works and the
+   balance fails, return the result to the owner of the affected musical
+   choice. A failed interpretation returns to Cues, a failed translation to
+   Realization, and a mismatched native edit to Bitwig Edit.
+4. For a requested balance or playback investigation, give
    [mixing](../../bitwig-mixing/SKILL.md) the same cue/passages, relationship and
    listening question. For a reported fault, identify the capture source and
    reproducible passage before changing routing or render settings. Compare

@@ -12,34 +12,6 @@ representative connecting phrase and climactic figure, or the requested full
 revision, to [editing](../../bitwig-edit/SKILL.md). Carry written precedent,
 editorial invention, stored result and audition status into project notes.
 
-## Audition a repair, then apply it
-
-1. Resolve both surfaces through [exploration](../../bitwig-explore/SKILL.md).
-   Record the source notes and arranger occurrence, then establish the intended
-   Launcher owner and scene. For an empty destination require an actual native
-   `launcher read`. Preserve the source arranger content during prototyping.
-2. Use [editing](../../bitwig-edit/SKILL.md) to create or replace the intended
-   Launcher clip and independently reread it. Use
-   [session actions](../../bitwig-explore/references/session-actions.md) to
-   audition and return playback to the Arranger. Check that the original
-   Arranger clip is unchanged.
-3. Apply only the candidate the user approved or explicitly delegated for
-   application. Find the intended class of occurrences from their musical
-   function, score markings, and native notes. Match transpositions or
-   rhythmic variants where they serve the same function. Preserve adjacent
-   figures and any source passages that appear similar but are outside the
-   class.
-4. Send the exact Arranger clip paths and approved changes to editing. Verify
-   the amended occurrences, surrounding content and any shared source aliases.
-   For a Launcher transfer, compare the source and destination in the same
-   beat coordinates and match numeric values numerically. Compare independent
-   readback directly with the approved candidate as well as the write request.
-   For saved delivery, Save and verify through session actions.
-
-An approved faster trill can transfer to other explicitly marked repetitions
-and transpositions. An otherwise similar written note with only a wavy line
-stays outside that class until the score and user direction establish its role.
-
 ## Append to existing receivers
 
 Resolve the ending, exact insertion beat, receiving tracks and layers, and the

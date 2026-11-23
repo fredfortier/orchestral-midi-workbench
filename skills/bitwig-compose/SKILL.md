@@ -11,8 +11,9 @@ directly to its owning skill.
 
 | Requested result | Procedure |
 | --- | --- |
-| Admit and orchestrate a score, direct a performance through cues, or realize sung phrases | [Score and performance](references/score-and-performance.md), including the orchestration checklist for a new rendition |
-| Compose a part against the arrangement, audition and apply a repair, or extend the piece | [Compose and revise](references/compose-and-revise.md) |
+| Admit and orchestrate a score, propose or apply cue-led expression, or realize sung phrases | [Score and performance](references/score-and-performance.md), including the orchestration checklist for a new rendition |
+| Compose a part against the arrangement or extend the piece | [Compose and revise](references/compose-and-revise.md) |
+| Hear a passage, compare candidates, or audition and apply a repair | [Audition in context](references/audition.md) |
 | Analyze the current native performance | [Read back the arrangement](references/readback.md) |
 
 Start from the requested musical result and the intended saved project (or

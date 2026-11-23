@@ -17,6 +17,7 @@ workflow, not separate categories of tasks.
 | Inspect an instrument, exposed controls or the exact plug-in UI | [Instrument inspection](references/device-parameters.md) |
 | Inspect performance landmarks | [Cue markers](references/cue-markers.md) |
 | Seek, audition, Save, history, arranger visibility or configured actions | [Session actions](references/session-actions.md) |
+| Render a passage or selected Arranger channels for listening | [Audio export contract](references/audio-export.md) |
 | Project dialogs, focus or authorized legacy cleanup | [Computer recipes](references/keyboard-workflow.md) |
 
 Resolve names within actual native containment; retain returned `nativeId`
