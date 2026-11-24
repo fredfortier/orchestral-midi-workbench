@@ -9,6 +9,8 @@ source-preservation artifacts. Internal inputs are retained evidence; playback
 does not execute them or PERFORMANCE.md prose.
 
 ```sh
+"$score_converter" "$working_score" --inspect-rendition \
+  --policy "$policy" --output "$run/source-notes.json"
 "$score_converter" "$working_score" --to midi2 \
   --policy "$policy" --rendition-plan "$rendition_plan" \
   --output "$project/performance.midi2" \
@@ -39,10 +41,15 @@ does not supply a complete patch-bound rendition without its explicit plan.
   note channels can share a declared slot when its complete channel set admits
   them. Preserve original portable routes and use [assignment](../../kontakt-setup/references/assignment.md)
   for the native mapping.
-- Optional `passages` entries record `id`, `sourcePrefixes`, `track`,
+- For a new realization or full channel review, use `passages` entries with
+  `id`, `sourcePrefixes`, `track`,
   `instrument`, `expectedNotes` and `reason`. When supplied, they must cover
   every performed occurrence exactly once. Establish expected counts against the
   score before compiling.
+  Read `sourceDirections` from rendition inspection alongside notes and voices.
+  Resolve its relevant words in score context before finalizing the routing
+  rules. A local articulation tag can start a figure whose routing continues
+  after the last explicit mark.
 - Match each note to exactly one musical rule. Choose plain key velocity or
   a documented crossfade law. Each rule matches `sourcePrefix`,
   `articulation` and `descriptor`, then sets `route` and `dynamics`.
@@ -55,6 +62,15 @@ does not supply a complete patch-bound rendition without its explicit plan.
   must start at note onset and overlapping notes that share a channel must agree
   throughout the overlap. Keep sampled dynamics and expression separate.
 
+- Build rule selectors from `--inspect-rendition` on the same score and policy.
+  Use `sourceVoice` for distinct written voices on a stave. Specify any
+  reviewed note endings in `noteEdits` and any channel-1 curves in
+  `trackCcCurves` with their companion `controlRoutes`. Match the edited
+  occurrences and CC points against the decoded performance. For a fixed attack
+  with a separately planned track curve, use `fixedAttack` and its documented
+  velocity. Archive preview pan/volume and direction prose with
+  `archiveScorePreview` when the realization replaces the preview mix.
+
 The converter resolves supported score semantics and applies declared source-note
 rules to receiver routes/control laws. Fixed-attack + CC-dynamics adaptation occurs
 here, not during native import. Required initialized controllers and evolving
@@ -62,7 +78,10 @@ dynamic curves must use supported explicit rules. No universal CC1 meaning, gate
 breath, bow stroke or smoothing is inferred. The importer transfers encoded values.
 
 Compare PERFORMANCE.md's binding purposes, stock variants and native routing with
-the exact rendition inputs and emitted companion. Verify resource locations and declared versions,
+the exact rendition inputs and emitted companion. For every required effect, match
+the documented control, project entry value and musically justified passage
+anchors to the decoded MIDI. Check for omitted curves and intentional holds
+before native import. Verify resource locations and declared versions,
 route coverage, source-part provenance, repeated occurrences, performed timing,
 attack/release and remaining expression. Review independent passage assertions
 and all loss/unsupported diagnostics. Musical suitability and audible support require independent evidence. The companion's project name/parent determine

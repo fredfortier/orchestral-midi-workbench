@@ -41,6 +41,22 @@ fn xml_path(element: Node<'_, '_>) -> String {
     components.reverse();
     format!("/{}", components.join("/"))
 }
+
+/// Map exact lexical MusicXML note paths to their written voice.
+/// # Errors
+/// Returns a diagnostic for invalid XML.
+pub fn note_voices(source: &str) -> Result<BTreeMap<String, String>> {
+    Ok(document(source)?
+        .descendants()
+        .filter(|node| node.has_tag_name("note"))
+        .map(|note| {
+            (
+                xml_path(note),
+                text(note, "voice").unwrap_or("1").to_owned(),
+            )
+        })
+        .collect())
+}
 fn mute_slot(value: &str, piano: bool) -> Result<u8> {
     // M2-126 §8.3.12 is a piano muffler/sordino switch, not a mechanism
     // accepting brass mute identities. MusicXML's generic on/off/practice has
@@ -880,6 +896,8 @@ pub fn read(bytes: &[u8], policy: &RenderingPolicy) -> Result<(String, Performan
                                     || n.has_tag_name("footnote")
                             }) {
                                 if let Some(value) = remark.text().filter(|v| !v.is_empty()) {
+                                    out.report
+                                        .record(xml_path(remark), "written direction", value);
                                     for &target in &part_routes {
                                         measure.events.push(Event {
                                             order: 0,

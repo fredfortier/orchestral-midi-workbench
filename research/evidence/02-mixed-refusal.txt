@@ -1,0 +1,37 @@
+$ midi-bridge controller selection set --input research/tmp/mixed-request.json
+{
+  "action": "set",
+  "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+  "revision": "ea3f04b2-912a-4d1c-999b-29a152635a33",
+  "paths": [
+    {
+      "project": "Boundary Sketch",
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Sketch Instruments",
+          "nativeId": "393"
+        }
+      ]
+    },
+    {
+      "project": "Boundary Sketch",
+      "elements": [
+        {
+          "kind": "track",
+          "name": "Sketch Instruments",
+          "nativeId": "393"
+        },
+        {
+          "kind": "automationLane",
+          "name": "Ch. 1 Expression (#11) automation",
+          "nativeId": "3124"
+        }
+      ]
+    }
+  ],
+  "mode": "objects",
+  "range": null
+}
+Error: Error { code: InvalidRequest, outcome: NotDispatched, message: "java.lang.IllegalArgumentException: Unsupported object selection target; request ID cli-2184978-1795372258377661209; operation 2077948-1795364998268101873:operation:133" }
+Before/after complete selection JSON equal: true

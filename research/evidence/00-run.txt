@@ -1,0 +1,7 @@
+Version name: 6.1
+Revision no: 162652
+$ curl -fsS http://127.0.0.1:8789/v2/health
+{"adapters":["e7a32b0b-70b2-4059-9744-4d36032f7ba1"],"apiVersion":2,"wireVersion":74}
+$ ss -lunp (selected UDP endpoint lines)
+UNCONN 0      0          127.0.0.1:9000       0.0.0.0:*    users:(("osc",pid=2185568,fd=3))
+UNCONN 0      0                  *:8000             *:*    users:(("BitwigStudio",pid=2268669,fd=197))

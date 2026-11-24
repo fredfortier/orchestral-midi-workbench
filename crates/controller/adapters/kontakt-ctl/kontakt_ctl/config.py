@@ -57,7 +57,7 @@ class BatchResaveConfig(LaunchConfig):
 class LoadNkiConfig(LaunchConfig):
     file_menu_image: Path = Field(default=Path("assets/targets/file__menu.png"))
     load_dialog_title: str = Field(default="Load")
-    dialog_timeout_seconds: int = Field(default=30, ge=1)
+    dialog_timeout_seconds: int = Field(default=75, ge=1)
     load_timeout_seconds: int = Field(default=120, ge=1)
     load_poll_seconds: float = Field(default=1.0, gt=0.0)
     post_open_settle_seconds: float = Field(default=2.0, gt=0.0)

@@ -47,6 +47,29 @@ that do not help a performer decide what to do. Affective readings such as
 “supplication” need musical mechanisms—suspensions, independent counterpoint,
 harmonic instability—not unsupported psychological narration.
 
+## Evaluate a proposed expressive design
+
+For a substantial change to the arc, orchestral foreground or timbral character,
+consult the applicable lenses below. Read the cited section and connect its
+principle to the actual passage. Score-based planning may use this reference
+before native placement. Qualify occurrences as intended until native readback
+and use the skill's open-project procedure for live cue work.
+
+| Decision | Literature and criterion |
+| --- | --- |
+| Rank climaxes, sectional arrivals and final closure | Alan Belkin's [composition guide, “Climax”](https://alanbelkinmusic.com/fr/la-forme-musicale-elaboration-continuation-premiere-partie/) gives preparation, culmination and release as a model. His [“Orchestration and Form”](https://alanbelkinmusic.com/orchestration-basic-notions-pt-1/) considers the role of timbre, texture and accents in form. Identify what converges at each peak, such as harmony, register, density or rhythm. Specify what is reserved for the principal crest. Judge the closing cadence by its phrase and tonal function as well as its weight. |
+| Blend a doubling, expose a line or mark a boundary | McAdams, Goodchild and Soden's [orchestral grouping taxonomy, §§4–6](https://mtosmt.org/issues/mto.22.28.3/mto.22.28.3.mcadams.html) distinguishes blend, stream integration, foreground/background and segmentation. Identify which lines should fuse or remain traceable, when that role changes, and which aspect of attack, color, register or level could make it audible. |
+| Develop color across occurrences or sections | McAdams and Saariaho's [“Qualities and Functions of Musical Timbre,” §1](https://saariaho.org/media/pages/texts/cff8839886-1717024846/qualities-and-functions-of-musical-timbre.pdf) connects perceptible timbral contrast and recognizable transformation with musical form. For a modern reworking, Prévot's [study of Stravinsky's *Pulcinella*, “Orchestration et altération”](https://larevue.conservatoiredeparis.fr/index.php/news/docannexe/file/2517/lodel/index.php?id=1869) shows how orchestration can reframe inherited material. Name what stays recognizable, what changes at the return, and which formal event the new color should clarify. |
+
+Use the score and piece-specific scholarship to substantiate what happens and
+where. Use the general literature to justify why the proposed treatment fits.
+Record the resulting editorial choice and an audible criterion, such as following
+successive entries over a continuous accompaniment. Compare relevant peaks or
+recurrences in context. A density maximum alone does not establish a performance
+climax, and a named technique supplies no patch mapping or numeric target.
+
+## Piece-specific research example
+
 The request's RV 589 II sources are research leads, to inspect before reuse:
 
 - Michael Talbot, [Hyperion movement note](https://www.hyperion-records.co.uk/dw.asp?dc=W2906_66849): rhetorical/affective context.

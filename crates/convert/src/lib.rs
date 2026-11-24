@@ -63,7 +63,12 @@ fn render_score(
 ) -> Result<Conversion> {
     let (source, score) = xml::read(bytes, policy)?;
     let (score, provenance) = if let Some(plan) = plan {
-        let (adapted, provenance) = adapt::render(&score, plan)?;
+        let voices = if plan.rules.iter().any(|rule| rule.source_voice.is_some()) {
+            xml::note_voices(&source)?
+        } else {
+            std::collections::BTreeMap::new()
+        };
+        let (adapted, provenance) = adapt::render_with_voices(&score, plan, &voices)?;
         (adapted, Some(provenance))
     } else {
         (score, None)

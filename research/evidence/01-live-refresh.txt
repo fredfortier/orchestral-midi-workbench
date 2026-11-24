@@ -1,0 +1,11 @@
+$ crates/target/debug/osc send 127.0.0.1:8000 /refresh
+/update Int(1)
+/play Int(0)
+/project/name String("Boundary Sketch")
+/project/engine Int(1)
+/track/1/name String("Sketch Instruments")
+/track/1/position Int(0)
+/track/1/clip/1/hasContent Int(1)
+/track/1/clip/2/hasContent Int(1)
+/track/3/name String("Inst 3")
+/update Int(0)

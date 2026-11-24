@@ -1,11 +1,11 @@
 ---
 name: bitwig-explore
-description: Locate and select Bitwig tracks, clips, automation lanes, devices and slots; inspect musical content, instruments and cues; compose native selection with supporting computer recipes. Musical edits and instrument setup retain their owning skills.
+description: Locate and select Bitwig tracks, clips, automation lanes, devices and slots; inspect musical content, instruments and cues; seek, reveal and audition resolved passages through qualified session actions. Musical edits and instrument setup retain their owning skills.
 ---
 
 # Explore and navigate Bitwig
 
-Follow [the shared workflow](../WORKFLOW.md). Choose a reference by the user's
+Choose a reference by the user's
 intended work; **CONTROLLER** and **COMPUTER** mark execution steps within that
 workflow, not separate categories of tasks.
 
@@ -16,7 +16,9 @@ workflow, not separate categories of tasks.
 | Understand automation, its owners and coordinates | [Automation](references/automation-queries.md) |
 | Inspect an instrument, exposed controls or the exact plug-in UI | [Instrument inspection](references/device-parameters.md) |
 | Inspect performance landmarks | [Cue markers](references/cue-markers.md) |
-| Save, rename, navigate panels or perform authorized cleanup | [Supporting project actions](references/keyboard-workflow.md) |
+| Seek, audition, Save, history, arranger visibility or configured actions | [Session actions](references/session-actions.md) |
+| Render a passage or selected Arranger channels for listening | [Audio export contract](references/audio-export.md) |
+| Project dialogs, focus or authorized legacy cleanup | [Computer recipes](references/keyboard-workflow.md) |
 
 Resolve names within actual native containment; retain returned `nativeId`
 discriminators for duplicate siblings. A displayed lane index locates a row in
@@ -25,11 +27,11 @@ the relevant owners, then read complete musical content and analyze locally.
 Structural and selection reads contain no notes, points or plug-in parameters.
 Parameter discovery is explicit through `controller automation read`.
 
-For an explicit-path operation, selection is unnecessary. For surrounding UI
-work, read context → **CONTROLLER** select exact paths → **COMPUTER** establish
-the recipe's panel focus and invoke its named action → **CONTROLLER** reread.
-Track headers, clip objects and automation time ranges are distinct native states.
-Never infer keyboard focus from native selection.
+Find the exact object and its arranger geometry once. Seek with the returned
+beat, select with the returned native path, and show or focus the relevant
+panel only when the request or next action needs it. Explicit-path reads need
+no selection. Track headers, clip objects and automation time ranges are
+distinct native states. Check editor and membership separately.
 
 For musical edits, pass resolved paths and complete content to
 [bitwig-edit](../bitwig-edit/SKILL.md): read → construct change → replace →

@@ -15,7 +15,7 @@ Read the [controller architecture](../../../crates/controller/ARCHITECTURE.md) f
 intended authority/data boundaries and [historical qualification](../../../docs/adrs/controller-native-authority.md)
 for build-specific evidence. [Probe inventory](../../../crates/controller/probes/README.md)
 and retained qualifications establish only their original host/fixture scope.
-For ordinary musical tasks use [the focused workflow](../../WORKFLOW.md).
+For ordinary musical tasks use [the focused workflow](../../bitwig-compose/SKILL.md).
 This skill does not authorize native mutation or an implementation change by itself.
 Start new integration work with [the Java harness conventions](references/java-harness.md).
 

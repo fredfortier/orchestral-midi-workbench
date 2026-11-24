@@ -5,7 +5,7 @@ description: Initialize an installed Kontakt library with verified one-time batc
 
 # Instrument intake
 
-Follow [the shared workflow](../WORKFLOW.md). Produce INSTRUMENT.md at the
+Produce INSTRUMENT.md at the
 requested sample-library root, usable by realization and setup. A library is the
 documentation unit; a patch is an entry, not automatically its own document.
 
@@ -51,20 +51,32 @@ does not change a patch's identity when its relative path is unchanged.
    For covered Syllabuilder patches, follow [document syllables](../kontakt-syllable-builder/references/document-syllables.md),
    merge each exact patch's vocabulary and sequencing evidence into INSTRUMENT.md,
    then resume here. This documentation route does not load or customize patches.
-4. Complete the template's **Conventional MIDI control map** before a covered
-   patch is handed to another skill. Review the manual's controller chart, dynamics,
-   expression, vibrato and pitch sections, then resolve exact-patch exceptions.
+4. Read the applicable manual's actual relevant pages and actively hunt for
+   stock standard MIDI assignments. Check the controller chart, the exact
+   articulation's playing instructions, and the sections on dynamics,
+   expression, volume, vibrato, pedals and pitch. Follow references to the
+   vendor's engine guide or in-patch manual and check which engine, patch and
+   mode each statement covers. Record the sources and sections checked for any
+   unresolved control. Complete the **Conventional MIDI control map** in
+   INSTRUMENT.md before handing it to the caller.
    Include explicit rows for CC1 (MW), CC2 (BC), CC11 (XP), pitch bend and velocity,
    plus every documented pedal, switch and other required MIDI control. Classify
    each as documented-supported, documented-unsupported, or unknown; an absent
    manual entry is unknown. Record exact patch scope, stock assignment, musical
    effect, range/units, default/reset, conditions and manual revision/page/section.
+   Record stock dynamics and expression baselines separately. Include documented
+   load/reset values, neutral or unity level if specified, and the value or
+   behavior before the first controller message. Label observed baselines with
+   the patch, mode and method. Mark unpublished or unobserved values unknown.
+   Project entry values belong in PERFORMANCE.md.
    Distinguish assignable/learned controls from stock defaults. Pitch bend needs
    center, range and bend sensitivity when documented; it is not a CC. Separate
    vendor facts from observed settings and project policy. Do not discover device
    macros/knobs unless explicitly requested for controls beyond conventional MIDI.
-   Return table coverage and unresolved controls to callers. Missing/stale mappings
-   trigger documentation-only intake, never a resave or speculative live mapping.
+   Return the exact control map, baselines and unresolved effects to the caller.
+   Required effects with an unknown control function remain unresolved even if
+   every table row is filled. Missing/stale mappings trigger documentation-only
+   intake, never a resave or speculative live mapping.
    Record material usage details: ensemble/solo identity, articulation, playing
    range and transposition, dynamic crossfade versus attack velocity, expression,
    keyswitches, legato triggering/overlap, release behavior, pedals, scripted

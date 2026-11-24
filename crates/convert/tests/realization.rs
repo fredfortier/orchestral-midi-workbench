@@ -76,6 +76,51 @@ fn source() -> Performance {
 }
 
 #[test]
+fn compiled_gates_and_shared_ccs_preserve_the_note_routes() {
+    let mut input = serde_json::to_value(plan()).unwrap();
+    let shared = json!({"group":1,"channel":0});
+    input["rendition"]["controlRoutes"] = json!([{"track":"strings","route":shared}]);
+    input["trackCcCurves"] = json!([{"route":shared,"controller":11,"points":[
+        {"time":[0,1],"value":123_456}, {"time":[1,1],"value":345_678}
+    ]}]);
+    input["noteEdits"] = json!([{"source":"short/1","onset":[0,1],"key":60,"end":[3,4]}]);
+    let reviewed: Plan = serde_json::from_value(input.clone()).unwrap();
+    let (result, _) = adapt::render(&source(), &reviewed).unwrap();
+    let (bytes, dictionary, _) = clip::encode(&result).unwrap();
+    let decoded = clip::decode(&bytes, Some(&dictionary)).unwrap();
+    reviewed.rendition.validate_performance(&decoded).unwrap();
+    assert_eq!(decoded.notes[0].end, Rational::new(3, 4));
+    assert_eq!(
+        decoded.notes[0].route,
+        Route {
+            group: 0,
+            channel: 0
+        }
+    );
+    for (beat, value) in [(0, 123_456), (1, 345_678)] {
+        let expected = musicxml_midi2_convert::wire::cc(
+            Route {
+                group: 1,
+                channel: 0,
+            },
+            11,
+            value,
+        );
+        assert!(
+            decoded
+                .configuration
+                .iter()
+                .chain(&decoded.events)
+                .any(|event| {
+                    event.time == Rational::from_integer(beat) && event.words == expected
+                })
+        );
+    }
+    input["noteEdits"][0]["source"] = json!("stale");
+    assert!(adapt::render(&source(), &serde_json::from_value(input).unwrap()).is_err());
+}
+
+#[test]
 fn reviewed_passages_and_curve_samples_survive_encoding_without_duplicate_envelopes() {
     let input = source();
     let (rendered, original) = adapt::render(&input, &plan()).unwrap();

@@ -1,0 +1,55 @@
+{
+  "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+  "clips": [
+    {
+      "id": "4895",
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Inst 3",
+            "nativeId": "2720"
+          },
+          {
+            "kind": "clip",
+            "name": "3",
+            "nativeId": "4895"
+          }
+        ]
+      },
+      "start": 8.0,
+      "duration": 1.9139995574951172,
+      "sourceStart": 0.0,
+      "sourceEnd": 1.9139995574951172,
+      "loopEnabled": false,
+      "notes": [
+        {
+          "id": "4910",
+          "key": 60,
+          "channel": 0,
+          "start": 0.3544445037841797,
+          "duration": 0.3544445037841797,
+          "velocity": 0.7559055089950562
+        },
+        {
+          "id": "4926",
+          "key": 64,
+          "channel": 0,
+          "start": 0.8506669998168945,
+          "duration": 0.3544445037841797,
+          "velocity": 0.7559055089950562
+        },
+        {
+          "id": "4944",
+          "key": 67,
+          "channel": 0,
+          "start": 1.346888542175293,
+          "duration": 0.3544445037841797,
+          "velocity": 0.7559055089950562
+        }
+      ]
+    }
+  ],
+  "automation": []
+}

@@ -8,6 +8,11 @@ realization/bindings, configuration verification and user commentary. Existing
 cue-only files may be extended without discarding their decisions. A prose review
 does not imply DAW changes.
 
+For a material cue change, pass the stable key if one exists, the musical event
+and performed occurrence, affected lines and their roles, the chosen treatment
+with its evidence, and the audible result to compare. Carry this in the
+requested proposal or in the existing interpretation sections.
+
 ```markdown
 ## Interpretation and cue map
 

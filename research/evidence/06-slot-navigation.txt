@@ -1,0 +1,11 @@
+Baseline selection and launcher read
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"ea3f04b2-912a-4d1c-999b-29a152635a33","editor":"detailEditor","members":[],"primary":null,"mode":"objects","range":null,"unsupportedMembers":["0"],"unsupportedPrimary":"0"}
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"8d77bafe-15bb-41f8-952d-a30a7bf7f686","position":null}
+$ osc send 127.0.0.1:8000 /track/3/clip/1/select
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"ea3f04b2-912a-4d1c-999b-29a152635a33","editor":"detailEditor","members":[],"primary":null,"mode":"objects","range":null,"unsupportedMembers":["0"],"unsupportedPrimary":"0"}
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"8d77bafe-15bb-41f8-952d-a30a7bf7f686","position":null}
+$ midi-bridge controller selection set --input research/tmp/06-track-selection.json
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"7a91fb2d-edcd-42a6-bc77-94ecadcdeb69","editor":"detailEditor","members":[{"project":"Boundary Sketch","elements":[{"kind":"track","name":"Inst 3","nativeId":"2720"}]}],"primary":{"project":"Boundary Sketch","elements":[{"kind":"track","name":"Inst 3","nativeId":"2720"}]},"mode":"objects","range":null,"unsupportedMembers":[]}
+$ osc send 127.0.0.1:8000 /track/3/clip/2/select
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"7a91fb2d-edcd-42a6-bc77-94ecadcdeb69","editor":"detailEditor","members":[{"project":"Boundary Sketch","elements":[{"kind":"track","name":"Inst 3","nativeId":"2720"}]}],"primary":{"project":"Boundary Sketch","elements":[{"kind":"track","name":"Inst 3","nativeId":"2720"}]},"mode":"objects","range":null,"unsupportedMembers":[]}
+{"document":"5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430","revision":"8d77bafe-15bb-41f8-952d-a30a7bf7f686","position":null}

@@ -36,6 +36,8 @@ Event       = {time, order, words: UMP u32[]}
 - [`xml.rs`](src/xml.rs) owns score parsing, written cursors and finite performed
   occurrence identity. Source paths identify absolute same-name sibling indices
   (1-based), optional attributes and repeat occurrences. They are identifiers.
+  Rendition inspection exposes written directions with their lexical source
+  paths for the review of continuation spans and shared staves.
 - [`rules.rs`](src/rules.rs) owns articulation choices.
   [`extension.rs`](src/extension.rs) owns named descriptors and dictionary rules.
   [`clip.rs`](src/clip.rs) and [`wire.rs`](src/wire.rs) own allocation, clock,
@@ -379,7 +381,8 @@ NoteSource   = source identity/route, source_velocity?, encoded route, onset/end
 ### Reviewed passages and dynamic curves
 
 - [`adapt::Plan`](src/adapt.rs) carries `rendition`, `rules`, optional
-  `initialControllers` and `passages`. The plan is reviewed conversion input.
+  `initialControllers`, `passages`, exact `noteEdits` and `trackCcCurves`.
+  The plan is reviewed conversion input.
   The executable delivery is the MIDI and companion.
 - Reviewed passages carry `id, sourcePrefixes, track, instrument, expectedNotes,
   reason`. Present nonempty assertions partition performed notes exactly once
@@ -387,14 +390,15 @@ NoteSource   = source identity/route, source_velocity?, encoded route, onset/end
   unused, unknown, overlapping or contradictory assertions. Cap passages and
   total prefixes at 4096 each. Omission preserves older plans without review
   evidence.
-- Each interpreted note must match exactly one rule by source prefix, complete
-  articulation and descriptor. A rule chooses an already bound encoded route
-  and either `keyVelocity` or `crossfade`. Every rule on a route shares the
+- Each interpreted note must match exactly one rule by source prefix, optional
+  lexical `sourceVoice`, complete articulation and descriptor. A rule chooses
+  an already bound encoded route and `keyVelocity`, `fixedAttack` or `crossfade`.
+  Every rule on a route shares the
   control law. Crossfade declares a CC, fixed u16 key velocity, source law
   and optional independent expression default. `requireDynamic` requires an
   explicit level or admitted curve. `dynamicOrVelocity16` falls back to
   `attackVelocity16 * 65537` by project policy. Preserve unconsumed facets,
-  note timing and release. Initialize controls at beat zero and write changes
+  note onsets and release velocity. Initialize controls at beat zero and write changes
   before attacks. Reject any unplanned route introduced by allocation.
 - `channelHold` opts into explicit relative dynamic curves. Their first point
   is zero-offset and offsets strictly increase within the note lifetime.
@@ -411,6 +415,13 @@ NoteSource   = source identity/route, source_velocity?, encoded route, onset/end
   a patch's meaning. Unassociated timed channel events and unsupported
   Piano adaptation fail explicitly. Initial program/name assignment changes
   retain original source provenance.
+- Explicit note endings select one performed source ID, onset and key; preserve
+  onset, pitch and release velocity. `rendition.controlRoutes` designates each
+  track's shared channel-1 CC address separately from note bindings. Curve
+  points are increasing, in-range rational beats, starting at zero with literal
+  u32 values. Destination CC0–119 uses normal MIDI CC events. Retain the score
+  preview mix and performance prose in source when `archiveScorePreview` is
+  selected. Unrelated executable channel messages still require a disposition.
 
 ## Portable arrangement grammar
 

@@ -1,0 +1,187 @@
+{
+  "document": "5d7e4a9e-fbc8-41e2-8d22-4f4f1820b430",
+  "clips": [
+    {
+      "id": "2485",
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Sketch Instruments",
+            "nativeId": "393"
+          },
+          {
+            "kind": "launcherClip",
+            "name": "S1",
+            "scene": 0,
+            "nativeId": "2485"
+          }
+        ]
+      },
+      "start": 0.0,
+      "duration": 4.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 4.0,
+      "loopEnabled": true,
+      "loopLength": 4.0,
+      "notes": [
+        {
+          "id": "2924",
+          "key": 67,
+          "channel": 1,
+          "start": 0.0,
+          "duration": 0.5,
+          "velocity": 0.75
+        },
+        {
+          "id": "2928",
+          "key": 64,
+          "channel": 1,
+          "start": 1.0,
+          "duration": 0.5,
+          "velocity": 0.625
+        },
+        {
+          "id": "2932",
+          "key": 60,
+          "channel": 1,
+          "start": 2.0,
+          "duration": 1.5,
+          "velocity": 0.5
+        }
+      ]
+    },
+    {
+      "id": "2551",
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Sketch Instruments",
+            "nativeId": "393"
+          },
+          {
+            "kind": "clip",
+            "name": "1",
+            "nativeId": "2551"
+          }
+        ]
+      },
+      "start": 0.0,
+      "duration": 4.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 4.0,
+      "loopEnabled": false,
+      "loopLength": 4.0,
+      "notes": [
+        {
+          "id": "2935",
+          "key": 60,
+          "channel": 1,
+          "start": 0.0,
+          "duration": 0.5,
+          "velocity": 0.625
+        },
+        {
+          "id": "2938",
+          "key": 63,
+          "channel": 1,
+          "start": 1.0,
+          "duration": 0.5,
+          "velocity": 0.6875
+        },
+        {
+          "id": "2941",
+          "key": 67,
+          "channel": 1,
+          "start": 2.0,
+          "duration": 1.5,
+          "velocity": 0.75
+        }
+      ]
+    },
+    {
+      "id": "4398",
+      "path": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Sketch Instruments",
+            "nativeId": "393"
+          },
+          {
+            "kind": "launcherClip",
+            "name": "S2",
+            "scene": 1,
+            "nativeId": "4398"
+          }
+        ]
+      },
+      "start": 0.0,
+      "duration": 4.0,
+      "sourceStart": 0.0,
+      "sourceEnd": 4.0,
+      "loopEnabled": true,
+      "loopLength": 4.0,
+      "notes": []
+    }
+  ],
+  "automation": [
+    {
+      "owner": {
+        "project": "Boundary Sketch",
+        "elements": [
+          {
+            "kind": "track",
+            "name": "Sketch Instruments",
+            "nativeId": "393"
+          }
+        ]
+      },
+      "lane": "3124",
+      "placement": "arranger",
+      "target": {
+        "channel": 0,
+        "controller": 11,
+        "domain": "LINEAR",
+        "fallbackValue": 0.0,
+        "kind": "midiCc",
+        "max": 1.0,
+        "min": 0.0,
+        "name": "Ch. 1 Expression (#11)",
+        "nativeParameterId": "3121",
+        "pointType": "continuous",
+        "unit": "MIDI128"
+      },
+      "points": [
+        {
+          "id": "3149",
+          "time": 0.0,
+          "value": 0.5,
+          "interpolation": "LINEAR",
+          "curvature": 0.0,
+          "spread": 0.0
+        },
+        {
+          "id": "3150",
+          "time": 2.0,
+          "value": 0.75,
+          "interpolation": "LINEAR",
+          "curvature": 0.0,
+          "spread": 0.0
+        },
+        {
+          "id": "3151",
+          "time": 3.5,
+          "value": 0.5,
+          "interpolation": "LINEAR",
+          "curvature": 0.0,
+          "spread": 0.0
+        }
+      ]
+    }
+  ]
+}

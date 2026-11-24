@@ -1,0 +1,26 @@
+$ osc send 127.0.0.1:8000 /refresh
+/play Int(0)
+/record Int(0)
+/repeat Int(0)
+/punchIn Int(0)
+/punchOut Int(0)
+/beat/str String("3.03.01:22")
+/project/name String("Boundary Sketch")
+/project/engine Int(1)
+/track/1/name String("Sketch Instruments")
+/track/1/recarm Int(0)
+/track/2/name String("Audio 2")
+/track/2/recarm Int(0)
+/track/3/name String("Inst 3")
+/track/3/recarm Int(1)
+/track/4/recarm Int(0)
+/track/5/recarm Int(0)
+/track/6/recarm Int(0)
+/track/7/recarm Int(0)
+/track/8/recarm Int(0)
+$ osc send 127.0.0.1:8000 /track/3/select i:1
+Track 2720 before: []
+$ osc send 127.0.0.1:8000 /eq/add
+Track 2720 after first add: [{"id": "4990", "name": "EQ+"}]
+$ osc send 127.0.0.1:8000 /eq/add
+Track 2720 after second add: [{"id": "4990", "name": "EQ+"}, {"id": "7254", "name": "EQ+"}]

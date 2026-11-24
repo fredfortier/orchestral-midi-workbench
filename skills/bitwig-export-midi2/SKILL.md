@@ -5,7 +5,7 @@ description: Capture an active Bitwig project or track group, interpret its musi
 
 # Export Bitwig musical content
 
-Use the [shared workflow](../WORKFLOW.md), the configured `midi-bridge` service
+Use the configured `midi-bridge` service
 and the installed musical converter. Set `score_converter` to its exact
 executable path. Export is read-only. Make interpretation edits in a JSON copy.
 

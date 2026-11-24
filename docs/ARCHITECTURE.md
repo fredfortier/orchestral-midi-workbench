@@ -49,3 +49,5 @@ Kontakt loader for an exact patch assignment when required.
   Its contract also governs execution in the Java adapter.
 - [Kontakt loader](../crates/controller/adapters/kontakt-ctl/ARCHITECTURE.md)
   owns exact NKI submission and confirmation within a controller-qualified editor.
+- [OSC](../crates/osc/README.md) supplies wire helpers for the controller
+  service's optional DrivenByMoss command and feedback socket.

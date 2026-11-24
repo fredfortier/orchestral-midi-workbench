@@ -5,13 +5,20 @@ description: Edit native Bitwig notes, channels, per-note expression and stored 
 
 # Edit native musical content
 
-Follow [the shared workflow](../WORKFLOW.md). An edit request authorizes its stated
+An edit request authorizes its stated
 musical change. Establish intended owners and preservation properties; keep work
 bounded to that request. Use [bitwig-explore](../bitwig-explore/SKILL.md) to resolve
 scope when needed. An open project is not a disposable history/random-edit fixture.
 
 Default to the arranger. When the request or current edit context identifies
 the launcher, use the [launcher recipe](references/common-edits.md#launcher-clips).
+
+For instrument automation, check the vendor manual for the exact instrument
+and consult its `INSTRUMENT.md` when available. Verify the loaded preset's
+mapping and prefer a native MIDI CC lane whenever it delivers the requested
+effect. Otherwise use an existing, exposed instrument macro through the Bitwig
+controller. Use computer interaction with a VST editor only when the user
+explicitly requests it. [Automation procedure](references/automation-edits.md)
 
 | Change | Read |
 | --- | --- |
@@ -25,9 +32,8 @@ the launcher, use the [launcher recipe](references/common-edits.md#launcher-clip
 resolve owners -> settle requested change (PERFORMANCE.md when in use)
  -> read complete selected clips OR resolve named paths and read complete clips
  -> notes / existing curve: inspect and edit that complete snapshot
- -> arranger MIDI control: read INSTRUMENT.md control table -> resolve track/channel
-    -> create/edit track MIDI lane (no sender device or automation clip)
- -> explicit beyond-MIDI device request: discover parameters/Remote Controls
+ -> instrument automation: manual + live mapping -> native MIDI CC when supported
+    -> otherwise discover and automate an existing instrument macro via controller
  -> replace once -> independent complete readback
  -> preservation check -> save when requested -> STOP
 ```
@@ -45,28 +51,24 @@ Structural reads and available-parameter discovery do not contain the stored
 curves; the complete clip observation does. Filtering is local analysis: retain
 the complete snapshot as the edit base and preserve every unrequested domain.
 For a complete notes+automation replacement, read [complete clip replacement](references/clip-replacement.md).
-For a supporting window/project/history action, read the directly routed
-[native keyboard workflow](../bitwig-explore/references/keyboard-workflow.md).
-The CLI owns musical CRUD; supporting keyboard actions must not compensate for
-missing or failed CRUD. Preserve loops, source ownership, unrequested notes,
+For surrounding actions, use the
+[shared session procedure](../bitwig-explore/references/session-actions.md).
+Stored musical changes remain on the native editing route. Preserve loops, source ownership, unrequested notes,
 expression, points and folder metadata. Refuse unsupported shared-source isolation.
 
 On partial/unknown results, retain intent/receipts and reobserve before another
 write. Never replay automatically or issue speculative Undo. Use a supported
-history command only when actually available and explicitly requested; ordinary
-public history control is outside this MVP. Native transaction/rollback mechanics
+qualified history action only when the adjacent history entry is established
+and the request authorizes it. Native transaction/rollback mechanics
 remain the adapter's responsibility and do not guarantee a safe user Undo target.
 
 Finish with requested/eligible/already-correct/applied counts by owner, independent
 readback and preservation status. If project content diverges from its generated
 bundle, record the edit in project revision notes when that workflow is in use;
 future reimport must reconcile it. Do not claim automatic score reconstruction.
-Required receiver setup is a dependency, not the end of an expression task.
-Read documented mappings from instrument-intake; missing facts return through its
-documentation-only branch. Keep matching loaded patches. A MIDI automation task
-does not require sender insertion or device-knob discovery. Verify shared-channel
-delivery through the standard Filter/Map chain. Return failed delivery to setup
-and preserve the original curves.
+Keep loaded patches. Verify MIDI delivery through the actual receiver route,
+including Filter/Map where present. If routing fails, preserve the existing
+curves and report the dependency.
 
 This skill does not itself load patches, revise orchestration, create cue interpretations,
 or promise general clip split/move/delete capabilities absent from the CLI.

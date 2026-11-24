@@ -11,9 +11,8 @@ receiver behavior, historical correctness or artistic quality.
 
 ## Acquire → load → select → report
 
-1. **Acquire current evidence.** For the active Bitwig piece/group, open
-   `~/.agents/skills/bitwig-export-midi2/SKILL.md`
-   ([repository equivalent](../bitwig-export-midi2/SKILL.md)). Invoke its capture,
+1. **Acquire current evidence.** For the active Bitwig piece/group, use
+   [MIDI2 export](../bitwig-export-midi2/SKILL.md). Invoke its capture,
    interpretation, MIDI2 admission and MXL steps for the requested scope; return
    here with the fresh MXL, assembly/notation reports and editorial capture path.
    Carry forward user exclusions and established interpretations. Do not assume an

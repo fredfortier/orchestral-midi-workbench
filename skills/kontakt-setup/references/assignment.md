@@ -25,6 +25,10 @@ midi-bridge controller instrument assign --target slot.json --operation "$assign
 midi-bridge controller instrument read --target slot.json
 ```
 
+After Layer ensure, use `.result.observation.target` from its receipt as
+`container.json` for slot ensure. Layer ensure can rename a default track. Reapplying its old path
+can target stale authority.
+
 Slot ensure targets a container to find/create the required name, or an exact
 existing slot to rename/update it. Repeated `--input-channel` flags replace the
 complete note admission set. Each call applies All → Same, stock Channel Filter
@@ -43,7 +47,9 @@ wherever in the slot chain, or inserts Kontakt at the end when no instrument
 exists. Multiple instruments refuse. Omit `--load-patch` and the loader runtime/
 output options to preserve the current patch and configuration. An explicit patch
 uses the integrated loader; never load merely to verify an existing configuration.
-Use the slot path returned by ensure, refreshing native handles after reopening.
+Use the slot path in `.result.observation.target` from ensure for assignment.
+A separate instrument read returns routing at `.result.slot`. Refresh native
+handles after reopening.
 Conventional controls use native track-level MIDI automation; missing patch facts
 return to intake. Setup returns curve edits to bitwig-edit.
 
@@ -53,18 +59,21 @@ The service performs a fresh full target read before mutation and validates nati
 readback. Runtime must belong to the admitted Bitwig PID/display/Wine prefix.
 
 No selection helper, first-title window match, screenshot parsing, empty-player
-insertion, alternate loader or manual intervention is part of this flow. The
-controller qualifies the exact editor through native visibility and Win32 window
-identity before sending NKI input. The external loader only loads that exact NKI.
+insertion, alternate loader or manual intervention is part of this flow.
+Bitwig opens Kontakt automatically on insertion. The controller identifies that
+editor from its appearance in the Win32 inventory and loads the NKI directly
+into it. For an existing hidden receiver, it opens the editor once before
+loading. An existing visible editor whose handle cannot be established is left
+open and the load is refused. The external loader only loads the exact NKI.
 The relative NKI beneath INSTRUMENTS_ROOT_DIR remains the musical patch identity.
 
 For an authorized Syllabuilder caller, append `--keep-editor-open` to that same
 integrated `instrument assign` command. Require `editorKeptOpen: true`, confirmed
-load and exact owned-window/native visibility evidence; return the active editor
+load and exact owned-window evidence; return the active editor
 and settled binding to kontakt-syllable-builder. Do not run the loader separately.
 Default assignment still closes the editor.
 
-For a completed-insertion ownership failure or retained initial-render preflight
+For a completed-insertion ownership, render or owned-dialog preflight
 failure conclusively proving no NKI submission, retain `instrument status --operation ID` as a fresh JSON receipt.
 Once the intended editor is available, the same integrated `assign` accepts `--resume-before-load
 STATUS_JSON` with the original target and settled NKI, fresh operation/output and

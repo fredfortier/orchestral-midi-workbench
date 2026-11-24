@@ -155,7 +155,7 @@ def run_load_nki(
         raise NkiNotSubmitted(str(error)) from error
     try:
         replaced_previous_instrument = prepare_empty_rack(render_window, config)
-        before_image = capture_window_image(render_window)
+        before_image = wait_for_window_render(render_window, config)
     except (RuntimeError, OSError) as error:
         raise NkiNotSubmitted(str(error)) from error
     navigator_before = crop_navigator_region(before_image, config)
@@ -163,10 +163,15 @@ def run_load_nki(
     sample_root = host_path.parent
     if any(w.title == "Content Missing" for w in gw.getAllWindows()):
         raise RuntimeError("Existing Content Missing transaction requires authenticated controller recovery")
-    open_headless_load_dialog(render_window, config)
-    dialog = wait_for_owned_dialog(kontakt_window, config)
-    edit_hwnd, open_button_hwnd = locate_open_dialog_controls(dialog._hWnd)
-    if get_window_process_id(kontakt_window)!=owner_pid or not user32.IsWindowVisible(owner_window):raise RuntimeError("Editor ownership changed before submission")
+    try:
+        open_headless_load_dialog(render_window, config)
+        dialog = wait_for_owned_dialog(kontakt_window, config)
+        edit_hwnd, open_button_hwnd = locate_open_dialog_controls(dialog._hWnd)
+        if (get_window_process_id(kontakt_window) != owner_pid
+                or not user32.IsWindowVisible(owner_window)):
+            raise RuntimeError("Editor ownership changed before submission")
+    except (RuntimeError, OSError) as error:
+        raise NkiNotSubmitted(str(error)) from error
     set_dialog_text(edit_hwnd, str(target_path))
     time.sleep(config.post_open_settle_seconds)
     click_button(open_button_hwnd)

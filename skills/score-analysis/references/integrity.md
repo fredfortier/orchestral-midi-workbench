@@ -25,20 +25,16 @@ also defeat blanket “bar duration must equal meter” assertions. Locate the e
 then compare native capture and notation decisions before attributing a defect.
 A missing key signature is missing metadata, not proof of C major.
 
-For a requested complete export audit, reuse the existing example rather than
-inventing a comparator. This is the durable-script exception to ephemeral analysis:
-
-```sh
-uv run --no-project ../../examples/music21_analysis.py /absolute/path/score.mxl --capture /absolute/path/interpreted.json --output /absolute/path/analysis.json
-```
-
-Run that command from this skill directory (`crates/skills/score-analysis`);
-from `crates/`, use `examples/music21_analysis.py`. `--capture` must be the exact
-editorial assembly input, not an arbitrary later capture. Add `--reference SOURCE`
-and repeat `--reference-part 'Exported name=Source name'` for explicit aliases.
-Duplicate source names require resolution; a realized continuo is not automatically
-identical to a source piano reduction. Read the script's exit status and audit
-fields; its default extra harmonic report is not a complete functional analysis.
+For a complete export audit, use the exact editorial assembly input with the
+reconstructed score. Count native sounding occurrences per part and pitch,
+applying their clip windows, loops, mute state and declared reset commands.
+In the score, expand chord pitches and join contiguous sounding ties within
+each voice. Compare the ordered onset and release pairs for each part and
+pitch within the documented quantization and notation tolerance. When a
+part has multiple voices, check the stored pitch-level tie starts and stops
+if whole-part `stripTies()` leaves continuations behind. Keep simultaneous
+same-pitch attacks in distinct voices. Use explicit aliases for a comparison
+with a source edition and resolve duplicate names before matching parts.
 
 Compare pitches and attacks first, then endpoints within the declared export
 quantization/notation tolerance. Distinguish wrong conversion, current DAW edits,

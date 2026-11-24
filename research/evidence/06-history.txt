@@ -1,0 +1,10 @@
+$ midi-bridge controller midi replace --expected <fresh before> --input <one-note patch>
+true
+$ osc send 127.0.0.1:8000 /undo
+true
+$ osc send 127.0.0.1:8000 /redo
+true
+[[60,64,67],["4895"]]
+[[60,65,67],["4895"]]
+[[60,64,67],["4895"]]
+[[60,65,67],["4895"]]

@@ -63,9 +63,9 @@ retain patch-specific row/column geometry only in case evidence.
    separately from musical notes and reconcile future bundle reimport.
 7. Close the configured Kontakt editor through its owning Bitwig plug-in window
    control; verify that exact editor is absent before moving to another receiver.
-   Preserve the loaded instrument and its configuration. Save through the qualified
-   native workflow. Verify phrase state after an
-   authorized reopen before claiming persistence. Audition/export representative
+   Preserve the loaded instrument and its configuration. If Save is in scope,
+   verify the project file write through the qualified native workflow. Keep the
+   active project open for readback. Audition/export representative
    entries, a melisma, repetition and rest/restart before claiming synchronized
    singing; check every occurrence structurally. Mid-phrase seeking/loops remain
    unsupported until a verified chase strategy restores their required history.

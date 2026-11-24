@@ -66,7 +66,8 @@ selected track header; a selected lane does not imply a point/time selection.
 Unknown outcomes require readback before further action.
 
 The reported editor may remain `none` while a clip or time range is inspected;
-that is a separate native fact, not missing membership. Set finishes after native
-mode/focus reconciliation. Establish the recipe's real panel focus through
-**COMPUTER**, then reread before its keyboard action. Time selection can move the
+which is separate from membership. Set finishes after native mode/focus
+reconciliation. If the next action requires Arranger focus, use the
+[qualified focus action](session-actions.md#qualified-configured-profile)
+and reread. A keyboard recipe can require its own actual focus check. Time selection can move the
 playback cursor to its start; disclose that side effect when preserving context.

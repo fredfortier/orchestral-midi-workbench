@@ -1,7 +1,7 @@
 # Intake design rationale and evidence
 
 Authoring-only rationale. [SKILL.md](SKILL.md) owns intake execution and routes
-supporting UI actions to the native keyboard reference.
+supporting actions to the computer and session action references.
 
 Opaque source preservation was separated from musical interpretation so intake can
 establish a workspace without implying that an accepted file format is supported

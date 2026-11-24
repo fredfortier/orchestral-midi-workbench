@@ -7,8 +7,8 @@ historical qualification cannot relax this contract.
 
 Bitwig owns the project, hierarchy, selection, notes, expression, automation and
 Undo. Controller provides lightweight discovery, exact native targeting and
-complete musical reads/replacement. Skills compose those primitives with named
-keyboard/computer recipes. Native mixing, audio export and MIDI2 interpretation
+complete musical reads/replacement. Skills compose those primitives with
+qualified OSC session actions and computer recipes. Native mixing, audio export and MIDI2 interpretation
 are bounded operations owned here.
 
 Retain one correlated JSON request/response envelope and qualified Path model.
@@ -38,6 +38,17 @@ CLI -> loopback HTTP -> Rust service <== native TCP ==> Bitwig Java extension
 - [`EditorSession`](adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/EditorSession.java)
   connects the extension. The harness packages separately armed disposable
   probes. Probe commands and the filesystem mailbox stay in the harness.
+
+## OSC session actions
+
+The bridge can own one loopback UDP command and feedback socket for the local
+DrivenByMoss extension. Its separate HTTP route submits raw OSC addresses and
+typed arguments without changing the adapter wire. One active submission can
+collect selected feedback addresses for a bounded window. UDP transmission
+establishes local submission, and feedback describes asynchronous peer state.
+Document effects still require native readback. Window or modal effects need
+a corresponding observation. See [setup](../osc/README.md) and the
+[architecture decision](../../docs/adrs/osc-through-the-bridge.md).
 
 ## Native host execution
 
@@ -214,6 +225,9 @@ lane factory also initializes that lane's arranger fallback at beat zero.
 
 Layer ensure creates/reuses the named stock Layer/Selector; conflicting types
 refuse. Slot ensure takes a musical name and complete nonempty note-channel set.
+After a rename, resolve the unchanged enclosing container path and select the
+resolved slot object. Verify its new name, preserved identity and routing in
+the result.
 It reapplies outer All → Same and stock Filter admitting shared displayed channel
 1 plus the requested notes, then Map sending all sixteen channels to displayed 1.
 Reuse helpers through the native factory; move a sole existing helper to the
@@ -225,14 +239,20 @@ Omitting ensure preserves manual customization and Selector performance policy.
 Assignment independently reuses the sole Kontakt anywhere in the slot or inserts
 at the end when no instrument exists; multiple instruments refuse. It does not
 require or modify routing helpers. Without an explicit NKI, preserve patch state.
-The existing integrated operation qualifies the exact native/Win32 editor, invokes
-the [Kontakt loader](adapters/kontakt-ctl/ARCHITECTURE.md) and verifies receiver
-membership/routing before closing. Only transient editor visibility is
-excluded from that comparison. Keep-editor-open
-verifies native visibility and the same owned window, records `editorKeptOpen`,
-and reports no closure; the loader never closes the editor. External loading is
-outside native Undo. Native assignment, NKI submission, loaded patch, samples and
-audible playback are distinct facts.
+With an explicit NKI, record the Win32 window inventory before assignment.
+Bind the single new window that Bitwig opens automatically on insertion and
+load directly into it after a scoped native read. For an existing hidden
+receiver, open its editor once and qualify the resulting window the same way.
+An already-visible existing editor cannot be correlated from that inventory and
+the request refuses before changing it.
+
+The [Kontakt loader](adapters/kontakt-ctl/ARCHITECTURE.md) loads into the
+qualified handle and PID. Verify receiver membership and routing after loading,
+ignoring transient native editor visibility. With keep-editor-open, verify that
+the same Win32 editor remains visible, record `editorKeptOpen`, and report no
+closure. Otherwise close the editor after loading and verify its disappearance.
+External loading is outside native Undo. Native assignment, NKI submission,
+loaded patch, samples and audible playback are distinct facts.
 
 Retain only outstanding external work while it may still act or its result is
 unknown; later writes refuse until reconciliation. Status does not compete with

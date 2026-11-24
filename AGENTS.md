@@ -10,11 +10,11 @@
 
 ## Bitwig project layout
 
-- Follow the [production project layout](skills/WORKFLOW.md#bitwig-project-layout) for saved projects, source scores, and evidence.
+- Follow the [production project layout](skills/score-intake/references/project-layout.md#bitwig-project-layout) for saved projects, source scores, and evidence.
+- Keep live operations within the user's requested musical task. Verify edits in the current session. Closing, reopening, or switching the active project, and restarting Bitwig or its services, require an explicit user request for that action.
 
 ## Skill workflow
 
 - Keep music-production skills, their references, and their authoring notes within the production documentation. They must never route to repository development documentation or source code. Report missing capabilities within the production task scope.
-- Start music-production work at [task routing](skills/WORKFLOW.md#route-by-outcome). Follow the owning skill and the workflow's [execution boundaries](skills/WORKFLOW.md#mandatory-execution-boundary) for any live action.
-- Use the workflow's [artifact authority](skills/WORKFLOW.md#meaning-and-authority) and [mutation ownership](skills/WORKFLOW.md#artifact-and-mutation-ownership) to establish scope. Verify the requested result using the owning workflow's [readiness and reconciliation rules](skills/WORKFLOW.md#readiness-and-change-propagation).
+- For an isolated music-production task, follow the owning skill and its references. For a result spanning skills, start with [bitwig-compose](skills/bitwig-compose/SKILL.md).
 - Put skill execution instructions in `SKILL.md` and directly routed references. Reserve skill `SPEC.md` and maintenance sidecars for authoring and review.

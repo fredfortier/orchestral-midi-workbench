@@ -6,6 +6,8 @@ mod cli_controller;
 mod cli_cues;
 mod cli_instrument;
 mod cli_mix;
+mod cli_osc;
+mod osc_session;
 use clap::{Parser, Subcommand};
 use notes_transformer::{
     adapter,
@@ -25,7 +27,15 @@ enum Commands {
         port: u16,
         #[arg(long,default_value_t=notes_transformer::api::DEFAULT_PORT)]
         api_port: u16,
+        /// Enable OSC and send to this local `DrivenByMoss` command port.
+        #[arg(long, value_parser = clap::value_parser!(u16).range(1..))]
+        osc_port: Option<u16>,
+        /// Local UDP port used by `DrivenByMoss` for feedback.
+        #[arg(long, requires = "osc_port", value_parser = clap::value_parser!(u16).range(1..))]
+        osc_feedback_port: Option<u16>,
     },
+    /// Send a raw `DrivenByMoss` OSC message through the running bridge.
+    Osc(cli_osc::Osc),
     Controller(cli_controller::Controller),
     Adapter {
         #[command(subcommand)]
@@ -131,7 +141,21 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .with_writer(std::io::stderr)
         .init();
     match Cli::parse().command {
-        Commands::Serve { port, api_port } => serve_controller(port, api_port).await?,
+        Commands::Serve {
+            port,
+            api_port,
+            osc_port,
+            osc_feedback_port,
+        } => {
+            let osc = osc_port.map(|port| {
+                (
+                    port,
+                    osc_feedback_port.unwrap_or(osc_session::DEFAULT_FEEDBACK_PORT),
+                )
+            });
+            serve_controller(port, api_port, osc).await?;
+        }
+        Commands::Osc(args) => cli_osc::run(args).await?,
         Commands::Controller(args) => cli_controller::run(args).await?,
         Commands::Adapter {
             host: Host::Bitwig { command },
@@ -146,18 +170,35 @@ async fn main() -> Result<(), Box<dyn Error>> {
     }
     Ok(())
 }
-async fn serve_controller(port: u16, api_port: u16) -> std::io::Result<()> {
+async fn serve_controller(
+    port: u16,
+    api_port: u16,
+    osc: Option<(u16, u16)>,
+) -> std::io::Result<()> {
     let native = tokio::net::TcpListener::bind((Ipv4Addr::LOCALHOST, port)).await?;
     let http = tokio::net::TcpListener::bind((Ipv4Addr::LOCALHOST, api_port)).await?;
+    let (osc_routes, osc_listener) = if let Some((target, feedback)) = osc {
+        if target == feedback {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidInput,
+                "OSC command and feedback ports must be distinct",
+            ));
+        }
+        let (dispatch, listener) = osc_session::Listener::bind(target, feedback).await?;
+        (osc_session::router(dispatch), Some(listener))
+    } else {
+        (axum::Router::new(), None)
+    };
     tracing::info!(adapter=%native.local_addr()?, api=%http.local_addr()?, "Controller service ready");
     let sessions = Sessions::default();
     let (stop, stopped) = tokio::sync::watch::channel(false);
     let api_stop = stopped.clone();
-    let native_stop = stopped;
-    let http_service = notes_transformer::api::serve(http, sessions.clone(), async move {
-        let mut stopped = api_stop;
-        let _ = stopped.changed().await;
-    });
+    let native_stop = stopped.clone();
+    let http_service =
+        notes_transformer::api::serve_with_routes(http, sessions.clone(), osc_routes, async move {
+            let mut stopped = api_stop;
+            let _ = stopped.changed().await;
+        });
     let native_service = serve(native, sessions, async move {
         let mut stopped = native_stop;
         let _ = stopped.changed().await;
@@ -174,6 +215,12 @@ async fn serve_controller(port: u16, api_port: u16) -> std::io::Result<()> {
         let _ = stop.send(true);
         Ok::<(), std::io::Error>(())
     };
-    tokio::try_join!(http_service, native_service, signal)?;
+    let osc_service = async {
+        if let Some(listener) = osc_listener {
+            listener.run(stopped).await?;
+        }
+        Ok::<(), std::io::Error>(())
+    };
+    tokio::try_join!(http_service, native_service, osc_service, signal)?;
     Ok(())
 }

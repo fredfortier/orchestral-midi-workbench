@@ -5,7 +5,7 @@ description: Export an open Bitwig arrangement as synchronized audio for listeni
 
 # Export native Bitwig audio
 
-Read [the shared workflow](../WORKFLOW.md). Use `controller export-audio` for
+Use `controller export-audio` for
 Bitwig's native Export Audio task. Check the running CLI's help for command
 options when needed.
 Do not emulate rendering, bounce clips destructively or solo tracks one by one.
@@ -24,8 +24,9 @@ Resolve intended project + export purpose/range/owners
 ```
 
 Resolve project instructions and confirm current project with `controller info`.
-Playback must be stopped; surrounding transport/window actions use the qualified
-native keyboard route. A request for advice alone does not dispatch an export.
+Playback must be stopped. Use [session actions](../bitwig-explore/references/session-actions.md)
+for transport and window operations. A request for advice alone does not dispatch
+an export.
 
 ```sh
 midi-bridge controller mix read --output mix.json

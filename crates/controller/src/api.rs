@@ -120,6 +120,18 @@ pub async fn serve(
     sessions: Sessions,
     shutdown: impl std::future::Future<Output = ()> + Send + 'static,
 ) -> io::Result<()> {
+    serve_with_routes(listener, sessions, Router::new(), shutdown).await
+}
+
+/// Serve the public API alongside additional loopback routes.
+/// # Errors
+/// Refuses non-loopback listeners and reports server I/O errors.
+pub async fn serve_with_routes(
+    listener: TcpListener,
+    sessions: Sessions,
+    routes: Router,
+    shutdown: impl std::future::Future<Output = ()> + Send + 'static,
+) -> io::Result<()> {
     if !listener.local_addr()?.ip().is_loopback() {
         return Err(io::Error::new(
             io::ErrorKind::PermissionDenied,
@@ -132,7 +144,8 @@ pub async fn serve(
         .with_state(Api {
             sessions,
             capacity: Arc::new(Semaphore::new(MAX_COMMANDS)),
-        });
+        })
+        .merge(routes);
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown)
         .await

@@ -1,0 +1,59 @@
+{
+  "rendition": {
+    "version": 1,
+    "tracks": [{"id": "violin", "name": "Violin"}],
+    "instruments": [{
+      "id": "shorts",
+      "nki": "/example/library/Violin Shorts.nki",
+      "player": {"id": "example", "name": "Kontakt", "version": "7", "format": "VST3"},
+      "settings": []
+    }, {
+      "id": "legato",
+      "nki": "/example/library/Violin Legato.nki",
+      "player": {"id": "example", "name": "Kontakt", "version": "7", "format": "VST3"},
+      "settings": []
+    }],
+    "slots": [
+      {"id": "shorts", "track": "violin", "name": "Shorts", "instrument": "shorts", "inputChannels": [1]},
+      {"id": "legato", "track": "violin", "name": "Legato", "instrument": "legato", "inputChannels": [2]}
+    ],
+    "bindings": [
+      {"track": "violin", "route": {"group": 0, "channel": 1}, "channel": 1, "instrument": "shorts", "slot": "shorts"},
+      {"track": "violin", "route": {"group": 0, "channel": 2}, "channel": 2, "instrument": "legato", "slot": "legato"}
+    ],
+    "controlRoutes": [{"track": "violin", "route": {"group": 0, "channel": 0}}]
+  },
+  "rules": [
+    {
+      "sourcePrefix": "/score-partwise/part[@id='P1']/",
+      "sourceVoice": "1",
+      "articulation": {"at": 17, "subclass": 10, "variation": 0, "direction": 0, "string": 0, "reset_round_robin": false, "release": 0},
+      "descriptor": null,
+      "route": {"group": 0, "channel": 1},
+      "dynamics": {"kind": "keyVelocity"}
+    },
+    {
+      "sourcePrefix": "/score-partwise/part[@id='P1']/",
+      "sourceVoice": "1",
+      "articulation": {"at": 17, "subclass": 0, "variation": 0, "direction": 0, "string": 0, "reset_round_robin": false, "release": 0},
+      "descriptor": null,
+      "route": {"group": 0, "channel": 1},
+      "dynamics": {"kind": "keyVelocity"}
+    },
+    {
+      "sourcePrefix": "/score-partwise/part[@id='P1']/",
+      "sourceVoice": "1",
+      "articulation": {"at": 16, "subclass": 0, "variation": 0, "direction": 0, "string": 0, "reset_round_robin": false, "release": 0},
+      "descriptor": null,
+      "route": {"group": 0, "channel": 2},
+      "dynamics": {"kind": "fixedAttack", "keyVelocity": 36000}
+    }
+  ],
+  "trackCcCurves": [{
+    "route": {"group": 0, "channel": 0},
+    "controller": 11,
+    "points": [{"time": [0, 1], "value": 2700000000}, {"time": [4, 1], "value": 3300000000}]
+  }],
+  "noteEdits": [{"source": "/score-partwise/part[@id='P1']/measure[1]/note[1]#occurrence=0", "onset": [0, 1], "key": 67, "end": [3, 4]}],
+  "archiveScorePreview": true
+}

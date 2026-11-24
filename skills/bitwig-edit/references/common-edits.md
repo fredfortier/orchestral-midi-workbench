@@ -38,7 +38,10 @@ discovery or instrument setup.
 ### Launcher clips
 
 Use the exact `launcherClip` path or run `midi-bridge controller launcher read > slot.json`
-for the selected slot. For authorized creation, verify `.position` identifies the
+for the selected slot. If its Inspector position is absent, reveal the
+Launcher and select the intended cell via [the computer recipe](../../bitwig-explore/references/keyboard-workflow.md#observed-computer-recipes).
+Recheck `launcher read`. Indexed OSC slot selection can light up the bank
+without supplying native Inspector position. For authorized creation, verify `.position` identifies the
 intended empty slot (`.position.clip == null`), then run
 `midi-bridge controller launcher create --expected slot.json --beats "$beats" > created.json`
 with the intended whole quarter-note length. Put the observed or created

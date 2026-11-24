@@ -16,6 +16,16 @@ to all parts. Identify connected line, separate attacks, repeated pulse, held
 harmony, entrances and cadences. Slurs, ties, sampled legato and portamento are
 different. Phrases cross barlines; do not reset legato, lyrics or dynamics there.
 
+Resolve articulation over the complete gesture before writing routing rules.
+Read words and signs such as *simile* or *segue*, opening examples whose marks
+continue, changes of bowing, and shared-staff instrument labels. Use the
+engraved score or another appropriate source to settle uncertain starts and
+ends. Compare neighbors with the same rhythm and musical role at every
+receiver switch, on both sides of the boundary. Default legato can give a
+fresh attack with appropriate note separation. A switch to a short sample
+requires its own musical justification. Trace shared staves back to the
+named instruments and distinguish intended doublings from duplicated exports.
+
 Choose variants with the relevant INSTRUMENT.md. Keep attack weight, sustained
 timbre/dynamics, expression, vibrato, tuning and release distinct. Patch changes
 may change the dynamics control law. Select documented stock behavior that fits
@@ -29,13 +39,16 @@ agree over the complete overlap, not only at attacks. For continuo, figures and
 voice-leading require actual harmonic interpretation; sounding pitch classes do
 not constitute a continuo realization. Do not add unrequested notes or doubles.
 
-Keep a concise passage review of musical role, receiver, attack/connection/release
-and dynamics. Use supported `adapt::Plan.passages` assertions to independently
-check track/instrument ownership and note coverage when constructing new plans.
-When present these partition every performed note including repeats; source
-prefixes use actual converter identities, not printed bar numbers. Expectations
-come from score review. Use the [rendition inputs](conversion.md#rendition-inputs)
-to record the assertions.
+For a new realization or a full channel review, partition every performed
+note, including repeated occurrences, into reviewed gestures. For each
+gesture record the score location, intended attack/connection/release, exact
+receiver and channel, and musical reason. Group notes that share a decision.
+Account explicitly for redundant source copies and other intentional omissions.
+Use the supported `passages` assertions to check the reviewed track, instrument
+and note coverage independently of the routing rules. Source prefixes use
+actual converter identities. Inspect adjacent notes and all route boundaries
+against that review, and verify exact channel/slot separately where multiple
+slots share a patch. See [rendition inputs](conversion.md#rendition-inputs).
 
 Authored dynamic curves need explicit supported rendering rules. The converter
 does not invent smoothing, breaths, bowing or phrase contours. Store unsupported
@@ -46,3 +59,35 @@ research of the global performance arc belongs to performance-cues.
 For revisions, compare the actual project with the last rendition before replacing
 anything. Preserve intentional native changes in pitch, timing, articulation,
 dynamics, tempo and mix; reconcile their relation to score and executable inputs.
+
+## Translate an expressive direction into receiver behavior
+
+Use the cue's score event, occurrence, named lines and audible criterion where a
+researched direction exists. For a score before native placement, take the
+equivalent anchors from the score and intended performed form. Return ambiguous
+musical meaning to its owner. Resolve feasibility through the exact patch and
+articulation, informed by the documented control law and any applicable patch
+tests.
+
+For each affected binding, specify the attack or within-note change, the parts
+that need independent shaping, and the initial state, anchors and release that
+will make the gesture audible. Name the supported control, its units and the
+applicable note or control-channel route. Follow the shared
+[dynamics and expression procedure](../../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction)
+for velocity, sampled intensity and independent expression. Receiver capability
+governs the choice of control. Mark numeric targets as editorial unless they
+describe documented bounds or measured response. Group equivalent gestures when
+they share a purpose, binding and intended behavior. Keep different occurrences
+distinct when the return calls for a different treatment.
+
+Record this translation in the existing binding and curve-anchor sections of
+`PERFORMANCE.md` for a rendition. A proposal can describe the same choices
+without encoding them. When applying to the generated rendition, verify the
+decoded and native values, alignment and routing against the intended gesture.
+For an authorized native-only revision, hand the scoped plan to
+[Bitwig Edit](../../bitwig-edit/SKILL.md) and use its readback checks. If the
+scope includes acoustic verification, carry the cue's criterion into a
+representative ensemble comparison. A matched stem can establish a receiver's
+response, while hearing the intended hierarchy requires the relevant parts
+together. Keep unsupported effects pending and report the acoustic evidence
+actually obtained.

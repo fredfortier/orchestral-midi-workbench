@@ -5,7 +5,7 @@ description: Mix an open Bitwig arrangement using musical foreground, native mix
 
 # Mix a Bitwig arrangement
 
-Read [the shared workflow](../WORKFLOW.md), then
+Read
 [mixing techniques and measurement](references/mixing-techniques.md) before
 making musical decisions. That reference separates
 industry guidance, native mechanics and this workflow's editorial defaults.
@@ -32,7 +32,8 @@ Use the existing controller; do not scrape the mixer or create another bridge.
    that a contour still serves the intended phrase or climax hierarchy.
    State routine assumptions; ask only if an unresolved choice materially changes
    musical intent, preservation or delivery compatibility. Do not reorchestrate.
-2. Stop playback through the qualified native keyboard workflow if necessary.
+2. Stop playback through [session actions](../bitwig-explore/references/session-actions.md)
+   if necessary.
    Read `midi-bridge controller mix read --output mix-before.json`. Retain complete
    owning clips through bitwig-explore for content/automation preservation. Read
    cues separately; join their beat positions to the mixer snapshot's `beatSeconds`
@@ -75,7 +76,7 @@ Use the existing controller; do not scrape the mixer or create another bridge.
    after consequential changes. Compare at matched playback loudness, including
    mono/quiet playback and representative sections. If listening is unavailable,
    label the pass measurement-led and leave perceptual approval pending.
-7. Save through the qualified native Save action; verify persistence separately.
+7. Use [session actions](../bitwig-explore/references/session-actions.md#direct-actions) to save and verify persistence separately.
    Record project-specific decisions/evidence in the project's existing musical
    document, never here. Return actual changes, before/after measurements,
    processing/export scope, preservation, save and listening limits. Do not call

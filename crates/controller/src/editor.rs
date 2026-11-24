@@ -65,6 +65,17 @@ pub enum Expression {
     Formant,
 }
 
+impl Expression {
+    const FAMILIES: [Self; 6] = [
+        Self::Pressure,
+        Self::Pitch,
+        Self::Gain,
+        Self::Pan,
+        Self::Timbre,
+        Self::Formant,
+    ];
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Point {
@@ -149,6 +160,14 @@ impl TryFrom<NoteEvent> for MidiNote {
             || !bounded(o.repeat_velocity_curve, -1.0, 1.0)
         {
             return Err(format!("Invalid note event {}", detail.id));
+        }
+        for kind in Expression::FAMILIES {
+            if !detail.expressions.contains_key(&kind) {
+                return Err(format!(
+                    "Complete note event {} is missing {kind:?} expression; use an empty array when it has no points",
+                    detail.id
+                ));
+            }
         }
         for (&kind, points) in &detail.expressions {
             let mut ids = std::collections::HashSet::new();

@@ -27,7 +27,7 @@ dynamic meaning from CC numbers or filename tokens.]
 
 ### Expression control specification
 
-| Binding / exact NKI and articulation | Documented default and velocity role | Named sampled dynamics; numeric velocity/CC ranges or anchors | Project control and initial values | Track MIDI lane / control channel / receiver routing | Manual evidence; calibration and execution status |
+| Binding / exact NKI and articulation | Documented dynamics and expression controls, stock baselines and velocity role | Named sampled dynamics and evidenced bounds | Project entry values and role of each control | Track MIDI lane / control channel / receiver routing | INSTRUMENT.md evidence and execution status |
 | --- | --- | --- | --- | --- | --- |
 
 [Realization fills every binding from instrument-intake's INSTRUMENT.md before
@@ -38,15 +38,28 @@ Follow the shared dynamics-and-expression reference: CC11 is neither fixed at
 maximum by default nor a copy/transform of CC1. Specify separate musical roles,
 passage anchors, initial values and ranges; a flat span needs a musical reason.
 For a verified CC11-only patch, use that control without inventing CC1 support.
-Consume the library's Conventional MIDI control map; missing facts
-return to documentation-only intake. Use track MIDI lanes, shared across related
+Consume the library's Conventional MIDI control map. Keep stock baselines
+distinct from chosen entry values. Missing facts return to documentation-only
+intake. Use track MIDI lanes, shared across related
 slots where routing and control semantics permit. Do not create sender devices or
 wrap automation in clips. Device macro/knob discovery is explicit opt-in only for
 controls beyond conventional MIDI. Identify independent channel/control needs.
 Give numeric units and distinguish vendor bounds, measured calibration and
-editorial targets. Label approximate anchors/interpolation as project choices;
-unknown control functions/defaults remain unresolved, not guessed.
+editorial targets. Use a labelled project baseline if a supported control's
+factory number is unpublished. A required effect with unknown controller
+behavior remains pending.
 Documentation, actual host configuration and audible response are separate facts.]
+
+### Musical curve anchors and verification
+
+| Track / articulation and required effect | Score passage and performed occurrence | Composer marking, score evidence or cited musical reading | Phrase role and justified direction | Control and entry, change, hold or release targets | Decoded MIDI and native readback / pending reason |
+| --- | --- | --- | --- | --- | --- |
+
+[Cover each required effect and each musically meaningful change. Link the
+musical reasons to the interpretation notes below where applicable. Explain
+holds in musically level spans. Group equivalent occurrences where the same
+rationale holds. Check the required effects against both the decoded bundle and
+native readback. Record affected scope and consequence for any pending effect.]
 
 ### Approximations and open musical questions
 

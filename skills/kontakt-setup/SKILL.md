@@ -5,8 +5,7 @@ description: Use the existing integrated midi-bridge instrument assignment opera
 
 # Load the specified instruments
 
-Follow [the shared workflow](../WORKFLOW.md), especially its mandatory execution
-boundary. Infer scope from the request and conversation; use
+Infer scope from the request and conversation; use
 [bitwig-explore](../bitwig-explore/SKILL.md) to resolve the targets:
 
 ```text
@@ -67,14 +66,15 @@ for supporting project and focus actions.
    Its native engine must be connected before assignment. An observation never
    changes selection or opens a different project.
 2. Apply the specified container and named-slot ensures in
-   [assignment](references/assignment.md). Slot ensure reapplies the shared
-   workflow's stock Filter/Map defaults and selects/verifies the resulting slot.
+   [assignment](references/assignment.md). Slot ensure reapplies the documented
+   stock Filter/Map defaults and selects/verifies the resulting slot.
    Check native name, channel mask, mapping and selection. CLI channels are 1–16;
    JSON/native note channels are 0–15. Preserve unrelated devices and musical content.
 3. Use integrated `instrument assign` for the slot. Without `--load-patch`, reuse
    its instrument configuration; an explicit NKI requests replacement. Assignment
-   preserves routing and other devices. Loading owns the exact editor and closes
-   it by default. For an authorized Syllabuilder handoff use `--keep-editor-open`
+   preserves routing and other devices. After insertion, load the NKI directly
+   into the editor Bitwig opens automatically. By default, close the editor
+   after loading. For an authorized Syllabuilder handoff use `--keep-editor-open`
    and return its verified window. Conventional controls use native track MIDI;
    read INSTRUMENT.md's control map and return curve edits to bitwig-edit.
 4. Process bindings serially. After an unknown/failure, query the original operation
@@ -95,7 +95,7 @@ assignment operation.
 Update PERFORMANCE.md's setup evidence with actual assignment coverage and limits;
 preserve its orchestration and all unrelated sections. Loading, editor closure,
 sample completeness, saved persistence, audible playback and musical approval are
-separate facts. Saving uses a separately qualified native keyboard action; it is not an instrument command.
+separate facts. Use [session actions](../bitwig-explore/references/session-actions.md#direct-actions) when the requested delivery includes Save.
 
 Keep the direct path tight: reuse selection observations, documentation, runtime,
 initialized libraries and matching receivers. Do not export full note/project

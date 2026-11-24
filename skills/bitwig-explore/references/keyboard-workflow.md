@@ -1,10 +1,9 @@
 # Native keyboard actions around the MIDI tools
 
-Use this reference only for supporting Bitwig window/project/navigation/history
-work and authorized legacy sender/lane cleanup under the shared workflow.
-MIDI notes, expression and curve creation/editing stay on the complete-clip
-read/replace route. No transport, mixer, window-management or general Bitwig
-control subcommands are prerequisites for that route.
+Use this reference for lifecycle dialogs, residual UI focus and authorized
+legacy sender/lane cleanup. Start with [session actions](session-actions.md)
+for qualified OSC routes. MIDI notes, expression and curve creation/editing
+use complete native clip reads and replacement.
 
 ## Select an action before sending keys
 
@@ -106,6 +105,8 @@ and bindings before reuse. Use native reads for musical verification.
 
 | Action | Recipe | Observed check |
 | --- | --- | --- |
+| New Project and first Save | **COMPUTER** File menu → **New Project** → **Save**. If the chooser is a separate window, bind to its **Save Project** identity. Confirm the Projects root and intended unique filename. | `controller info` returns the saved project at the exact path, which exists on disk. |
+| Select an empty Launcher slot | **COMPUTER** Reveal Launcher if needed. In the intended track and scene, click inside the empty cell, away from its launch, record, and create buttons. | `controller launcher read` returns the exact native track, zero-based scene and null clip. |
 | Save | **COMPUTER** Bitwig project window → named Save action, Ctrl+S in `Default keyboard mappings (My version)` | Saving finishes, dirty asterisk clears, file mtime advances; complete clip reread matches |
 | Rename | **CONTROLLER** select exact path → **COMPUTER** focus its panel → named Rename, Ctrl+R in that profile → text → Return | Resolve the renamed item again through `info`; names are not IDs |
 | Set a fixed knob value | **CONTROLLER** resolve exact receiver/device → **COMPUTER** focus numeric editor → triple-click knob → Ctrl+A → type number → Return; no automation lane | Portato CC11 status displayed 127.00; complete readback still had only knob 1’s curve, then Save cleared dirty state |
@@ -134,7 +135,7 @@ Unknown controller outcomes require original operation status and native readbac
 not keyboard Undo. A known UI cleanup error needs its exact history boundary and
 readback; a familiar shortcut alone does not establish a safe recovery target.
 
-Native selection supplies exact targets; panel focus and keys stay on the computer. Controller-owned MIDI/automation edits and
+Native selection supplies exact targets. Use session actions for qualified focus and computer input for remaining keyboard actions. Controller-owned MIDI/automation edits and
 integrated Kontakt loading keep their existing owners. These cleanup recipes are
 not permission to use UI edits to bypass failed controller CRUD.
 

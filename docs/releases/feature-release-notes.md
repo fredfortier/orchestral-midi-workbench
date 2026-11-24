@@ -1,5 +1,11 @@
 # Feature release notes
 
+## Unreleased
+
+- The controller service can host DrivenByMoss OSC feedback. Use
+  `midi-bridge osc` to send typed commands and observe selected feedback addresses
+  from the same service process.
+
 ## v0.1.0 · Prototype
 
 - Convert MusicXML and MXL to MIDI 2.0 Clip Files. The converter implements file encodings from the MIDI-CI Orchestral Articulation Profile and produces a companion file for source-aware restoration.

@@ -1,0 +1,13 @@
+[package]
+name = "osc"
+description = "OSC wire helpers for DrivenByMoss"
+version.workspace = true
+edition.workspace = true
+rust-version = "1.87"
+publish.workspace = true
+
+[dependencies]
+rosc = "0.11.4"
+
+[lints]
+workspace = true
