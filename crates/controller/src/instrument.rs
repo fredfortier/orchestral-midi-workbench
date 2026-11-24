@@ -234,6 +234,7 @@ async fn assign(
     else {
         return Err(control::Error::invalid("Expected instrument assignment"));
     };
+    let acquisition = EditorAcquisition::for_receiver(&command["expected"])?;
     let runtime = runtime.for_host(before_host(&command["expected"])?)?;
     check_assignment_resources(&runtime, &nki, &output).await?;
     let (assigned, baseline) = begin_assignment(
@@ -245,8 +246,7 @@ async fn assign(
         resume_before_load.as_deref(),
     )
     .await?;
-    let document = assigned["document"].clone();
-    let (owner, hidden_baseline) = qualify_editor(
+    let owner = qualify_editor(
         state,
         adapter.clone(),
         &operation,
@@ -254,6 +254,7 @@ async fn assign(
         &runtime,
         &output,
         (&baseline, &assigned),
+        acquisition,
     )
     .await
     .map_err(|e| {
@@ -285,27 +286,30 @@ async fn assign(
         ));
     }
     let closed = if keep_editor_open {
-        if receiver_editor_visible(&current) != Some(true)
-            || await_windows(
-                &runtime, &output.join("kept-open"), &hidden_baseline,
-                WindowExpectation::Visible(Some(owner.pid)),
-            ).await.map_err(|e|control::Error::unknown(format!("Exact NKI load completed but editor-open verification failed: {}; do not reload",e.message)))?
-                != Some(owner)
-        {
-            return Err(control::Error::unknown(
-                "Loaded receiver editor is not independently confirmed open; do not reload",
-            ));
-        }
+        await_windows(
+            &runtime,
+            &output.join("kept-open"),
+            &baseline,
+            WindowExpectation::Open(owner),
+        )
+        .await
+        .map_err(|e| loaded_visibility_error("open", &e))?;
         Value::Null
     } else {
-        state.operations.progress(
-            &operation,
-            "closingEditor",
-            Some(&format!("{operation}:close")),
-        )?;
-        complete(state,adapter,json!({"action":"closeEditor","operation":format!("{operation}:close"),"target":target,"document":document,"expected":current})).await.map_err(|e|control::Error::unknown(e.to_string()))?
+        close_loaded_editor(
+            state, adapter, &runtime, &output, &baseline, &operation, current,
+        )
+        .await?
     };
-    let result = json!({"operation":operation,"status":"verified","assignment":assigned,"load":loaded,"closure":closed,"editorKeptOpen":keep_editor_open,"ownership":{"method":"native-visibility-handshake","window":owner}});
+    let result = json!({
+        "operation":operation,
+        "status":"verified",
+        "assignment":assigned,
+        "load":loaded,
+        "closure":closed,
+        "editorKeptOpen":keep_editor_open,
+        "ownership":{"method":"scoped-window-appearance","window":owner},
+    });
     crate::files::publish(&output.join("assignment.json"), &result)
         .map_err(|e| control::Error::unknown(e.to_string()))?;
     *state
@@ -313,6 +317,50 @@ async fn assign(
         .lock()
         .map_err(|_| control::Error::unavailable("Loader state unavailable"))? = None;
     Ok(result)
+}
+
+async fn close_loaded_editor(
+    state: &Sessions,
+    adapter: Option<String>,
+    runtime: &crate::kontakt_process::Runtime,
+    output: &std::path::Path,
+    baseline: &[OwnedWindow],
+    operation: &str,
+    current: Value,
+) -> Result<Value, control::Error> {
+    let close_operation = format!("{operation}:close");
+    state
+        .operations
+        .progress(operation, "closingEditor", Some(&close_operation))?;
+    let closed = complete(
+        state,
+        adapter,
+        json!({
+            "action":"closeEditor",
+            "operation":close_operation,
+            "target":current["target"],
+            "document":current["document"],
+            "expected":current,
+        }),
+    )
+    .await
+    .map_err(|e| loaded_visibility_error("closed", &e))?;
+    await_windows(
+        runtime,
+        &output.join("closed"),
+        baseline,
+        WindowExpectation::Closed,
+    )
+    .await
+    .map_err(|e| loaded_visibility_error("closed", &e))?;
+    Ok(closed)
+}
+
+fn loaded_visibility_error(expected: &str, error: &control::Error) -> control::Error {
+    control::Error::unknown(format!(
+        "Exact NKI load completed but its editor was not confirmed {expected}: {}; do not reload",
+        error.message
+    ))
 }
 
 fn assignment_native_command(mut command: Value) -> Value {
@@ -337,7 +385,7 @@ async fn begin_assignment(
     runtime: &crate::kontakt_process::Runtime,
     output: &std::path::Path,
     resume_before_load: Option<&std::path::Path>,
-) -> Result<(Value, Value), control::Error> {
+) -> Result<(Value, Vec<OwnedWindow>), control::Error> {
     let operation = command["operation"]
         .as_str()
         .ok_or_else(|| control::Error::invalid("Missing assignment operation"))?
@@ -353,6 +401,7 @@ async fn begin_assignment(
     .await
     .map_err(|e| control::Error::invalid(e.to_string()))?
     .map_err(control::Error::invalid)?;
+    let baseline = window_rows(&baseline).map_err(|e| control::Error::invalid(e.message))?;
     state
         .operations
         .progress(&operation, "assigningReceiver", Some(&operation))?;
@@ -373,11 +422,6 @@ fn receiver_device(observation: &Value) -> Option<&Value> {
         .as_array()?
         .iter()
         .find(|d| d["pluginId"] == "vst3-5653544E694B376B6F6E74616B742037")
-}
-fn receiver_editor_visible(observation: &Value) -> Option<bool> {
-    receiver_device(observation)?
-        .get("editorVisible")?
-        .as_bool()
 }
 
 fn claim_preload_continuation(
@@ -656,6 +700,25 @@ fn legacy_pre_submission_failure(directory: &std::path::Path, response: &Value) 
         && body.matches("wait_for_window_render(").count() == 1
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum EditorAcquisition {
+    AutomaticOnInsertion,
+    OpenExisting,
+}
+
+impl EditorAcquisition {
+    fn for_receiver(before: &Value) -> Result<Self, control::Error> {
+        match receiver_device(before) {
+            None => Ok(Self::AutomaticOnInsertion),
+            Some(device) if device["editorVisible"] == false => Ok(Self::OpenExisting),
+            Some(_) => Err(control::Error::invalid(
+                "Existing Kontakt editor must be hidden to identify its window when opened; no editor changed",
+            )),
+        }
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
 async fn qualify_editor(
     state: &Sessions,
     adapter: Option<String>,
@@ -663,84 +726,57 @@ async fn qualify_editor(
     target: &Path,
     runtime: &crate::kontakt_process::Runtime,
     output: &std::path::Path,
-    observations: (&Value, &Value),
-) -> Result<(OwnedWindow, Vec<OwnedWindow>), control::Error> {
+    observations: (&[OwnedWindow], &Value),
+    acquisition: EditorAcquisition,
+) -> Result<OwnedWindow, control::Error> {
     let (baseline, assigned) = observations;
-    let document = assigned["document"].clone();
-    let before = window_rows(baseline)?;
-    // Native visibility is not an OS handle. Qualify that association before any NKI input.
-    // A freshly inserted hosted plug-in can expose an OS editor while its native
-    // visibility value is still false. Establish open, then challenge hidden;
-    // never infer the initial OS state from that native value alone.
-    let current = assigned["observation"].clone();
-    let opened = visibility(
-        state,
-        adapter.clone(),
-        operation,
-        "owner-open",
-        target,
-        &document,
-        current,
-        true,
-    )
-    .await?;
-    let opened_windows =
-        await_open_inventory(runtime, &output.join("owner-opened-inventory"), &before).await?;
-    let closed = visibility(
-        state,
-        adapter.clone(),
-        operation,
-        "owner-challenge",
-        target,
-        &document,
-        opened["observation"].clone(),
-        false,
-    )
-    .await?;
-    let first = await_windows(
+    let expected = &assigned["observation"];
+    // An insertion opens the hosted editor itself. Its native visibility flag can
+    // lag the actual Win32 window, so observe appearance without toggling it.
+    if acquisition == EditorAcquisition::OpenExisting {
+        let current = native(
+            state,
+            adapter.clone(),
+            json!({"action":"read","target":target}),
+        )
+        .await?;
+        if &current != expected {
+            return Err(control::Error::unknown(
+                "Receiver changed before opening its editor; no editor action dispatched",
+            ));
+        }
+        complete(
+            state,
+            adapter.clone(),
+            json!({
+                "action":"openEditor",
+                "operation":format!("{operation}:open"),
+                "target":target,
+                "document":assigned["document"],
+                "expected":current,
+            }),
+        )
+        .await?;
+    }
+    let WindowObservation::Open(owner) = await_windows(
         runtime,
-        &output.join("owner-hidden"),
-        &opened_windows,
-        WindowExpectation::OneRemoved,
+        &output.join("owner-appeared"),
+        baseline,
+        WindowExpectation::New,
     )
     .await?
-    .ok_or_else(|| control::Error::unknown("Owned editor window was not observed"))?;
-    let hidden_baseline: Vec<_> = opened_windows
-        .into_iter()
-        .filter(|window| *window != first)
-        .collect();
-    let reopened = visibility(
-        state,
-        adapter.clone(),
-        operation,
-        "open",
-        target,
-        &document,
-        closed["observation"].clone(),
-        true,
-    )
-    .await?;
-    let owner = await_windows(
-        runtime,
-        &output.join("owner-final"),
-        &hidden_baseline,
-        WindowExpectation::Visible(Some(first.pid)),
-    )
-    .await?
-    .ok_or_else(|| control::Error::unknown("Owned editor did not reappear"))?;
-    let observed = native(
-        state,
-        adapter.clone(),
-        json!({"action":"read","target":target}),
-    )
-    .await
-    .map_err(|e| control::Error::unknown(e.to_string()))?;
-    if observed != reopened["observation"] {
+    else {
         return Err(control::Error::unknown(
-            "Receiver/editor changed during ownership qualification; no NKI submitted",
+            "Owned editor window was not observed",
+        ));
+    };
+    let current = native(state, adapter, json!({"action":"read","target":target})).await?;
+    if receiver_structure(expected.clone()) != receiver_structure(current) {
+        return Err(control::Error::unknown(
+            "Receiver changed during ownership qualification; no NKI submitted",
         ));
     }
-    Ok((owner, hidden_baseline))
+    Ok(owner)
 }
 
 async fn complete(
@@ -989,47 +1025,37 @@ fn window_rows(inventory: &Value) -> Result<Vec<OwnedWindow>, control::Error> {
     }
     Ok(windows)
 }
+#[derive(Clone, Copy)]
 enum WindowExpectation {
-    OneRemoved,
-    Visible(Option<u32>),
+    New,
+    Open(OwnedWindow),
+    Closed,
 }
 
-async fn await_open_inventory(
-    runtime: &crate::kontakt_process::Runtime,
-    output: &std::path::Path,
-    baseline: &[OwnedWindow],
-) -> Result<Vec<OwnedWindow>, control::Error> {
-    std::fs::create_dir(output).map_err(|e| control::Error::unknown(e.to_string()))?;
-    let deadline = tokio::time::Instant::now() + Duration::from_secs(30);
-    let mut previous = None;
-    let mut attempt = 0;
-    loop {
-        let runtime = runtime.clone();
-        let observation = output.join(format!("observation-{attempt}"));
-        attempt += 1;
-        let observed = tokio::task::spawn_blocking(move || {
-            crate::kontakt_process::windows(&runtime, &observation).map_err(|e| e.to_string())
-        })
-        .await
-        .map_err(|e| control::Error::unknown(e.to_string()))?
-        .map_err(control::Error::unknown)?;
-        let windows = window_rows(&observed)?;
-        let count_matches = windows.len() == baseline.len() + 1
-            || (!windows.is_empty() && windows.len() == baseline.len());
-        if count_matches && baseline.iter().all(|window| windows.contains(window)) {
-            if previous.as_ref() == Some(&windows) {
-                return Ok(windows);
-            }
-            previous = Some(windows);
-        } else {
-            previous = None;
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum WindowObservation {
+    Open(OwnedWindow),
+    Closed,
+}
+
+impl WindowExpectation {
+    fn observe(
+        self,
+        baseline: &[OwnedWindow],
+        windows: &[OwnedWindow],
+    ) -> Option<WindowObservation> {
+        if !baseline.iter().all(|window| windows.contains(window)) {
+            return None;
         }
-        if tokio::time::Instant::now() >= deadline {
-            return Err(control::Error::unknown(
-                "Owned editor opening did not stabilize",
-            ));
+        if matches!(self, Self::Closed) {
+            return (windows.len() == baseline.len()).then_some(WindowObservation::Closed);
         }
-        tokio::time::sleep(Duration::from_millis(100)).await;
+        let mut added = windows.iter().filter(|window| !baseline.contains(window));
+        let owner = *added.next()?;
+        if added.next().is_some() || matches!(self, Self::Open(expected) if owner != expected) {
+            return None;
+        }
+        Some(WindowObservation::Open(owner))
     }
 }
 
@@ -1037,10 +1063,11 @@ async fn await_windows(
     runtime: &crate::kontakt_process::Runtime,
     output: &std::path::Path,
     baseline: &[OwnedWindow],
-    visible: WindowExpectation,
-) -> Result<Option<OwnedWindow>, control::Error> {
+    expectation: WindowExpectation,
+) -> Result<WindowObservation, control::Error> {
     std::fs::create_dir(output).map_err(|e| control::Error::unknown(e.to_string()))?;
     let deadline = tokio::time::Instant::now() + Duration::from_secs(30);
+    let mut previous = None;
     let mut attempt = 0;
     loop {
         let runtime = runtime.clone();
@@ -1053,67 +1080,20 @@ async fn await_windows(
         .map_err(|e| control::Error::unknown(e.to_string()))?
         .map_err(control::Error::unknown)?;
         let windows = window_rows(&observed)?;
-        if matches!(visible, WindowExpectation::OneRemoved)
-            && windows.len() + 1 == baseline.len()
-            && windows.iter().all(|window| baseline.contains(window))
-        {
-            return Ok(baseline
-                .iter()
-                .find(|window| !windows.contains(window))
-                .copied());
-        }
-        if baseline.iter().all(|window| windows.contains(window)) {
-            let added: Vec<_> = windows
-                .iter()
-                .filter(|window| !baseline.contains(window))
-                .copied()
-                .collect();
-            match visible {
-                WindowExpectation::Visible(pid)
-                    if added.len() == 1 && pid.is_none_or(|pid| added[0].pid == pid) =>
-                {
-                    return Ok(Some(added[0]));
-                }
-                _ => {}
+        let outcome = expectation.observe(baseline, &windows);
+        if let Some(owner) = outcome {
+            if previous == outcome {
+                return Ok(owner);
             }
         }
+        previous = outcome;
         if tokio::time::Instant::now() >= deadline {
             return Err(control::Error::unknown(
-                "Editor ownership visibility challenge did not stabilize; retain the original operation",
+                "Expected editor window inventory did not stabilize; retain the original operation",
             ));
         }
         tokio::time::sleep(Duration::from_millis(100)).await;
     }
-}
-#[allow(clippy::too_many_arguments)]
-async fn visibility(
-    state: &Sessions,
-    adapter: Option<String>,
-    operation: &str,
-    phase: &str,
-    target: &Path,
-    document: &Value,
-    expected: Value,
-    visible: bool,
-) -> Result<Value, control::Error> {
-    let current = native(
-        state,
-        adapter.clone(),
-        json!({"action":"read","target":target}),
-    )
-    .await?;
-    if receiver_structure(expected) != receiver_structure(current.clone()) {
-        return Err(control::Error::unknown(
-            "Receiver structure changed before editor action; no input dispatched",
-        ));
-    }
-    let result=complete(state,adapter,json!({"action":if visible{"openEditor"}else{"closeEditor"},"operation":format!("{operation}:{phase}"),"target":target,"document":document,"expected":current})).await.map_err(|e|control::Error::unknown(e.to_string()))?;
-    if receiver_editor_visible(&result["observation"]) != Some(visible) {
-        return Err(control::Error::unknown(
-            "Native editor visibility readback differs",
-        ));
-    }
-    Ok(result)
 }
 
 fn before_host(observation: &Value) -> Result<u32, control::Error> {
@@ -1161,4 +1141,60 @@ async fn check_assignment_resources(
     .await
     .map_err(|e| control::Error::invalid(e.to_string()))?
     .map_err(control::Error::invalid)
+}
+
+#[cfg(test)]
+mod editor_tests {
+    use super::{EditorAcquisition, OwnedWindow, WindowExpectation, WindowObservation};
+    use serde_json::json;
+
+    #[test]
+    fn new_receiver_uses_automatic_open_and_hidden_existing_receiver_opens_once() {
+        let observation = |devices| json!({"slot":{"devices":devices}});
+        let kontakt = |visible| {
+            json!([{
+                "pluginId":"vst3-5653544E694B376B6F6E74616B742037",
+                "editorVisible":visible
+            }])
+        };
+        assert_eq!(
+            EditorAcquisition::for_receiver(&observation(json!([]))).unwrap(),
+            EditorAcquisition::AutomaticOnInsertion
+        );
+        assert_eq!(
+            EditorAcquisition::for_receiver(&observation(kontakt(false))).unwrap(),
+            EditorAcquisition::OpenExisting
+        );
+        assert!(EditorAcquisition::for_receiver(&observation(kontakt(true))).is_err());
+    }
+
+    #[test]
+    fn automatic_open_requires_one_new_window_and_preserves_existing_windows() {
+        let unrelated = OwnedWindow { hwnd: 10, pid: 20 };
+        let editor = OwnedWindow { hwnd: 11, pid: 20 };
+        let replacement = OwnedWindow { hwnd: 12, pid: 20 };
+        let baseline = [unrelated];
+        assert_eq!(
+            WindowExpectation::New.observe(&baseline, &[unrelated, editor]),
+            Some(WindowObservation::Open(editor))
+        );
+        assert_eq!(WindowExpectation::New.observe(&baseline, &baseline), None);
+        assert_eq!(WindowExpectation::New.observe(&baseline, &[editor]), None);
+        assert_eq!(
+            WindowExpectation::New.observe(&baseline, &[unrelated, editor, replacement]),
+            None
+        );
+        assert_eq!(
+            WindowExpectation::Open(editor).observe(&baseline, &[unrelated, replacement]),
+            None
+        );
+        assert_eq!(
+            WindowExpectation::Closed.observe(&baseline, &[unrelated, editor]),
+            None
+        );
+        assert_eq!(
+            WindowExpectation::Closed.observe(&baseline, &baseline),
+            Some(WindowObservation::Closed)
+        );
+    }
 }

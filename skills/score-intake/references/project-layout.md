@@ -40,6 +40,5 @@ project evidence. Further checkpoints follow the same convention.
 This checkpoint restores project-file state only; external files remain shared.
 Keep required external resources in place and preserve them under their owning
 workflow. If rollback is requested, preserve the experimental main file as another
-checkpoint, restore the selected backup to the original main path without an
-open document overwriting it, then reopen and verify the restored project through
-the qualified native workflow.
+checkpoint. Restore the selected backup only when the main project is closed
+and verify that the restored file matches the checkpoint byte for byte.

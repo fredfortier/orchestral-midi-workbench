@@ -239,14 +239,20 @@ Omitting ensure preserves manual customization and Selector performance policy.
 Assignment independently reuses the sole Kontakt anywhere in the slot or inserts
 at the end when no instrument exists; multiple instruments refuse. It does not
 require or modify routing helpers. Without an explicit NKI, preserve patch state.
-The existing integrated operation qualifies the exact native/Win32 editor, invokes
-the [Kontakt loader](adapters/kontakt-ctl/ARCHITECTURE.md) and verifies receiver
-membership/routing before closing. Only transient editor visibility is
-excluded from that comparison. Keep-editor-open
-verifies native visibility and the same owned window, records `editorKeptOpen`,
-and reports no closure; the loader never closes the editor. External loading is
-outside native Undo. Native assignment, NKI submission, loaded patch, samples and
-audible playback are distinct facts.
+With an explicit NKI, record the Win32 window inventory before assignment.
+Bind the single new window that Bitwig opens automatically on insertion and
+load directly into it after a scoped native read. For an existing hidden
+receiver, open its editor once and qualify the resulting window the same way.
+An already-visible existing editor cannot be correlated from that inventory and
+the request refuses before changing it.
+
+The [Kontakt loader](adapters/kontakt-ctl/ARCHITECTURE.md) loads into the
+qualified handle and PID. Verify receiver membership and routing after loading,
+ignoring transient native editor visibility. With keep-editor-open, verify that
+the same Win32 editor remains visible, record `editorKeptOpen`, and report no
+closure. Otherwise close the editor after loading and verify its disappearance.
+External loading is outside native Undo. Native assignment, NKI submission,
+loaded patch, samples and audible playback are distinct facts.
 
 Retain only outstanding external work while it may still act or its result is
 unknown; later writes refuse until reconciliation. Status does not compete with

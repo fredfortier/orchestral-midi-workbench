@@ -189,7 +189,7 @@ pub fn preflight(runtime: &Runtime, nki: &Path, output: &Path) -> Result<(), Box
     Ok(())
 }
 
-/// Observe Win32 host windows before native assignment opens its editor.
+/// Observe visible Win32 host windows without changing their visibility.
 /// # Errors
 /// Refuses runtime/process failures; takes no window input.
 pub fn windows(runtime: &Runtime, output: &Path) -> Result<Value, Box<dyn Error>> {
@@ -200,7 +200,7 @@ pub fn windows(runtime: &Runtime, output: &Path) -> Result<Value, Box<dyn Error>
         &json!({"kind":"window-inventory"}),
     )
 }
-/// Load only into the exact newly exposed adapter-owned Win32 editor.
+/// Load only into the exact Win32 editor qualified by the assignment.
 /// # Errors
 /// Retains process/dialog failures without closing or replaying the receiver.
 pub fn load(

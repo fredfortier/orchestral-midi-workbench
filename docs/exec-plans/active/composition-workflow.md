@@ -17,9 +17,9 @@ Bach *Qui tollis* project.
    procedures. Consolidate recurring session actions and preserve the owners
    of notes, curves, routing, and Kontakt setup.
 4. Exercise admission, realization, cues, navigation, audition and repair,
-   receiver setup, transitions, and export on the Bach project. Save, reopen,
-   and verify the project. Revisit code or procedures when an observation
-   exposes friction or an ambiguous handoff.
+   receiver setup, transitions, and export on the Bach project. Verify the file
+   write and the native state in the current session. Revisit code or
+   procedures when an observation exposes friction or an ambiguous handoff.
 
 ## Validation and evidence
 
@@ -58,9 +58,9 @@ Keep host-effect verification in the owning procedure.
 
 After cleanup and qualification, run the remaining workflow in the main Bach
 file. Complete receiver realization, verify the sung entry and audition, apply
-the authorized edits, then save and reopen that exact path. Verify the saved
-project's content, timing, cues, and loaded receivers. Evidence from earlier
-copies remains useful for individual probes. The main project must supply the
+the authorized edits, then verify Save writes to that exact path. Check the
+content, timing, cues, and loaded receivers in the current session. Evidence
+from earlier copies remains useful for individual probes. The main project must supply the
 end-to-end evidence. Add a controller operation only if a capability gap remains
 after testing the existing OSC, native, and computer routes.
 

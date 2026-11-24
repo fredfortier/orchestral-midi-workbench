@@ -26,7 +26,7 @@ resolve active project + existing plan
   → settle only missing phrase/control decisions; record them once in PERFORMANCE.md
   → serially reuse or load → program → reread → close each unfinished receiver
   → one fresh complete-clip edit after all affected receivers are ready
-  → independent readback → Save/reopen and representative audition → report
+  → independent in-session readback → Save when in scope → representative audition → report
 ```
 
 Keep the control flow tight. Reuse unchanged patch qualification and native
@@ -70,9 +70,10 @@ completed work or expanding the task into a diagnostic campaign.
    return missing required curves to the edit owner before completion. Preserving
    existing automation alone does not establish the new patch's vocal intensity.
 6. Compare every occurrence against the plan, including phrase entries, melismas,
-   repeated attacks and rests. Verify saved configuration and an audible passage
-   before claiming persistence or synchronized singing. Report completed scope
-   and remaining losses; a programmed dashboard alone proves neither.
+   repeated attacks and rests. Read the configuration in the current session.
+   When Save is in scope, verify the write to the intended project file. Use a
+   representative audible passage to check synchronization. Report the evidence
+   and remaining losses.
 
 An ambiguous source association, unsupported required phoneme or unverified
 control blocks only its dependent action. Resolve from retained sources and the

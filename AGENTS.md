@@ -11,6 +11,7 @@
 ## Bitwig project layout
 
 - Follow the [production project layout](skills/score-intake/references/project-layout.md#bitwig-project-layout) for saved projects, source scores, and evidence.
+- Keep live operations within the user's requested musical task. Verify edits in the current session. Closing, reopening, or switching the active project, and restarting Bitwig or its services, require an explicit user request for that action.
 
 ## Skill workflow
 

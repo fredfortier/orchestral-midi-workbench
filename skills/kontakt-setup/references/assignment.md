@@ -59,14 +59,17 @@ The service performs a fresh full target read before mutation and validates nati
 readback. Runtime must belong to the admitted Bitwig PID/display/Wine prefix.
 
 No selection helper, first-title window match, screenshot parsing, empty-player
-insertion, alternate loader or manual intervention is part of this flow. The
-controller qualifies the exact editor through native visibility and Win32 window
-identity before sending NKI input. The external loader only loads that exact NKI.
+insertion, alternate loader or manual intervention is part of this flow.
+Bitwig opens Kontakt automatically on insertion. The controller identifies that
+editor from its appearance in the Win32 inventory and loads the NKI directly
+into it. For an existing hidden receiver, it opens the editor once before
+loading. An existing visible editor whose handle cannot be established is left
+open and the load is refused. The external loader only loads the exact NKI.
 The relative NKI beneath INSTRUMENTS_ROOT_DIR remains the musical patch identity.
 
 For an authorized Syllabuilder caller, append `--keep-editor-open` to that same
 integrated `instrument assign` command. Require `editorKeptOpen: true`, confirmed
-load and exact owned-window/native visibility evidence; return the active editor
+load and exact owned-window evidence; return the active editor
 and settled binding to kontakt-syllable-builder. Do not run the loader separately.
 Default assignment still closes the editor.
 

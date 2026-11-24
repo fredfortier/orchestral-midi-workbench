@@ -72,8 +72,9 @@ for supporting project and focus actions.
    JSON/native note channels are 0–15. Preserve unrelated devices and musical content.
 3. Use integrated `instrument assign` for the slot. Without `--load-patch`, reuse
    its instrument configuration; an explicit NKI requests replacement. Assignment
-   preserves routing and other devices. Loading owns the exact editor and closes
-   it by default. For an authorized Syllabuilder handoff use `--keep-editor-open`
+   preserves routing and other devices. After insertion, load the NKI directly
+   into the editor Bitwig opens automatically. By default, close the editor
+   after loading. For an authorized Syllabuilder handoff use `--keep-editor-open`
    and return its verified window. Conventional controls use native track MIDI;
    read INSTRUMENT.md's control map and return curve edits to bitwig-edit.
 4. Process bindings serially. After an unknown/failure, query the original operation
