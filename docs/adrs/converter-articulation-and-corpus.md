@@ -34,4 +34,4 @@ distinctions reliably.
   measured reconstruction order. Bounded binary/triplet inference, embedded
   musical identities, and a shared canonical serializer remain project choices.
 
-[Current converter contract](../../crates/convert/ARCHITECTURE.md)
+[Current converter contract](../architecture/convert.md)

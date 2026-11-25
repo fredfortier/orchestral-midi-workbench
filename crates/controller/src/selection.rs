@@ -96,6 +96,30 @@ mod tests {
         let observation = serde_json::from_value(invalid).unwrap();
         assert!(Request::Read {}.verify(&observation).is_err());
     }
+
+    #[test]
+    fn overlapping_selection_locators_cannot_account_for_an_unrequested_member() {
+        let locator = json!({"project":"Piece","elements":[{"kind":"track","name":"Harp"}]});
+        let harp = json!({"project":"Piece","elements":[
+            {"kind":"track","name":"Harp","nativeId":"10"}
+        ]});
+        let cello = json!({"project":"Piece","elements":[
+            {"kind":"track","name":"Cello","nativeId":"20"}
+        ]});
+        let revision = "0e240cca-45e8-44b6-8b35-d67b0e6d0fcf";
+        let request: Request = serde_json::from_value(json!({
+            "action":"set","document":"piece","revision":revision,
+            "paths":[locator, harp],"mode":"objects","range":null
+        }))
+        .unwrap();
+        let observation: Observation = serde_json::from_value(json!({
+            "document":"piece","revision":revision,"editor":"arranger",
+            "members":[harp, cello],"primary":harp,
+            "mode":"objects","range":null,"unsupportedMembers":[]
+        }))
+        .unwrap();
+        assert!(request.verify(&observation).is_err());
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -188,11 +212,18 @@ impl Request {
             if document != &observation.document
                 || observation.members.len() != paths.len()
                 || !observation.unsupported_members.is_empty()
+                || observation.unsupported_primary.is_some()
+                || (paths.is_empty() && observation.primary.is_some())
                 || paths.iter().any(|path| {
-                    !observation
+                    observation
                         .members
                         .iter()
-                        .any(|actual| actual.item.is_none() && path.matches(&actual.path))
+                        .filter(|actual| actual.item.is_none() && path.matches(&actual.path))
+                        .count()
+                        != 1
+                })
+                || observation.members.iter().any(|actual| {
+                    actual.item.is_some() || !paths.iter().any(|path| path.matches(&actual.path))
                 })
                 || paths.first().is_some_and(|path| {
                     observation

@@ -71,7 +71,7 @@ Resolve the owning track paths from the same entity tree, then read their
 complete content once:
 
 ```sh
-midi-bridge controller midi get-all --paths paths.json --output before.json > /dev/null
+midi-bridge controller content read --paths paths.json > before.json
 ```
 
 This includes every note, expression curve, owning-track automation curve and

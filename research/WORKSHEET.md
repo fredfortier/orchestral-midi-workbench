@@ -18,7 +18,7 @@ establish transport and launcher state only.
 
 **Aim** Distinguish the document's owners from the remote's bank view.
 
-**Setup and steps** Use `controller info` and `midi get-all --paths` for exact
+**Setup and steps** Use `controller info` and `content read --paths` for exact
 clip paths. With the listener bound, send OSC `/refresh`. Send
 `/track/add/instrument` once and compare native structure before and after.
 
@@ -61,7 +61,7 @@ designation and qualified lane selection are not documented OSC commands.[^osc][
 `launcher read` and `launcher create --expected … --beats 4`. The arranger
 container was seeded through the UI before checking all programmatic options.
 Write both motifs with one
-`midi replace` and verify with an exact-path `get-all`. Add CC11 with
+`content replace` and verify with an exact-path `content read`. Add CC11 with
 `automation set`. Click the call's middle note in the Detail Editor, confirm
 the one selected key, then `note transpose --semitones -1` with fresh authority.
 With the fixture engine active, send OSC seek, indexed launch, stop, indexed
@@ -161,7 +161,7 @@ source before considering empty arranger creation.
   weight in choosing a document-centric clip creation or editing route.
   [OSC exchange](evidence/06-record-osc.txt) · [Recorded clip](evidence/06-recorded-clip.json) ·
   [Repeat, guard and restoration](evidence/06-preservation.txt).
-- **Geometry refused.** Native `midi replace` rejected the duration-only
+- **Geometry refused.** Native content replacement rejects the duration-only
   change as `NotDispatched`. Fresh readback matched the original clip and
   automation. The host has a named **Create Empty Clip** action. DrivenByMoss
   26.6.5 dispatches an assigned action via `/action/N`. The tested slot's
@@ -244,10 +244,10 @@ Reveal and keyboard focus were outside this check.
 [^osc]: [Pinned DrivenByMoss reference](https://github.com/git-moss/DrivenByMoss-Documentation/blob/8aab247a5643082f9706b36c6fd091ab7125aae4/Generic-Tools-Protocols/Open-Sound-Control-(OSC).md).
     Both directions were checked, including transport, layout, track, launcher,
     browser, virtual MIDI, markers and configured actions.
-[^native]: [Native structure and selection](../crates/controller/ARCHITECTURE.md#paths-and-structural-reads)
+[^native]: [Native structure and selection](../docs/architecture/controller.md#paths-and-structural-reads)
     and the [navigation recipe](../skills/bitwig-explore/references/arranger-navigation.md).
 [^edit]: [Launcher and replacement recipes](../skills/bitwig-edit/references/common-edits.md)
     and [supported production operations](../skills/bitwig-compose/references/workflow-stories.md#route-by-outcome).
-[^setup]: [Integrated instrument contract](../crates/controller/ARCHITECTURE.md#integrated-instruments)
+[^setup]: [Integrated instrument contract](../docs/architecture/controller.md#integrated-instruments)
     and [assignment procedure](../skills/kontakt-setup/references/assignment.md).
 [^keyboard]: [Qualified keyboard workflow](../skills/bitwig-explore/references/keyboard-workflow.md).

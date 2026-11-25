@@ -1,7 +1,7 @@
 # Bitwig qualification probe notes
 
 Use the [adapter instructions](adapters/bitwig-ctl/AGENTS.md) for deployment and
-the [verification contract](ARCHITECTURE.md#wire-deployment-and-verification)
+the [verification contract](../../docs/architecture/controller.md#wire-deployment-and-verification)
 for acceptance. Select probe cases applicable to the change and fixture.
 
 ## Candidate probe scopes

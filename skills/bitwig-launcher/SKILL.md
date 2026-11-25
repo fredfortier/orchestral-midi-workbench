@@ -72,7 +72,7 @@ and every intended clip/track owner; screenshots and injected input are not a fa
 Use `midi-bridge controller selection read` to confirm native project and
 selection readiness for either kind of host. When the task requires a musical
 read, use the selected note clips or pass exact clip paths to
-`midi-bridge controller midi get-all --paths paths.json`. Count the actual
+`midi-bridge controller content read --paths paths.json`. Count the actual
 note and automation arrays with jq.
 
 Open [troubleshooting](references/troubleshooting.md) whenever launch, project

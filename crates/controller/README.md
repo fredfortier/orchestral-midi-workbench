@@ -4,7 +4,7 @@
 operations. Run `cargo run --manifest-path crates/Cargo.toml -p notes-transformer -- --help`
 from the repository root.
 
-[Architecture](ARCHITECTURE.md) · [Java adapter](adapters/bitwig-ctl/README.md)
+[Architecture](../../docs/architecture/controller.md) · [Java adapter](adapters/bitwig-ctl/README.md)
 
 ## Launcher clips
 
@@ -15,12 +15,12 @@ create a four-beat clip.
 midi-bridge controller launcher read > slot.json
 midi-bridge controller launcher create --expected slot.json --beats 4 > created.json
 jq '[.position.clip]' created.json > paths.json
-midi-bridge controller midi get-all --paths paths.json > before.json
+midi-bridge controller content read --paths paths.json > before.json
 ```
 
-With a launcher slot selected, `midi get-all` also reads its contents directly.
+With a launcher slot selected, `content read --selection` reads its contents.
 Copy the snapshot, edit its notes or automation points, and submit the complete
-desired snapshot with `midi replace --expected before.json --input after.json`.
+desired snapshot with `content replace --expected before.json --input after.json`.
 To add a CC curve, append an automation entry with the track `owner`,
 `"placement": "launcher"`, the observed note clip ID in `noteClip`, a
 `midiCc` target, and points beginning at beat zero. Leave the native automation

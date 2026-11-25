@@ -1,6 +1,6 @@
 # Kontakt loader
 
-- Follow the [loader contract](ARCHITECTURE.md) for hosted loads and the [preprocessing contract](ARCHITECTURE.md#standalone-library-preprocessing) for standalone batch resave.
+- Follow the [loader contract](../../../../docs/architecture/kontakt-loader.md) for hosted loads and the [preprocessing contract](../../../../docs/architecture/kontakt-loader.md#standalone-library-preprocessing) for standalone batch resave.
 - When changing the loader's shipped files, check the [controller's embedded file list](../../src/kontakt_process.rs). Check the Rust caller as well when changing the JSON result.
 
 ## Provisioned Windows runtime

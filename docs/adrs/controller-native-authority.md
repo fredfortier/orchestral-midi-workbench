@@ -45,4 +45,4 @@ have separate scopes.
   fixtures, with explicit focus and evidence limits. It describes the observed
   builds and projects. Current qualification follows the package contract.
 
-[Current controller contract](../../crates/controller/ARCHITECTURE.md)
+[Current controller contract](../architecture/controller.md)

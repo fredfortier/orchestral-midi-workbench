@@ -10,5 +10,5 @@
   tree. The [controller decision record](../../../docs/adrs/controller-native-authority.md)
   records its revision and the later qualification provenance.
 
-Use the [controller architecture](../../../crates/controller/ARCHITECTURE.md)
+Use the [controller architecture](../../../docs/architecture/controller.md)
 and [qualification runbook](../../../crates/controller/RUNBOOK.md) for current authority.

@@ -74,5 +74,5 @@ from the worksheets.
     govern current skill execution.
 [^osc]: The [pinned DrivenByMoss OSC protocol](https://github.com/git-moss/DrivenByMoss-Documentation/blob/8aab247a5643082f9706b36c6fd091ab7125aae4/Generic-Tools-Protocols/Open-Sound-Control-(OSC).md)
     defines documented feedback, commands and the configured action slots.
-[^controller]: The [controller contract](../crates/controller/ARCHITECTURE.md)
+[^controller]: The [controller contract](../docs/architecture/controller.md)
     defines native ownership and verification.

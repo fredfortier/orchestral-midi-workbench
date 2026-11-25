@@ -1,8 +1,70 @@
 //! Complete native note clips, expressions and stored automation.
+use crate::project_address::{Element, Path};
 use crate::protocol;
-use std::error::Error;
+use std::collections::BTreeSet;
 pub type Observation = protocol::Snapshot;
 impl Observation {
+    /// Check the resolved scope as well as the echoed locators.
+    pub(crate) fn verify_scope(&self, paths: Option<&[Path]>) -> Result<(), String> {
+        if self.paths.as_deref() != paths {
+            return Err("Native content scope differs from the request".into());
+        }
+        let Some(paths) = paths else {
+            return Ok(());
+        };
+        let mut owners = BTreeSet::new();
+        let mut arranger_owners = BTreeSet::new();
+        let mut track_scopes = BTreeSet::new();
+        let mut clip_scopes = BTreeSet::new();
+        for path in paths {
+            let locator = path.track_path()?;
+            let mut matches = self.owners.iter().filter(|owner| locator.matches(owner));
+            let (Some(owner), None) = (matches.next(), matches.next()) else {
+                return Err("Requested content owner is absent or ambiguous".into());
+            };
+            owners.insert(owner);
+            if !matches!(path.elements.last(), Some(Element::LauncherClip { .. })) {
+                arranger_owners.insert(owner);
+            }
+            if matches!(
+                path.elements.last(),
+                Some(Element::Clip { .. } | Element::LauncherClip { .. })
+            ) {
+                let mut matches = self.clips.iter().filter(|clip| path.matches(&clip.path));
+                let (Some(clip), None) = (matches.next(), matches.next()) else {
+                    return Err("Requested Note Clip is absent or ambiguous".into());
+                };
+                if !clip_scopes.insert(&clip.path) {
+                    return Err("Multiple locators resolve to the same Note Clip".into());
+                }
+            } else if !track_scopes.insert(owner) {
+                return Err("Multiple locators resolve to the same content track".into());
+            }
+        }
+        if owners.len() != self.owners.len() {
+            return Err("Native read returned an unrequested content owner".into());
+        }
+        for clip in &self.clips {
+            let covered_by_track = matches!(clip.path.elements.last(), Some(Element::Clip { .. }))
+                && track_scopes.contains(&clip.path.track_path()?);
+            if covered_by_track == clip_scopes.contains(&clip.path) {
+                return Err(
+                    "Native Note Clip is outside the requested scope or covered twice".into(),
+                );
+            }
+        }
+        if self
+            .automation
+            .iter()
+            .any(|lane| lane.placement != "launcher" && !arranger_owners.contains(&lane.owner))
+        {
+            return Err(
+                "Native read returned Arranger automation outside the requested scope".into(),
+            );
+        }
+        Ok(())
+    }
+
     pub(crate) fn owns_automation(&self, lane: &crate::automation::Curve) -> bool {
         lane.note_clip.as_ref().is_none_or(|id| {
             self.clips.iter().any(|clip| {
@@ -36,10 +98,25 @@ impl Observation {
             {
                 return Err("Clip paths must be unique and end in a native Note Clip".into());
             }
+            if clip
+                .path
+                .elements
+                .last()
+                .and_then(Element::native_id)
+                .is_some_and(|id| id != clip.id)
+            {
+                return Err("Clip identity differs from its qualified path".into());
+            }
         }
         let mut owners = std::collections::BTreeSet::new();
         for owner in &self.owners {
             owner.validate()?;
+            if !matches!(
+                owner.elements.last(),
+                Some(Element::Track { .. } | Element::Group { .. })
+            ) {
+                return Err("Content owner must be a track or group channel".into());
+            }
             if !owners.insert(owner) {
                 return Err("Duplicate content owner".into());
             }
@@ -58,6 +135,7 @@ impl Observation {
             }
             if !self.owns_automation(lane)
                 || !owners.contains(&lane.owner)
+                || (!lane.is_new() && track_id(&lane.owner).is_some_and(|id| id != lane.track))
                 || (!lane.is_new() && !placements.insert((&lane.track, &lane.lane, &lane.clip)))
             {
                 return Err("Unknown owner or duplicate automation placement".into());
@@ -66,25 +144,20 @@ impl Observation {
         for clip in &self.clips {
             let mut owner = clip.path.clone();
             owner.elements.pop();
-            if !owners.contains(&owner) {
+            if !owners.contains(&owner) || track_id(&owner).is_some_and(|id| id != clip.track) {
                 return Err("Unknown clip owner".into());
             }
         }
         Ok(())
     }
 }
-/// # Errors
-/// Returns connection, selection, ownership and schema failures.
-pub async fn read(port: u16, adapter: Option<String>) -> Result<Observation, Box<dyn Error>> {
-    match crate::api::exchange(port, adapter, crate::controller::Command::Midi).await? {
-        crate::control::Response::MidiResult { midi } => {
-            midi.validate()?;
-            Ok(*midi)
-        }
-        _ => Err("Unexpected clip content response".into()),
+
+fn track_id(path: &Path) -> Option<&str> {
+    match path.elements.last() {
+        Some(Element::Track { native_id, .. }) => native_id.as_deref(),
+        _ => None,
     }
 }
-
 /// Compile a modified complete clip payload to one native notes-and-automation transaction.
 /// # Errors
 /// Refuses changed clip identity/geometry, partial note scope or unsupported note attributes.
@@ -255,4 +328,45 @@ fn compile_new_lanes(
         plan.automation_create.push(lane.clone());
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod scope_tests {
+    use super::Observation;
+    use serde_json::json;
+
+    #[test]
+    fn correct_path_echo_does_not_admit_wrong_owners_or_missing_clips() {
+        let owner = json!({"project":"Piece","elements":[
+            {"kind":"track","name":"Harp","nativeId":"1"}
+        ]});
+        let clip = json!({"project":"Piece","elements":[
+            {"kind":"track","name":"Harp","nativeId":"1"},
+            {"kind":"clip","name":"Harp part","nativeId":"2"}
+        ]});
+        let missing: Observation = serde_json::from_value(json!({
+            "document":"piece","revision":"observed",
+            "selection":{"editor":"paths","kind":"clips","from":0,"to":0,"lanes":[],"objects":[]},
+            "clips":[],"automation":[],"owners":[owner],"paths":[clip]
+        }))
+        .unwrap();
+        assert!(missing.validate().is_ok());
+        assert_eq!(
+            missing.verify_scope(missing.paths.as_deref()).unwrap_err(),
+            "Requested Note Clip is absent or ambiguous"
+        );
+
+        let mut wrong_owner = missing;
+        wrong_owner.paths = Some(wrong_owner.owners.clone());
+        wrong_owner.owners[0].elements[0] = super::Element::Track {
+            name: "Cello".into(),
+            native_id: Some("3".into()),
+        };
+        assert!(wrong_owner.validate().is_ok());
+        assert!(
+            wrong_owner
+                .verify_scope(wrong_owner.paths.as_deref())
+                .is_err()
+        );
+    }
 }

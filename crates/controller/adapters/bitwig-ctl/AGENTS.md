@@ -1,6 +1,6 @@
 # Bitwig Java adapter
 
-- Read the [native host contract](../../ARCHITECTURE.md#native-host-execution) before changing SDK or private document calls. Use [wire and deployment rules](../../ARCHITECTURE.md#wire-deployment-and-verification) when changing the adapter-service boundary.
+- Read the [native host contract](../../../../docs/architecture/controller.md#native-host-execution) before changing SDK or private document calls. Use [wire and deployment rules](../../../../docs/architecture/controller.md#wire-deployment-and-verification) when changing the adapter-service boundary.
 
 ## Build checks
 
@@ -35,4 +35,4 @@ Bitwig documents live installation by dropping a `.bwextension` onto the app. Th
 
 - Add `--harness` to the installer and enable **Notes Editor Harness** only on the disposable profile. To refresh its development code from `crates/`, run `bash controller/scripts/install-extension.sh --harness --code-only`, then `./target/debug/midi-bridge adapter bitwig probe reload`. Check the probe's `error` field and reload result.
 - The default scratch directory is `/tmp/notes-editor-harness`. To override it, set `NOTES_HARNESS_DIRECTORY` for the installer and CLI and the JVM property `notes.harness.directory` for Bitwig to the same directory.
-- Use focused ephemeral probes. Keep fault injection and history probes in the harness. Report the checks run, fixture and build identities, independent readback, and open limits under the [native verification contract](../../ARCHITECTURE.md#wire-deployment-and-verification).
+- Use focused ephemeral probes. Keep fault injection and history probes in the harness. Report the checks run, fixture and build identities, independent readback, and open limits under the [native verification contract](../../../../docs/architecture/controller.md#wire-deployment-and-verification).

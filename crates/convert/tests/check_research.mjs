@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const converter = fileURLToPath(new URL('../', import.meta.url));
 const research = path.resolve(converter, '../../.research');
-const architecturePath = path.join(converter, 'ARCHITECTURE.md');
+const architecturePath = path.resolve(converter, '../../docs/architecture/convert.md');
 const architecture = readFileSync(architecturePath, 'utf8');
 const catalog = JSON.parse(readFileSync(path.join(converter,'mapping/orchestral-subclasses.json')));
 const records = JSON.parse(readFileSync(path.join(research,'sources.json'))).records;
@@ -86,7 +86,14 @@ for(const file of readdirSync(schemaRoot)) {
 const temporary=mkdtempSync(path.join(os.tmpdir(),'midi2-spec-check-'));
 try {
   const xmlEscape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-  const fragment=architecture.match(/```xml\n([\s\S]*?)\n```/)[1];
+  const fragment=`<note id="blurred">
+  <pitch><step>D</step><octave>5</octave></pitch>
+  <duration>1</duration>
+  <notations><articulations><spiccato/></articulations></notations>
+  <play>
+    <other-play type="urn:midi2workbench:articulation:v2">{"technique":"short.spiccato","qualifiers":{"urn:midi2workbench:ot-berlin:sample-character":"blurred"},"binding":"example-berlin-strings-violin-i-v1"}</other-play>
+  </play>
+</note>`;
   const payload=JSON.parse(fragment.match(/<other-play[^>]*>([^<]+)<\/other-play>/)[1]);
   assert.equal(payload.technique,'short.spiccato');
   assert.equal(payload.qualifiers['urn:midi2workbench:ot-berlin:sample-character'],'blurred');

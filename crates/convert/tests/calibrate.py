@@ -29,7 +29,7 @@ def artifact_hashes():
         ROOT / 'crates/Cargo.lock',
         ROOT / 'crates/Cargo.toml',
         CRATE / 'Cargo.toml',
-        CRATE / 'ARCHITECTURE.md',
+        ROOT / 'docs/architecture/convert.md',
         ROOT / '.research/sources.json',
     ]
     for folder in ['src', 'mapping', 'tests']:

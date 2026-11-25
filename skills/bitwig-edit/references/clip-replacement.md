@@ -6,9 +6,9 @@ unrequested value. New notes/points use unique temporary IDs. Retained IDs mean
 update; omitted notes/points mean delete. Do not send a statistics projection.
 
 ```sh
-midi-bridge controller midi get-all --paths paths.json --output before.json
+midi-bridge controller content read --paths paths.json --output before.json
 jq '(.clips[].notes[] | select(.note.key==60) | .note.velocity) = 0.6' before.json > desired.json
-midi-bridge controller midi replace --expected before.json --input desired.json --output after.json
+midi-bridge controller content replace --expected before.json --input desired.json > after.json
 ```
 
 For note creation, each `.clips[].notes[]` entry contains `selected` and

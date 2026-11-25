@@ -37,4 +37,4 @@ input; do not commandeer physical ports or the desktop feedback socket.
 
 Validate actual host generation/owners before native writes. Valid silent audio,
 a display connection or a service health response is not musical qualification.
-See the [native verification contract](ARCHITECTURE.md#wire-deployment-and-verification).
+See the [native verification contract](../../docs/architecture/controller.md#wire-deployment-and-verification).

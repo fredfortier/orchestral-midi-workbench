@@ -1,7 +1,7 @@
 # Arranger cue markers
 
 For the intended scope, read the
-[landmark contract](../../../../crates/controller/ARCHITECTURE.md#purpose-and-execution-boundaries).
+[landmark contract](../../../../docs/architecture/controller.md#purpose-and-execution-boundaries).
 Current help and source establish implemented limits and operations. Use
 `controller cues read/create`; read help for the exact arguments and independently
 read markers again to verify creation. Native

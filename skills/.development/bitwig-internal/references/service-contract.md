@@ -1,6 +1,6 @@
 # Service/adapter development
 
-The [architecture data contracts](../../../../crates/controller/ARCHITECTURE.md#purpose-and-execution-boundaries)
+The [architecture data contracts](../../../../docs/architecture/controller.md#purpose-and-execution-boundaries)
 own application intent, domain planning, native execution and recovery. Read the
 [historical qualification](../../../../docs/adrs/controller-native-authority.md) before treating an existing
 session/DTO as the desired contract.

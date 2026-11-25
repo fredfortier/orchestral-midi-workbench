@@ -11,7 +11,7 @@ selection, stored notes and location context through the document adapter. Do
 not add a JavaScript bridge, grid reconstruction path, MIDI interface or a
 second competing note model.
 
-Read the [controller architecture](../../../crates/controller/ARCHITECTURE.md) for
+Read the [controller architecture](../../../docs/architecture/controller.md) for
 intended authority/data boundaries and [historical qualification](../../../docs/adrs/controller-native-authority.md)
 for build-specific evidence. [Probe inventory](../../../crates/controller/probes/README.md)
 and retained qualifications establish only their original host/fixture scope.

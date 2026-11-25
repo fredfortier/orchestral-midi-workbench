@@ -10,7 +10,7 @@ evidence directory; output files must not already exist.
 For the actual selected clip(s), including a selection of notes inside a clip:
 
 ```sh
-midi-bridge controller midi get-all --output before.json > /dev/null
+midi-bridge controller content read --selection > before.json
 jq '[.clips[].path]' before.json > paths.json
 ```
 
@@ -46,7 +46,7 @@ intended empty slot (`.position.clip == null`), then run
 `midi-bridge controller launcher create --expected slot.json --beats "$beats" > created.json`
 with the intended whole quarter-note length. Put the observed or created
 `.position.clip` in the `paths.json` array and use the same explicit-path
-`midi get-all`, `midi replace` and independent readback below.
+`content read`, `content replace` and independent readback below.
 
 Use clip-local source beats. Identify curves by `placement: "launcher"` and
 `noteClip` (the observed note clip ID). To add a CC curve, append an
@@ -158,29 +158,22 @@ curvature and spread. Clearing points may produce a verified native fallback;
 it does not delete an outside-clip lane.
 
 For named arranger curves or **new arranger lanes**, use the same underlying transaction
-through `controller automation set --input curves.json --output after.json`.
+through `controller automation set --input curves.json > after.json`.
 Its [input recipe](automation-edits.md#set-track-cc-curves) avoids
 manual snapshot bookkeeping: specify the track/channel/CC from INSTRUMENT.md,
 supply complete desired points in native CC units, and let the CLI capture the full
 current content internally. Device discovery is explicit opt-in beyond MIDI only. New curves
-need no preliminary lane setup. Do not additionally run `midi replace` for the
+need no preliminary lane setup. Do not additionally run `content replace` for the
 same edit after `automation set`.
 
 ## 4. Apply one complete replacement
 
-For an explicit-path observation, use:
+Use the complete before and desired snapshots from the same scope. A
+selection-scoped write rechecks the effective native musical selection.
 
 ```sh
 midi-bridge controller content replace \
   --expected before.json --input desired.json > after.json
-```
-
-For an effective selected-note observation without explicit paths, use the
-selection-aware compatibility command:
-
-```sh
-midi-bridge controller midi replace \
-  --expected before.json --input desired.json --output after.json > /dev/null
 ```
 
 The expected state includes notes **and** automation. One native transaction

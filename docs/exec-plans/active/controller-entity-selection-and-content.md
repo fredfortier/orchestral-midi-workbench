@@ -11,7 +11,7 @@ independently verify the live project’s Harp Punish curve after qualification.
 1. Ground hierarchy, selection, timeline, ownership and CLI grammar in
    Bitwig's guide, the adapter and the accepted controller contract.
 2. Use one selection projection, one path grammar and one snapshot transaction.
-   Preserve existing call sites during migration.
+   Update callers to the same command surface.
 3. Verify the Rust CLI and both Java profiles. Qualify the current Bitwig 6.1
    host with explicit paths, selected points and a complete automation read.
 4. Apply the original curve edit and reread the exact scope. Compare every

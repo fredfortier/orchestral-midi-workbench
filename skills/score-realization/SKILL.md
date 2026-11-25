@@ -1,9 +1,15 @@
 ---
 name: score-realization
-description: Interpret a supplied score, choose documented instrument patches, compile an explicit MIDI rendition, and place verified editable notes, automation and channel-layer routing in its Bitwig project. Excludes workspace intake, Kontakt loading/configuration and researched cue sheets.
+description: Convert a score with the Workbench converter, import a MIDI2 rendition into Bitwig, or realize an orchestrated performance with explicit rendition decisions. Excludes workspace intake, Kontakt loading/configuration and researched cue sheets.
 ---
 
 # Score realization
+
+For conversion or import with the converter's defaults, follow [default score
+import](references/default-import.md). That procedure also owns placement of
+an existing Workbench MIDI2 bundle when no musical changes are requested.
+
+## Orchestrated realization
 
 Own the musical decisions and their
 translation into native editable material. Stop at verified content/routing and

@@ -155,7 +155,8 @@ pub enum ClientMessage {
         adapter: String,
         host_build: String,
     },
-    /// Development/custom processors may submit explicit CRUD. Both sides validate.
+    /// Internal proposal compiled from a correlated native observation.
+    #[serde(skip)]
     Propose {
         operation: String,
         snapshot: Snapshot,
@@ -173,6 +174,17 @@ pub enum ClientMessage {
     Status {
         operation: String,
     },
+}
+
+#[cfg(test)]
+mod wire_tests {
+    use super::ClientMessage;
+
+    #[test]
+    fn adapter_cannot_supply_an_internal_edit_proposal() {
+        let error = serde_json::from_str::<ClientMessage>(r#"{"type":"propose"}"#).unwrap_err();
+        assert!(error.to_string().contains("unknown variant `propose`"));
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

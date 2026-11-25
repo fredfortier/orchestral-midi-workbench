@@ -81,8 +81,8 @@ requires existing curves; ordinary humanization should not randomize MIDI
 channels or techniques unless requested.
 
 `controller point` edits per-note expression. For track automation point CRUD or
-smoothing, use [automation edits](automation-edits.md): `controller midi replace`
+smoothing, use [automation edits](automation-edits.md): `controller content replace`
 has its own complete observation, revision fence and atomic source-curve plan.
-`get-all` is one complete observation for notes, expression and automation. Its
+`content read` is one complete observation for notes, expression and automation. Its
 document, revision, full content and source ownership are the expected state for
-the combined `midi replace` transaction; there is no separate automation authority.
+the combined `content replace` transaction; there is no separate automation authority.

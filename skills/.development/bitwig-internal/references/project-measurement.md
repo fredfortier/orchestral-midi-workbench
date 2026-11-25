@@ -1,7 +1,7 @@
 # Inspect native content without a project graph
 
-[ARCHITECTURE.md](../../../../crates/controller/ARCHITECTURE.md#one-complete-musical-snapshot) owns the
-schema. `controller info` reads typed folders; `controller midi get-all` reads
+[The controller contract](../../../../docs/architecture/controller.md#one-complete-musical-snapshot) owns the
+schema. `controller info` reads typed folders; `controller content read` reads
 complete selected clips, or `--paths paths.json` reads explicit clips without UI
 selection changes. Notes, expressions and all automation always travel together.
 

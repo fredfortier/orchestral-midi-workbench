@@ -77,7 +77,7 @@ transaction. Event sampling and receiver routing remain part of MIDI delivery.
 ## Set track CC curves
 
 ```sh
-midi-bridge controller automation set --input curves.json --output after.json > /dev/null
+midi-bridge controller automation set --input curves.json > after.json
 ```
 
 `curves.json` is one atomic batch:
@@ -95,7 +95,7 @@ zero curvature and zero spread are defaults. Record required initial held values
 as track MIDI state when needed; no sender device is required for static controls.
 
 The command resolves the owning track and its existing note clips, captures all
-notes/expression/automation, and uses the canonical `midi replace` transaction.
+notes/expression/automation, and uses the canonical `content replace` transaction.
 It creates missing track lanes or edits their complete points. Device discovery,
 selection changes and receiver reloads are unnecessary. Existing committed content
 refuses an implicit edit: preserve it, and specify its observed `source` only when

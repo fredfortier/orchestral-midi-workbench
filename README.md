@@ -30,7 +30,7 @@ Open this checkout in Codex or another agent that supports `SKILL.md`, then star
 
 **In Bitwig**, articulated parts use channels 2–16 for musical and keyswitch notes. The note channel selects the Kontakt instrument or articulation slot. Channel 1 carries a single shared automation lane per control. Each slot's Channel Filter admits its own note channels and the shared channel 1. Its Channel Map then sends those messages to channel 1 at Kontakt. That lets one dynamic curve follow the phrase as it moves between patches. For example, when a patch supports it, CC1 crossfades sampled dynamic layers while CC11 shapes phrase level. [Bitwig MIDI devices](https://www.bitwig.com/userguide/latest/midi/) · [Routing and expression conventions](skills/bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction)
 
-**On export**, the bridge reads that routing and translates recognized articulation slots into MIDI 2.0 note attributes. An ambiguous slot name becomes a performance remark. Reconstructing a score from edited DAW timing involves notation choices such as quantization and voice assignment. Keep the source score when you need the original engraving. [Capture and reconstruction](crates/controller/ARCHITECTURE.md#self-contained-midi2-export)
+**On export**, the bridge reads that routing and translates recognized articulation slots into MIDI 2.0 note attributes. An ambiguous slot name becomes a performance remark. Reconstructing a score from edited DAW timing involves notation choices such as quantization and voice assignment. Keep the source score when you need the original engraving. [Capture and reconstruction](docs/architecture/controller.md#self-contained-midi2-export)
 
 ## Project status
 

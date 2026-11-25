@@ -270,11 +270,16 @@ impl Command {
                 request: request.clone(),
             }),
             Self::Midi => Ok(DocumentCommand::ReadMidi),
-            Self::ReplaceClips { before, .. } => Ok(DocumentCommand::PrepareEdit {
-                paths: before.paths.clone(),
-                document: before.document.clone(),
-                revision: None,
-            }),
+            Self::ReplaceClips { before, .. } => {
+                if let Some(paths) = &before.paths {
+                    validate_content_paths(paths)?;
+                }
+                Ok(DocumentCommand::PrepareEdit {
+                    paths: before.paths.clone(),
+                    document: before.document.clone(),
+                    revision: None,
+                })
+            }
             Self::Apply { plan } => Ok(prepare(&plan.document, &plan.revision)),
             Self::Create {
                 document, revision, ..
@@ -334,6 +339,7 @@ impl Command {
                 return Err("Command does not produce an edit plan".into());
             }
             Self::ReplaceClips { before, after } => {
+                snapshot.verify_scope(before.paths.as_deref())?;
                 let mut current = snapshot.clone();
                 current.revision.clone_from(&before.revision);
                 if before.as_ref() != &current {
@@ -512,11 +518,14 @@ impl Command {
 fn validate_content_paths(paths: &[crate::project_address::Path]) -> Result<(), String> {
     use crate::project_address::Element;
     let mut distinct = std::collections::BTreeSet::new();
-    if paths.is_empty() {
-        return Err("Content read requires at least one qualified path".into());
-    }
+    let first = paths
+        .first()
+        .ok_or("Content read requires at least one qualified path")?;
     for path in paths {
         path.validate()?;
+        if path.project != first.project {
+            return Err("Content paths must address one project".into());
+        }
         if !matches!(
             path.elements.last(),
             Some(

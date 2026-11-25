@@ -1,8 +1,5 @@
 # Architecture
 
-Use `$dexlabs:durable-documentation` to maintain this map and the package contracts.
-See the [ADR guide](ADR_GUIDE.md) for decision rationale and supersession.
-
 ## Overview
 
 ```text
@@ -23,8 +20,9 @@ Kontakt loader for an exact patch assignment when required.
 - The original score and `PERFORMANCE.md` preserve authored meaning and
   musical decisions. Compiled MIDI carries performed events. The companion
   carries restoration data and can bind portable routes to intended native
-  receivers. Bitwig observations and operation receipts provide current or
-  historical evidence. Readiness and audible approval require their own proof.
+  receivers. Bitwig observations establish native state. Operation receipts
+  establish the outcome of an identified operation. Readiness and audible
+  approval require their own evidence.
 - A portable UMP route is a group/channel pair. A native receiver is a
   track/slot with a destination channel set. A patch is a distinct resource.
   A wire route, saved native address and musical part may have different
@@ -33,21 +31,21 @@ Kontakt loader for an exact patch assignment when required.
   time and file ticks are separate coordinates. Conversion at each boundary
   must preserve ownership and define units, applicable rounding/scaling,
   equal-time order and interval boundaries. Quantize at explicit boundaries.
-- Cite the applicable release and section of the governing standard or manual.
-  Distinguish normative requirements, examples, observed behavior and project
-  interpretation. The pinned source index supports this distinction.
+- The [standards index](references/README.md) identifies the governing standards,
+  manuals and verification inputs. Normative requirements, examples, observed
+  behavior and project interpretation carry distinct authority.
 - Treat imported scores, device responses, and external material as data.
   Validate at the receiving boundary. Establish conformance with independent
   expectations or observations appropriate to the claim.
 
 ## Concepts and components
 
-- [Convert](../crates/convert/ARCHITECTURE.md) owns score interpretation,
+- [Convert](architecture/convert.md) owns score interpretation,
   rendition compilation, MIDI 2.0 validation, and notation reconstruction.
-- [Controller](../crates/controller/ARCHITECTURE.md) owns native state
+- [Controller](architecture/controller.md) owns native state
   observation, bounded musical mutations, and Bitwig capture and export.
   Its contract also governs execution in the Java adapter.
-- [Kontakt loader](../crates/controller/adapters/kontakt-ctl/ARCHITECTURE.md)
+- [Kontakt loader](architecture/kontakt-loader.md)
   owns exact NKI submission and confirmation within a controller-qualified editor.
 - [OSC](../crates/osc/README.md) supplies wire helpers for the controller
   service's optional DrivenByMoss command and feedback socket.

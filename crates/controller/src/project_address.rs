@@ -85,7 +85,7 @@ impl Element {
             | Self::Plugin { name, .. } => name,
         }
     }
-    fn native_id(&self) -> Option<&str> {
+    pub(crate) fn native_id(&self) -> Option<&str> {
         match self {
             Self::Device { native_id, .. }
             | Self::AutomationLane { native_id, .. }

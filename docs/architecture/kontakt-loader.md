@@ -2,7 +2,7 @@
 
 ## Hosted loading
 
-The [controller](../../ARCHITECTURE.md#integrated-instruments) owns Bitwig
+The [controller](controller.md#integrated-instruments) owns Bitwig
 assignment, routing, and the editor lifecycle. The loader submits the exact NKI
 to the editor admitted by that transaction. It leaves player creation, patch
 customization, and editor closure to their respective owners.
@@ -18,19 +18,17 @@ Reconcile an unknown outcome before another submission. Require a visible
 render after rack preparation before opening the owned Load dialog. A failed
 dialog preflight that precedes filling or submitting the filename uses
 `NkiNotSubmitted`. Failures after that boundary retain their actual uncertainty.
-The owned Load dialog has a 75-second admission window. Wine may materialize
-the file picker after the previous 30-second limit under a large loaded session.
-The exact owner and process checks apply throughout the wait.
-Confirmation covers
-the loader's observed dialog, render, and navigator state. Sample availability,
+The owned Load dialog has a 75-second admission window. Window and process
+ownership checks apply throughout the wait. Confirmation covers the
+loader's observed dialog, render, and navigator state. Sample availability,
 saved persistence, and audible behavior each require their own evidence.
 
 ## Process contract and verification
 
 The Rust caller embeds the shipped source and assets in
-[`kontakt_process.rs`](../../src/kontakt_process.rs). With `--json` before the
-subcommand, stdout carries one `kontakt-ctl.result/v1` object and logs go to
-stderr. Failures return a nonzero exit status. [`cli.py`](kontakt_ctl/cli.py) and
+[`kontakt_process.rs`](../../crates/controller/src/kontakt_process.rs). With `--json` before the
+subcommand, stdout carries one command result object and logs go to
+stderr. Failures return a nonzero exit status. [`cli.py`](../../crates/controller/adapters/kontakt-ctl/kontakt_ctl/cli.py) and
 the command result types own the concrete fields.
 
 Use ephemeral Windows checks and disposable load probes. Durable unit tests
@@ -53,11 +51,11 @@ batch-resave literal X: child -> exact folder readback -> owned process rewrites
   Reconcile uncertain processing before retry. Back up original instrument files
   for authorized processing. Disposable fixtures cannot certify a real library.
 - Atomically publish `.kontakt-ctl-batch-resave.json` after clean completion.
-  `kontakt-ctl.batch-resave/v3` records target folder, covered relative filenames,
-  counts, completion time, exit code and evidence-log path. Reuse uses covered
-  paths and a successful result. Compatible v2 coverage remains usable without
-  its hashes. `--check` and already covered requests skip launch. Documented
-  historical folder processing can establish reuse during intake.
+  The receipt records the target folder, covered relative filenames, counts,
+  completion time, exit code and evidence-log path. Reuse requires covered
+  paths and a successful result. `--check` and requests with verified coverage
+  skip launch. Instrument intake can establish coverage from verified
+  folder-processing evidence.
 - Verify path and process ownership, folder readback, completeness, cleanup
   and receipt reuse in ephemeral Windows checks. For live qualification,
   independently observe the exact target, complete rewrites and clean exit.

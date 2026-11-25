@@ -148,4 +148,4 @@ The prohibition above on selecting to obtain a read applies to observation
 operations: reads remain selection-preserving. A deliberate selection command
 is a separate, fenced UI action, followed by a fresh effective musical read.
 Native maps and qualification are documented in the
-[arranger contract](../../../../crates/controller/ARCHITECTURE.md#native-selection).
+[arranger contract](../../../../docs/architecture/controller.md#native-selection).
