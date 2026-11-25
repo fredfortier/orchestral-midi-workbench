@@ -7,7 +7,7 @@ use std::{
     path::Path,
 };
 pub type Error = Box<dyn StdError>;
-pub const MAX_ARTIFACT_BYTES: u64 = 64 * 1024 * 1024;
+pub use musicxml_midi2_convert::MAX_ARTIFACT_BYTES;
 
 /// Refuse an unavailable evidence destination before native dispatch.
 /// This checks current availability; publication still uses atomic no-clobber.

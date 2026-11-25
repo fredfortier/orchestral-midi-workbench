@@ -5,6 +5,7 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Companion {
     pub version: u32,
     pub mapping_version: u32,
@@ -16,8 +17,6 @@ pub struct Companion {
     /// Version-2 intended receiver assignments, distinct from execution evidence.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rendition: Option<crate::rendition::Rendition>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub receiver_bindings: Option<serde_json::Value>,
     /// Optional ownership in canonical decoded note order; older companions omit it.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub note_sources: Vec<crate::clip::NoteSource>,
@@ -79,7 +78,6 @@ impl Companion {
         let requirements = serde_json::json!({"profiles":profiles,"pianoChannels":decoded.piano_routes,"optionalFeatures":required.bits,"standardCounts":required.standard.to_vec(),"customCounts":required.custom.to_vec(),"releaseSamples":decoded.notes.iter().map(|n|n.articulation.release).filter(|v|*v!=0).collect::<std::collections::BTreeSet<_>>()});
         Self {
             requirements,
-            receiver_bindings: None,
             rendition: None,
             note_sources: Vec::new(),
             version: 1,
@@ -101,12 +99,6 @@ impl Companion {
         rendition: crate::rendition::Rendition,
         decoded: &Performance,
     ) -> crate::Result<()> {
-        if self.receiver_bindings.is_some() {
-            return Err(crate::Diagnostic::new(
-                "E_RENDITION",
-                "legacy receiver bindings conflict with rendition assignment authority",
-            ));
-        }
         if decoded.semantic_values() != self.expected_values()? {
             return Err(crate::Diagnostic::new(
                 "E_RENDITION",
@@ -123,6 +115,13 @@ impl Companion {
     /// # Errors
     /// Returns unsupported/inconsistent versions, changed assignments and invalid bindings.
     pub fn validate_rendition(&self, decoded: &Performance) -> crate::Result<()> {
+        if self.mapping_version != 2 {
+            return Err(crate::Diagnostic::new(
+                "E_COMPANION",
+                "Unsupported companion mapping",
+            ));
+        }
+        self.dictionary.validate()?;
         if self.expected_values()? != decoded.semantic_values() {
             return Err(crate::Diagnostic::new(
                 "E_RENDITION",
@@ -131,9 +130,7 @@ impl Companion {
         }
         match (self.version, &self.rendition) {
             (1, None) => Ok(()),
-            (2, Some(rendition)) if self.receiver_bindings.is_none() => {
-                rendition.validate_performance(decoded)
-            }
+            (2, Some(rendition)) => rendition.validate_performance(decoded),
             _ => Err(crate::Diagnostic::new(
                 "E_COMPANION_VERSION",
                 "unsupported version or inconsistent rendition extension",
@@ -141,13 +138,7 @@ impl Companion {
         }
     }
     #[must_use]
-    pub fn matches(&self, _clip: &[u8], decoded: &Performance) -> bool {
-        if self.validate_rendition(decoded).is_err()
-            || self.mapping_version != 2
-            || self.dictionary.validate().is_err()
-        {
-            return false;
-        }
+    pub(crate) fn source_matches(&self, decoded: &Performance) -> bool {
         // The manifest's own claims are not an oracle for the archived source.
         // Re-render it under the recorded policy before restoring written structure.
         let source_matches = (|| {
