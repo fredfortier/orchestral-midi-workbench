@@ -10,28 +10,19 @@ import java.util.List;
 
 /** Arranger-only titled events, traced through ApiArrangementCueMarkerTimeline. */
 final class ProjectCues61 {
-    ProjectCues61() {}
-    private final ObservedScope authority=new ObservedScope();
-    private final java.util.Map<String,ObjectNode> inputs=new java.util.LinkedHashMap<>();
-    private final java.util.Map<String,ObjectNode> results=new java.util.LinkedHashMap<>();
-    private long bytes;
-    boolean admitted(String operation){return inputs.containsKey(operation);}
     String run(Object proxy,EditorAdapter61 editor,ObjectNode request)throws Exception {
         String action=request.required("action").asText();
         if(action.equals("read")){ObjectNode result=Wire.object();result.putNull("before");result.set("observation",read(proxy,editor));result.putNull("error");return result.toString();}
-        if(!action.equals("create"))throw new IllegalArgumentException("Unknown cue action");
-        String operation=request.required("operation").asText();
-        if(inputs.containsKey(operation)) {
-            if(!inputs.get(operation).equals(request))throw new IllegalArgumentException("Conflicting cue operation ID");
-            return results.get(operation).toString();
-        }
-        ObjectNode before=read(proxy,editor);
-        if(!request.required("document").equals(before.required("document")) || !request.required("revision").equals(before.required("revision")))throw new IllegalStateException("Stale marker scope; no mutation");
-        Prepared prepared=prepare(proxy,request.required("cues"));
-        long reservation=2L*before.toString().getBytes(StandardCharsets.UTF_8).length+request.toString().getBytes(StandardCharsets.UTF_8).length+65536;
-        if(inputs.size()>=4096 || bytes+reservation>32L*1024*1024)throw new IllegalStateException("Cue evidence capacity reached before writes");
+        ObjectNode before;
+        Prepared prepared;
+        try {
+            if(!action.equals("create"))throw new IllegalArgumentException("Unknown cue action");
+            request.required("operation");
+            before=read(proxy,editor);
+            if(!request.required("document").equals(before.required("document")) || !request.required("revision").equals(before.required("revision")))throw new IllegalStateException("Stale marker scope; no mutation");
+            prepared=prepare(proxy,request.required("cues"));
+        }catch(Exception failure){throw new NativeRefusal(failure);}
         ObjectNode result=Wire.object();result.set("before",before);result.set("observation",before.deepCopy());result.putNull("error");
-        inputs.put(operation,request.deepCopy());results.put(operation,result);bytes+=reservation;
         try {apply(prepared);result.set("observation",read(proxy,editor));}
         catch(Exception error){result.put("error",error.toString());try{result.set("observation",read(proxy,editor));}catch(Exception readFailure){error.addSuppressed(readFailure);}}
         return result.toString();
@@ -49,7 +40,7 @@ final class ProjectCues61 {
             ObjectNode marker=markers.addObject();marker.put("id",ProjectAdapter61.value(event,"managed_object_ID").toString());
             marker.put("name",Reflection.call(event,"v33").toString());marker.put("time",((Number)ProjectAdapter61.value(event,"time")).doubleValue());
         }
-        result.put("revision",authority.observe(result));Wire.requireMessageCapacity(result);return result;
+        result.put("revision",ObservedScope.revision(result));Wire.requireMessageCapacity(result);return result;
     }
     record Prepared(Object document,Object timeline,Class<?> eventType,List<Object> events) {}
 

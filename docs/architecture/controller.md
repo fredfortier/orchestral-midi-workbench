@@ -140,6 +140,15 @@ admitted document thread. Socket waits, blocking external work and live
 references stay out of that boundary. Timing-sensitive callbacks require
 explicit allocation, blocking, locking and logging budgets.
 
+Current Bitwig state supplies project authority. Request receipts correlate
+work and describe outcomes. A plug-in window, instrument or export receipt
+cannot suspend access to the document. Mutations check the relevant native
+owner, transport, save, render or Undo context at execution time. Scoped
+selection, launcher, cue, content and mixer revisions are derived from the facts
+in the observation. Reading an intervening scope does not change an identical
+observation's revision. The mixer and export also carry the native project
+change cursor because their observations omit stored musical content.
+
 ## Paths and structural reads
 
 `Path` consists of a project and a sequence of typed elements. It follows actual
@@ -207,8 +216,8 @@ selection uses the native collection and range mechanisms.
 
 `launcher read` observes the Inspector's single native launcher note slot and
 returns its qualified track, zero-based scene, native slot ID and nullable clip
-path. `launcher create` requires that exact fresh observation for an empty
-slot and creates an empty Note Clip of 1–1024 whole quarter-note beats in one
+path. `launcher create` compares the request with the current empty slot
+and creates an empty Note Clip with a positive whole-beat length in one
 native Undo step. Verify the slot, the created clip and its source and loop
 length before returning authority. Slot creation and subsequent MIDI replacement
 are independent Undo steps.
@@ -278,14 +287,17 @@ observed Snapshot + desired Snapshot -> native prepare/freeze -> Rust Plan
 ```
 
 Preserve paths, owners, selection, clip/source/loop geometry,
-untouched attributes and unrelated curves. Store the original explicit scope for
-freeze and reread; reconstructing it from clips loses automation-only tracks and
-can widen clip-only requests. Unchanged replacement independently rereads and
-compares the same scope without writes or an Undo step.
+untouched attributes and unrelated curves. Carry the original explicit scope
+with the edit request through independent readback. Reconstructing it from clips
+loses automation-only tracks and can widen clip-only requests. Unchanged
+replacement independently rereads and compares the same scope without writes
+or an Undo step.
 
-Native prepare freezes current complete values. Rust compares expected content
-and compiles note create/update/delete and complete curve replacements into one
-Plan. Revision is a freshness/transaction cursor, not sufficient proof of content.
+Native prepare reads current complete values for the individual request. Rust
+compares expected content and compiles note create/update/delete and complete
+curve replacements into one Plan. Before writing, the adapter rereads the same
+native scope and compares its
+complete values to the request snapshot. Revision alone cannot establish content.
 Preflight source aliases, temporary identities, collisions, domains, ordering and
 native precision before mutation. Reject unsupported occurrence isolation. Complete
 readback and point identity mappings verify intended changes and preservation;
@@ -354,11 +366,13 @@ closure. Otherwise close the editor after loading and verify its disappearance.
 External loading is outside native Undo. Native assignment, NKI submission,
 loaded patch, samples and audible playback are distinct facts.
 
-Retain only outstanding external work while it may still act or its result is
-unknown; later writes refuse until reconciliation. Status does not compete with
-an active loader. A native editor-visibility operation invalidated by a document
-lifetime change retains a terminal unknown receipt. It releases its write guard
-because it has no deferred document edit. Resume-before-load continues the same
+Operation status records the outcome for the original instrument request.
+Status does not compete with an active loader. A native editor-visibility
+operation invalidated by a document lifetime change retains a terminal unknown
+receipt. Later document requests resolve and inspect their own current Bitwig
+scope. The service requires reconciliation before another external NKI
+submission when the prior submission's outcome remains unknown.
+Resume-before-load continues the same
 operation only after a retained receipt and fresh identity/membership/routing
 evidence prove no NKI
 submission. It never reinserts. An atomic one-shot receipt claim fences submission;

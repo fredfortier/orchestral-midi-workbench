@@ -490,7 +490,7 @@ async fn load_owned_nki(
     .map_err(control::Error::unknown)
 }
 
-// Admit only the existing, evidence-checked continuation through the write gate.
+// Admit the evidence-checked continuation before another NKI submission.
 // Fresh native owner/routing checks and the one-use claim still run in assignment.
 pub(crate) fn resumes_blocked_loader(request: &Request, blocked: &str) -> bool {
     let Request::Assign {

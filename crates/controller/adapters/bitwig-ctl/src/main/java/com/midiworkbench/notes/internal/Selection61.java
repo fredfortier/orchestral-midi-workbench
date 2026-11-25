@@ -14,12 +14,11 @@ import java.util.Set;
 final class Selection61 {
     private final Object proxy,document;
     private final String generation;
-    private final ObservedScope scope;
     private final java.util.function.BooleanSupplier current;
     private boolean dispatched;
     private final java.util.Map<String,JsonNode> knownPaths=new java.util.HashMap<>();
-    Selection61(Object proxy,Object document,String generation,ObservedScope scope,java.util.function.BooleanSupplier current) {
-        this.proxy=proxy;this.document=document;this.generation=generation;this.scope=scope;this.current=current;
+    Selection61(Object proxy,Object document,String generation,java.util.function.BooleanSupplier current) {
+        this.proxy=proxy;this.document=document;this.generation=generation;this.current=current;
     }
     private static Object call(Object o,String method)throws Exception{return Reflection.call(o,method);}
     private static Object value(Object o,String field)throws Exception{return ProjectAdapter61.value(o,field);}
@@ -135,7 +134,7 @@ desired.add(target);expected.add(pathFor(target));
             Object primary=call(nativeSelection,"XQF");if(primary!=null) { try {result.set("primary",member(primary));}catch(IllegalArgumentException outside){result.put("unsupportedPrimary",id(primary));} }
             if(time) {ObjectNode range=result.putObject("range");range.put("from",((Number)call(inspected,"zeN")).doubleValue());range.put("to",((Number)call(inspected,"cSc")).doubleValue());}
         }
-        result.put("revision",scope.observe(result));return result;
+        result.put("revision",ObservedScope.revision(result));return result;
     }
     private JsonNode member(Object target)throws Exception {
         if(type("fOD").isInstance(target)) {

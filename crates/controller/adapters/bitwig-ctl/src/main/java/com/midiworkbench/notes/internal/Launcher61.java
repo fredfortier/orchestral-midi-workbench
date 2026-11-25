@@ -70,7 +70,7 @@ final class Launcher61 {
         return value(owner,"managed_object_ID").toString();
     }
 
-    static ObjectNode observe(Object document,String generation,Object slot,ObservedScope scope) throws Exception {
+    static ObjectNode observe(Object document,String generation,Object slot) throws Exception {
         ObjectNode result = Wire.object().put("document",generation);
         result.putNull("position");
         if (slot != null) {
@@ -81,7 +81,7 @@ final class Launcher61 {
             if (clip == null) position.putNull("clip");
             else position.set("clip",clipPath(document,track,clip));
         }
-        result.put("revision",scope.observe(result));
+        result.put("revision",ObservedScope.revision(result));
         return result;
     }
 
@@ -91,16 +91,16 @@ final class Launcher61 {
                 || before.required("position").isNull()
                 || !before.required("position").required("clip").isNull()
                 || !request.required("beats").isIntegralNumber()
-                || !request.required("beats").canConvertToInt()
-                || request.required("beats").intValue() < 1 || request.required("beats").intValue() > 1024)
-            throw new IllegalArgumentException("Creation requires fresh authority for one empty launcher note slot and 1–1024 beats");
+                || !request.required("beats").canConvertToLong()
+                || request.required("beats").longValue() < 1 || request.required("beats").longValue() > 0xffff_ffffL)
+            throw new IllegalArgumentException("Creation requires the current empty launcher note slot and a positive unsigned 32-bit beat length");
     }
 
-    static void create(Object slot,int beats) throws Exception {
+    static void create(Object slot,long beats) throws Exception {
         call(slot,"v33",new Class<?>[]{double.class},(double)beats);
     }
 
-    static void verify(Object slot,int beats) throws Exception {
+    static void verify(Object slot,long beats) throws Exception {
         Object created = clip(slot);
         if (created == null || noteSlot(created) != slot
                 || ((Number)value(call(created,"fvB"),"duration")).doubleValue() != beats

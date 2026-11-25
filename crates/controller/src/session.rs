@@ -483,19 +483,19 @@ pub async fn control(
         return dispatch(state, adapter, command).await;
     }
     let _guard = state.application_gate.lock().await;
-    if let Some(operation) = state
-        .unresolved_loader
-        .lock()
-        .map_err(|_| ControlError::unavailable("Loader state unavailable"))?
-        .as_ref()
+    if let Command::Instrument {
+        request: request @ crate::instrument::Request::Assign { nki: Some(_), .. },
+    } = &command
+        && let Some(operation) = state
+            .unresolved_loader
+            .lock()
+            .map_err(|_| ControlError::unavailable("Loader state unavailable"))?
+            .as_ref()
+        && !crate::instrument::resumes_blocked_loader(request, operation)
     {
-        let resumes = matches!(&command, Command::Instrument { request }
-            if crate::instrument::resumes_blocked_loader(request, operation));
-        if !resumes {
-            return Err(ControlError::unknown(format!(
-                "External load {operation} requires reconciliation; no further write dispatched"
-            )));
-        }
+        return Err(ControlError::unknown(format!(
+            "External load {operation} requires reconciliation before another NKI submission"
+        )));
     }
     let adapter = Some(state.resolve_adapter(adapter.as_deref())?);
     if let Command::ReplaceClips { before, after } = &command {

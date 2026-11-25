@@ -33,9 +33,6 @@ public final class EditorAdapter61 implements AutoCloseable {
     private final Instrument61 instruments=new Instrument61();
     private Object currentDocument;
     private String generation;
-    private String frozenRevision;
-    private ObjectNode frozenSnapshot;
-    private JsonNode frozenPaths;
     private Object documentTarget;
     private Object documentListener;
     private boolean closed;
@@ -51,53 +48,56 @@ public final class EditorAdapter61 implements AutoCloseable {
     }
 
     public EditorAdapter61(Object proxy,HostBuild build,DocumentAccess continuation){this(proxy,build);this.continuation=continuation;}
-    public void initialize() throws Exception {observeTargetDocument();}
+    public void initialize() throws Exception {
+        Object document = observeTargetDocument();
+        if (document != null) nativeRevision(document);
+    }
 
     /** Probe-owned document lifetime without serializing the complete project graph. */
     public String currentProjectGeneration() throws Exception {
         observeCurrentDocument();return generation;
     }
 
+    String nativeRevision(Object document) throws Exception {
+        if (nativeChanges == null) nativeChanges = new ProjectRevision61(proxy);
+        nativeChanges.bind(document);
+        return ProjectRevision61.read(proxy, document);
+    }
+
     public String mix(String request)throws Exception {
-        exports.requireIdle();instruments.requireIdle();
         try{return mixer.run(proxy,this,Wire.parse(request));}
         catch(Exception failure){if(!mixer.dispatched)throw new NativeRefusal(failure);throw failure;}
     }
     public String exportAudio(String request)throws Exception {
-        instruments.requireIdle();ObjectNode input=Wire.parse(request);
+        ObjectNode input=Wire.parse(request);
         try{return exports.run(proxy,this,mixer,input);}
         catch(Exception failure){if(!exports.contains(input.path("operation").asText()))throw new NativeRefusal(failure);throw failure;}
     }
     public String cues(String request)throws Exception {
         observeCurrentDocument();ObjectNode input=Wire.parse(request);
-        if(!input.required("action").asText().equals("read")){instruments.requireIdle();exports.requireIdle();}
-        try{return cues.run(proxy,this,input);}
-        catch(Exception failure){if(!cues.admitted(input.path("operation").asText()))throw new NativeRefusal(failure);throw failure;}
+        return cues.run(proxy,this,input);
     }
     public String instrument(String request) throws Exception {
-        exports.requireIdle();observeCurrentDocument();
+        observeCurrentDocument();
         return instruments.run(proxy,this,continuation,Wire.parse(request));
     }
-    private final ObservedScope selectionScope=new ObservedScope();
     public java.util.concurrent.CompletableFuture<String> selection(String request)throws Exception {return selection(request,()->true);}
     public java.util.concurrent.CompletableFuture<String> selection(String request,java.util.function.BooleanSupplier validRequest)throws Exception {
-        Object document=observeCurrentDocument();exports.requireIdle();instruments.requireIdle();
-        return new Selection61(proxy,document,generation,selectionScope,()->validRequest.getAsBoolean() && !closed && currentDocument==document).run(Wire.parse(request));
+        Object document=observeCurrentDocument();
+        return new Selection61(proxy,document,generation,()->validRequest.getAsBoolean() && !closed && currentDocument==document).run(Wire.parse(request));
     }
-    private final ObservedScope launcherScope=new ObservedScope();
     public ObjectNode launcher(ObjectNode request) throws Exception {
         Object document=observeCurrentDocument();
         Object slot=Launcher61.selectedSlot(Launcher61.selection(proxy));
-        ObjectNode before=Launcher61.observe(document,generation,slot,launcherScope);
+        ObjectNode before=Launcher61.observe(document,generation,slot);
         if(request.size()==1 && request.path("action").asText().equals("read"))return before;
         try {
             if(!request.path("action").asText().equals("create"))throw new IllegalArgumentException("Unknown launcher action");
             Launcher61.preflight(request,before);
-            exports.requireIdle();instruments.requireIdle();
             requireIdleForContentEdit(document);
             requireIndependentUndo(document);
         }catch(Exception failure){throw new NativeRefusal(failure);}
-        int beats=request.required("beats").intValue();
+        long beats=request.required("beats").longValue();
         invoke(document,"v33",new Class<?>[]{String.class,boolean.class},"Create launcher clip",false);
         try {
             Object recorder=call(call(call(document,"cuK"),"TcB"),"v33");
@@ -108,7 +108,7 @@ public final class EditorAdapter61 implements AutoCloseable {
                 Launcher61.verify(slot,beats);
                 Object actualSlot=Launcher61.selectedSlot(Launcher61.selection(proxy));
                 if(actualSlot!=slot)throw new IllegalStateException("Launcher selection changed during clip creation");
-                return Launcher61.observe(document,generation,actualSlot,launcherScope);
+                return Launcher61.observe(document,generation,actualSlot);
             }catch(Exception failure) {
                 reverseStep(recorder,step,failure);
                 if(Launcher61.clip(slot)!=null || Launcher61.selectedSlot(Launcher61.selection(proxy))!=slot)
@@ -125,42 +125,34 @@ public final class EditorAdapter61 implements AutoCloseable {
     public String info(String path,boolean parameters) throws Exception {
         Object document=observeCurrentDocument();
         ObjectNode entity=new Entity61(document).observe(Wire.JSON.readTree(path),parameters);
-        entity.set("selection",new Selection61(proxy,document,generation,selectionScope,()->currentDocument==document).read());
+        entity.set("selection",new Selection61(proxy,document,generation,()->currentDocument==document).read());
         return entity.toString();
     }
     public String capture(String path,boolean includeInactive)throws Exception {return new MidiCapture61(observeCurrentDocument(),this).read(Wire.JSON.readTree(path),includeInactive);}
     public String readMidi() throws Exception {return readSelection();}
     public String readClips(String paths) throws Exception {return observe(Wire.JSON.readTree(paths)).snapshot().toString();}
-    public String freezePaths(JsonNode paths) throws Exception {
-        exports.requireIdle();instruments.requireIdle();frozenRevision=null;frozenPaths=paths.deepCopy();
-        View view=observe(frozenPaths);requireIndependentUndo(view.document());requireIsolatedSources(view);
-        frozenRevision=view.snapshot().required("revision").asText();frozenSnapshot=view.snapshot().deepCopy();return view.snapshot().toString();
-    }
     public String readSelection() throws Exception { return observe().snapshot().toString(); }
-    public String readAppliedSelection() throws Exception {try{return observe(frozenPaths).snapshot().toString();}finally{frozenPaths=null;}}
 
-    public String freeze() throws Exception {
-        instruments.requireIdle();exports.requireIdle();
-        frozenRevision = null;frozenPaths=null;
-        View view = observe();
-        requireIndependentUndo(view.document());
+    public ObjectNode readContent(JsonNode paths) throws Exception {
+        return observe(paths.isNull() ? null : paths).snapshot();
+    }
+
+    public ObjectNode prepareEdit(JsonNode paths) throws Exception {
+        View view = observe(paths.isNull() ? null : paths);
         requireIsolatedSources(view);
-        String wire = view.snapshot().toString();
-        frozenRevision = view.snapshot().required("revision").asText();frozenSnapshot=view.snapshot().deepCopy();
-        return wire;
+        return view.snapshot();
     }
 
     /** Preflight, apply and independently observe one native document batch. */
-    public String apply(String json) throws Exception {
-        instruments.requireIdle();exports.requireIdle();
-        String request = frozenRevision;ObjectNode frozen=frozenSnapshot;
-        frozenRevision = null;frozenSnapshot=null;
-        if (request == null) throw new IllegalStateException("No frozen UI selection");
-        View live = observe(frozenPaths);
-        if(frozen==null || !sameDocumentState(frozen,live.snapshot()))throw new IllegalArgumentException("Complete clip scope or selection changed before write");
+    public String apply(ObjectNode before, String json) throws Exception {
+        JsonNode paths = before.required("paths");
+        if (paths.isNull()) paths = null;
+        View live = observe(paths);
+        if (!sameDocumentState(before, live.snapshot()))
+            throw new IllegalArgumentException("Complete clip scope or selection changed before write");
         ObjectNode plan = Wire.parse(json);
         if (!plan.required("document").asText().equals(live.snapshot().required("document").asText())
-                || !plan.required("revision").asText().equals(request))
+                || !plan.required("revision").equals(before.required("revision")))
             throw new IllegalStateException("Selection, source content or clip mapping changed before apply");
         requireIsolatedSources(live);
         Set<String> planFields=new HashSet<>(Set.of("document","revision","edits"));for(String field:List.of("automation","automationCreate","automationDelete"))if(plan.has(field))planFields.add(field);requireKeys(plan,planFields);
@@ -269,7 +261,7 @@ public final class EditorAdapter61 implements AutoCloseable {
             pointIdentities.fields().forEachRemaining(entry->identities.put(entry.getKey(),entry.getValue().asText()));
             automation.project(expected,curves);
             call(call(recorder,"v33"),"LHs");
-            View observed=observe(frozenPaths);
+            View observed=observe(paths);
             automation.projectTopology(expected,observed.snapshot(),deletedCurves,created);
             verify(live,expected,observed,touched);
             ObjectNode result=Wire.object();result.set("snapshot",observed.snapshot());result.set("identities",Wire.JSON.valueToTree(identities));result.set("defaults",defaults);
@@ -280,7 +272,7 @@ public final class EditorAdapter61 implements AutoCloseable {
             // Same native change-buffer reversal used by the host's validation
             // recovery. Closing the group below is not itself rollback.
             reverseStep(recorder,step,failure);
-            View recovered=observe(frozenPaths);
+            View recovered=observe(paths);
             if(!sameDocumentState(live.snapshot(),recovered.snapshot()) || !live.payloads().equals(recovered.payloads()))
                 throw new IllegalStateException("Native recovery did not restore the frozen document",failure);
             discardRecoveredStep(step);
@@ -294,7 +286,8 @@ public final class EditorAdapter61 implements AutoCloseable {
         Object transport=ProjectAdapter61.value(document,"transport");
         for(String field:List.of("is_playing","is_playing_on_engine","record","write_automation"))
             if(!Boolean.FALSE.equals(ProjectAdapter61.value(transport,field)))throw new IllegalArgumentException("Content edits require stopped transport and recording disabled");
-        if(Boolean.TRUE.equals(ProjectAdapter61.value(document,"is_being_saved")) || call(document,"jst")!=null)throw new IllegalArgumentException("Save/render in progress");
+        if(Boolean.TRUE.equals(ProjectAdapter61.value(document,"is_being_saved")))throw new IllegalArgumentException("Save in progress");
+        Mix61.requireQueueIdle(document);
     }
 
     private static void reverseStep(Object recorder,Object step,Exception failure) throws Exception {
@@ -738,7 +731,7 @@ public final class EditorAdapter61 implements AutoCloseable {
             Object track=tracks.get(trackId);owners.add(ProjectAddress61.nativeTrackPath(document,track));
             automation.addAll(automationAdapter.readTrack(document,track,arrangerTracks.contains(trackId),launcherClips.getOrDefault(trackId,List.of()),curveOwners));
         }
-        root.put("revision",ProjectRevision61.read(proxy,document));
+        root.put("revision",ObservedScope.revision(root));
         return new View(document,root,Map.copyOf(clips),Map.copyOf(sourceNotes),Map.copyOf(payloads),Map.copyOf(curveOwners),Set.copyOf(arrangerTracks));
     }
 
@@ -770,8 +763,7 @@ public final class EditorAdapter61 implements AutoCloseable {
         if(!Boolean.TRUE.equals(call(proxy,"isDocumentThread")))throw new IllegalStateException("Wrong document thread");
         observeDocumentChanges();
         Object document=call(proxy,"getDocument");
-        nativeChanges.bind(document);
-        if(currentDocument!=document || generation==null) {currentDocument=document;generation=UUID.randomUUID().toString();frozenRevision=null;}
+        if(currentDocument!=document || generation==null) {currentDocument=document;generation=UUID.randomUUID().toString();}
         return document;
     }
 
@@ -779,11 +771,13 @@ public final class EditorAdapter61 implements AutoCloseable {
     private void observeDocumentChanges() throws Exception {
         if(closed)throw new IllegalStateException("Adapter exited");
         if(documentListener!=null)return;
-        nativeChanges=new ProjectRevision61(proxy);
-        try {
         Object target=call(proxy,"getTargetValue");Class<?> listenerType=type("ums");
         Object listener=java.lang.reflect.Proxy.newProxyInstance(listenerType.getClassLoader(),new Class<?>[]{listenerType},(receiver,method,args)->switch(method.getName()) {
-            case "eventOccurred" -> {instruments.invalidate();nativeChanges.invalidate();frozenRevision=null;frozenSnapshot=null;currentDocument=null;generation=null;yield null;}
+            case "eventOccurred" -> {
+                instruments.invalidate();
+                if (nativeChanges != null) nativeChanges.invalidate();
+                currentDocument=null;generation=null;yield null;
+            }
             case "hashCode" -> System.identityHashCode(receiver);
             case "equals" -> receiver==args[0];
             case "toString" -> "Notes document invalidation";
@@ -791,7 +785,6 @@ public final class EditorAdapter61 implements AutoCloseable {
         });
         invoke(target,"addListener",new Class<?>[]{listenerType},listener);
         documentTarget=target;documentListener=listener;
-        }catch(Exception error){try{nativeChanges.close();}catch(Exception cleanup){error.addSuppressed(cleanup);}nativeChanges=null;throw error;}
     }
 
     /** DocumentAccess dispatches disposal on the same owner thread as observation. */
@@ -801,7 +794,7 @@ public final class EditorAdapter61 implements AutoCloseable {
             instruments.invalidate();exports.close();
             if(nativeChanges!=null)nativeChanges.close();nativeChanges=null;
 
-            closed=true;frozenRevision=null;currentDocument=null;generation=null;
+            closed=true;currentDocument=null;generation=null;
             if(documentListener!=null)invoke(documentTarget,"removeListener",new Class<?>[]{type("ums")},documentListener);
             documentTarget=null;documentListener=null;
         }catch(Exception error){throw new IllegalStateException("Native observer disposal failed",error);}
