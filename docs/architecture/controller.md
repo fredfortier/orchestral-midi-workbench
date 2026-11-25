@@ -159,7 +159,10 @@ lane index locates a row within its observed track; it is not identity.
 `Entity = {path,kind,metadata,children}` contains name/native identity, track
 activity, clip placement/source/loop geometry, automation-lane locator, device
 registry identity and existing routing metadata. A lane's target descriptor
-identifies its parameter or MIDI channel and controller. Structural `info`
+identifies its parameter or MIDI channel and controller. If the native target
+cannot be resolved, structural reads return the lane's native identity, index
+and `targetResolution: "unresolved"`. Complete automation reads still refuse
+when a lane in their scope has an unresolved target. Structural `info`
 adds a root-level `selection` to that entity tree. It returns identity and
 structure without serializing notes, curve points or unrelated plug-in
 parameters in its default form. Explicit `--parameters` adds the requested
@@ -353,8 +356,11 @@ loaded patch, samples and audible playback are distinct facts.
 
 Retain only outstanding external work while it may still act or its result is
 unknown; later writes refuse until reconciliation. Status does not compete with
-an active loader. Resume-before-load continues the same operation only after a
-retained receipt and fresh identity/membership/routing evidence prove no NKI
+an active loader. A native editor-visibility operation invalidated by a document
+lifetime change retains a terminal unknown receipt. It releases its write guard
+because it has no deferred document edit. Resume-before-load continues the same
+operation only after a retained receipt and fresh identity/membership/routing
+evidence prove no NKI
 submission. It never reinserts. An atomic one-shot receipt claim fences submission;
 possible submission, consumed claims or changed scope refuse. Loader activation/
 render preparation does not establish dialog submission or permit customization.

@@ -1,0 +1,3 @@
+[submodule "bitwig-control-deck"]
+	path = bitwig-control-deck
+	url = https://github.com/remymazmanian/bitwig-control-deck

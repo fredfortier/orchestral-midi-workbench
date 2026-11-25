@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 /** JSON is confined to immutable strings at the host/network boundary. */
 public final class Wire {
-    public static final int VERSION = 75;
+    public static final int VERSION = 76;
     public static final int MAX_MESSAGE_BYTES = 16 * 1024 * 1024;
     public static final ObjectMapper JSON = new ObjectMapper()
             .enable(com.fasterxml.jackson.core.JsonParser.Feature.STRICT_DUPLICATE_DETECTION)

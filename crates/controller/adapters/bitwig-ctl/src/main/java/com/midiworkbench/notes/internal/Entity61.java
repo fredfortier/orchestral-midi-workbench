@@ -68,7 +68,7 @@ final class Entity61 {
             elements.remove(elements.size()-1);
             Object track=ProjectAddress61.resolveNative(parent,document,document.getClass().getClassLoader());
             if(elements.get(elements.size()-1).required("kind").asText().equals("group"))track=call(track,"DQP");
-            laneMetadata(owner,automationLanes(track).indexOf(owner),node);
+            laneMetadata(laneAtom(owner),automationLanes(track).indexOf(owner),node);
         }
         else if(kind.equals("layerChain") || kind.equals("choice"))devices(owner,node);
         else if(Set.of("device","plugin","layer","selector").contains(kind)) {
@@ -98,8 +98,10 @@ final class Entity61 {
         }
         int index=0;
         for(Object automation:automationLanes(channel)) {
-            ObjectNode c=entity(childPath(path,"automationLane",laneName(automation)),"automationLane",laneName(automation),automation);
-            laneMetadata(automation,index++,c);
+            Object atom=laneAtom(automation);
+            String name=targetName(atom);
+            ObjectNode c=entity(childPath(path,"automationLane",name),"automationLane",name,automation);
+            laneMetadata(atom,index++,c);
             node.withArray("children").add(c);
         }
         devices(channel,node);if(group)tracks(track,node);
@@ -109,16 +111,23 @@ final class Entity61 {
         Class<?> preview=Class.forName("owf",true,track.getClass().getClassLoader());
         return ((List<?>)Reflection.call(lanes,"XrN",new Class<?>[]{String.class},new Object[]{null})).stream().filter(l->!preview.isInstance(l)).toList();
     }
-    static String laneName(Object lane)throws Exception {
-        return value(laneAtom(lane),"name")+" automation";
+    private static String targetName(Object atom)throws Exception {
+        return atom==null?"Unresolved automation":value(atom,"name")+" automation";
     }
-    private static void laneMetadata(Object lane,int index,ObjectNode node)throws Exception {
+    static String laneName(Object lane)throws Exception {
+        return targetName(laneAtom(lane));
+    }
+    private static void laneMetadata(Object atom,int index,ObjectNode node)throws Exception {
         ObjectNode metadata=node.withObject("metadata").put("index",index);
-        metadata.set("target",AutomationAdapter61.targetIdentity(laneAtom(lane)));
+        if(atom==null)metadata.put("targetResolution","unresolved");
+        else metadata.set("target",AutomationAdapter61.targetIdentity(atom));
     }
     private static Object laneAtom(Object lane)throws Exception {
-        Object atom=value(lane,"value_atom");if(atom==null)atom=call(value(lane,"atom_reference"),"qKA");
-        if(atom==null)throw new IllegalStateException("Unresolved automation lane target");
+        Object atom=value(lane,"value_atom");
+        if(atom==null) {
+            Object reference=value(lane,"atom_reference");
+            if(reference!=null)atom=call(reference,"qKA");
+        }
         return atom;
     }
     private void devices(Object owner,ObjectNode parent)throws Exception {

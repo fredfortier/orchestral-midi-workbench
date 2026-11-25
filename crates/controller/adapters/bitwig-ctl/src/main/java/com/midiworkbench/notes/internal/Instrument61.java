@@ -29,7 +29,20 @@ public final class Instrument61 {
     private record Scope(Object document,Object track,Object parent,Object layer,Object container,Object slot,ObjectNode target,ObjectNode observation) {}
 
     void invalidate() {
-        for(Entry entry:operations.values())if(entry.result==null){entry.error="Document lifetime changed";entry.phase.set("unknown");}
+        for(Entry entry:operations.values()) {
+            if(entry.result!=null)continue;
+            entry.error="Document lifetime changed";
+            entry.phase.set("unknown");
+            String action=entry.input.required("action").asText();
+            if(action.equals("openEditor") || action.equals("closeEditor")) {
+                // Visibility has no deferred document edit. Keep its unknown outcome
+                // queryable without blocking writes in the next document lifetime.
+                entry.result=Wire.object();
+                entry.result.set("operation",entry.input.required("operation"));
+                entry.result.set("document",entry.input.required("document"));
+                entry.result.put("status","unknown").put("error",entry.error);
+            }
+        }
     }
     void requireIdle() {
         for(var entry:operations.entrySet())if(entry.getValue().result==null)throw new IllegalStateException("Unresolved instrument operation "+entry.getKey()+"; query original status");

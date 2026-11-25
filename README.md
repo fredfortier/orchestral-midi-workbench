@@ -1,12 +1,28 @@
 # Orchestral MIDI Workbench
 
-AI companion tools for orchestral composition, from MusicXML scores to editable Bitwig performances and back.
+AI companion tools for inspecting, composing, and editing orchestral music in Bitwig Studio, with MusicXML and MIDI 2.0 conversion.
 
-Bring a score into Bitwig Studio 6.1, shape the performance with Kontakt instruments, and export the edited arrangement as MIDI 2.0 or a reconstructed score for analysis. The workbench pairs a standalone MusicXML converter with a Bitwig controller and task-specific skills for an AI agent.
+Point to selected notes, automation points, or clips in Bitwig and ask an agent to inspect them or use them as musical reference. For example, use a cello rhythm and the harmony across the string tracks to rewrite just the viola clip. Workbench keeps the material it reads and the destination it edits independent. You can also start from a score, realize it with Kontakt instruments, and export the edited arrangement for analysis or notation.
 
-![A violin phrase goes from MusicXML through a validated MIDI 2.0 clip and back to notation.](docs/media/violin-round-trip.gif)
+[Work with an open Bitwig project](#work-with-an-open-bitwig-project) · [Try the standalone converter](#try-the-converter) · [Architecture](docs/ARCHITECTURE.md)
+
+## Work with an open Bitwig project
+
+`midi-bridge` connects to a Java extension in Bitwig Studio. Together they provide document access for stored notes, note expressions, and automation in the Arranger and Clip Launcher. The controller resolves the exact destination, checks it against the content previously read, and verifies the stored result after applying a supported edit in one native Undo step. That lets an agent read broadly and edit narrowly while Bitwig owns the project and its history.
+
+Workbench delegates session operations to DrivenByMoss over OSC wherever a qualified command covers the task, such as play, stop, seek, or clip audition. When a session action changes stored material, the workflow verifies the effect with a document read. [Why the stack uses a document data access layer](docs/ARCHITECTURE.md#why-bitwig-needs-a-document-data-access-layer)
+
+Follow the [Linux adapter setup](crates/controller/adapters/bitwig-ctl/AGENTS.md#update-and-smoke-test-on-linux). With the adapter connected, select notes in Bitwig's Detail Editor Panel and run a read from the repository root.
+
+```sh
+./crates/target/debug/midi-bridge controller content read --selection
+```
+
+The command returns a JSON snapshot of the owning clips, with flags for the selected notes. For analysis and editing through an agent, open this checkout in Codex or another agent that supports `SKILL.md` and use the [exploration](skills/bitwig-explore/SKILL.md), [score analysis](skills/score-analysis/SKILL.md), or [editing](skills/bitwig-edit/SKILL.md) skill.
 
 ## Try the converter
+
+![A violin phrase goes from MusicXML through a validated MIDI 2.0 clip and back to notation.](docs/media/violin-round-trip.gif)
 
 From the repository root, with the stable Rust toolchain installed, run:
 
@@ -22,7 +38,7 @@ The validation report inventories seven notes and the encoded pizzicato and stac
 
 ## Realize and edit a score in Bitwig
 
-Open this checkout in Codex or another agent that supports `SKILL.md`, then start with [the production workflow](skills/bitwig-compose/SKILL.md). The skills help an agent choose documented patches, plan articulations and phrasing, write editable notes and automation, and inspect the result. Bitwig owns the saved arrangement, so you can continue editing in the DAW. Export can capture a whole arrangement or a track group, validate a self-contained MIDI 2.0 clip, and reconstruct MusicXML or compressed MXL for harmonic, rhythmic, and orchestration analysis. [Bitwig adapter setup](crates/controller/adapters/bitwig-ctl/README.md) · [Kontakt loader setup](crates/controller/adapters/kontakt-ctl/README.md) · [MIDI 2.0 export](skills/bitwig-export-midi2/SKILL.md)
+Start with the [production workflow](skills/bitwig-compose/SKILL.md) to choose documented patches, plan articulations and phrasing, and realize a score with editable notes and automation in Bitwig. Export can capture a whole arrangement or a track group, validate a self-contained MIDI 2.0 clip, and reconstruct MusicXML or compressed MXL for harmonic, rhythmic, and orchestration analysis. [Kontakt loader setup](crates/controller/adapters/kontakt-ctl/README.md) · [MIDI 2.0 export](skills/bitwig-export-midi2/SKILL.md)
 
 ## How articulations and expression travel
 
@@ -34,6 +50,6 @@ Open this checkout in Codex or another agent that supports `SKILL.md`, then star
 
 ## Project status
 
-The converter runs independently of Bitwig or Kontakt. The live workflow targets the exact Bitwig Studio 6.1 host build and a provisioned Kontakt 7 setup under Wine on Linux. See the [verification guide](docs/CICD.md) for reproducible converter checks and the scope of native testing.
+The converter runs independently of Bitwig or Kontakt. Document access uses private mappings qualified against the supported Bitwig Studio 6.1 host build on Linux. Score realization with Kontakt uses a provisioned Kontakt 7 setup under Wine. See the [verification guide](docs/CICD.md) for reproducible converter checks and the scope of native testing.
 
 [Contributing](CONTRIBUTING.md) · [Architecture](docs/ARCHITECTURE.md) · [MIT License](LICENSE)
