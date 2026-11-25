@@ -255,7 +255,7 @@ impl Command {
                 })
             }
             Self::ReadClips { paths } => {
-                paths.iter().try_for_each(Path::validate)?;
+                validate_content_paths(paths)?;
                 Ok(DocumentCommand::ReadClips {
                     paths: paths.clone(),
                 })
@@ -507,6 +507,32 @@ impl Command {
         normalized.validate_plan(&plan)?;
         Ok(plan)
     }
+}
+
+fn validate_content_paths(paths: &[crate::project_address::Path]) -> Result<(), String> {
+    use crate::project_address::Element;
+    let mut distinct = std::collections::BTreeSet::new();
+    if paths.is_empty() {
+        return Err("Content read requires at least one qualified path".into());
+    }
+    for path in paths {
+        path.validate()?;
+        if !matches!(
+            path.elements.last(),
+            Some(
+                Element::Track { .. }
+                    | Element::Group { .. }
+                    | Element::Clip { .. }
+                    | Element::LauncherClip { .. }
+            )
+        ) {
+            return Err("Content paths must address tracks, group channels or Note Clips. For an automation lane, use the owning track path.".into());
+        }
+        if !distinct.insert(path) {
+            return Err("Content read requires distinct qualified paths".into());
+        }
+    }
+    Ok(())
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

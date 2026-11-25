@@ -122,7 +122,12 @@ public final class EditorAdapter61 implements AutoCloseable {
     }
     /** All reads use the same complete clip representation. */
     public String info(String path) throws Exception {return info(path,false);}
-    public String info(String path,boolean parameters) throws Exception {return new Entity61(observeCurrentDocument()).read(Wire.JSON.readTree(path),parameters);}
+    public String info(String path,boolean parameters) throws Exception {
+        Object document=observeCurrentDocument();
+        ObjectNode entity=new Entity61(document).observe(Wire.JSON.readTree(path),parameters);
+        entity.set("selection",new Selection61(proxy,document,generation,selectionScope,()->currentDocument==document).read());
+        return entity.toString();
+    }
     public String capture(String path,boolean includeInactive)throws Exception {return new MidiCapture61(observeCurrentDocument(),this).read(Wire.JSON.readTree(path),includeInactive);}
     public String readMidi() throws Exception {return readSelection();}
     public String readClips(String paths) throws Exception {return observe(Wire.JSON.readTree(paths)).snapshot().toString();}

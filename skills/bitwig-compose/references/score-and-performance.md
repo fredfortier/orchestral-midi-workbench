@@ -43,7 +43,8 @@ saved project + original score + user direction
    Anchor the required curves to the composer's markings and the musicological
    analysis in PERFORMANCE.md. Follow the shared
    [expression control specification](../../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction).
-   Use applicable controls as intended and encode their shared channel-1 curves.
+   Follow the [sparse curve procedure](../../bitwig-edit/references/automation-edits.md#draw-sparse-musical-curves)
+   when encoding applicable shared channel-1 curves.
    Finish and review the converter's MIDI2 and companion before creating
    musical tracks, clips or receivers. The bundle holds performed note gates,
    attacks, note routes and track controls. Place it with the admitted native

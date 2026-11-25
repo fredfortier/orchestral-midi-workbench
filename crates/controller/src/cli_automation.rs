@@ -22,6 +22,7 @@ pub struct Automation {
 #[derive(Subcommand)]
 enum Action {
     /// Discover the named device's parameters and mapped Remote Controls.
+    #[command(hide = true)]
     Read {
         #[arg(long)]
         target: PathBuf,

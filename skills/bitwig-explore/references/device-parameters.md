@@ -21,7 +21,7 @@ jq --arg track 'Soprano - ARVA Boys' --arg chain 'Ah legato' '
 ' entities.json > device.json
 ```
 
-`info` returns `Entity = {path, kind, metadata, children}`. `path` retains every
+`info` returns the entity tree and current selection. `path` retains every
 native Group Track, Track, device container and chain. Reuse its `nativeId`
 discriminators; do not strip them, flatten ancestry or choose the first duplicate.
 Include additional ancestor criteria when names occur in several groups. For
@@ -32,7 +32,7 @@ plug-ins select the discovered `plugin` entity with its registry ID/version.
 **CONTROLLER** Request this catalogue explicitly; structural `info` omits it.
 
 ```sh
-midi-bridge controller automation read --target device.json > device-parameters.json
+midi-bridge controller info --path device.json --parameters > device-parameters.json
 jq '.metadata.parameters[] | select(.midiController == 1)
     | {name:.target.name, parameter:.target.nativeParameterId,
        controller:.midiController, value, automatable,

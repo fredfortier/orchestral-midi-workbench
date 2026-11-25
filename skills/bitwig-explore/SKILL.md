@@ -24,8 +24,8 @@ Resolve names within actual native containment; retain returned `nativeId`
 discriminators for duplicate siblings. A displayed lane index locates a row in
 its observed track and is not durable identity. Read project layout, narrow to
 the relevant owners, then read complete musical content and analyze locally.
-Structural and selection reads contain no notes, points or plug-in parameters.
-Parameter discovery is explicit through `controller automation read`.
+Structural and selection reads contain no stored notes or curve points.
+Parameter discovery is explicit through `controller info --path DEVICE.json --parameters`.
 
 Find the exact object and its arranger geometry once. Seek with the returned
 beat, select with the returned native path, and show or focus the relevant

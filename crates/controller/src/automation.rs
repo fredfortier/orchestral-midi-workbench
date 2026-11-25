@@ -66,8 +66,11 @@ fn points_valid(points: &[Point]) -> Result<(), String> {
             return Err("Invalid automation point identity/time/value/curvature/spread".into());
         }
     }
-    if points.windows(2).any(|p| p[0].time > p[1].time) {
-        return Err("Automation points must retain stable source-time order".into());
+    if let Some(pair) = points.windows(2).find(|p| p[0].time > p[1].time) {
+        return Err(format!(
+            "Automation points must retain stable source-time order ({} at {} before {} at {})",
+            pair[0].id, pair[0].time, pair[1].id, pair[1].time
+        ));
     }
     Ok(())
 }
@@ -205,7 +208,12 @@ impl Curve {
     /// Rejects incomplete native data or malformed new channel-CC automation.
     pub fn validate(&self) -> Result<(), String> {
         self.owner.validate()?;
-        points_valid(&self.points)?;
+        points_valid(&self.points).map_err(|error| {
+            format!(
+                "Track {}, lane {}, source {}: {error}",
+                self.track, self.lane, self.source
+            )
+        })?;
         if (self.placement == "launcher") != self.note_clip.is_some()
             || self.note_clip.as_deref().is_some_and(|id| !identity(id))
         {

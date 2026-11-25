@@ -3,6 +3,83 @@
 Status: **Binding contract.** The owner's instructions govern. Existing code and
 historical qualification cannot relax this contract.
 
+## Entity model
+
+Bitwig owns three related kinds of state. An **entity** is a named structural
+object with a qualified path. **Selection** describes the native UI context and
+references entities or items inside them. **Musical content** lives in note
+and automation sources. An automation lane addresses a control on a track.
+Its arranger timeline and automation clips can carry different curves for
+that control.[^bitwig-automation] The Inspector can select a track, clip,
+note, device or automation point, and the active editor has its own
+meaning.[^bitwig-inspector]
+
+```text
+Project
+  +-- Group [nested Group ...]
+        +-- Track
+              +-- Arranger Note Clip ---- note source ---- notes, expression
+              +-- Launcher Note Clip ---- note source ---- notes, expression
+              +-- Automation Lane ------- target identity
+              |     +-- outside clips --- curve source --- points
+              |     +-- automation clip - curve source --- points
+              +-- Device
+                    +-- Layer or Selector chain ---- nested devices
+
+Selection ---- qualified entity path + optional content reference
+Snapshot ----- explicit paths + complete musical content in that scope
+```
+
+The structural path ends at the lane or Note Clip. A point or note reference
+carries an identity scoped by its lane or clip. A placement says where a
+source plays. Several placements can share one source, so an edit to that
+source must account for its aliases. This distinction determines what the
+controller can preserve during replacement.
+
+## Command grammar
+
+Use the same qualified JSON `Path` for every operation that addresses a
+structural entity. Entity kinds and names follow native containment. Display
+order, focus, parameter labels and numeric controller numbers describe
+different facts and cannot substitute for a path. Resolve names within the
+already identified owner, then carry the observed path to the next operation.
+
+| Command | Scope and result |
+| --- | --- |
+| `info [--path PATH.json]` | One structural subtree, or the project when omitted, with current native selection from the same document callback. |
+| `info --path DEVICE.json --parameters` | Include metadata for the addressed device's parameters and Remote Controls, including current values. The explicit flag bounds this additional read to that device. |
+| `selection read` | The same selection representation on its own. This avoids traversing the hierarchy during repeated checks. |
+| `selection set --input REQUEST.json` | Absolute native selection request with fresh authority, paths and mode. Return the verified native selection. |
+| `content read --paths PATHS.json` | One complete snapshot for a nonempty array of explicit track, group-channel or Note Clip paths. |
+| `content replace --expected BEFORE.json --input DESIRED.json` | Replace the same complete scope and return independently verified content. |
+
+The prefix is `midi-bridge controller`. `--path` takes one path and `--paths`
+takes an array. A mutation takes `--input` for its desired data and uses
+`--expected` where the precondition is a separate complete snapshot. These
+commands emit one JSON document on stdout and diagnostics on stderr. The shell
+handles output routing. Content read and replacement use the same snapshot
+grammar. They require explicit paths because selection can change between a
+read, a decision and a write.[^cli-grammar]
+
+```text
+info -> qualified selection and hierarchy -> resolve target and owning path
+  -> content read -> inspect or edit the JSON locally
+  -> content replace -> content read of the same scope
+```
+
+A lane address identifies the curve family. Use its owning track path to read
+the complete arranger snapshot, then filter the result by lane ID and, where
+needed, by placement or source. This keeps both the requested scope and the
+preservation scope visible. An ambiguous name requires a qualified path or
+further user intent. A point ID without ownership cannot choose an edit target.
+
+`midi get-all`, `midi replace` and the existing automation command forms remain
+compatibility entry points. Explicit legacy musical reads and edits use the
+same underlying snapshot and transaction as `content`. Specialist commands
+retain their domain contracts. Their scoped entity arguments use `Path` when
+the addressed object is structural, and their operation IDs, channels, source
+IDs and artifact filenames retain their distinct meanings.
+
 ## Purpose and execution boundaries
 
 Bitwig owns the project, hierarchy, selection, notes, expression, automation and
@@ -77,11 +154,12 @@ lane index locates a row within its observed track; it is not identity.
 
 `Entity = {path,kind,metadata,children}` contains name/native identity, track
 activity, clip placement/source/loop geometry, automation-lane locator, device
-registry identity and existing routing metadata. Structural `info` reads the
-project or resolves the requested subtree directly, then reads only descendants.
-It never reads notes, points or unrelated plug-in parameters. Explicit
-`automation read --target` adds the requested device's parameter/Remote Control
-catalogue; ordinary structural reads never do so. No native property bags, graphs,
+registry identity and existing routing metadata. A lane's target descriptor
+identifies its parameter or MIDI channel and controller. Structural `info`
+adds a root-level `selection` to that entity tree. It returns identity and
+structure without serializing notes, curve points or unrelated plug-in
+parameters in its default form. Explicit `--parameters` adds the requested
+device's parameter and Remote Control catalog. No native property bags, graphs,
 plug-in payloads or speculative fields belong in Entity.
 
 ## Native selection
@@ -94,6 +172,16 @@ bounds, normalized intentionally at native 2^-20 beat precision. Preflight every
 target and owner combination before changing anything. Reject incompatible
 families/owners, duplicates and stale authority. The first requested member is
 primary where supported; verify that fact independently of membership.
+
+An observation member has the fields of `Path` and, for selected content, an
+additional `item`. A selected note uses the owning Note Clip path and
+`item: {kind:"note", id}`. A selected automation point uses the lane path and
+`item: {kind:"automationPoint", id, source, placement?}`. The placement is
+present when the native context identifies it. For a shared source with no
+resolved placement, retain the source identity and require placement resolution
+for occurrence-specific work. Structural members are plain paths. Reuse the
+same path resolver and selection reader in project overview and selection-only
+reads. Selection observation does not imply write support for every member kind.
 
 Empty object paths clear the active supported selection. Readback distinguishes
 membership, primary, active editor and object/time mode; unsupported membership
@@ -161,6 +249,11 @@ compression, sparse views, note-only/automation-only observation protocols,
 subscription caches or adaptive payload machinery. About 1 MB is a prompt to
 inspect junk fields, not permission to truncate or impose a musical size ceiling.
 Frames reject above 16 MiB and offline inputs above 64 MiB as input safeguards.
+
+The adapter emits automation points in increasing source-time order and keeps
+native enumeration order among equal-time points. A remaining order failure
+identifies the track, lane, source and offending point pair. Apply the same
+canonical order to ordinary reads, the edit preflight and independent readback.
 
 Times are quarter-note beats with native source/placement/loop coordinates;
 expression time uses its source plus `contentStart`. MIDI channels are 0–15,
@@ -381,3 +474,24 @@ reject redundant full-project reads and unnecessary payloads.
 
 Compilation establishes buildability. Native behavior, semantic fidelity,
 instrument support and audible playback require their own evidence.
+
+[^bitwig-automation]: The Bitwig Studio 6.0 release notes distinguish track
+    automation from Arranger automation clips. The user guide describes the
+    corresponding track and clip editing modes, including Launcher clips.
+    [Bitwig 6.0 release notes](https://downloads.bitwig.com/6.0/Release-Notes-6.0.pdf)
+    · [Automation Editor Panel](https://www.bitwig.com/userguide/latest/the_automation_editor_panel/)
+
+[^bitwig-inspector]: Bitwig describes the Inspector as following the active
+    panel's selection and enumerates tracks, clips, notes, devices and
+    automation points. The [native adapter](adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/internal/Selection61.java)
+    reads Inspector membership and editor focus from distinct native fields.
+    [Meet Inspector Panel](https://www.bitwig.com/userguide/latest/meet_inspector_panel/)
+
+[^cli-grammar]: The authors of the [Command Line Interface Guidelines](https://clig.dev/)
+    recommend composable commands, consistent names and options, machine-readable
+    stdout and actionable diagnostics. These principles support reusing JSON
+    paths and snapshots directly in pipelines. The preservation boundary and
+    explicit write preconditions are local controller decisions.
+    [Simple parts](https://clig.dev/#simple-parts-that-work-together)
+    · [Output](https://clig.dev/#output)
+    · [Subcommands](https://clig.dev/#subcommands)

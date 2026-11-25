@@ -3,7 +3,7 @@ use crate::editor::{Change, MidiNote, NoteEvent};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashSet};
 
-pub const VERSION: u8 = 74;
+pub const VERSION: u8 = 75;
 
 /// Validate an adapter-owned operation token or bounded native history cursor.
 #[must_use]

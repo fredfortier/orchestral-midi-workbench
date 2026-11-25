@@ -25,7 +25,7 @@ For named owners independent of UI selection, follow
 the exact discovered paths in `paths.json`, then:
 
 ```sh
-midi-bridge controller midi get-all --paths paths.json --output before.json > /dev/null
+midi-bridge controller content read --paths paths.json > before.json
 ```
 
 For **structural information**, use `controller info` (or `info --path path.json`)
@@ -168,7 +168,15 @@ same edit after `automation set`.
 
 ## 4. Apply one complete replacement
 
-For either `desired.json` recipe, use the same command:
+For an explicit-path observation, use:
+
+```sh
+midi-bridge controller content replace \
+  --expected before.json --input desired.json > after.json
+```
+
+For an effective selected-note observation without explicit paths, use the
+selection-aware compatibility command:
 
 ```sh
 midi-bridge controller midi replace \
@@ -184,8 +192,7 @@ do not have different write authorities or reduced transfer schemas. See
 ## 5. Independently reread and check preservation
 
 ```sh
-midi-bridge controller midi get-all \
-  --paths paths.json --output verified.json > /dev/null
+midi-bridge controller content read --paths paths.json > verified.json
 ```
 
 For the existing-record examples above (no creation or native canonicalization),

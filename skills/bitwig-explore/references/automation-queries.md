@@ -5,10 +5,44 @@ Obtain musical meanings from INSTRUMENT.md, not knob discovery. Use
 [device parameter discovery](device-parameters.md) only for an explicit beyond-MIDI
 request or legacy-sender migration. This reference queries stored content.
 
-1. **CONTROLLER** Resolve the relevant track paths with scoped `info` and read
-   complete content through `midi get-all --paths paths.json`.
-2. Analyze the retained snapshot locally. `.automation[]` stores every placement
-   once alongside `.clips[]`; it does not require a note-clip owner.
+1. **CONTROLLER** Read `midi-bridge controller info > entities.json`. Resolve
+   the named track or use `.selection.primary` to identify its owner. A selected
+   automation point has the lane path and an `item` with its source and point ID.
+   An Arranger Note Clip, Launcher Note Clip or automation lane has the owning
+   track or group-channel path as its parent. If the prompt and metadata leave
+   several plausible matches, ask the user which target they mean.
+2. Find the requested lane within that owner, then read the complete track
+   snapshot and filter it locally by the observed lane ID.
+
+```sh
+# For a selected track, Note Clip, automation lane or automation point.
+jq -e '
+  .selection.primary
+  | {project, elements}
+  | if (.elements[-1].kind | IN("clip", "launcherClip", "automationLane"))
+    then .elements |= .[:-1] else . end
+  | select(.elements[-1].kind | IN("track", "group"))
+  | [.]
+' entities.json > paths.json
+
+jq -e --slurpfile owners paths.json --arg name 'Punish automation' '
+  $owners[0][0] as $owner
+  | [.. | objects | select(.path? == $owner) | .children[]
+     | select(.kind == "automationLane" and .metadata.name == $name)]
+  | if length == 1 then .[0] else error("Expected one matching lane") end
+' entities.json > lane.json
+
+midi-bridge controller content read --paths paths.json > before.json
+jq --slurpfile lane lane.json '
+  [.automation[] | select(.lane == $lane[0].metadata.id)]
+' before.json > lane-curves.json
+```
+
+For channel 1 CC1, replace the lane-name predicate with
+`.metadata.target.kind == "midiCc" and .metadata.target.channel == 0 and
+.metadata.target.controller == 1`, keeping the automation-lane kind check.
+`.automation[]` retains every placement once alongside `.clips[]`. For multiple
+placements, resolve the intended one by source, placement and mapping.
 
 ```sh
 jq '[.automation[] | {
