@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- In `midi-bridge controller`, replace `midi get-all` with `content read --selection`
+  or `content read --paths PATHS.json`. Use `content replace` with the original
+  and edited snapshots to apply changes. For device parameters, replace
+  `automation read --target DEVICE.json` with `info --path DEVICE.json --parameters`.
+- When restoring a score, `convert` checks that an explicit companion matches
+  the MIDI clip. For custom receiver routing during conversion, supply a
+  rendition plan with `--rendition-plan` in place of `--bindings`.
 - The controller service can host DrivenByMoss OSC feedback. Use
   `midi-bridge osc` to send typed commands and observe selected feedback addresses
   from the same service process.
