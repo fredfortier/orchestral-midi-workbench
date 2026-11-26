@@ -16,21 +16,64 @@ to all parts. Identify connected line, separate attacks, repeated pulse, held
 harmony, entrances and cadences. Slurs, ties, sampled legato and portamento are
 different. Phrases cross barlines; do not reset legato, lyrics or dynamics there.
 
-Resolve articulation over the complete gesture before writing routing rules.
-Read words and signs such as *simile* or *segue*, opening examples whose marks
-continue, changes of bowing, and shared-staff instrument labels. Use the
-engraved score or another appropriate source to settle uncertain starts and
-ends. Compare neighbors with the same rhythm and musical role at every
-receiver switch, on both sides of the boundary. Default legato can give a
-fresh attack with appropriate note separation. A switch to a short sample
-requires its own musical justification. Trace shared staves back to the
-named instruments and distinguish intended doublings from duplicated exports.
+## Research and map articulations
 
-Choose variants with the relevant INSTRUMENT.md. Keep attack weight, sustained
-timbre/dynamics, expression, vibrato, tuning and release distinct. Patch changes
-may change the dynamics control law. Select documented stock behavior that fits
-the rendition. Setup only assigns and loads the exact patch; it does not change
-receiver settings. A catalogue claim is not acoustic proof.
+Complete this review before recommending an articulation patch or writing its
+routing or note changes. It applies to new and revised articulation decisions
+in proposals and realizations. Use it for the requested passage, part, clip or
+movement.
+
+1. **Resolve the occurrences.** Identify the edition or score source, part and
+   voice, and complete requested range. For native material, identify the actual
+   track and clip owner and reconcile written locations with performed
+   occurrences. Distinguish an Arranger clip from a Launcher clip, a selected
+   subset from a whole clip, and shared-staff lines from doublings or export
+   duplicates. Read slurs, ties, rests, ornament and articulation marks, and
+   repeated attacks in the complete gesture, including neighboring notes.
+   Check directions that continue beyond their first example.
+   Where a parsed marking or voice assignment is uncertain, inspect the original
+   notation or a suitable edition and identify the source used. When the score
+   is unavailable, report what the native notes establish and leave score
+   markings unverified.
+2. **Research the consequential choices.** Use the [musicology research
+   procedure](../../performance-cues/references/musicology-research.md) to seek
+   work- and passage-specific analysis or critical commentary. If it leaves the
+   technique open, check applicable period, instrument or vocal practice.
+   Cite the source and exact location and state the inference it supports. When
+   an available recording is specified as a reference, align its performed
+   form to the score and cite timestamps for the relevant contrasts. Describe
+   the audible attack, connection and release. Attribute a physical technique
+   only if the evidence can identify it. Record gaps or conflicting evidence
+   and make a reasoned provisional choice when the sources leave room.
+3. **Choose the sound, then the receiver.** Describe the intended attack,
+   connection, body and release in playing terms. Use [instrument
+   selection](instrument-selection.md) to compare eligible installed variants
+   against that intent. Read their exact entries in `INSTRUMENT.md` and the
+   applicable manual sections when the choice depends on a specific behavior.
+   Check register, retriggering, transitions, release, dynamics control and
+   other behavior relevant to the passage. Cite what distinguishes the chosen
+   variant from plausible alternatives. Qualify a filename-only candidate as
+   unverified. If acoustic checking is in scope, use the [matched audition
+   procedure](../../bitwig-compose/references/audition.md) at the passage's
+   register and pulse, including the relevant transition or release.
+4. **Return the articulation map.** For each gesture, give the score location
+   and performed occurrence, observed notation, cited evidence or its limit,
+   intended sound, exact relative NKI, displayed Bitwig note channel and
+   Kontakt input, and verification status. Label proposed routing, measured
+   behavior and editorial gate or control targets explicitly. Group equivalent
+   occurrences where they share the rationale and binding. For a complete
+   rendition or full-clip review, account for every performed note and
+   intentional omission. Return the map for a proposal or record it in the
+   realization evidence linked from `PERFORMANCE.md`. Use the owning edit
+   and setup workflows when implementation is requested.
+
+Keep attack weight, sustained timbre, dynamics, expression, vibrato, tuning
+and release distinct. Patch changes may change the dynamics control law.
+Select documented stock behavior that fits the rendition. Setup assigns and
+loads the exact patch with its stock settings. Establish acoustic behavior
+through audition or measurement.
+
+## Check the performed mapping
 
 Review register/transposition, simultaneous lines, same-key overlap, tied notes,
 articulation transitions, tails and final cutoff. Never shorten ties to accommodate
@@ -39,16 +82,12 @@ agree over the complete overlap, not only at attacks. For continuo, figures and
 voice-leading require actual harmonic interpretation; sounding pitch classes do
 not constitute a continuo realization. Do not add unrequested notes or doubles.
 
-For a new realization or a full channel review, partition every performed
-note, including repeated occurrences, into reviewed gestures. For each
-gesture record the score location, intended attack/connection/release, exact
-receiver and channel, and musical reason. Group notes that share a decision.
-Account explicitly for redundant source copies and other intentional omissions.
-Use the supported `passages` assertions to check the reviewed track, instrument
-and note coverage independently of the routing rules. Source prefixes use
-actual converter identities. Inspect adjacent notes and all route boundaries
-against that review, and verify exact channel/slot separately where multiple
-slots share a patch. See [rendition inputs](conversion.md#rendition-inputs).
+When compiling, use the supported `passages` assertions to check the map's
+track, instrument and note coverage independently of the routing rules.
+Source prefixes use actual converter identities. Inspect adjacent notes
+and every receiver switch on both sides of its boundary. Verify the exact
+channel and slot even where multiple slots share a patch. See
+[rendition inputs](conversion.md#rendition-inputs).
 
 Authored dynamic curves need explicit supported rendering rules. The converter
 does not invent smoothing, breaths, bowing or phrase contours. Store unsupported

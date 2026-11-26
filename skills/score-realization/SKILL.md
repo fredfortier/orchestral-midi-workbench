@@ -9,6 +9,12 @@ For conversion or import with the converter's defaults, follow [default score
 import](references/default-import.md). That procedure also owns placement of
 an existing Workbench MIDI2 bundle when no musical changes are requested.
 
+For a new or revised articulation proposal, use the [articulation research
+and mapping procedure](references/interpretation.md#research-and-map-articulations)
+and return the map. A proposal can use a supplied score and documented patch
+inventory without native placement. For a request about a native selection,
+resolve the selected object through [Bitwig Explore](../bitwig-explore/SKILL.md).
+
 ## Orchestrated realization
 
 Own the musical decisions and their
@@ -17,8 +23,8 @@ save; do not automatically load Kontakt, research an arc, render or seek approva
 
 ```text
 existing workspace + source + musical direction
- -> review score gestures, continuations and neighboring notes
- -> assign exact receiver and channel to every reviewed occurrence
+ -> review score gestures and research material articulation choices
+ -> map every reviewed occurrence to its exact receiver and channel
  -> PERFORMANCE.md + independent passage expectations
  -> convert -> compare decoded routes to expectations
  -> native placement -> verify channels, receiver filters and note coverage
@@ -37,9 +43,12 @@ existing workspace + source + musical direction
    and return. Unsupported score format needs an explicit supported conversion
    path; intake of a PDF does not make it MusicXML.
 2. Read all relevant parts through the ending. Establish source instructions,
-   editorial choices and receiver adaptations separately. Select exact variants
-   from initialized library documentation. Read the exact articulation's
-   Conventional MIDI control map and stock dynamics and expression baselines.
+   editorial choices and receiver adaptations separately. Before choosing
+   patches or programming articulation, [research and map the
+   articulations](references/interpretation.md#research-and-map-articulations)
+   in the requested scope. For each chosen variant, read the exact
+   articulation's Conventional MIDI control map and stock dynamics and
+   expression baselines.
    Missing/stale controls return to documentation-only intake. If a required
    effect remains unresolved, evaluate eligible patches or mark the effect pending.
 3. Own PERFORMANCE.md's realization, binding and approximation sections using

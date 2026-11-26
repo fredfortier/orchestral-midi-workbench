@@ -86,10 +86,10 @@ Record each decision that affects the rendition beside its evidence.
 - [ ] **Forces and texture.** Check sounding transpositions, tessitura,
   polyphony, continuo texture, foreground and support. Resolve vocal sections,
   language, vowels or text fidelity, and melismas.
-- [ ] **Articulation and line.** Read the written slurs, ties, rests, ornaments,
-  repeated notes and attacks. Relate them to bowing, tonguing, text and phrase
-  function. Specify attack, connection, release and any editorial departures.
-  Check legato transitions, repeated attacks and polyphony against exact patches.
+- [ ] **Articulation and line.** Complete the
+  [articulation research and map](../../score-realization/references/interpretation.md#research-and-map-articulations).
+  Carry the score occurrences, cited evidence, playing intent and exact
+  receiver choices into the rendition.
 - [ ] **Intensity and expression.** Identify tension, arrivals, cadence and
   release. Choose sampled dynamics, attack velocity and independent expression
   separately. Review the patch control and baseline for each, and justify the

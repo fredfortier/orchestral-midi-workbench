@@ -13,6 +13,7 @@ directly to its owning skill.
 | --- | --- |
 | Convert and import a score with default playback, or place an existing Workbench rendition | [Default score import](../score-realization/references/default-import.md) |
 | Admit and orchestrate a score, propose or apply cue-led expression, or realize sung phrases | [Score and performance](references/score-and-performance.md), including the orchestration checklist for a new rendition |
+| Propose or revise articulations for a score, part or selected clip | [Score realization](../score-realization/SKILL.md), starting with articulation research and mapping |
 | Compose a part against the arrangement or extend the piece | [Compose and revise](references/compose-and-revise.md) |
 | Hear a passage, compare candidates, or audition and apply a repair | [Audition in context](references/audition.md) |
 | Analyze the current native performance | [Read back the arrangement](references/readback.md) |

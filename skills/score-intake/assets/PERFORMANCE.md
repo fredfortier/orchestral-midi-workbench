@@ -12,6 +12,10 @@ Current rendition: [revision and MIDI/companion links, or not yet realized].
 articulations, timing, dynamics, tuning and vocal-text fidelity as applicable.
 Initially unfilled. Realization owns this section and the bindings below.]
 
+[For a new or revised articulation plan, link the gesture map or record it here.
+Include score and performed locations, evidence and inference, playing intent,
+the receiver binding and its verification status for the requested scope.]
+
 ### Receiver bindings
 
 | Binding key | Score part / voice and musical purpose | Track / layer chain | Note channel (1–16 display) | Instrument / articulation / dynamics behavior | Library patch key / exact NKI | Stock behavior / native routing | Evidence / approximation |
