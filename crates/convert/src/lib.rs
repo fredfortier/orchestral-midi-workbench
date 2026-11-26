@@ -15,6 +15,9 @@ pub mod validation;
 pub mod wire;
 pub mod xml;
 use thiserror::Error;
+/// Maximum size of a portable artifact read or written by a Workbench CLI.
+pub const MAX_ARTIFACT_BYTES: u64 = 64 * 1024 * 1024;
+
 /// A stable error code and concrete witness.
 #[derive(Debug, Error)]
 #[error("{code}: {message}")]
@@ -118,9 +121,11 @@ pub fn midi2_to_xml(
     companion: Option<&preserve::Companion>,
     compressed: bool,
 ) -> Result<Vec<u8>> {
-    let score = clip::decode(bytes, companion.map(|c| &c.dictionary))?;
-    let source = if let Some(c) = companion.filter(|c| c.matches(bytes, &score)) {
-        xml::source_aware_xml(&c.source_xml)?
+    let score = clip::decode(bytes, None)?;
+    let source = if let Some(companion) = companion.filter(|companion| {
+        companion.validate_rendition(&score).is_ok() && companion.source_matches(&score)
+    }) {
+        xml::source_aware_xml(&companion.source_xml)?
     } else {
         notation::write(&score)?
     };

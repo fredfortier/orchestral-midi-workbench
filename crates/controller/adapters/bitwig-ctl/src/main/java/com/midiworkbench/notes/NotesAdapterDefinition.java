@@ -11,7 +11,7 @@ public final class NotesAdapterDefinition extends ControllerExtensionDefinition 
 
     @Override public String getName() { return "Notes Document Adapter"; }
     @Override public String getAuthor() { return "MIDI2.0Workbench"; }
-    @Override public String getVersion() { return "0.4.33"; }
+    @Override public String getVersion() { return "0.4.36"; }
     @Override public UUID getId() { return ID; }
     @Override public String getHardwareVendor() { return "MIDI2.0Workbench"; }
     @Override public String getHardwareModel() { return "Notes Document Adapter"; }

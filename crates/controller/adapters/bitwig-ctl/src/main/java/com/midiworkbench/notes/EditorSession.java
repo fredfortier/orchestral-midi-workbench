@@ -40,7 +40,6 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
     private volatile Operation pending;
     private boolean ready;
     private boolean connecting;
-    private boolean commanding;
     private long commandHighWater;
     private final ReplayCache<DocumentRequest> documentRequests=new ReplayCache<>(16,REPLAY_BYTES,entry->entry.bytes,entry->entry.receipt!=null);
     private static final class DocumentRequest {
@@ -66,6 +65,7 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
         final String id;
         final long deadline=System.nanoTime()+TimeUnit.SECONDS.toNanos(30);
         String request;
+        ObjectNode snapshot;
         String plan;
         boolean applying;
         volatile String receipt;
@@ -185,8 +185,8 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
                     document.submit(()->{
                         if(!active || connection!=receivedOn || pending!=operation || System.nanoTime()>operation.deadline)
                             throw new IllegalStateException("Session invalidated before native apply");
-                        ObjectNode applied=Wire.parse(editor.apply(plan));
-                        ObjectNode independent=Wire.parse(editor.readAppliedSelection());
+                        ObjectNode applied=Wire.parse(editor.apply(operation.snapshot,plan));
+                        ObjectNode independent=editor.readContent(operation.snapshot.required("paths"));
                         ObjectNode expected=applied.required("snapshot").deepCopy();expected.set("revision",independent.required("revision"));
                         if(!independent.equals(expected))throw new IllegalStateException("Independent content differs from apply readback");
                         ObjectNode receipt=Wire.object();receipt.put("type","applied");receipt.put("operation",id);
@@ -262,9 +262,8 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
         keys(command,action.equals("capture")?Set.of("action","path","includeInactive"):action.equals("info")?Set.of("action","path","parameters"):action.equals("readClips")?Set.of("action","paths"):(action.equals("selection") || action.equals("launcher") || action.equals("mix") || action.equals("exportAudio") || action.equals("cues") || action.equals("instrument"))?Set.of("action","request"):(action.equals("readMidi"))?Set.of("action"):command.has("paths")?Set.of("action","document","revision","paths"):Set.of("action","document","revision"));
         commandHighWater=requestSequence;
         DocumentRequest entry=new DocumentRequest(message);documentRequests.put(request,entry);
-        if(pending!=null || commanding){entry.complete(commandErrorReceipt(request,"Adapter busy or reconnecting"));documentRequests.trim();send(entry.receipt);return;}
+        if(edit && pending!=null){entry.complete(commandErrorReceipt(request,"An edit handshake already owns this session"));documentRequests.trim();send(entry.receipt);return;}
         long commandDeadline=System.nanoTime()+DEADLINE;
-        commanding=true;
         Operation operation=edit?new Operation(adapter+":"+(++sequence)):null;
         if(edit)pending=operation;
         java.util.concurrent.CompletableFuture<String> execution;
@@ -306,22 +305,17 @@ public final class EditorSession implements AutoCloseable,ConnectionControl.Targ
                 ObjectNode result=Wire.object();result.put("type","midiObservation");result.put("request",request);
                 result.set("midi",Wire.parse(action.equals("readClips")?editor.readClips(command.required("paths").toString()):editor.readMidi()));Wire.requireMessageCapacity(result);return result.toString();
             }
-            String snapshot;
-            {
-                snapshot=edit?(command.has("paths")?editor.freezePaths(command.required("paths")):editor.freeze()):editor.readSelection();
-                if(edit) {
-                    ObjectNode frozen=Wire.parse(snapshot);
-                    if(!frozen.required("document").equals(command.required("document"))
-                            || (!command.required("revision").isNull() && !frozen.required("revision").equals(command.required("revision"))))
-                        throw new IllegalArgumentException("Stale document or revision before preparing edit");
-                }
-            }
-            ObjectNode result=Wire.object();result.put("type","observation");result.put("request",request);
-            if(edit)result.put("operation",operation.id);else result.putNull("operation");
-            result.set("snapshot",Wire.JSON.readTree(snapshot));return result.toString();
+            ObjectNode snapshot=editor.prepareEdit(command.has("paths") ? command.required("paths")
+                    : com.fasterxml.jackson.databind.node.NullNode.getInstance());
+            if(!snapshot.required("document").equals(command.required("document"))
+                    || (!command.required("revision").isNull() && !snapshot.required("revision").equals(command.required("revision"))))
+                throw new IllegalArgumentException("Stale document or revision before preparing edit");
+            operation.snapshot=snapshot;
+            ObjectNode result=Wire.object().put("type","observation").put("request",request).put("operation",operation.id);
+            result.set("snapshot",snapshot);
+            return result.toString();
         });
         execution.whenComplete((result,error)->post(()->{
-            commanding=false;
             if(error!=null){if(pending==operation)pending=null;entry.complete(commandErrorReceipt(request,error));}
             else {if(edit)operation.request=result;entry.complete(result);}
             documentRequests.trim();

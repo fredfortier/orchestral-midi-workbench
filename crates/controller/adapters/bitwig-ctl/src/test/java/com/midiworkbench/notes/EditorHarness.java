@@ -29,6 +29,7 @@ public final class EditorHarness extends ControllerExtension {
     private boolean active;
     private boolean busy;
     private String armedDocument;
+    private Object editSnapshot;
 
     EditorHarness(EditorHarnessDefinition definition,ControllerHost host){super(definition,host);}
     @Override public void init(){
@@ -76,7 +77,15 @@ public final class EditorHarness extends ControllerExtension {
                                 yield (String)probe.getMethod("run",Object.class,String.class).invoke(null,proxy,request.toString());
                             }
                             case "selection" -> invoke("readSelection");
-                            case "freeze" -> invoke("freeze");
+                            case "freeze" -> {
+                                Class<?> pathsType=editor.getClass().getClassLoader()
+                                    .loadClass(com.fasterxml.jackson.databind.JsonNode.class.getName());
+                                Class<?> nullType=editor.getClass().getClassLoader()
+                                    .loadClass(com.fasterxml.jackson.databind.node.NullNode.class.getName());
+                                Object noPaths=nullType.getMethod("getInstance").invoke(null);
+                                editSnapshot=editor.getClass().getMethod("prepareEdit",pathsType).invoke(editor,noPaths);
+                                yield editSnapshot.toString();
+                            }
                             case "arm" -> {
                                 ObjectNode state=Wire.parse(invoke("readSelection"));
                                 if(!request.required("confirmation").asText().equals("DISPOSABLE FIXTURE")
@@ -89,7 +98,12 @@ public final class EditorHarness extends ControllerExtension {
                                 if(!state.required("document").asText().equals(armedDocument))throw new IllegalStateException("Arm this disposable fixture first");
                                 Class<?> faults=editor.getClass().getClassLoader().loadClass("com.midiworkbench.notes.internal.NativeFaults");
                                 if(command.equals("fail"))faults.getMethod("arm",int.class).invoke(null,request.path("after").asInt(1));
-                                try {yield (String)editor.getClass().getMethod("apply",String.class).invoke(editor,request.required("plan").toString());}
+                                try {
+                                    Object snapshot=editSnapshot;editSnapshot=null;
+                                    if(snapshot==null)throw new IllegalStateException("Observe the fixture before applying an edit");
+                                    yield (String)editor.getClass().getMethod("apply",snapshot.getClass(),String.class)
+                                        .invoke(editor,snapshot,request.required("plan").toString());
+                                }
                                 finally {faultAudit.set((String)faults.getMethod("disarm").invoke(null));}
                             }
                             default -> throw new IllegalArgumentException("Unknown named probe: "+command);
@@ -101,6 +115,7 @@ public final class EditorHarness extends ControllerExtension {
         getHost().scheduleTask(this::tick,100);
     }
     private void reload() throws Exception {
+        editSnapshot=null;
         Path built=DIRECTORY.resolve("code.bwextension");
         if(!Files.exists(built)) {
             if(editor!=null)((AutoCloseable)editor).close();

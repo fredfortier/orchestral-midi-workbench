@@ -24,7 +24,7 @@ Orchestra / Strings / Violino I / Instrument Layer / Portato
 **CONTROLLER** Save an array of requested track/group-channel or clip paths, then:
 
 ```sh
-midi-bridge controller midi get-all --paths paths.json --output before.json > /dev/null
+midi-bridge controller content read --paths paths.json > before.json
 ```
 
 Omit `--paths` only to read the effective native musical selection. Reads never
@@ -46,7 +46,7 @@ silently interpreted as an empty supported selection.
 Build one absolute request from the returned paths and current authority:
 
 ```json
-{"action":"set","document":"OBSERVED","revision":"OBSERVED",
+{"document":"OBSERVED","revision":"OBSERVED",
  "paths":[],"mode":"objects","range":null}
 ```
 

@@ -14,12 +14,11 @@ import java.util.Set;
 final class Selection61 {
     private final Object proxy,document;
     private final String generation;
-    private final ObservedScope scope;
     private final java.util.function.BooleanSupplier current;
     private boolean dispatched;
     private final java.util.Map<String,JsonNode> knownPaths=new java.util.HashMap<>();
-    Selection61(Object proxy,Object document,String generation,ObservedScope scope,java.util.function.BooleanSupplier current) {
-        this.proxy=proxy;this.document=document;this.generation=generation;this.scope=scope;this.current=current;
+    Selection61(Object proxy,Object document,String generation,java.util.function.BooleanSupplier current) {
+        this.proxy=proxy;this.document=document;this.generation=generation;this.current=current;
     }
     private static Object call(Object o,String method)throws Exception{return Reflection.call(o,method);}
     private static Object value(Object o,String field)throws Exception{return ProjectAdapter61.value(o,field);}
@@ -122,7 +121,7 @@ desired.add(target);expected.add(pathFor(target));
         });
         return result;
     }
-    private ObjectNode read()throws Exception {
+    ObjectNode read()throws Exception {
         ObjectNode result=Wire.object();result.put("document",generation);
         Object active=value(widget(),"active_editor_selection"),inspected=value(widget(),"inspector_selection");
         result.put("editor",active==null?"none":active==arranger()?"arranger":type("biD").isInstance(active)?"detailEditor":"unsupported");
@@ -131,11 +130,49 @@ desired.add(target);expected.add(pathFor(target));
         result.put("mode",time?"time":"objects");result.putNull("range");result.putNull("primary");
         if(inspected!=null) {
             Object nativeSelection=call(inspected,"qKA");
-            for(Object target:(List<?>)call(nativeSelection,"jaQ")) { try { members.add(pathFor(target)); } catch(IllegalArgumentException outside) { unsupported.add(id(target)); } }
-            Object primary=call(nativeSelection,"XQF");if(primary!=null) { try {result.set("primary",pathFor(primary));}catch(IllegalArgumentException outside){result.put("unsupportedPrimary",id(primary));} }
+            for(Object target:(List<?>)call(nativeSelection,"jaQ")) { try { members.add(member(target)); } catch(IllegalArgumentException outside) { unsupported.add(id(target)); } }
+            Object primary=call(nativeSelection,"XQF");if(primary!=null) { try {result.set("primary",member(primary));}catch(IllegalArgumentException outside){result.put("unsupportedPrimary",id(primary));} }
             if(time) {ObjectNode range=result.putObject("range");range.put("from",((Number)call(inspected,"zeN")).doubleValue());range.put("to",((Number)call(inspected,"cSc")).doubleValue());}
         }
-        result.put("revision",scope.observe(result));return result;
+        result.put("revision",ObservedScope.revision(result));return result;
+    }
+    private JsonNode member(Object target)throws Exception {
+        if(type("fOD").isInstance(target)) {
+            Object clip=call(target,"YXc"),note=call(target,"v33");
+            Object track=ancestor(clip,"com.bitwig.flt.document.core.master.kkr");
+            if(track==null)throw new IllegalArgumentException("Selected note has no track");
+            ObjectNode path=Launcher61.clipPath(document,track,clip);
+            path.putObject("item").put("kind","note").put("id",id(note));
+            return path;
+        }
+        if(type("nCh").isInstance(target) || type("Oss").isInstance(target))return automationPoint(target);
+        return pathFor(target);
+    }
+    private Object ancestor(Object target,String name)throws Exception {
+        return Reflection.call(target,"EwU",new Class<?>[]{Class.class},type(name));
+    }
+    private ObjectNode automationPoint(Object point)throws Exception {
+        Object timeline=ancestor(point,"BAd");
+        Object source=ancestor(point,"US");
+        if(timeline==null && source!=null)timeline=call(source,"DQP");
+        if(timeline==null)throw new IllegalArgumentException("Selected automation point has no timeline");
+        Object arrangement=call(timeline,"Vdp");
+        Object lane=arrangement==null?null:ancestor(arrangement,"dsv");
+        if(lane==null)lane=ancestor(point,"dsv");
+        if(lane==null)throw new IllegalArgumentException("Selected automation point has no lane");
+        ObjectNode path=(ObjectNode)pathFor(lane);
+        ObjectNode item=path.putObject("item").put("kind","automationPoint").put("id",id(point));
+        if(arrangement!=null && timeline==value(arrangement,"outside_timeline")) {
+            item.put("source",id(timeline)).put("placement",id(timeline));
+        } else {
+            Object clip=ancestor(point,"I3W");
+            if(clip!=null) {
+                item.put("source",id(call(clip,"dxV"))).put("placement",id(clip));
+            } else if(source!=null) {
+                item.put("source",id(source));
+            } else throw new IllegalArgumentException("Selected automation point has no source");
+        }
+        return path;
     }
     private JsonNode pathFor(Object target)throws Exception {
         if(type("com.bitwig.flt.document.core.master.kkr").isInstance(target) || type("com.bitwig.flt.document.core.master.stI").isInstance(target))return ProjectAddress61.nativeTrackPath(document,target);

@@ -1,6 +1,6 @@
 # Query complete clip MIDI with jq
 
-These filters operate on the same complete `get-all` JSON used for replacement.
+These filters operate on the same complete `content read` JSON used for replacement.
 They do not change the adapter scope or strip the retained file.
 
 **CONTROLLER** Resolve relevant tracks, then read their complete content once

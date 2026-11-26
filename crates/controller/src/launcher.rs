@@ -68,11 +68,10 @@ impl Request {
     pub fn validate(&self) -> Result<(), String> {
         if let Self::Create { expected, beats } = self {
             expected.validate()?;
-            if !(1..=1024).contains(beats)
-                || expected.position.as_ref().is_none_or(|p| p.clip.is_some())
-            {
+            if *beats == 0 || expected.position.as_ref().is_none_or(|p| p.clip.is_some()) {
                 return Err(
-                    "Creation requires an empty selected launcher slot and 1–1024 beats".into(),
+                    "Creation requires an empty selected launcher slot and a positive beat length"
+                        .into(),
                 );
             }
         }

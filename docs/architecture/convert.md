@@ -2,7 +2,7 @@
 
 Convert owns the transformation between authored notation, performed values,
 portable MIDI 2.0 and reconstructed notation. Controller owns native capture
-and the [interpretation of Bitwig routing](../controller/ARCHITECTURE.md#self-contained-midi2-export).
+and the [interpretation of Bitwig routing](controller.md#self-contained-midi2-export).
 Project-specific musical choices and evidence belong to the score's production
 workspace.
 
@@ -29,20 +29,20 @@ Descriptor  = {technique, qualifiers: {semanticId -> JSON value}}
 Event       = {time, order, words: UMP u32[]}
 ```
 
-- [`model.rs`](src/model.rs) represents time and sounding pitch as exact
+- [`model.rs`](../../crates/convert/src/model.rs) represents time and sounding pitch as exact
   rationals in quarter-note beats and MIDI semitones. Duration includes trailing
   rests. Encoded key, sounding pitch, displayed spelling and instrument
   trigger are distinct.
-- [`xml.rs`](src/xml.rs) owns score parsing, written cursors and finite performed
+- [`xml.rs`](../../crates/convert/src/xml.rs) owns score parsing, written cursors and finite performed
   occurrence identity. Source paths identify absolute same-name sibling indices
   (1-based), optional attributes and repeat occurrences. They are identifiers.
   Rendition inspection exposes written directions with their lexical source
   paths for the review of continuation spans and shared staves.
-- [`rules.rs`](src/rules.rs) owns articulation choices.
-  [`extension.rs`](src/extension.rs) owns named descriptors and dictionary rules.
-  [`clip.rs`](src/clip.rs) and [`wire.rs`](src/wire.rs) own allocation, clock,
-  framing and message encoding. [`notation.rs`](src/notation.rs) owns measured
-  reconstruction and [`preserve.rs`](src/preserve.rs) owns exact source restoration.
+- [`rules.rs`](../../crates/convert/src/rules.rs) owns articulation choices.
+  [`extension.rs`](../../crates/convert/src/extension.rs) owns named descriptors and dictionary rules.
+  [`clip.rs`](../../crates/convert/src/clip.rs) and [`wire.rs`](../../crates/convert/src/wire.rs) own allocation, clock,
+  framing and message encoding. [`notation.rs`](../../crates/convert/src/notation.rs) owns measured
+  reconstruction and [`preserve.rs`](../../crates/convert/src/preserve.rs) owns exact source restoration.
 - Preserve lifecycle, production/attack, connection, timbre, pattern, dynamics,
   position/mute and release as independent facets with source provenance. Every
   explicit audible facet needs a standard encoding, exact binding or timed
@@ -53,7 +53,7 @@ Event       = {time, order, words: UMP u32[]}
 ## Score semantics and timing
 
 - Admit the documented MusicXML partwise, timewise and MXL forms. Validate
-  output against the pinned MusicXML 4.0 grammar and follow the container root.
+  output against the governing MusicXML grammar and follow the container root.
   Retain the source XML in the companion and original MXL bytes as a separate
   source artifact. Ambiguous roots require selection. Local parsing and XSD
   checks avoid network and external-entity resolution.
@@ -116,7 +116,7 @@ Event       = {time, order, words: UMP u32[]}
   exact full-descriptor variation in declared preference order, then a custom
   binding or exact timed realization. Equal-priority ambiguity or an unsupported
   required facet fails. Report `E_CONFLICT` or `E_UNREPRESENTABLE` with the source.
-- The [catalog](mapping/orchestral-subclasses.json) covers all 106 named
+- The [catalog](../../crates/convert/mapping/orchestral-subclasses.json) covers all 106 named
   coordinates and is checked against `rules::VOCABULARY`. T accepts the exact
   named term/semantic ID. P additionally requires pattern/phrase constraints.
   Published Table 12 governs Lontano `14/7` and Singing `14/8`.
@@ -143,11 +143,11 @@ Event       = {time, order, words: UMP u32[]}
 | N9 | Detached-legato OR tenuto+staccato OR combined glyph → `11/9`. **Policy:** portato, regardless of serialization of equivalent marks. |
 | N10 | Effective pizzicato=yes → `11/A`, unless refined by snap. |
 | N11 | Snap-pizzicato/glyph → `11/B`. |
-| N12 | Explicit unmeasured type (normally value 0), or legacy single/0 → `12/0`. Paired start/stop is checked first, including zero marks. Measured tremolo retains rate/count and needs a matching sample binding or timed repeated notes. |
+| N12 | Explicit unmeasured type (normally value 0), or single tremolo with value 0 → `12/0`. Paired start/stop is checked first, including zero marks. Measured tremolo retains rate/count and needs a matching sample binding or timed repeated notes. |
 | N13 | Double-tongue → retain native production in the note descriptor. Do not trigger two attacks per written note merely from tonguing technique. Explicit two-repeat sound requests use `12/4`. |
 | N14 | Triple-tongue → retain native production; explicit three-repeat sound requests use `12/5`, with the same distinction. |
 | N15 | Trill mark/span → resolve principal/auxiliary sounding pitches, starting member, terminal turn and timing. Semitone/whole-tone and main/upper-first select `13/0..3`. Explicit accidental marks and trill-step determine the auxiliary. Pinned XSD defaults apply where absent; do not claim the implementation derives a diatonic auxiliary from key signatures. |
-| N16 | Named two-pitch sample request spanning 3..12 semitones → `13/4..D`; starting member is additional information. Native paired-note tremolo currently receives a diagnostic. |
+| N16 | Named two-pitch sample request spanning 3..12 semitones → `13/4..D`; starting member is additional information. Native paired-note tremolo receives a diagnostic. |
 | N17 | harmonic/natural → `14/0`, with separately resolved sounding/base/touching pitch. |
 | N18 | harmonic/artificial → `14/1`, same pitch obligation. |
 | N19 | Falloff → `15/0`; retain any additional specified ending trajectory. |
@@ -160,7 +160,7 @@ Event       = {time, order, words: UMP u32[]}
 
 ### Verified SMuFL identities
 
-All names below exist in the archived 1.4 registry. Placement variants do not
+The names below come from the SMuFL registry. Placement variants do not
 change the production technique. A glyph is matched by canonical name, not by a
 font codepoint or appearance.
 
@@ -195,44 +195,33 @@ specify an audible effect. Never fabricate a SMuFL name to hide a vocabulary gap
 
 ## Refinements and bindings
 
-MusicXML carries a project-defined JSON descriptor under
-`play/other-play@type=urn:midi2workbench:articulation:v2`. This example exercises
-the independent XSD and vocabulary checks.
+MusicXML carries a project-defined JSON descriptor in `play/other-play`.
+[The refinement codec](../../crates/convert/src/extension.rs) defines its type identifier and
+independent schema checks.
 
-```xml
-<note id="v1-blurred">
-  <pitch><step>D</step><octave>5</octave></pitch>
-  <duration>1</duration>
-  <notations><articulations><spiccato/></articulations></notations>
-  <play>
-    <other-play type="urn:midi2workbench:articulation:v2">{"technique":"short.spiccato","qualifiers":{"urn:midi2workbench:ot-berlin:sample-character":"blurred"},"binding":"example-berlin-strings-violin-i-v1"}</other-play>
-  </play>
-</note>
-```
-
-- The [annotation schema](mapping/annotation.schema.json) defines accepted keys
+- The [annotation schema](../../crates/convert/mapping/annotation.schema.json) defines accepted keys
   and ranges. Reject duplicate keys, unknown vocabulary and contradictions.
-  `replace` names precisely the superseded source paths. Unknown qualifiers need
+  `replace` names the exact source paths subject to replacement. Unknown qualifiers need
   an explicit binding. Generic metadata cannot stand in for an audible effect.
 - Preserve distinctions between per-note position, mute identity/amount,
   sounding pitch, attack velocity, sampled dynamic level, amplitude,
   sample length and mute provenance. Numeric values have their declared units.
   A literal MIDI 2.0 Note On velocity of zero remains a Note On.
-- [Binding](mapping/binding.schema.json) and [refinement](mapping/refinement.schema.json)
+- [Binding](../../crates/convert/mapping/binding.schema.json) and [refinement](../../crates/convert/mapping/refinement.schema.json)
   schemas describe declared receiver meanings. Bind the complete descriptor to
-  a versioned library/player/configuration and numeric keys/channels, range,
+  the exact library, player and configuration and numeric keys/channels, range,
   velocity roles, switch/hold/release ordering and timing. Compare the required
   map identity and content before claiming receiver support. The
-  [Berlin example](examples/berlin-receiver.example.json) illustrates a declared
+  [Berlin example](../../crates/convert/examples/berlin-receiver.example.json) illustrates a declared
   configuration with unverified status. Settings and descriptive names alone
   provide no evidence of loaded state, MIDI-CI or audible support.
 - Property Exchange can advertise the custom `X-ArticulationMap` resource when
   a real receiver supports it. For ASCII camelCase PE JSON, serialize URI
   qualifiers as sorted unique `{id, valueJson}` entries. Apply negotiated
-  SysEx7 chunk limits. The [ResourceList example](examples/resource-list.example.json)
+  SysEx7 chunk limits. The [ResourceList example](../../crates/convert/examples/resource-list.example.json)
   is resource data. MIDI Clip Files exclude PE resources.
-- The embedded dictionary uses `urn:midi2workbench:refinement:v2:` in Unknown
-  Metadata Text with `{version, controller_index, descriptors, parameters?}`.
+- The embedded refinement dictionary uses Unknown Metadata Text and carries
+  the assigned controller index, descriptors and optional parameter definitions.
   Its assigned per-note controller resolves a descriptor ID in the file.
   Keep dictionary identity, routing and note-association rules intact.
 
@@ -265,7 +254,7 @@ SMF2CLIP | profile declarations* | DCS(0) + DCTPQ
   precede any DCS. Configuration and sequence use separate clocks. For exact
   score rendering take the LCM of rational time denominators and prefer an
   additional factor of 480 when the resulting TPQ fits u16. Reject unrepresentable
-  exact clocks. Bitwig capture applies its [separate quantization policy](../controller/ARCHITECTURE.md#self-contained-midi2-export).
+  exact clocks. Bitwig capture applies its [separate quantization policy](controller.md#self-contained-midi2-export).
 - Allocate a compatible route for the full audible, pedal and release lifetime.
   Same-pitch overlaps with independent per-note controls require independent
   addresses. Retain ending releases, pedal changes, channel state, mute
@@ -341,46 +330,55 @@ Off.word1 = releaseTime16<<16 | Off.data  (or ordinary release velocity off-prof
 ## Rendition and companion grammar
 
 ```text
-Companion v1 = source, policy, expected MIDI, dictionary, requirements, note_sources?
-Companion v2 = v1 + Rendition v1 (legacy receiver_bindings excluded)
+Companion    = source, policy, expected MIDI, dictionary, requirements, note_sources?, rendition?
 Rendition    = tracks[], instruments[], slots[]?, bindings[], bitwig?
 Binding      = UMP Route -> track, destination channel, instrument, slot?
 Slot         = id, track, musical name, instrument, inputChannels[], settings?
 NoteSource   = source identity/route, source_velocity?, encoded route, onset/end/key
 ```
 
-- [`preserve.rs`](src/preserve.rs) authenticates the companion against decoded
+- [`preserve.rs`](../../crates/convert/src/preserve.rs) authenticates the companion against decoded
   semantic values from `expected_midi_base64`. Optional `note_sources` are
   canonical by `(onset, route, key, end)`, with exact ownership through encoder
   route isolation. Consumers verify count and coordinates. Exact restoration
   additionally validates the archived source against the rendering policy.
-- [`rendition.rs`](src/rendition.rs) requires complete occupied-route coverage,
+  An explicit companion path requires a readable companion whose performed
+  values agree with the input. Exact restoration requires agreement with the
+  archived notation. Measured reconstruction uses the clip's embedded data
+  when an adjacent companion describes a different performance.
+- Conversion resolves input and artifact identities before publication.
+  Artifact destinations are distinct regular files or unused paths.
+  Input and output artifacts share a 64 MiB limit. Each artifact is staged
+  beside its destination. The companion is the
+  completion marker for a score conversion, and consumers check its agreement
+  with the clip before using the bundle.
+- [`rendition.rs`](../../crates/convert/src/rendition.rs) requires complete occupied-route coverage,
   unique portable routes and unique destination track/channel pairs, with
   no unused or unbound references. UMP groups do not imply native groups.
   Slot identity is separate from NKI resource identity. Multiple destinations
   may share a slot and distinct slots may reuse a resource. A binding must
   match the slot's track, instrument and admitted note channel. Every slot needs
-  a binding. An omitted slot collection preserves legacy one-binding-per-receiver.
+  a binding. A rendition without a slot collection uses one receiver per binding.
 - Native destination channels are zero-based JSON and displayed 1–16. Articulated
   tracks reserve displayed 1 for shared controls. A single-channel part may
   use 1 for both notes and controls. Preserve encoded UMP routes. Converging
   curves require agreement over complete histories. For native Filter/Map
-  settings use [the controller contract](../controller/ARCHITECTURE.md#integrated-instruments).
+  settings use [the controller contract](controller.md#integrated-instruments).
 - Cap tracks, instruments, slots and bindings at 256 each and settings at 128
   per owner. IDs use 1–128 ASCII letters/digits/dots/underscores/hyphens. Labels
   are nonempty and NUL-free with at most 256 UTF-8 bytes. Track names and
   articulation labels per track must be unique. Settings require unique control
   IDs, a non-null value and declared units/vocabulary.
-- Instruments carry an absolute execution NKI path, player identity/version/format,
+- Instruments carry an absolute execution NKI path, the exact player identity and format,
   settings and optional sample root. Musical patch identity remains relative to
   `INSTRUMENTS_ROOT_DIR`. Optional Bitwig project/group, decision revision,
   meter tick rate, mix and located player-name evidence describe intent.
-  Neither a companion field nor a historical schedule grants native write or
-  customization authority.
+  Native write and customization authority come from the user request and
+  the controller’s native preconditions.
 
 ### Reviewed passages and dynamic curves
 
-- [`adapt::Plan`](src/adapt.rs) carries `rendition`, `rules`, optional
+- [`adapt::Plan`](../../crates/convert/src/adapt.rs) carries `rendition`, `rules`, optional
   `initialControllers`, `passages`, exact `noteEdits` and `trackCcCurves`.
   The plan is reviewed conversion input.
   The executable delivery is the MIDI and companion.
@@ -388,7 +386,7 @@ NoteSource   = source identity/route, source_velocity?, encoded route, onset/end
   reason`. Present nonempty assertions partition performed notes exactly once
   and agree with the bound destination and positive note count. Reject
   unused, unknown, overlapping or contradictory assertions. Cap passages and
-  total prefixes at 4096 each. Omission preserves older plans without review
+  total prefixes at 4096 each. Plans without passages carry no passage review
   evidence.
 - Each interpreted note must match exactly one rule by source prefix, optional
   lexical `sourceVoice`, complete articulation and descriptor. A rule chooses
@@ -426,20 +424,20 @@ NoteSource   = source identity/route, source_velocity?, encoded route, onset/end
 ## Portable arrangement grammar
 
 - Standard Note On attributes, per-note controls, CC, tempo/meter/key and Flex
-  text/lyrics take precedence. `urn:midi2workbench:arrangement:v1:` carries
-  `{version:1, parts:[{name, routes[]}], decisions[]}` in Unknown Metadata Text.
+  text/lyrics take precedence. Arrangement metadata carries
+  `{parts:[{name, routes[]}], decisions[]}` in Unknown Metadata Text.
   Require one declaration, nonempty parts and unique route ownership.
   Auxiliary routes for independent note instances stay under their musical part.
 - Unknown Metadata Text is bank 1/status 0 and timed Unknown Performance Text
-  is bank 2/status 0. Keep scoped direction remarks under
-  `urn:midi2workbench:direction-remark:v1:` and note remarks in `score-remarks`.
+  is bank 2/status 0. Direction remarks use the scoped direction metadata
+  namespace. Note remarks use `score-remarks`.
   Declared command notes use the arrangement command convention and stay outside
   engraved pitches. Piano Description is specific to Piano. Other instrument
-  identities use `urn:midi2workbench:instrument:v1:`; programs remain independent.
-- [`arrangement.rs`](src/arrangement.rs), [`remarks.rs`](src/remarks.rs) and
-  [`extension.rs`](src/extension.rs) own the actual serialization. The embedded
-  dictionary suffices for new files. An older companion is used only when
-  explicitly supplied for compatible restoration.
+  identities use the instrument metadata namespace independently of program values.
+- [`arrangement.rs`](../../crates/convert/src/arrangement.rs), [`remarks.rs`](../../crates/convert/src/remarks.rs) and
+  [`extension.rs`](../../crates/convert/src/extension.rs) own the actual serialization. The embedded
+  dictionary supports standalone reconstruction. Exact source restoration uses
+  a companion and validates its correspondence to the clip.
 
 ## Validation and reconstruction
 
@@ -461,9 +459,8 @@ members, deterministic voices and ties across barlines. Keep tempo/meter changes
 Infer binary/triplet rhythms only within 1/96 quarter-note beat by default;
 record approximations. A tiny note is not automatically a keyswitch or grace.
 Missing key context uses deterministic editorial spelling, not claimed source
-spelling. The measured writer currently retains key messages as playback metadata;
-it does not engrave key signatures or perform key-aware enharmonic spelling.
-This is an explicit reconstruction limit even when the MIDI2 contains a key.
+spelling. The measured writer carries key messages as playback metadata. Engraved key
+signatures and key-aware enharmonic spelling are outside its scope.
 Missing meter/unaligned changes require an explicit reported policy.
 
 Standard articulations become their MusicXML equivalents. A legato articulation
@@ -477,31 +474,28 @@ inventing syllable alignment. MusicXML's `other-play` carries playback details
 without a more specific standard representation; it is not a place to pretend
 unknown playback has been realised.[^xml]
 
-No new mapping sidecar is required. Add an opt-in mapping input only after a
-concrete, documented ambiguity cannot be resolved from the standards, embedded
-musical metadata or declared conventions. Reports and intermediate captures are
-not reconstruction dependencies.
+Reconstruction depends on the standards, embedded musical metadata and
+declared conventions. An opt-in mapping input addresses a documented ambiguity
+outside those sources. Reports and intermediate captures are verification evidence.
 
 ### Verification
 
-Use existing tests and independent MusicXML XSD checks. Add durable tests only
-for plausible regressions; every added test docstring must name the scenario,
-likely failure mechanism and observable protection. Use ephemeral native probes
-for controller integration. Retain a piece-specific case study outside production
-logic; distinguish capture, file validation, readable notation and audio evidence.
+Verification uses independent MusicXML XSD checks and targeted regression
+tests that identify the scenario, failure mechanism and observable protection.
+Ephemeral native probes cover controller integration. Piece-specific case studies
+separate capture, file validation, reconstructed notation and audio evidence.
 
-[^clip]: M2-104 v1.1.2 §§7.5.9–11 defines text and lyrics; M2-116 v1.0 §6.4
+[^clip]: M2-104 §§7.5.9–11 defines text and lyrics. M2-116 §6.4
     excludes Property Exchange resources. See [UMP](https://midi.org/universal-midi-packet-ump-and-midi-2-0-protocol-specification)
     and [Clip Files](https://midi.org/midi-clip-file-specification-smf-midi-2-0).
-[^xml]: MusicXML 4.0 distinguishes [notes and playback](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/),
+[^xml]: MusicXML distinguishes [notes and playback](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/),
     [text directions](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/words/)
     and [other playback](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-play/).
 
 ## Standards and implementation boundaries
 
-- Apply MusicXML 4.0, SMuFL 1.4, M2-123 v1.0, M2-126 v1.0, M2-104 v1.1.2
-  and M2-116 v1.0. For CI use M2-101/102/103 and for scaling use M2-115.
-  [Source and verification inputs](../../docs/references/README.md) records the
+- Apply MusicXML, SMuFL, M2-123, M2-126, M2-104 and M2-116. For CI use M2-101/102/103 and for scaling use M2-115.
+  [Source and verification inputs](../references/README.md) records the
   pinned corpus and external evidence.
 - Reuse the pinned `midi2` encoder/validators and the shared `musicxml` ScorePartwise
   parser/writer. Keep narrow local adapters for unsupported wire cases, the pinned

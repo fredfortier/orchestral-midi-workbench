@@ -1,6 +1,7 @@
 package com.midiworkbench.notes.internal;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.midiworkbench.notes.Wire;
 import java.util.List;
@@ -41,6 +42,9 @@ final class Entity61 {
     }
     String read(JsonNode requested)throws Exception {return read(requested,false);}
     String read(JsonNode requested,boolean parameters)throws Exception {
+        return observe(requested,parameters).toString();
+    }
+    ObjectNode observe(JsonNode requested,boolean parameters)throws Exception {
         ObjectNode path;
         Object owner;
         String kind;
@@ -58,12 +62,20 @@ final class Entity61 {
             String file=(String)call(document,"jDA");if(file!=null && !file.isBlank())node.withObject("metadata").put("file",file);
             tracks(call(document,"peG"),node);
         } else if(kind.equals("track") || kind.equals("group"))track(owner,node,kind.equals("group"));
+        else if(kind.equals("automationLane")) {
+            ObjectNode parent=path.deepCopy();
+            ArrayNode elements=parent.withArray("elements");
+            elements.remove(elements.size()-1);
+            Object track=ProjectAddress61.resolveNative(parent,document,document.getClass().getClassLoader());
+            if(elements.get(elements.size()-1).required("kind").asText().equals("group"))track=call(track,"DQP");
+            laneMetadata(laneAtom(owner),automationLanes(track).indexOf(owner),node);
+        }
         else if(kind.equals("layerChain") || kind.equals("choice"))devices(owner,node);
         else if(Set.of("device","plugin","layer","selector").contains(kind)) {
             deviceChildren(owner,node,kind);
             if(parameters)node.withObject("metadata").setAll(DeviceParameters61.read(owner,node.required("path")));
         } else if(parameters)throw new IllegalArgumentException("Parameter discovery requires a device path");
-        return node.toString();
+        return node;
     }
     private void tracks(Object parent,ObjectNode root)throws Exception {
         java.util.LinkedHashSet<Object> tracks=new java.util.LinkedHashSet<>((List<?>)call(parent,"IFc"));tracks.addAll((List<?>)call(parent,"UQt"));
@@ -86,8 +98,11 @@ final class Entity61 {
         }
         int index=0;
         for(Object automation:automationLanes(channel)) {
-            ObjectNode c=entity(childPath(path,"automationLane",laneName(automation)),"automationLane",laneName(automation),automation);
-            c.withObject("metadata").put("index",index++);node.withArray("children").add(c);
+            Object atom=laneAtom(automation);
+            String name=targetName(atom);
+            ObjectNode c=entity(childPath(path,"automationLane",name),"automationLane",name,automation);
+            laneMetadata(atom,index++,c);
+            node.withArray("children").add(c);
         }
         devices(channel,node);if(group)tracks(track,node);
     }
@@ -96,10 +111,24 @@ final class Entity61 {
         Class<?> preview=Class.forName("owf",true,track.getClass().getClassLoader());
         return ((List<?>)Reflection.call(lanes,"XrN",new Class<?>[]{String.class},new Object[]{null})).stream().filter(l->!preview.isInstance(l)).toList();
     }
+    private static String targetName(Object atom)throws Exception {
+        return atom==null?"Unresolved automation":value(atom,"name")+" automation";
+    }
     static String laneName(Object lane)throws Exception {
-        Object atom=value(lane,"value_atom");if(atom==null)atom=call(value(lane,"atom_reference"),"qKA");
-        if(atom==null)throw new IllegalStateException("Unresolved automation lane target");
-        return value(atom,"name")+" automation";
+        return targetName(laneAtom(lane));
+    }
+    private static void laneMetadata(Object atom,int index,ObjectNode node)throws Exception {
+        ObjectNode metadata=node.withObject("metadata").put("index",index);
+        if(atom==null)metadata.put("targetResolution","unresolved");
+        else metadata.set("target",AutomationAdapter61.targetIdentity(atom));
+    }
+    private static Object laneAtom(Object lane)throws Exception {
+        Object atom=value(lane,"value_atom");
+        if(atom==null) {
+            Object reference=value(lane,"atom_reference");
+            if(reference!=null)atom=call(reference,"qKA");
+        }
+        return atom;
     }
     private void devices(Object owner,ObjectNode parent)throws Exception {
         Object chain=call(owner,owner.getClass().getName().equals("com.bitwig.flt.document.core.master.device.kdt")?"PPp":"Vdp");

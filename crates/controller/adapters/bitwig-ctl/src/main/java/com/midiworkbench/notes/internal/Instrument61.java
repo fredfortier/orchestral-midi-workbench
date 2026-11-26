@@ -19,20 +19,29 @@ public final class Instrument61 {
     private final Map<String,Entry> operations=new LinkedHashMap<>();
     private static final class Entry {
         final ObjectNode input;
-        final DocumentAccess continuation;
         final AtomicReference<String> phase=new AtomicReference<>("pending");
         volatile String error;
         boolean dispatched;
         ObjectNode result;
-        Entry(ObjectNode input,DocumentAccess continuation){this.input=input.deepCopy();this.continuation=continuation;}
+        Entry(ObjectNode input){this.input=input.deepCopy();}
     }
     private record Scope(Object document,Object track,Object parent,Object layer,Object container,Object slot,ObjectNode target,ObjectNode observation) {}
 
     void invalidate() {
-        for(Entry entry:operations.values())if(entry.result==null){entry.error="Document lifetime changed";entry.phase.set("unknown");}
-    }
-    void requireIdle() {
-        for(var entry:operations.entrySet())if(entry.getValue().result==null)throw new IllegalStateException("Unresolved instrument operation "+entry.getKey()+"; query original status");
+        for(Entry entry:operations.values()) {
+            if(entry.result!=null)continue;
+            entry.error="Document lifetime changed";
+            entry.phase.set("unknown");
+            String action=entry.input.required("action").asText();
+            if(action.equals("openEditor") || action.equals("closeEditor")) {
+                // Visibility has no deferred document edit. Keep its unknown outcome
+                // queryable without blocking writes in the next document lifetime.
+                entry.result=Wire.object();
+                entry.result.set("operation",entry.input.required("operation"));
+                entry.result.set("document",entry.input.required("document"));
+                entry.result.put("status","unknown").put("error",entry.error);
+            }
+        }
     }
     public String run(Object proxy,EditorAdapter61 editor,DocumentAccess continuation,ObjectNode request)throws Exception {
         try{return execute(proxy,editor,continuation,request);}
@@ -53,8 +62,6 @@ public final class Instrument61 {
         String operation=request.required("operation").asText();
         Entry old=operations.get(operation);
         if(old!=null){if(!old.input.equals(request))throw new IllegalArgumentException("Conflicting instrument operation ID");return status(proxy,editor,operation,false).toString();}
-        for(Entry entry:operations.values())if(entry.result==null)throw new IllegalStateException("Unresolved native instrument operation; query its original ID");
-        if(operations.size()>=4096)throw new IllegalStateException("Instrument receipt capacity reached; no mutation dispatched");
         Scope scope=scope(proxy,editor,request.required("target"));
         if(!scope.observation().required("document").equals(request.required("document")) || !scope.observation().equals(request.required("expected"))) {
             List<String> changed=new ArrayList<>();
@@ -78,7 +85,8 @@ public final class Instrument61 {
         if(Set.of("openEditor","closeEditor").contains(action))receiver(scope.slot(),true);
         if(action.equals("ensureSlot") && scope.slot()==null && slots(scope.container()).size()>=128)throw new IllegalArgumentException("Container slot capacity reached");
         SlotRouting61.Prepared routing=action.equals("ensureSlot")?SlotRouting61.prepare(scope.slot(),proxy.getClass().getClassLoader()):null;
-        Entry entry=new Entry(request,continuation);operations.put(operation,entry);
+        if(operations.size()>=4096)operations.values().stream().filter(entry->entry.result!=null).findFirst().ifPresent(entry->operations.values().remove(entry));
+        Entry entry=new Entry(request);operations.put(operation,entry);
         try {
             if(action.equals("ensureLayer")) {ensureLayer(scope);entry.phase.set("completed");}
             else if(action.equals("assignReceiver") && receiver(scope.slot(),false)==null)insert(proxy,editor,continuation,scope,entry,scope.slot());
@@ -103,7 +111,6 @@ public final class Instrument61 {
         if(!editor.currentProjectGeneration().equals(entry.input.required("document").asText())){entry.error="Document lifetime changed";entry.phase.set("unknown");result.put("status","unknown");result.put("error",entry.error);return result;}
         try {
             String action=entry.input.required("action").asText();
-            requireStopped(Reflection.call(proxy,"getDocument"));
             ObjectNode target=(ObjectNode)entry.input.required("target").deepCopy();
             Object track=resolvedTrack(proxy,entry);
             String display=value(track,"displayed_title").toString();

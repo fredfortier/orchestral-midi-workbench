@@ -1,31 +1,35 @@
 ---
 name: bitwig-launcher
-description: Launches or reuses an agent-managed Bitwig Studio on Linux.
+description: Reuse the running Bitwig Studio on Linux, or launch it when no instance exists. Apply the single-instance preflight to production, controller development and smoke tests.
 ---
 
 # Manage Bitwig Studio
 
 
-## Single-instance constraint
+## Single-instance preflight
 
-**Multiple Bitwig Studio instances are unsupported. At most one instance may run
-across all displays and launch modes.** A virtual-display instance counts as a
-running instance when the user requests normal desktop Bitwig, and vice versa.
-Never launch another instance to satisfy a different display request.
+**Reuse the running Bitwig Studio. At most one application instance may run on
+this machine.** Count across all displays, profiles, services and launch
+methods. Apply this before production work, adapter development, qualification
+and smoke tests. Xpra is prohibited.
 
-Before every launch, inspect all Bitwig application processes and their exact
-PID/start identities and displays:
-
-- If one instance is running in the requested mode, reuse it.
-- If any instance is running in another mode, stop: explain the conflict and ask
-  the user to quit it, unless the user has already authorized stopping it.
-- If multiple instances are found, do not launch. Resolve them first within the
-  user's authorization.
-- When stopping is authorized, terminate only the identified processes, verify
-  that all Bitwig application instances have exited, then launch exactly one.
-  Never terminate by process name or start a competing instance while waiting.
-- If no instance is running, launch `bitwig-studio` normally by default. Use the
-  virtual-display procedure below only when the user requests it.
+1. Inspect Bitwig application PIDs, start identities and displays before any
+   launch or host change. Launcher wrappers, splash screens, audio engines
+   and plug-in hosts do not count as application instances.
+2. If one instance is running, verify its project through
+   `midi-bridge controller info` and use that instance. A different display,
+   disposable project, fixture, listener port, extension build or wire version
+   does not permit a second instance.
+3. If the running session cannot support the task, diagnose that session.
+   Closing, reopening or switching the active project, or restarting Bitwig
+   or its services, requires the user's explicit request for that action. When
+   the needed action is unauthorized or unavailable, finish independent work
+   and report the blocked live check.
+4. If multiple application instances exist, pause live work until the conflict
+   is resolved within the user's authorization. Stop only a specifically
+   identified process when authorized.
+5. Launch only after verifying zero application instances. Launch normally by
+   default. Use the virtual-display procedure only when the user requests it.
 
 Verify after launch that exactly one Bitwig application instance is running and
 that it is on the intended display. Launcher wrappers, splash screens, audio
@@ -68,7 +72,7 @@ and every intended clip/track owner; screenshots and injected input are not a fa
 Use `midi-bridge controller selection read` to confirm native project and
 selection readiness for either kind of host. When the task requires a musical
 read, use the selected note clips or pass exact clip paths to
-`midi-bridge controller midi get-all --paths paths.json`. Count the actual
+`midi-bridge controller content read --paths paths.json`. Count the actual
 note and automation arrays with jq.
 
 Open [troubleshooting](references/troubleshooting.md) whenever launch, project

@@ -1,12 +1,12 @@
 # Cargo workspace
 
 - Use [Cargo.toml](Cargo.toml) and the affected package manifest for membership, edition, features and minimum Rust version. Check package overrides and inspect [Cargo.lock](Cargo.lock) when dependencies change.
-- Read the [converter contract](convert/ARCHITECTURE.md) or [controller contract](controller/ARCHITECTURE.md) before changing a musical model, protocol, or host operation. For work inside an adapter, use its own instructions and validation path.
+- Read the [converter contract](../docs/architecture/convert.md) or [controller contract](../docs/architecture/controller.md) before changing a musical model, protocol, or host operation. For work inside an adapter, use its own instructions and validation path.
 
 ## Rust rules
 
 - Use the `rust-skills` rule files relevant to the change. Start with `err-result-over-panic` for failure paths, `num-overflow-explicit` for protocol or timing arithmetic, `serde-try-from-validate` for deserialization, `async-cancel-safety` for session changes, or `unsafe-safety-comment` for unsafe code.
-- Return recoverable errors with context for invalid input and host failures. Reserve assertions for proven invariants. Put validation at the boundary and preserve wire compatibility deliberately.
+- Return recoverable errors with context for invalid input and host failures. Reserve assertions for proven invariants. Put validation at the boundary. Coordinate wire changes across the participants.
 - Keep blocking work off async executor threads and release locks before awaiting. Document the safety argument for each unsafe operation. Measure the affected path before optimizing it.
 
 ## Verification

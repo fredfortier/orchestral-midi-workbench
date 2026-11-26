@@ -9,12 +9,17 @@ pub struct Entity {
     pub kind: String,
     pub metadata: Value,
     pub children: Vec<Entity>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub selection: Option<crate::selection::Observation>,
 }
 impl Entity {
     /// # Errors
     /// Refuses malformed hierarchy records rather than accepting arbitrary native graphs.
     pub fn validate(&self) -> Result<(), String> {
         self.path.validate()?;
+        if let Some(selection) = &self.selection {
+            (crate::selection::Request::Read {}).verify(selection)?;
+        }
         if ![
             "project",
             "group",
@@ -62,6 +67,7 @@ impl Entity {
             "cues",
             "parameters",
             "remoteControls",
+            "target",
         ];
         if self
             .metadata

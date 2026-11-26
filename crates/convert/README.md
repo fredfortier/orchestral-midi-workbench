@@ -47,4 +47,4 @@ Check the conversion report and the decoded MIDI against the intended note and
 control decisions before opening the Bitwig import step. Re-use a new output
 location for each attempt. `--force` explicitly replaces existing files.
 
-[Architecture](ARCHITECTURE.md) · [Verification inputs](../../docs/references/README.md)
+[Architecture](../../docs/architecture/convert.md) · [Verification inputs](../../docs/references/README.md)

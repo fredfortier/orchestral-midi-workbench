@@ -32,9 +32,6 @@ final class ExportAudio61 {
     }
     private static void set(Object owner,String key,Object v)throws Exception {Reflection.call(Reflection.call(owner,"Nln",new Class<?>[]{String.class},key),"setValue",new Class<?>[]{Object.class},v);}
     boolean contains(String operation){return jobs.containsKey(operation);}
-    void requireIdle()throws Exception {
-        for(Job job:jobs.values())if(!job.settled)throw new IllegalStateException("Export remains pending; query its operation status before mutation");
-    }
     String run(Object proxy,EditorAdapter61 editor,Mix61 mix,ObjectNode request)throws Exception {
         String operation=request.required("operation").asText();
         if(!operation.matches("[A-Za-z0-9:/-]{1,256}"))throw new IllegalArgumentException("Invalid export operation");
@@ -43,9 +40,11 @@ final class ExportAudio61 {
         if(!action.equals("start"))throw new IllegalArgumentException("Unknown export action");
         Job previous=jobs.get(operation);
         if(previous!=null)throw new IllegalArgumentException("Export operation already exists; query its original status");
-        requireIdle();Object document=Mix61.document(proxy);ClassLoader loader=document.getClass().getClassLoader();
+        Object document=Mix61.document(proxy);ClassLoader loader=document.getClass().getClassLoader();
         JsonNode options=request.required("options");
-        if(!Mix61.sameScope(mix.read(proxy,editor),options.required("expected")))throw new IllegalArgumentException("Stale mixer scope before export; no job created");
+        ObjectNode current=mix.read(proxy,editor);JsonNode expected=options.required("expected");
+        if(!Mix61.sameScope(current,expected) || !current.required("nativeRevision").equals(expected.required("nativeRevision")))
+            throw new IllegalArgumentException("Bitwig source or mixer scope changed before export");
         Mix61.requireIdleEngine(document);
         if(!((Enum<?>)call(document,"T1L")).name().equals("CONNECTED") || call(document,"Met")!=null || !Boolean.TRUE.equals(call(document,"GsP")) || call(document,"jst")!=null)throw new IllegalStateException("Native export requires healthy idle connected engine");
         if(((Number)call(call(document,"voC"),"HUL")).intValue()!=0)throw new IllegalStateException("Native project has missing files");
@@ -67,7 +66,7 @@ final class ExportAudio61 {
             if(!observed)throw new IllegalArgumentException("Export owner absent from expected scope");targets.add(Mix61.resolve(document,path));
         }
         Path directory=Path.of(options.required("directory").asText());if(!directory.isAbsolute() || Files.exists(directory) || !Files.isDirectory(directory.getParent()))throw new IllegalArgumentException("Require a fresh absolute export directory under an existing parent");
-        if(jobs.size()>=256)throw new IllegalStateException("Export operation capacity reached");
+        if(jobs.size()>=256)jobs.values().stream().filter(job->job.settled).findFirst().ifPresent(job->jobs.values().remove(job));
         String[] names=new String[targets.size()];ObjectNode receipt=Wire.object();receipt.put("operation",operation);receipt.put("document",editor.currentProjectGeneration());receipt.put("hostBuild",HostBuild.VERIFIED_61);receipt.put("expectedSeconds",seconds);receipt.set("options",options.deepCopy());receipt.withObject("options").remove("expected");receipt.put("sourceNativeRevision",options.required("expected").required("nativeRevision").asText());
         var files=receipt.putArray("files");
         for(int i=0;i<targets.size();i++) {

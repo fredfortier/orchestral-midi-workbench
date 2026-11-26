@@ -10,9 +10,12 @@ import java.util.List;
 
 /** Stopped-document mixer facts. Host values never leave the document thread. */
 final class Mix61 {
-    private final ObservedScope authority=new ObservedScope();
     boolean dispatched;
-    static boolean sameScope(JsonNode a,JsonNode b){ObjectNode aa=a.deepCopy(),bb=b.deepCopy();aa.remove("captureTime");bb.remove("captureTime");return aa.equals(bb);}
+    static boolean sameScope(JsonNode a,JsonNode b){
+        ObjectNode aa=a.deepCopy(),bb=b.deepCopy();
+        aa.remove(List.of("captureTime","nativeRevision"));bb.remove(List.of("captureTime","nativeRevision"));
+        return aa.equals(bb);
+    }
     private static Object value(Object owner,String key)throws Exception{return ProjectAdapter61.value(owner,key);}
     private static Object call(Object owner,String method)throws Exception{return Reflection.call(owner,method);}
     static Object optional(Object owner,String key)throws Exception {
@@ -52,7 +55,7 @@ final class Mix61 {
     }
     ObjectNode read(Object proxy,EditorAdapter61 editor)throws Exception {
         Object document=document(proxy);
-        ObjectNode result=Wire.object();result.put("document",editor.currentProjectGeneration());result.put("project",value(document,"name").toString());result.put("hostBuild",HostBuild.VERIFIED_61);result.put("nativeRevision",ProjectRevision61.read(proxy,document));
+        ObjectNode result=Wire.object();result.put("document",editor.currentProjectGeneration());result.put("project",value(document,"name").toString());result.put("hostBuild",HostBuild.VERIFIED_61);
         Object transport=value(document,"transport");result.put("positionBeats",((Number)value(transport,"playback_position")).doubleValue());result.put("positionSeconds",((Number)value(transport,"position_in_seconds")).doubleValue());
         var beats=new java.util.TreeSet<Double>();beats.add(0.0);beats.add(((Number)value(transport,"playback_position")).doubleValue());
         Object markers=value(transport,"cue_marker_timeline");List<?> events=(List<?>)call(markers,"v33");if(events.size()>4096)throw new IllegalStateException("Cue time-context bound exceeded");
@@ -64,7 +67,8 @@ final class Mix61 {
         result.putArray("limitations").add("Stored stopped-document mixer settings; no effective playback values, meters or audio analysis.")
             .add("Pan is the native PANORAMA parameter; stereo balance law/mode is not inferred.")
             .add("Opaque plugin state, Kontakt patch/microphones and complete automation histories are outside this snapshot.");
-        result.put("revision",authority.observe(result));result.put("captureTime",java.time.Instant.now().toString());return result;
+        result.put("revision",ObservedScope.revision(result));result.put("nativeRevision",editor.nativeRevision(document));
+        result.put("captureTime",java.time.Instant.now().toString());return result;
     }
     private static ObjectNode child(JsonNode parent,Object owner,String kind)throws Exception {
         ObjectNode path=parent.deepCopy();path.withArray("elements").addObject().put("kind",kind).put("name",value(owner,"displayed_title").toString()).put("nativeId",value(owner,"managed_object_ID").toString());return path;

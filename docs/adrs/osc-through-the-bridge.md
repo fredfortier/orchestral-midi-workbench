@@ -28,5 +28,5 @@ adapter or its wire version. Each action still needs an appropriate target
 and independent effect check. UI interaction owns configuration and any
 focus or modal behavior that lacks a qualified OSC path.
 
-[Controller architecture](../../crates/controller/ARCHITECTURE.md) ·
+[Controller architecture](../architecture/controller.md) ·
 [OSC setup](../../crates/osc/README.md)

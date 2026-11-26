@@ -38,12 +38,21 @@ enum Action {
     Mix(crate::cli_mix::Mix),
     /// Export selected native channels with explicit WAV options.
     ExportAudio(crate::cli_mix::ExportAudio),
-    /// Discover device parameters or set complete automation curves atomically.
+    /// Set complete automation curves atomically.
     Automation(crate::cli_automation::Automation),
-    /// Read a native entity and its folder-like descendants by exact path.
+    /// Read the project hierarchy or an exact subtree, with current native selection.
     Info {
+        /// JSON qualified entity path. Omit to read the project hierarchy.
         #[arg(long)]
         path: Option<PathBuf>,
+        /// Include the addressed device's parameter and Remote Control catalog.
+        #[arg(long, requires = "path")]
+        parameters: bool,
+    },
+    /// Read or replace complete native notes, expression and automation.
+    Content {
+        #[command(subcommand)]
+        command: ContentAction,
     },
     /// Inspect the original application operation without replaying it.
     Operation {
@@ -54,7 +63,7 @@ enum Action {
     Instrument(crate::cli_instrument::Instrument),
     /// Named performance landmarks on the native Arranger timeline.
     Cues(crate::cli_cues::Cues),
-    /// Read complete selected clips: MIDI notes, expressions and automation.
+    /// Capture, assemble or decode a MIDI 2.0 performance.
     Midi {
         #[command(subcommand)]
         command: MidiAction,
@@ -76,6 +85,28 @@ enum Action {
 }
 
 #[derive(Subcommand)]
+enum ContentAction {
+    /// Read complete musical content for explicit paths or the active selection.
+    Read {
+        /// JSON array of qualified track, group-channel or Note Clip paths.
+        #[arg(long, required_unless_present = "selection")]
+        paths: Option<PathBuf>,
+        /// Use the effective native musical selection.
+        #[arg(long, conflicts_with = "paths")]
+        selection: bool,
+    },
+    /// Atomically replace the same complete musical content and print native readback.
+    Replace {
+        /// Complete snapshot previously returned by content read.
+        #[arg(long)]
+        expected: PathBuf,
+        /// Desired snapshot for exactly the same paths.
+        #[arg(long)]
+        input: PathBuf,
+    },
+}
+
+#[derive(Subcommand)]
 enum LauncherAction {
     Read,
     Create {
@@ -88,7 +119,7 @@ enum LauncherAction {
 #[derive(Subcommand)]
 enum SelectionAction {
     Read,
-    /// JSON request: action=set, document, revision, paths, mode, range.
+    /// JSON request: document, revision, paths, mode, range.
     Set {
         #[arg(long)]
         input: PathBuf,
@@ -120,24 +151,6 @@ enum MidiAction {
         input: PathBuf,
         #[arg(long)]
         companion: PathBuf,
-    },
-    /// Atomically replace notes and automation from a modified complete clip JSON payload.
-    Replace {
-        #[arg(long)]
-        expected: PathBuf,
-        #[arg(long)]
-        input: PathBuf,
-        #[arg(long)]
-        output: Option<PathBuf>,
-    },
-    /// Read all effective selected arranger clips/notes/time, including multiple tracks and groups.
-    GetAll {
-        /// JSON array of exact clip paths; omit to read the native selection.
-        #[arg(long)]
-        paths: Option<PathBuf>,
-        /// Write the same complete clip content printed on stdout.
-        #[arg(long)]
-        output: Option<PathBuf>,
     },
 }
 
@@ -423,16 +436,18 @@ impl Controller {
                 request: match command {
                     SelectionAction::Read => notes_transformer::selection::Request::Read {},
                     SelectionAction::Set { input } => {
-                        let request: notes_transformer::selection::Request = read(&input)?;
-                        if !matches!(request, notes_transformer::selection::Request::Set { .. }) {
-                            return Err("Expected absolute selection set request".into());
+                        let mut input: serde_json::Map<String, serde_json::Value> = read(&input)?;
+                        if input.insert("action".into(), "set".into()).is_some() {
+                            return Err("Selection input must omit action".into());
                         }
+                        let request: notes_transformer::selection::Request =
+                            serde_json::from_value(input.into())?;
                         request
                     }
                 },
             },
-            Action::Info { path } => Command::Info {
-                parameters: false,
+            Action::Info { path, parameters } => Command::Info {
+                parameters,
                 path: path.as_ref().map(|path| read(path)).transpose()?,
             },
             Action::Operation { request_id } => Command::OperationStatus { request_id },
@@ -440,6 +455,7 @@ impl Controller {
             Action::Mix(_)
             | Action::ExportAudio(_)
             | Action::Cues(_)
+            | Action::Content { .. }
             | Action::Midi { .. }
             | Action::Automation(_) => {
                 return Err("Workflow command requires its dedicated dispatcher".into());
@@ -453,12 +469,12 @@ impl Controller {
     }
 }
 pub async fn run(args: Controller) -> Result<(), Box<dyn Error>> {
-    if let Action::Info { path } = args.command {
+    if let Action::Info { path, parameters } = args.command {
         let response = notes_transformer::api::exchange(
             args.port,
             args.adapter,
             Command::Info {
-                parameters: false,
+                parameters,
                 path: path.as_ref().map(|path| read(path)).transpose()?,
             },
         )
@@ -483,7 +499,37 @@ pub async fn run(args: Controller) -> Result<(), Box<dyn Error>> {
 
     run_specialist(args).await
 }
+async fn run_content(
+    port: u16,
+    adapter: Option<String>,
+    command: ContentAction,
+) -> Result<(), Box<dyn Error>> {
+    let command = match command {
+        ContentAction::Read {
+            paths: Some(paths), ..
+        } => Command::ReadClips {
+            paths: read(&paths)?,
+        },
+        ContentAction::Read { paths: None, .. } => Command::Midi,
+        ContentAction::Replace { expected, input } => Command::ReplaceClips {
+            before: read(&expected)?,
+            after: read(&input)?,
+        },
+    };
+    let snapshot = match notes_transformer::api::exchange(port, adapter, command).await? {
+        Response::MidiResult { midi } => *midi,
+        Response::ControlResult { result } => result.snapshot,
+        _ => return Err("Unexpected native content response".into()),
+    };
+    serde_json::to_writer(std::io::stdout().lock(), &snapshot)?;
+    println!();
+    Ok(())
+}
+
 async fn run_specialist(args: Controller) -> Result<(), Box<dyn Error>> {
+    if let Action::Content { command } = args.command {
+        return run_content(args.port, args.adapter, command).await;
+    }
     if let Action::Mix(command) = args.command {
         return crate::cli_mix::mix(command, args.port, args.adapter).await;
     }
@@ -509,67 +555,6 @@ async fn run_specialist(args: Controller) -> Result<(), Box<dyn Error>> {
     if let Action::Cues(cues) = args.command {
         return crate::cli_cues::run(args.port, args.adapter, cues).await;
     }
-    if let Action::Midi {
-        command:
-            MidiAction::Replace {
-                expected,
-                input,
-                output,
-            },
-    } = args.command
-    {
-        let before = serde_json::from_slice(&notes_transformer::files::read_bounded(&expected)?)?;
-        let after = serde_json::from_slice(&notes_transformer::files::read_bounded(&input)?)?;
-        if let Some(path) = &output {
-            notes_transformer::files::ensure_fresh_output(path)?;
-        }
-        let response = notes_transformer::api::exchange(
-            args.port,
-            args.adapter,
-            Command::ReplaceClips { before, after },
-        )
-        .await?;
-        let notes_transformer::control::Response::ControlResult { result } = response else {
-            return Err("Unexpected clip replacement result".into());
-        };
-        if let Some(path) = output {
-            notes_transformer::files::publish_bytes(&path, &serde_json::to_vec(&result.snapshot)?)?;
-        }
-        serde_json::to_writer(std::io::stdout().lock(), &result.snapshot)?;
-        println!();
-        return Ok(());
-    }
-    if let Action::Midi {
-        command: MidiAction::GetAll { output, paths },
-    } = args.command
-    {
-        if let Some(path) = &output {
-            notes_transformer::files::ensure_fresh_output(path)?;
-        }
-        let observed = if let Some(paths) = paths {
-            let response = notes_transformer::api::exchange(
-                args.port,
-                args.adapter,
-                Command::ReadClips {
-                    paths: read(&paths)?,
-                },
-            )
-            .await?;
-            let notes_transformer::control::Response::MidiResult { midi } = response else {
-                return Err("Unexpected clip read result".into());
-            };
-            *midi
-        } else {
-            notes_transformer::midi::read(args.port, args.adapter).await?
-        };
-        if let Some(path) = &output {
-            notes_transformer::files::publish_bytes(path, &serde_json::to_vec(&observed)?)?;
-        }
-        serde_json::to_writer(std::io::stdout().lock(), &observed)?;
-        println!();
-        return Ok(());
-    }
-
     let (port, adapter, command) = args.intent()?;
     let response = notes_transformer::api::exchange(port, adapter, command).await?;
     let output = match response {

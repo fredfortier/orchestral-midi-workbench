@@ -13,7 +13,7 @@ This document defines the default collaboration model for an agent-first reposit
 ## Documentation Discipline
 
 - `AGENTS.md` is a routing layer, not a giant policy document.
-- `docs/` owns repository-wide guidance and records. Package `ARCHITECTURE.md` files own implementation contracts. Skills own music-production procedures.
+- [Architecture](ARCHITECTURE.md) maps the design. Concept documents under `docs/architecture/` own component contracts. Skills own music-production procedures.
 - Put essential developer procedures in the owning `AGENTS.md`. Durable documentation may link to those instructions and package contracts. Keep ephemeral runbooks out of durable documentation links.
 - Keep music-production and development documentation separate. Production skills and their supporting files must never route to development docs or source code.
 - If behavior changes, update the corresponding docs in the same change.

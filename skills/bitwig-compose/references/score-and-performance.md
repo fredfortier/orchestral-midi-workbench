@@ -43,7 +43,8 @@ saved project + original score + user direction
    Anchor the required curves to the composer's markings and the musicological
    analysis in PERFORMANCE.md. Follow the shared
    [expression control specification](../../bitwig-edit/references/dynamics-and-expression.md#apply-the-distinction).
-   Use applicable controls as intended and encode their shared channel-1 curves.
+   Follow the [sparse curve procedure](../../bitwig-edit/references/automation-edits.md#draw-sparse-musical-curves)
+   when encoding applicable shared channel-1 curves.
    Finish and review the converter's MIDI2 and companion before creating
    musical tracks, clips or receivers. The bundle holds performed note gates,
    attacks, note routes and track controls. Place it with the admitted native
@@ -85,10 +86,10 @@ Record each decision that affects the rendition beside its evidence.
 - [ ] **Forces and texture.** Check sounding transpositions, tessitura,
   polyphony, continuo texture, foreground and support. Resolve vocal sections,
   language, vowels or text fidelity, and melismas.
-- [ ] **Articulation and line.** Read the written slurs, ties, rests, ornaments,
-  repeated notes and attacks. Relate them to bowing, tonguing, text and phrase
-  function. Specify attack, connection, release and any editorial departures.
-  Check legato transitions, repeated attacks and polyphony against exact patches.
+- [ ] **Articulation and line.** Complete the
+  [articulation research and map](../../score-realization/references/interpretation.md#research-and-map-articulations).
+  Carry the score occurrences, cited evidence, playing intent and exact
+  receiver choices into the rendition.
 - [ ] **Intensity and expression.** Identify tension, arrivals, cadence and
   release. Choose sampled dynamics, attack velocity and independent expression
   separately. Review the patch control and baseline for each, and justify the

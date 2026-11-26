@@ -33,7 +33,7 @@ adapters identify the intended instance explicitly. Do not substitute cached mus
 | Place an already agreed cue sheet | Read performance-file and cue-marker references. Verify its musical anchors against a fresh note observation; preserve the agreed interpretation unless evidence contradicts it. |
 
 Open [bitwig-explore](../bitwig-explore/SKILL.md) before musical reads; use its
-`controller midi get-all --paths paths.json --output fresh.json` command for
+`controller content read --paths paths.json > fresh.json` command for
 explicit scope, or omit paths for the actual native selection. Use `controller info`
 to establish every intended part/clip. Do not confuse an empty or partial selection
 with the whole piece. Resolve written passages to actual arranger occurrences

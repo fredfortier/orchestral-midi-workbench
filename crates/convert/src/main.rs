@@ -1,7 +1,8 @@
 //! The command line is an I/O adapter around the library API.
 use clap::{Parser, ValueEnum};
 use musicxml_midi2_convert::{
-    self as convert, Diagnostic, Result, model::RenderingPolicy, preserve::Companion,
+    self as convert, Diagnostic, MAX_ARTIFACT_BYTES, Result, model::RenderingPolicy,
+    preserve::Companion,
 };
 use std::{
     io::{Read, Write},
@@ -25,10 +26,10 @@ struct Args {
     #[arg(long, value_enum)]
     to: Option<Format>,
     /// Validate and inventory MIDI2 without reconstructing a score.
-    #[arg(long, conflicts_with_all = ["to", "companion", "bindings", "rendition_plan", "policy", "from", "output"])]
+    #[arg(long, conflicts_with_all = ["to", "companion", "rendition_plan", "policy", "from", "output"])]
     validate: bool,
     /// Inspect performed notes and exact rendition-rule selectors without writing MIDI.
-    #[arg(long, conflicts_with_all = ["to", "validate", "companion", "bindings", "rendition_plan", "from", "report"])]
+    #[arg(long, conflicts_with_all = ["to", "validate", "companion", "rendition_plan", "from", "report"])]
     inspect_rendition: bool,
     #[arg(long, value_enum)]
     from: Option<Format>,
@@ -36,11 +37,8 @@ struct Args {
     output: Option<PathBuf>,
     #[arg(long)]
     companion: Option<PathBuf>,
-    /// Attach verified receiver recipes to the companion for a future live adapter.
-    #[arg(long)]
-    bindings: Option<PathBuf>,
     /// Apply reviewed note, receiver and controller decisions (JSON; see convert README).
-    #[arg(long, conflicts_with = "bindings")]
+    #[arg(long)]
     rendition_plan: Option<PathBuf>,
     /// Rendering policy JSON, including the default tempo for scores without one.
     #[arg(long)]
@@ -54,12 +52,29 @@ fn io(e: impl std::fmt::Display) -> Diagnostic {
     Diagnostic::new("E_IO", e.to_string())
 }
 fn write_set(files: &[(PathBuf, Vec<u8>)], force: bool) -> Result<()> {
-    for (path, _) in files {
-        if path.exists() && !force {
+    for (path, data) in files {
+        if u64::try_from(data.len()).map_err(io)? > MAX_ARTIFACT_BYTES {
             return Err(Diagnostic::new(
-                "E_EXISTS",
-                format!("{} exists; use --force", path.display()),
+                "E_RESOURCE",
+                format!("{} exceeds the 64 MiB artifact limit", path.display()),
             ));
+        }
+        match path.symlink_metadata() {
+            Ok(metadata) if !metadata.is_file() => {
+                return Err(Diagnostic::new(
+                    "E_OUTPUT",
+                    format!("{} is not a regular file", path.display()),
+                ));
+            }
+            Ok(_) if !force => {
+                return Err(Diagnostic::new(
+                    "E_EXISTS",
+                    format!("{} exists; use --force", path.display()),
+                ));
+            }
+            Ok(_) => {}
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+            Err(error) => return Err(io(error)),
         }
     }
     let mut staging = Vec::new();
@@ -73,7 +88,7 @@ fn write_set(files: &[(PathBuf, Vec<u8>)], force: bool) -> Result<()> {
         file.as_file().sync_all().map_err(io)?;
         staging.push(file);
     }
-    // The companion manifest is the last publication and the commit marker.
+    // The companion is the completion marker for score conversion.
     for (file, (path, _)) in staging.into_iter().zip(files) {
         if force {
             file.persist(path).map_err(io)?;
@@ -87,10 +102,10 @@ fn read_input(path: &Path) -> Result<Vec<u8>> {
     let mut bytes = Vec::new();
     std::fs::File::open(path)
         .map_err(io)?
-        .take(64 * 1024 * 1024 + 1)
+        .take(MAX_ARTIFACT_BYTES + 1)
         .read_to_end(&mut bytes)
         .map_err(io)?;
-    if bytes.len() > 64 * 1024 * 1024 {
+    if u64::try_from(bytes.len()).map_err(io)? > MAX_ARTIFACT_BYTES {
         return Err(Diagnostic::new("E_RESOURCE", "Input exceeds 64 MiB"));
     }
     Ok(bytes)
@@ -122,10 +137,15 @@ fn inspect_rendition(args: &Args) -> Result<()> {
     let mut bytes = serde_json::to_vec_pretty(&inspection).map_err(io)?;
     bytes.push(b'\n');
     if let Some(path) = &args.output {
-        if path.canonicalize().ok() == Some(args.input.canonicalize().map_err(io)?) {
+        let destination = path.canonicalize().ok();
+        if destination.is_some()
+            && std::iter::once(&args.input)
+                .chain(args.policy.iter())
+                .any(|input| input.canonicalize().ok() == destination)
+        {
             return Err(Diagnostic::new(
                 "E_OUTPUT",
-                "inspection must differ from input",
+                "inspection output overlaps an input",
             ));
         }
         return write_set(&[(path.clone(), bytes)], args.force);
@@ -179,16 +199,18 @@ fn run(args: Args) -> Result<()> {
         return Err(Diagnostic::new("E_OUTPUT", "input and output must differ"));
     }
     let mut files = Vec::new();
+    let mut protected =
+        std::collections::BTreeSet::from([args.input.canonicalize().map_err(io)?]);
     let from_midi = match args.from {
         Some(Format::Midi2) => true,
         Some(_) => false,
         None => bytes.starts_with(b"SMF2CLIP"),
     };
     if from_midi {
-        if args.bindings.is_some() || args.policy.is_some() || args.rendition_plan.is_some() {
+        if args.policy.is_some() || args.rendition_plan.is_some() {
             return Err(Diagnostic::new(
                 "E_OPTIONS",
-                "--bindings, --policy and --rendition-plan apply to score rendering",
+                "--policy and --rendition-plan apply to score rendering",
             ));
         }
         if matches!(target, Format::Midi2) {
@@ -197,23 +219,26 @@ fn run(args: Args) -> Result<()> {
                 "choose musicxml or mxl for a MIDI clip",
             ));
         }
-        let standalone =
-            convert::arrangement::read(&convert::clip::decode(&bytes, None)?)?.is_some();
+        let performance = convert::clip::decode(&bytes, None)?;
+        let standalone = convert::arrangement::read(&performance)?.is_some();
         let explicit_companion = args.companion.is_some();
         let companion_path = args
             .companion
             .unwrap_or_else(|| args.input.with_extension("convert.json"));
-        let companion: Option<Companion> = if (explicit_companion || !standalone)
-            && companion_path.exists()
-        {
-            Some(serde_json::from_slice(&std::fs::read(&companion_path).map_err(io)?).map_err(io)?)
-        } else {
-            None
-        };
+        let companion: Option<Companion> =
+            if explicit_companion || (!standalone && companion_path.try_exists().map_err(io)?) {
+                let companion: Companion =
+                    serde_json::from_slice(&read_input(&companion_path)?).map_err(io)?;
+                if explicit_companion {
+                    companion.validate_rendition(&performance)?;
+                }
+                protected.insert(companion_path.canonicalize().map_err(io)?);
+                Some(companion)
+            } else {
+                None
+            };
         let xml = convert::midi2_to_xml(&bytes, companion.as_ref(), matches!(target, Format::Mxl))?;
         if let Some(report) = args.report {
-            let performance =
-                convert::clip::decode(&bytes, companion.as_ref().map(|c| &c.dictionary))?;
             files.push((
                 report,
                 serde_json::to_vec_pretty(&if standalone {
@@ -233,24 +258,18 @@ fn run(args: Args) -> Result<()> {
             ));
         }
         let policy = read_policy(args.policy.as_deref())?;
-        let mut converted = if let Some(path) = args.rendition_plan {
+        if let Some(path) = &args.policy {
+            protected.insert(path.canonicalize().map_err(io)?);
+        }
+        let converted = if let Some(path) = args.rendition_plan {
             let plan = serde_json::from_slice(&read_input(&path)?).map_err(|error| {
                 Diagnostic::new("E_RENDITION_PLAN", format!("{}: {error}", path.display()))
             })?;
+            protected.insert(path.canonicalize().map_err(io)?);
             convert::xml_to_rendition(&bytes, &policy, &plan)?
         } else {
             convert::xml_to_midi2(&bytes, &policy)?
         };
-        if let Some(path) = args.bindings {
-            let bindings = serde_json::from_slice(&std::fs::read(path).map_err(io)?).map_err(io)?;
-            convert::extension::validate_bindings(&bindings)?;
-            converted.companion.receiver_bindings = Some(bindings);
-            converted.report.record(
-                "/",
-                "receiver binding",
-                "verified binding retained for a live adapter; portable file categories used",
-            );
-        }
         let companion = args
             .companion
             .unwrap_or_else(|| output.with_extension("convert.json"));
@@ -274,7 +293,6 @@ fn run(args: Args) -> Result<()> {
         ));
     }
     let mut paths = std::collections::BTreeSet::new();
-    let input_identity = args.input.canonicalize().map_err(io)?;
     for (path, _) in &files {
         let parent = path
             .parent()
@@ -288,7 +306,7 @@ fn run(args: Args) -> Result<()> {
                     .map(|p| p.join(path.file_name().unwrap_or_default()))
             })
             .map_err(io)?;
-        if identity == input_identity || !paths.insert(identity) {
+        if protected.contains(&identity) || !paths.insert(identity) {
             return Err(Diagnostic::new("E_OUTPUT", "artifact paths overlap"));
         }
         if let Some(parent) = path.parent().filter(|p| !p.as_os_str().is_empty()) {

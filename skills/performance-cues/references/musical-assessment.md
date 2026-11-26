@@ -11,7 +11,7 @@ Follow [the exploration procedure](../../bitwig-explore/references/arranger-navi
 
 ```sh
 run_dir=$(mktemp -d /tmp/performance-cues.XXXXXX)
-midi-bridge controller midi get-all --output "$run_dir/notes.json" > /dev/null
+midi-bridge controller content read --selection > "$run_dir/notes.json"
 ```
 
 Confirm movement, tracks, clips and musical extent from the result. Retain exact

@@ -17,22 +17,15 @@ use std::{collections::BTreeSet, error::Error, path::PathBuf};
 #[derive(Args)]
 pub struct Automation {
     #[command(subcommand)]
-    command: Action,
+    command: AutomationAction,
 }
 #[derive(Subcommand)]
-enum Action {
-    /// Discover the named device's parameters and mapped Remote Controls.
-    Read {
-        #[arg(long)]
-        target: PathBuf,
-    },
+enum AutomationAction {
     /// Set track MIDI CC curves (or explicitly requested device parameters) atomically.
     /// Points use physical values and source beats (arranger beats for new curves).
     Set {
         #[arg(long)]
         input: PathBuf,
-        #[arg(long)]
-        output: Option<PathBuf>,
     },
 }
 #[derive(Deserialize)]
@@ -82,14 +75,7 @@ pub async fn run(
     adapter: Option<String>,
 ) -> Result<(), Box<dyn Error>> {
     match args.command {
-        Action::Read { target } => {
-            let path = serde_json::from_slice(&files::read_bounded(&target)?)?;
-            let entity = info(port, adapter, path).await?;
-            serde_json::to_writer(std::io::stdout().lock(), &entity)?;
-            println!();
-            Ok(())
-        }
-        Action::Set { input, output } => set(&input, output, port, adapter).await,
+        AutomationAction::Set { input } => set(&input, port, adapter).await,
     }
 }
 async fn device_target(
@@ -128,13 +114,9 @@ async fn device_target(
 
 async fn set(
     input: &std::path::Path,
-    output: Option<PathBuf>,
     port: u16,
     adapter: Option<String>,
 ) -> Result<(), Box<dyn Error>> {
-    if let Some(path) = &output {
-        files::ensure_fresh_output(path)?;
-    }
     let inputs: Vec<CurveInput> = serde_json::from_slice(&files::read_bounded(input)?)?;
     if inputs.is_empty() || inputs.len() > 256 {
         return Err("Supply 1–256 automation curves".into());
@@ -206,9 +188,6 @@ async fn set(
         };
         result.snapshot
     };
-    if let Some(path) = output {
-        files::publish_bytes(&path, &serde_json::to_vec(&observed)?)?;
-    }
     serde_json::to_writer(std::io::stdout().lock(), &observed)?;
     println!();
     Ok(())

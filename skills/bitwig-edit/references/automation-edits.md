@@ -20,10 +20,64 @@ dynamics and independent expression envelope before writing. CC11 is not a
 fixed-127 baseline by default, and its curve must not be derived mechanically
 from CC1. Preserve unsupported controls and unrelated histories.
 
+## Draw sparse musical curves
+
+1. Read the existing source and align it with the sounding notes and relevant
+   performance cues. Identify what each gesture does before smoothing it.
+   Describe the initial level, onset of the rise, crest or plateau, release and
+   return in musical terms, then give each necessary anchor a time and a value
+   in the target's units. Resolve cue or bar references to the actual played
+   occurrence. Preserve intentional local accents and the relative weight of
+   crests, rests, resets, tails and boundary values. A cue can explain a gesture
+   without requiring a breakpoint.
+2. Start with the required anchors. Use straight ramps and constant spans
+   wherever they serve the gesture. For an eased rise or release, use a
+   shape-preserving reference that passes through the anchors and stays within
+   the intended range. Add only the linear breakpoints needed to approximate it
+   at the same beats within a stated value tolerance. Remove collinear and
+   redundant flat points where their removal preserves timing and held state.
+   Use HOLD for intentional steps and switches, with zero curvature. Keep their
+   exact times, boundaries and equal-time order outside any fitting pass.
+3. For portable continuous MIDI CC, use LINEAR with zero curvature and spread
+   and confirm destination channel, controller and receiver behavior. Plan in
+   MIDI 1.0 CC units (0–127) and store native CC values as level / 127 with full
+   precision. Budget curve approximation in CC steps, then separately check
+   7-bit rounding and any audible change from discrete event timing. Start with
+   a tolerance of roughly one CC step for a gentle continuous control if the
+   receiver permits it. Preserve seek and initial state. Sparse Bitwig points
+   define the shape. A MIDI renderer samples the ramps into discrete CC events
+   at its delivery cadence. A device-parameter curve uses its own value domain.
+   It requires a verified receiver mapping before translation to MIDI CC.
+4. Check the final ramps after [native time quantization](clip-replacement.md).
+   Confirm exact required anchors, range, intended direction, boundary
+   continuity and approximation error between anchors. Account for every
+   extra point by its musical or approximation role. Apply through the complete
+   native edit and compare fresh readback with the plan and preserved content.
+
+### When a helper is worthwhile
+
+Use direct anchor placement for flats and simple ramps. For repeated eased
+phrases or dense existing curves, an offline helper can take resolved beats,
+CC levels, protected anchors and a shape such as hold, ramp or eased swell.
+Keep the agent responsible for choosing those musical anchors. The helper
+would return proposed points and an error report for review before replacement.
+
+[SCAMP's expenvelope](https://scamp.marcevanstein.com/expenvelope/expenvelope.envelope.Envelope.html)
+models musical envelopes with levels, durations and segment shapes.
+[SciPy PCHIP](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.PchipInterpolator.html)
+is an alternative for smooth, shape-preserving interpolation from points alone.
+Either can supply the reference shape. For minimum point count on a fixed
+candidate grid, find the shortest path through links whose straight segments
+meet the same-beat value tolerance, splitting at protected anchors and steps.
+Check the worst error between sample times as well when claiming a continuous
+bound. Report the candidate grid and tolerance alongside any optimality claim.
+The helper would export LINEAR or HOLD point proposals for the existing native
+transaction. Event sampling and receiver routing remain part of MIDI delivery.
+
 ## Set track CC curves
 
 ```sh
-midi-bridge controller automation set --input curves.json --output after.json > /dev/null
+midi-bridge controller automation set --input curves.json > after.json
 ```
 
 `curves.json` is one atomic batch:
@@ -41,7 +95,7 @@ zero curvature and zero spread are defaults. Record required initial held values
 as track MIDI state when needed; no sender device is required for static controls.
 
 The command resolves the owning track and its existing note clips, captures all
-notes/expression/automation, and uses the canonical `midi replace` transaction.
+notes/expression/automation, and uses the canonical `content replace` transaction.
 It creates missing track lanes or edits their complete points. Device discovery,
 selection changes and receiver reloads are unnecessary. Existing committed content
 refuses an implicit edit: preserve it, and specify its observed `source` only when
@@ -78,7 +132,7 @@ writes. Open or manipulate a VST editor through computer interaction only on
 explicit user request.
 
 ```sh
-midi-bridge controller automation read --target device.json > parameters.json
+midi-bridge controller info --path device.json --parameters > parameters.json
 ```
 
 Descriptors provide physical ranges, units, identity and mapped Remote Controls.

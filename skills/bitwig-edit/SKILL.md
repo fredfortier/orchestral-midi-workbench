@@ -10,6 +10,11 @@ musical change. Establish intended owners and preservation properties; keep work
 bounded to that request. Use [bitwig-explore](../bitwig-explore/SKILL.md) to resolve
 scope when needed. An open project is not a disposable history/random-edit fixture.
 
+Use `midi-bridge controller` for every read, write, and verification of stored
+automation and MIDI notes. Resolve the exact native owner and source through
+controller reads. If the controller cannot establish the source or return a
+valid complete snapshot, stop the affected edit and report the controller error.
+
 Default to the arranger. When the request or current edit context identifies
 the launcher, use the [launcher recipe](references/common-edits.md#launcher-clips).
 
@@ -26,7 +31,7 @@ explicitly requests it. [Automation procedure](references/automation-edits.md)
 | Structural paths; explicit beyond-MIDI parameter/Remote Control discovery | [bitwig-explore](../bitwig-explore/SKILL.md), then its relevant discovery reference |
 | Note CRUD, transpose, channel, timing, velocity, bounded humanization | [Native edits](references/native-edits.md) |
 | Per-note pressure/pitch/gain/pan/timbre points | [Native edits](references/native-edits.md#expression-and-automation-boundaries) |
-| Stored automation point CRUD, complete curves, smoothing | [Automation edits](references/automation-edits.md) |
+| Stored automation point CRUD, complete curves, smoothing | [Automation edits](references/automation-edits.md) and its [curve-drawing procedure](references/automation-edits.md#draw-sparse-musical-curves) |
 
 ```text
 resolve owners -> settle requested change (PERFORMANCE.md when in use)

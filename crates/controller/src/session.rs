@@ -163,12 +163,18 @@ impl PendingControl {
                 | ClientMessage::CommandError { reason, .. },
             ) => Err(reason),
             (
-                Command::Midi | Command::ReadClips { .. },
+                command @ (Command::Midi | Command::ReadClips { .. }),
                 ClientMessage::MidiObservation { midi, .. },
-            ) => midi
-                .validate()
-                .map(|()| ControlOutcome::MidiResult { midi })
-                .map_err(|reason| format!("Invalid native MIDI observation: {reason}")),
+            ) => {
+                let paths = match command {
+                    Command::ReadClips { paths } => Some(paths.as_slice()),
+                    _ => None,
+                };
+                midi.validate()
+                    .map_err(|reason| format!("Invalid native MIDI observation: {reason}"))?;
+                midi.verify_scope(paths)?;
+                Ok(ControlOutcome::MidiResult { midi })
+            }
             _ => Err("Observation kind does not match dispatched command".into()),
         }
     }
@@ -477,32 +483,28 @@ pub async fn control(
         return dispatch(state, adapter, command).await;
     }
     let _guard = state.application_gate.lock().await;
-    if let Some(operation) = state
-        .unresolved_loader
-        .lock()
-        .map_err(|_| ControlError::unavailable("Loader state unavailable"))?
-        .as_ref()
+    if let Command::Instrument {
+        request: request @ crate::instrument::Request::Assign { nki: Some(_), .. },
+    } = &command
+        && let Some(operation) = state
+            .unresolved_loader
+            .lock()
+            .map_err(|_| ControlError::unavailable("Loader state unavailable"))?
+            .as_ref()
+        && !crate::instrument::resumes_blocked_loader(request, operation)
     {
-        let resumes = matches!(&command, Command::Instrument { request }
-            if crate::instrument::resumes_blocked_loader(request, operation));
-        if !resumes {
-            return Err(ControlError::unknown(format!(
-                "External load {operation} requires reconciliation; no further write dispatched"
-            )));
-        }
+        return Err(ControlError::unknown(format!(
+            "External load {operation} requires reconciliation before another NKI submission"
+        )));
     }
     let adapter = Some(state.resolve_adapter(adapter.as_deref())?);
     if let Command::ReplaceClips { before, after } = &command {
         if before == after {
-            let read = if before.selection.editor == "paths" {
-                Command::ReadClips {
-                    paths: before
-                        .paths
-                        .clone()
-                        .ok_or_else(|| ControlError::invalid("Missing explicit content scope"))?,
-                }
-            } else {
-                Command::Midi
+            let read = match &before.paths {
+                Some(paths) => Command::ReadClips {
+                    paths: paths.clone(),
+                },
+                None => Command::Midi,
             };
             let ControlOutcome::MidiResult { midi } = dispatch(state, adapter, read).await? else {
                 return Err(ControlError::unknown("Unexpected clip read"));

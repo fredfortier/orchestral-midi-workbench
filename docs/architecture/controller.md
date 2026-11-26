@@ -1,7 +1,87 @@
 # Controller architecture
 
-Status: **Binding contract.** The owner's instructions govern. Existing code and
-historical qualification cannot relax this contract.
+## Entity model
+
+Bitwig owns three related kinds of state. An **entity** is a named structural
+object with a qualified path. **Selection** describes the native UI context and
+references entities or items inside them. **Musical content** lives in note
+and automation sources. An automation lane addresses a control on a track.
+Its arranger timeline and automation clips can carry different curves for
+that control.[^bitwig-automation] The Inspector can select a track, clip,
+note, device or automation point, and the active editor has its own
+meaning.[^bitwig-inspector]
+
+```text
+Project
+  +-- Group [nested Group ...]
+        +-- Track
+              +-- Arranger Note Clip ---- note source ---- notes, expression
+              +-- Launcher Note Clip ---- note source ---- notes, expression
+              +-- Automation Lane ------- target identity
+              |     +-- outside clips --- curve source --- points
+              |     +-- automation clip - curve source --- points
+              +-- Device
+                    +-- Layer or Selector chain ---- nested devices
+
+Selection ---- qualified entity path + optional content reference
+Snapshot ----- explicit paths + complete musical content in that scope
+```
+
+The structural path ends at the lane or Note Clip. A point or note reference
+carries an identity scoped by its lane or clip. A placement says where a
+source plays. Several placements can share one source, so an edit to that
+source must account for its aliases. This distinction determines what the
+controller can preserve during replacement.
+
+## Command grammar
+
+Use the same qualified JSON `Path` for every operation that addresses a
+structural entity. Entity kinds and names follow native containment. Display
+order, focus, parameter labels and numeric controller numbers describe
+different facts and cannot substitute for a path. Resolve names within the
+already identified owner, then carry the observed path to the next operation.
+
+| Command | Scope and result |
+| --- | --- |
+| `info [--path PATH.json]` | One structural subtree, or the project when omitted, with current native selection from the same document callback. |
+| `info --path DEVICE.json --parameters` | Include metadata for the addressed device's parameters and Remote Controls, including current values. The explicit flag bounds this additional read to that device. |
+| `selection read` | The same selection representation on its own. This avoids traversing the hierarchy during repeated checks. |
+| `selection set --input REQUEST.json` | Absolute native selection request with fresh authority, paths and mode. Return the verified native selection. |
+| `content read --paths PATHS.json` | One complete snapshot for a nonempty array of explicit track, group-channel or Note Clip paths. |
+| `content read --selection` | The same snapshot grammar for the effective native musical selection, including selected note flags. |
+| `content replace --expected BEFORE.json --input DESIRED.json` | Replace the same complete scope and return independently verified content. |
+
+The prefix is `midi-bridge controller`. `--path` takes one path and `--paths`
+takes an array. A mutation takes `--input` for its desired data and uses
+`--expected` where the precondition is a separate complete snapshot. These
+commands emit one JSON document on stdout and diagnostics on stderr. The shell
+handles output routing. Use explicit paths for a known native target or
+`--selection` when the selected clip, notes or time range define the task.
+Replacement requires the same scope in both snapshots and rechecks that scope
+against native state before writing.[^cli-grammar]
+
+An explicit content observation verifies the returned owners, clips and
+automation against the requested scope. Track and group-channel paths cover
+their own Arranger content. Launcher content requires a Launcher Note Clip
+path. A clip path selects one clip and its owning automation scope. Missing,
+overlapping and unrequested content invalidate the observation.
+
+```text
+info -> qualified selection and hierarchy -> resolve target and owning path
+  -> content read -> inspect or edit the JSON locally
+  -> content replace -> content read of the same scope
+```
+
+A lane address identifies the curve family. Use its owning track path to read
+the complete arranger snapshot, then filter the result by lane ID and, where
+needed, by placement or source. This keeps both the requested scope and the
+preservation scope visible. An ambiguous name requires a qualified path or
+further user intent. A point ID without ownership cannot choose an edit target.
+
+Use `info --parameters` for the device catalog and `automation set` to express a
+complete curve in native units. Specialist commands use `Path` for structural
+entities and keep operation IDs, channels, source IDs, and artifact filenames
+in their respective domains.
 
 ## Purpose and execution boundaries
 
@@ -11,10 +91,12 @@ complete musical reads/replacement. Skills compose those primitives with
 qualified OSC session actions and computer recipes. Native mixing, audio export and MIDI2 interpretation
 are bounded operations owned here.
 
-Retain one correlated JSON request/response envelope and qualified Path model.
+The controller uses one correlated JSON envelope and one qualified Path model.
+The Rust service compiles edit proposals from correlated native observations.
+The adapter sends observations and operation results.
 No generic action/macro executor, reflected property access, mirrored project,
 second setup mechanism, transport API, general clip-geometry editing or project lifecycle
-API. Existing specialized instrument operations own integrated slot/routing and
+API. Instrument operations own integrated slot/routing and
 Kontakt assignment, including Channel Filter → Channel Map → receiver. Java owns
 host calls; Rust owns pure musical planning and external assignment orchestration.
 Keyboard delivery and panel focus belong to computer use in the owning skill.
@@ -29,13 +111,13 @@ CLI -> loopback HTTP -> Rust service <== native TCP ==> Bitwig Java extension
                         +-- qualified load --> Kontakt editor     Bitwig state
 ```
 
-- [`controller.rs`](src/controller.rs) defines admitted operations.
-  [`protocol.rs`](src/protocol.rs), [`frame.rs`](src/frame.rs) and
-  [`session.rs`](src/session.rs) own messages, framing and adapter epochs.
-- [`project_address.rs`](src/project_address.rs), [`editor.rs`](src/editor.rs)
-  and [`automation.rs`](src/automation.rs) own path, note and curve types.
-  [`export_midi.rs`](src/export_midi.rs) owns capture interpretation and assembly.
-- [`EditorSession`](adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/EditorSession.java)
+- [`controller.rs`](../../crates/controller/src/controller.rs) defines admitted operations.
+  [`protocol.rs`](../../crates/controller/src/protocol.rs), [`frame.rs`](../../crates/controller/src/frame.rs) and
+  [`session.rs`](../../crates/controller/src/session.rs) own messages, framing and adapter epochs.
+- [`project_address.rs`](../../crates/controller/src/project_address.rs), [`editor.rs`](../../crates/controller/src/editor.rs)
+  and [`automation.rs`](../../crates/controller/src/automation.rs) own path, note and curve types.
+  [`export_midi.rs`](../../crates/controller/src/export_midi.rs) owns capture interpretation and assembly.
+- [`EditorSession`](../../crates/controller/adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/EditorSession.java)
   connects the extension. The harness packages separately armed disposable
   probes. Probe commands and the filesystem mailbox stay in the harness.
 
@@ -47,24 +129,32 @@ typed arguments without changing the adapter wire. One active submission can
 collect selected feedback addresses for a bounded window. UDP transmission
 establishes local submission, and feedback describes asynchronous peer state.
 Document effects still require native readback. Window or modal effects need
-a corresponding observation. See [setup](../osc/README.md) and the
-[architecture decision](../../docs/adrs/osc-through-the-bridge.md).
+a corresponding observation. See [OSC transport](../../crates/osc/README.md).
 
 ## Native host execution
 
-The [Bitwig Java adapter](adapters/bitwig-ctl/README.md) keeps published SDK
+The [Bitwig Java adapter](../../crates/controller/adapters/bitwig-ctl/README.md) keeps published SDK
 calls and private document mappings distinct. Qualify each operation against
 its host build, owning thread and object lifetime. Host objects stay on the
 admitted document thread. Socket waits, blocking external work and live
 references stay out of that boundary. Timing-sensitive callbacks require
 explicit allocation, blocking, locking and logging budgets.
 
+Current Bitwig state supplies project authority. Request receipts correlate
+work and describe outcomes. A plug-in window, instrument or export receipt
+cannot suspend access to the document. Mutations check the relevant native
+owner, transport, save, render or Undo context at execution time. Scoped
+selection, launcher, cue, content and mixer revisions are derived from the facts
+in the observation. Reading an intervening scope does not change an identical
+observation's revision. The mixer and export also carry the native project
+change cursor because their observations omit stored musical content.
+
 ## Paths and structural reads
 
-`Path = {project, elements:[{kind,name,nativeId?,id?,version?}]}` follows actual
+`Path` consists of a project and a sequence of typed elements. It follows actual
 native containment: groups → track → clip or automation lane; track/device chain
-→ device → supported Layer/Selector slot → nested device. Plug-ins retain exact
-registry `id` and `version`. No fabricated folders or flattened group ancestry.
+→ device → supported Layer/Selector slot → nested device. Plug-in elements carry
+their exact registry identity. No fabricated folders or flattened group ancestry.
 Names containing separators remain literal strings. A launcher Note Clip is a
 `launcherClip` child of its track with a zero-based native scene index.
 Clip resolution checks scene, name and any returned native identity.
@@ -77,11 +167,15 @@ lane index locates a row within its observed track; it is not identity.
 
 `Entity = {path,kind,metadata,children}` contains name/native identity, track
 activity, clip placement/source/loop geometry, automation-lane locator, device
-registry identity and existing routing metadata. Structural `info` reads the
-project or resolves the requested subtree directly, then reads only descendants.
-It never reads notes, points or unrelated plug-in parameters. Explicit
-`automation read --target` adds the requested device's parameter/Remote Control
-catalogue; ordinary structural reads never do so. No native property bags, graphs,
+registry identity and existing routing metadata. A lane's target descriptor
+identifies its parameter or MIDI channel and controller. If the native target
+cannot be resolved, structural reads return the lane's native identity, index
+and `targetResolution: "unresolved"`. Complete automation reads still refuse
+when a lane in their scope has an unresolved target. Structural `info`
+adds a root-level `selection` to that entity tree. It returns identity and
+structure without serializing notes, curve points or unrelated plug-in
+parameters in its default form. Explicit `--parameters` adds the requested
+device's parameter and Remote Control catalog. No native property bags, graphs,
 plug-in payloads or speculative fields belong in Entity.
 
 ## Native selection
@@ -95,6 +189,16 @@ target and owner combination before changing anything. Reject incompatible
 families/owners, duplicates and stale authority. The first requested member is
 primary where supported; verify that fact independently of membership.
 
+An observation member has the fields of `Path` and, for selected content, an
+additional `item`. A selected note uses the owning Note Clip path and
+`item: {kind:"note", id}`. A selected automation point uses the lane path and
+`item: {kind:"automationPoint", id, source, placement?}`. The placement is
+present when the native context identifies it. For a shared source with no
+resolved placement, retain the source identity and require placement resolution
+for occurrence-specific work. Structural members are plain paths. Reuse the
+same path resolver and selection reader in project overview and selection-only
+reads. Selection observation does not imply write support for every member kind.
+
 Empty object paths clear the active supported selection. Readback distinguishes
 membership, primary, active editor and object/time mode; unsupported membership
 must be explicit. Reads never move selection or keyboard focus. Membership,
@@ -105,15 +209,15 @@ end-of-event mode/focus reconciliation, with request/lifetime fences rechecked.
 Never inject `active_selection` to imitate keyboard focus. Native selection
 does not establish panel focus: Delete, Rename, arrows and object/time commands
 require their owning computer recipe's focus, selection and binding prerequisites.
-Use existing track/device/slot helpers and arranger collection/range mechanisms;
-remove superseded delta/clear selection implementations.
+Track, device and slot selection use the native selection helpers. Arranger
+selection uses the native collection and range mechanisms.
 
 ## Launcher slot creation
 
 `launcher read` observes the Inspector's single native launcher note slot and
 returns its qualified track, zero-based scene, native slot ID and nullable clip
-path. `launcher create` requires that exact fresh observation for an empty
-slot and creates an empty Note Clip of 1–1024 whole quarter-note beats in one
+path. `launcher create` compares the request with the current empty slot
+and creates an empty Note Clip with a positive whole-beat length in one
 native Undo step. Verify the slot, the created clip and its source and loop
 length before returning authority. Slot creation and subsequent MIDI replacement
 are independent Undo steps.
@@ -162,6 +266,11 @@ subscription caches or adaptive payload machinery. About 1 MB is a prompt to
 inspect junk fields, not permission to truncate or impose a musical size ceiling.
 Frames reject above 16 MiB and offline inputs above 64 MiB as input safeguards.
 
+The adapter emits automation points in increasing source-time order and keeps
+native enumeration order among equal-time points. A remaining order failure
+identifies the track, lane, source and offending point pair. Apply the same
+canonical order to ordinary reads, the edit preflight and independent readback.
+
 Times are quarter-note beats with native source/placement/loop coordinates;
 expression time uses its source plus `contentStart`. MIDI channels are 0–15,
 velocities/pressure 0–1, pitch semitones, pan/timbre −1–1, gain native cube-root
@@ -178,20 +287,23 @@ observed Snapshot + desired Snapshot -> native prepare/freeze -> Rust Plan
 ```
 
 Preserve paths, owners, selection, clip/source/loop geometry,
-untouched attributes and unrelated curves. Store the original explicit scope for
-freeze and reread; reconstructing it from clips loses automation-only tracks and
-can widen clip-only requests. Unchanged replacement independently rereads and
-compares the same scope without writes or an Undo step.
+untouched attributes and unrelated curves. Carry the original explicit scope
+with the edit request through independent readback. Reconstructing it from clips
+loses automation-only tracks and can widen clip-only requests. Unchanged
+replacement independently rereads and compares the same scope without writes
+or an Undo step.
 
-Native prepare freezes current complete values. Rust compares expected content
-and compiles note create/update/delete and complete curve replacements into one
-Plan. Revision is a freshness/transaction cursor, not sufficient proof of content.
+Native prepare reads current complete values for the individual request. Rust
+compares expected content and compiles note create/update/delete and complete
+curve replacements into one Plan. Before writing, the adapter rereads the same
+native scope and compares its
+complete values to the request snapshot. Revision alone cannot establish content.
 Preflight source aliases, temporary identities, collisions, domains, ordering and
 native precision before mutation. Reject unsupported occurrence isolation. Complete
 readback and point identity mappings verify intended changes and preservation;
 never treat an echoed request as independent verification.
 
-Native mutation uses the existing independent Undo transaction and calibrated
+Native mutation uses an independent Undo transaction and calibrated
 rollback behavior.
 Known refusal, partial failure and unknown outcome remain distinct. Recover lost
 responses through the original operation identity and readback; never blindly
@@ -210,8 +322,8 @@ retained identities update existing content. Clearing notes preserves automation
 Conventional controls use documented native track MIDI automation. Direct CC
 values/spread are normalized 0–1; sender-device values may be 0–127. New CC lanes
 admit 0–119; channel-mode messages 120–127 and pitch-bend creation are outside
-that operation. Device parameters/macros require explicit beyond-MIDI scope, or
-legacy-sender discovery for authorized migration. Committed sources require an
+that operation. Device parameters and macros require explicit beyond-MIDI scope
+or inspection of a sender that the user requests to remove. Committed sources require an
 explicit source; overlapping content refuses an implicit track edit. New parameter
 curves carry the qualified device and physical target descriptor; resolve identity,
 range/domain and automation eligibility before writes. Already-correct batches
@@ -246,7 +358,7 @@ receiver, open its editor once and qualify the resulting window the same way.
 An already-visible existing editor cannot be correlated from that inventory and
 the request refuses before changing it.
 
-The [Kontakt loader](adapters/kontakt-ctl/ARCHITECTURE.md) loads into the
+The [Kontakt loader](kontakt-loader.md) loads into the
 qualified handle and PID. Verify receiver membership and routing after loading,
 ignoring transient native editor visibility. With keep-editor-open, verify that
 the same Win32 editor remains visible, record `editorKeptOpen`, and report no
@@ -254,12 +366,17 @@ closure. Otherwise close the editor after loading and verify its disappearance.
 External loading is outside native Undo. Native assignment, NKI submission,
 loaded patch, samples and audible playback are distinct facts.
 
-Retain only outstanding external work while it may still act or its result is
-unknown; later writes refuse until reconciliation. Status does not compete with
-an active loader. Resume-before-load continues the same operation only after a
-retained receipt and fresh identity/membership/routing evidence prove no NKI
+Operation status records the outcome for the original instrument request.
+Status does not compete with an active loader. A native editor-visibility
+operation invalidated by a document lifetime change retains a terminal unknown
+receipt. Later document requests resolve and inspect their own current Bitwig
+scope. The service requires reconciliation before another external NKI
+submission when the prior submission's outcome remains unknown.
+Resume-before-load continues the same
+operation only after a retained receipt and fresh identity/membership/routing
+evidence prove no NKI
 submission. It never reinserts. An atomic one-shot receipt claim fences submission;
-possible prior load, consumed claims or changed scope refuse. Loader activation/
+possible submission, consumed claims or changed scope refuse. Loader activation/
 render preparation does not establish dialog submission or permit customization.
 ## Mixing and audio export
 
@@ -289,7 +406,7 @@ AudioStatus     = same operation
   (sample rate, depth, dither, pre/post-fader and real-time). Resolve every path
   before changing the queue or settings. Reject missing targets, unsupported
   options and existing output paths. Use task-owned settings and preserve
-  persistent export preferences. [`export_audio.rs`](src/export_audio.rs) owns
+  persistent export preferences. [`export_audio.rs`](../../crates/controller/src/export_audio.rs) owns
   the sample-rate allowlist. Depth is INT16, INT24 or FLOAT32. Float WAV rejects
   dither. Range endpoints must be exact native beats.
 - Return an operation ID immediately and observe progress, native outcome and
@@ -300,7 +417,7 @@ AudioStatus     = same operation
 ## Self-contained MIDI2 export
 
 ```text
-Capture v2 = {version: 2, entities, midi: Snapshot, globals[], excluded[], decisions[]?}
+Capture    = {entities, midi: Snapshot, globals[], excluded[], decisions[]?}
 Context    = {beat, seconds, numerator, denominator}
 native read -> retained capture -> optional editorial copy -> assemble -> .midi2
 ```
@@ -308,11 +425,11 @@ native read -> retained capture -> optional editorial copy -> assemble -> .midi2
 - Capture reads one current document on its owning thread, optionally under an
   exact Path. Exclude inactive tracks and descendants of inactive groups before
   reading their clips unless explicitly included. Mute and solo are separate
-  state. Preserve selection, transport and project. Schema 1 requires a new
-  capture. Use the same complete snapshot grammar, including one automation
+  state. Preserve selection, transport and project. Capture uses the complete
+  snapshot grammar, including one automation
   collection and explicit owners/scope. The capture stays intact. An editorial
   copy may record musical decisions and losses and carries no native write
-  authority. See [the capture types](src/export_midi.rs).
+  authority. See [the capture types](../../crates/controller/src/export_midi.rs).
 - Plug-in paths and capture inventory read identity from the native serialized
   contents. CLAP contents use `clap_device_id` and the `clap-` prefix, including
   inside Instrument Layer and Selector slots.
@@ -350,11 +467,11 @@ native read -> retained capture -> optional editorial copy -> assemble -> .midi2
 
 ## Wire, deployment and verification
 
-Loopback HTTP v2 uses `/v2/health` and `/v2/commands` with
-`{requestId,adapter?,command}`. The native wire is separately versioned and uses
+The [loopback HTTP service](../../crates/controller/src/api.rs) exposes health and dispatches
+`{requestId,adapter?,command}`. The native connection uses
 `{type:documentRequest,request,command}` plus correlated typed observations.
 Native frames are plain JSON preceded by a big-endian u32 byte length.
-The adapter `hello` identifies wire, adapter and host build. The service
+The adapter `hello` identifies the protocol, adapter and host build. The service
 `welcome` supplies the session epoch and maximum message size. Reject empty
 or oversized frames. Request correlation, operation identity, document revision
 and session epoch have distinct lifetimes.
@@ -365,9 +482,9 @@ For a repeated mutation request ID, the service compares the complete intent and
 returns the retained result or state of the original operation. A conflicting
 intent fails. This bounded record lives in the service process. After loss of
 the record, use current native readback and retained evidence to reconcile.
-Bump wire/adapter version → build → install immutable CLI/service/adapter → reload
-exact version → verify live handshake → reread → mutate. Never overwrite a loaded
-artifact or admit a mismatched/unknown host build by best-effort reflection.
+The CLI, service and adapter use the same protocol contract. Deployment uses
+immutable artifacts. A live handshake admits only a matching stack and a
+qualified host build. A fresh native read establishes mutation authority.
 
 Durable nominal unit tests are prohibited. Use workspace formatting/tests/Clippy,
 production/harness Java verification and focused ephemeral probes. Native claims
@@ -381,3 +498,22 @@ reject redundant full-project reads and unnecessary payloads.
 
 Compilation establishes buildability. Native behavior, semantic fidelity,
 instrument support and audible playback require their own evidence.
+
+[^bitwig-automation]: The Bitwig user guide distinguishes track and clip
+    automation editing modes, including Launcher clips.
+    [Automation Editor Panel](https://www.bitwig.com/userguide/latest/the_automation_editor_panel/)
+
+[^bitwig-inspector]: Bitwig describes the Inspector as following the active
+    panel's selection and enumerates tracks, clips, notes, devices and
+    automation points. The [native adapter](../../crates/controller/adapters/bitwig-ctl/src/main/java/com/midiworkbench/notes/internal/Selection61.java)
+    reads Inspector membership and editor focus from distinct native fields.
+    [Meet Inspector Panel](https://www.bitwig.com/userguide/latest/meet_inspector_panel/)
+
+[^cli-grammar]: The authors of the [Command Line Interface Guidelines](https://clig.dev/)
+    recommend composable commands, consistent names and options, machine-readable
+    stdout and actionable diagnostics. These principles support reusing JSON
+    paths and snapshots directly in pipelines. The preservation boundary and
+    explicit write preconditions are local controller decisions.
+    [Simple parts](https://clig.dev/#simple-parts-that-work-together)
+    · [Output](https://clig.dev/#output)
+    · [Subcommands](https://clig.dev/#subcommands)

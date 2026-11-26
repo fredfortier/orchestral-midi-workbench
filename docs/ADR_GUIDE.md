@@ -1,7 +1,8 @@
 # Architecture decision records
 
 Use an ADR when a consequential choice needs lasting rationale for review.
-Keep the current contract in the owning `ARCHITECTURE.md`. Git records
+Keep the governing contract in [the architecture map](ARCHITECTURE.md) or its
+owning concept under `docs/architecture/`. Git records
 chronology and routine changes.
 
 - Use a descriptive, undated slug under `docs/adrs/`. Start with

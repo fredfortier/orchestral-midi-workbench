@@ -49,6 +49,16 @@ final class AutomationAdapter61 {
         else throw new IllegalStateException("Unsupported native automation point representation");
         return n;
     }
+    static ObjectNode targetIdentity(Object atom) throws Exception {
+        ObjectNode target=Wire.object().put("kind","parameter").put("nativeParameterId",id(atom))
+                .put("name",String.valueOf(value(atom,"name")));
+        if(Class.forName("HQO",true,atom.getClass().getClassLoader()).isInstance(atom)) {
+            int status=((Number)Reflection.call(atom,"tGW")).intValue();
+            if((status&0xf0)==0xb0)target.put("kind","midiCc").put("channel",status&15)
+                    .put("controller",((Number)Reflection.call(atom,"Iz2")).intValue());
+        }
+        return target;
+    }
     ArrayNode readTrack(Object document,Object track,boolean includeArranger,List<Object> launcherClips,Map<String,Owner> owners) throws Exception {
         ArrayNode result=Wire.JSON.createArrayNode();
         String trackId=id(track);Object lanes=value(track,"automation_lanes");
@@ -132,17 +142,20 @@ final class AutomationAdapter61 {
         }
         Object physical=value(atom,"value_type");
         if(physical==null)throw new IllegalStateException("Unsupported stored automation target (track "+trackId+", lane "+id(lane)+", reference "+id(reference)+", atom "+id(atom)+"): physical value type is absent; complete read refused, no lanes omitted");
-        ObjectNode target=c.putObject("target");
-        target.put("kind","parameter");target.put("nativeParameterId",id(atom));target.put("name",String.valueOf(value(atom,"name")));
+        ObjectNode target=targetIdentity(atom);c.set("target",target);
         if(type("am").isInstance(valueType))for(String field:List.of("min","max","domain","unit"))target.set(field,Wire.JSON.valueToTree(value(physical,field)));
         else target.put("domain","discrete");
         target.put("pointType",type("am").isInstance(valueType)?"continuous":"unsupported");
         if(type("am").isInstance(valueType))target.put("fallbackValue",number(call(valueType,"TUp",new Class<?>[]{double.class},number(call(reference,"aV_")))));
-        if(type("HQO").isInstance(atom)) {
-            int status=((Number)call(atom,"tGW")).intValue();
-            if((status&0xf0)==0xb0){target.put("kind","midiCc");target.put("channel",status&15);target.put("controller",((Number)call(atom,"Iz2")).intValue());}
-        }
-        ArrayNode points=c.putArray("points");for(Object point:(List<?>)call(timeline,"v33"))points.add(point(point));
+        List<ObjectNode> ordered=new ArrayList<>();
+        for(Object event:(List<?>)call(timeline,"v33"))ordered.add(point(event));
+        // The host returns its event collection in native order. Publish source-time
+        // order and retain that native order within ties, including signed zero.
+        ordered.sort((left,right)->{
+            double a=left.required("time").asDouble(),b=right.required("time").asDouble();
+            return a==b?0:Double.compare(a,b);
+        });
+        c.putArray("points").addAll(ordered);
         if(owners!=null)owners.put(key(trackId,id(lane),clipId),new Owner(lane,clip,launcherSlot,source,timeline,valueType));
     }
     private static List<JsonNode> curves(JsonNode snapshot) {

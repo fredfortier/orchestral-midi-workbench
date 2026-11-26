@@ -9,9 +9,6 @@ use std::path::Path;
 pub fn read(input: &Path, companion: &Path) -> Result<(Performance, Companion), Error> {
     let bytes = read_bounded(input)?;
     let envelope: Companion = serde_json::from_slice(&read_bounded(companion)?)?;
-    if !matches!(envelope.version, 1 | 2) || envelope.mapping_version != 2 {
-        return Err("E_BUNDLE_VERSION: unsupported companion version".into());
-    }
     let performance = clip::decode(&bytes, Some(&envelope.dictionary))?;
     envelope.validate_rendition(&performance)?;
     if !envelope.note_sources.is_empty() {

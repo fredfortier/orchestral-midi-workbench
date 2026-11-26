@@ -62,19 +62,129 @@ impl Request {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::{Observation, Request};
+    use serde_json::json;
+
+    #[test]
+    fn selection_point_uses_the_same_qualified_lane_address() {
+        let member = json!({
+            "project": "Piece",
+            "elements": [
+                {"kind": "track", "name": "Cello", "nativeId": "10"},
+                {"kind": "automationLane", "name": "Modulation", "nativeId": "20"}
+            ],
+            "item": {"kind": "automationPoint", "id": "30", "source": "40", "placement": "40"}
+        });
+        let input = json!({
+            "document": "document",
+            "revision": "0e240cca-45e8-44b6-8b35-d67b0e6d0fcf",
+            "editor": "arranger",
+            "members": [member],
+            "primary": member,
+            "mode": "objects",
+            "range": null,
+            "unsupportedMembers": []
+        });
+        let observation: Observation = serde_json::from_value(input.clone()).unwrap();
+        Request::Read {}.verify(&observation).unwrap();
+        assert_eq!(serde_json::to_value(observation).unwrap(), input);
+
+        let mut invalid = input;
+        invalid["members"][0]["elements"][1]["kind"] = json!("clip");
+        let observation = serde_json::from_value(invalid).unwrap();
+        assert!(Request::Read {}.verify(&observation).is_err());
+    }
+
+    #[test]
+    fn overlapping_selection_locators_cannot_account_for_an_unrequested_member() {
+        let locator = json!({"project":"Piece","elements":[{"kind":"track","name":"Harp"}]});
+        let harp = json!({"project":"Piece","elements":[
+            {"kind":"track","name":"Harp","nativeId":"10"}
+        ]});
+        let cello = json!({"project":"Piece","elements":[
+            {"kind":"track","name":"Cello","nativeId":"20"}
+        ]});
+        let revision = "0e240cca-45e8-44b6-8b35-d67b0e6d0fcf";
+        let request: Request = serde_json::from_value(json!({
+            "action":"set","document":"piece","revision":revision,
+            "paths":[locator, harp],"mode":"objects","range":null
+        }))
+        .unwrap();
+        let observation: Observation = serde_json::from_value(json!({
+            "document":"piece","revision":revision,"editor":"arranger",
+            "members":[harp, cello],"primary":harp,
+            "mode":"objects","range":null,"unsupportedMembers":[]
+        }))
+        .unwrap();
+        assert!(request.verify(&observation).is_err());
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Observation {
     pub document: String,
     pub revision: String,
     pub editor: String,
-    pub members: Vec<Path>,
-    pub primary: Option<Path>,
+    pub members: Vec<Member>,
+    pub primary: Option<Member>,
     pub mode: Mode,
     pub range: Option<Range>,
     pub unsupported_members: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub unsupported_primary: Option<String>,
+}
+
+/// A structural address with an optional reference to content at that address.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Member {
+    #[serde(flatten)]
+    pub path: Path,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub item: Option<Item>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
+pub enum Item {
+    Note {
+        id: String,
+    },
+    AutomationPoint {
+        id: String,
+        source: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        placement: Option<String>,
+    },
+}
+
+impl Member {
+    fn validate(&self) -> Result<(), String> {
+        use crate::project_address::Element;
+        self.path.validate()?;
+        let valid_id = |id: &str| crate::project_address::name(id) && id.len() <= 128;
+        match (self.path.elements.last(), &self.item) {
+            (_, None) => Ok(()),
+            (
+                Some(Element::Clip { .. } | Element::LauncherClip { .. }),
+                Some(Item::Note { id }),
+            ) if valid_id(id) => Ok(()),
+            (
+                Some(Element::AutomationLane { .. }),
+                Some(Item::AutomationPoint {
+                    id,
+                    source,
+                    placement,
+                }),
+            ) if valid_id(id) && valid_id(source) && placement.as_deref().is_none_or(valid_id) => {
+                Ok(())
+            }
+            _ => Err("Selected content has an invalid identity or owner path".into()),
+        }
+    }
 }
 impl Request {
     /// Verify independently returned native selection, including primary and normalized bounds.
@@ -88,8 +198,8 @@ impl Request {
         {
             return Err("Invalid native selection authority/editor".into());
         }
-        for path in observation.members.iter().chain(observation.primary.iter()) {
-            path.validate()?;
+        for member in observation.members.iter().chain(observation.primary.iter()) {
+            member.validate()?;
         }
         if let Self::Set {
             document,
@@ -102,17 +212,24 @@ impl Request {
             if document != &observation.document
                 || observation.members.len() != paths.len()
                 || !observation.unsupported_members.is_empty()
+                || observation.unsupported_primary.is_some()
+                || (paths.is_empty() && observation.primary.is_some())
                 || paths.iter().any(|path| {
-                    !observation
+                    observation
                         .members
                         .iter()
-                        .any(|actual| path.matches(actual))
+                        .filter(|actual| actual.item.is_none() && path.matches(&actual.path))
+                        .count()
+                        != 1
+                })
+                || observation.members.iter().any(|actual| {
+                    actual.item.is_some() || !paths.iter().any(|path| path.matches(&actual.path))
                 })
                 || paths.first().is_some_and(|path| {
                     observation
                         .primary
                         .as_ref()
-                        .is_none_or(|actual| !path.matches(actual))
+                        .is_none_or(|actual| actual.item.is_some() || !path.matches(&actual.path))
                 })
                 || (!paths.is_empty() && *mode != observation.mode)
             {
